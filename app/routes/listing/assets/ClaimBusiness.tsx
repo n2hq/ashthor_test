@@ -8,13 +8,13 @@ const ClaimBusiness = ({ listing }: any) => {
         const getOwnerRole = async (owner: string) => {
             await getUserProfile(owner).then((data) => {
                 let user: any = data
-                setOwnerRole(user.role)
+                setOwnerRole(user?.role)
                 //console.log(user.role)
             })
 
         }
 
-        if (listing?.owner) {
+        if (listing?.owner !== "") {
             getOwnerRole(listing?.owner)
         }
 
