@@ -113,7 +113,7 @@ const LocationWithHours = ({ listing, operatingHoursStatus }: any) => {
             const operatingHours = await getOperatingHours(businessGuid, userGuid)
             return operatingHours
         }
-        if (businessGuid && userGuid) {
+        if (businessGuid !== "" && userGuid !== "") {
             getOpHours(businessGuid, userGuid).then((data) => {
 
                 //console.log(data)
