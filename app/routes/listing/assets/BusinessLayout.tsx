@@ -95,7 +95,7 @@ const BusinessLayout = ({
 
                     {
                         ratingsData &&
-                        <div className={`mt-4 flex gap-2 place-items-center px-[15px]`}>
+                        <div className={`mt-4 flex gap-2 place-items-center px-[12px]`}>
                             <RatingBoxSquare rating={Number(ratingsData?.rating_average)} />
                             <div className={`flex place-items-center place-content-center
                                     gap-1 text-black/60 text-[14px]`}>

@@ -100,7 +100,7 @@ const AddressPanelContent = () => {
 
     return (
         <div>
-            <div className={`w-full rounded-lg  border-[1px] border-t-0 md:border-t h-auto overflow-hidden`}>
+            <div className={`w-full rounded-none md:rounded-lg  border-[1px] h-auto overflow-hidden`}>
 
                 {/** header */}
                 <div className={`bg-gray-100/20 px-2 py-3 border-b flex place-items-center place-content-between`}>
@@ -123,7 +123,11 @@ const AddressPanelContent = () => {
                     </div>
                     <div>
                         <div className={`flex place-items-center place-content-center w-[40px] h-[40px] bg-gray-500 rounded-md text-white text-[22px] font-normal `}>
-                            {formatNumber(Number(addressCtx.ratingsData?.rating))}
+                            {
+                                addressCtx.ratingsData?.rating >= 0 ?
+                                    formatNumber(Number(addressCtx.ratingsData?.rating)) :
+                                    0
+                            }
                         </div>
                     </div>
                 </div>
