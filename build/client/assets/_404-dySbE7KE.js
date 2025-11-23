@@ -1,5 +1,0 @@
-import{j as e}from"./jsx-runtime-0DLF9kdB.js";import{M as t}from"./MainNav-DJZKCZXI.js";import"./components-QUucBwvO.js";import"./AuthContext-D6RspcLh.js";import"./lib-gXVz7xpy.js";import"./AccountUserImage-zrnI0bEK.js";import"./index-D4GH3UrM.js";function x(){return e.jsxs("div",{children:[e.jsx(t,{}),e.jsx("div",{className:`min-h-screen flex items-center justify-center 
-        text-center px-4 text-black fixed top-0 w-full`,children:e.jsxs("div",{className:`flex place-content-center place-items-center gap-3
-                h-[40px]`,children:[e.jsx("div",{className:`text-2xl font-bold text-red-600 h-full
-                    flex place-items-center`,children:"404"}),e.jsx("div",{className:"h-full w-[2px] border-r"}),e.jsxs("div",{className:`text-black text-[14px]
-                    h-full flex place-items-center space-x-2`,children:[e.jsx("span",{children:"Resource not found."}),e.jsx("button",{onClick:()=>{window.history.back()},className:"underline",children:"Go back"})]})]})})]})}export{x as default};
