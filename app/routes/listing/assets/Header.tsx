@@ -29,8 +29,8 @@ const Header = ({ listing, profileImageData, operatingHoursStatus, ratingsData }
                         profileImageData?.image_url ?
                             <img
                                 src={config.IMG_BASE_URL + profileImageData?.image_url}
-                                alt=""
-                                className={` object-cover w-full h-full `}
+                                alt="85x90"
+                                className={` object-scale-down w-full h-full `}
                             /> :
                             <Placeholder />
                     }
