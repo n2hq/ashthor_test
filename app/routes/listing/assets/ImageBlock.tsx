@@ -81,7 +81,7 @@ export interface BlockProp {
 }
 export function SingleBlock({ index, imgs, showCarousel }: BlockProp) {
     return (
-        <div className={`rounded-xl overflow-hidden bg-gray-200
+        <div className={` overflow-hidden bg-gray-200 
                     relative cursor-pointer w-full h-full`}>
             {
                 imgs[index]?.image_url !== undefined && imgs[index]?.image_url !== null ?
@@ -120,10 +120,10 @@ export function ComposeImages({ imgs, index, showCarousel, showGallery }: BlockP
     return (
         <>
             {
-                imageTotal === 1 && <div className={`h-[350px]
-                grid grid-cols-12 gap-[7px]`}>
+                imageTotal === 1 && <div className={`h-[350px] rounded-xl overflow-hidden
+                grid grid-cols-12`}>
                     <div className={`col-span-12 
-                    row-span-2 overflow-hidden`}
+                    row-span-2 overflow-hidden shadow-gray-500`}
                         onMouseDown={(e) => showCarousel && showCarousel(index)}
                     >
                         <SingleBlock imgs={images} index={0} />
@@ -133,10 +133,10 @@ export function ComposeImages({ imgs, index, showCarousel, showGallery }: BlockP
 
 
             {
-                imageTotal === 2 && <div className={`h-[350px]
-                grid grid-cols-12 gap-[7px]`}>
+                imageTotal === 2 && <div className={`h-[350px] rounded-xl overflow-hidden
+                grid grid-cols-12 gap-[5px]`}>
                     <div className={`col-span-7 bg-black
-                    row-span-2 rounded-xl overflow-hidden
+                    row-span-2 overflow-hidden
                     relative cursor-pointer`}
                         onMouseDown={(e) => showCarousel && showCarousel(0)}
                     >
@@ -145,7 +145,7 @@ export function ComposeImages({ imgs, index, showCarousel, showGallery }: BlockP
 
 
                     <div className={`col-span-5 bg-black
-                    row-span-2 rounded-xl overflow-hidden
+                    row-span-2 overflow-hidden
                     relative cursor-pointer`}
                         onMouseDown={(e) => showCarousel && showCarousel(1)}
                     >
@@ -156,8 +156,8 @@ export function ComposeImages({ imgs, index, showCarousel, showGallery }: BlockP
 
 
             {
-                imageTotal === 3 && <div className={`h-[350px]
-                grid grid-cols-12 gap-[7px]`}>
+                imageTotal === 3 && <div className={`h-[350px] rounded-xl overflow-hidden
+                grid grid-cols-12 gap-[5px]`}>
 
                     <div className={`col-span-7 row-span-2 overflow-hidden`}
                         onMouseDown={(e) => showCarousel && showCarousel(0)}
@@ -181,11 +181,11 @@ export function ComposeImages({ imgs, index, showCarousel, showGallery }: BlockP
             }
 
             {
-                imageTotal >= 4 && <div className={`space-y-[7px]`}>
+                imageTotal >= 4 && <div className={`space-y-[5px]`}>
                     <div className={`h-[350px]
-                grid grid-cols-12 gap-[7px]`}>
+                grid grid-cols-12 gap-[5px] rounded-t-xl overflow-hidden`}>
 
-                        <div className={`col-span-7 row-span-2 overflow-hidden`}
+                        <div className={`col-span-7 row-span-2 overflow-hidden `}
                             onMouseDown={(e) => showCarousel && showCarousel(0)}
                         >
                             <SingleBlock imgs={images} index={0} />
@@ -206,7 +206,7 @@ export function ComposeImages({ imgs, index, showCarousel, showGallery }: BlockP
                     </div>
 
 
-                    <div className={`grid grid-cols-5 gap-[7px] mt-[2px] h-[100px]`}>
+                    <div className={`grid grid-cols-5 gap-[5px] h-[100px] rounded-bl-xl overflow-hidden`}>
 
                         <div className={`overflow-hidden`}
                             onMouseDown={(e) => showCarousel && showCarousel(3)}
@@ -235,7 +235,7 @@ export function ComposeImages({ imgs, index, showCarousel, showGallery }: BlockP
                         }
 
 
-                        <div className={`rounded-xl overflow-hidden
+                        <div className={`rounded-br-xl overflow-hidden
                     relative bg-gray-200 text-white cursor-pointer
                     flex place-content-center place-items-center h-[100px]
                     bg-cover`}

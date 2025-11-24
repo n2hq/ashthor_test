@@ -96,7 +96,7 @@ const BusinessLayout = ({
                     <div className=''>
                         {
                             ratingsData &&
-                            <div className={`mt-4 flex gap-2 place-items-center`}>
+                            <div className={`mt-12 flex gap-2 place-items-center`}>
                                 <RatingBoxSquare rating={Number(ratingsData?.rating_average)} />
                                 <div className={`flex place-items-center place-content-center
                                     gap-1 text-black/60 text-[14px]`}>
@@ -129,7 +129,7 @@ const BusinessLayout = ({
             {
                 images?.length > 0 && listing &&
                 <div className={`bg-black h-fit md:hidden
-                            mt-4 `}>
+                            mt-12 `}>
                     <ListingCarousel
                         images={images}
                         listing={listing}
@@ -138,9 +138,9 @@ const BusinessLayout = ({
                 </div>
             }
 
-            <div className={` md:pt-4 md:px-[12px]`}>
+            <div className={` md:pt-12 md:px-[12px]`}>
                 <div className={`max-w-[1100px] w-full mx-auto bg-white`}>
-                    <div className={`grid grid-cols-12 gap-0 md:gap-4 relative
+                    <div className={`grid grid-cols-12 gap-0 md:gap-16 relative
                     `}>
                         <div className={` col-span-12 lg:col-span-8`}>
 

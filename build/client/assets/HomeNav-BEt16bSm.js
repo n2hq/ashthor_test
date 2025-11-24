@@ -1,5 +1,0 @@
-import{j as e}from"./jsx-runtime-0DLF9kdB.js";import{r as s}from"./components-QUucBwvO.js";import{z as o}from"./lib-DdNSHGvE.js";const w=()=>{const[t,a]=s.useState(1),[c,n]=s.useState(""),[i,l]=s.useState(!1),[x,p]=s.useState(!1),[d,h]=s.useState(!1);return s.useEffect(()=>{const r=()=>{window.scrollY>=t&&l(!0),window.scrollY<t&&l(!1),a(window.scrollY)};window.onscroll=()=>r()},[t]),e.jsx("div",{children:e.jsxs("div",{className:"shadow-lg pb-3 z-[1000]",children:[e.jsx("div",{className:"h-[10px]"}),e.jsx("div",{className:"px-[12px] w-full bg-white",children:e.jsx("form",{action:"/web/search",children:e.jsxs("div",{className:`bg-gray-100 w-full rounded-full h-[38px]
-                    flex place-items-center px-2 gap-2 border
-                    border-gray-400/20`,children:[e.jsx(o,{className:"h-[20px] w-[20px]"}),e.jsx("input",{type:"text",name:"q",placeholder:"Restaurants, Hotels, Cities, Real Estates",className:`bg-transparent w-full outline-none
-                            h-full flex place-content-center text-[14px]
-                            `})]})})})]})})};export{w as H};
