@@ -29,7 +29,7 @@ export const getSiteLogo = () => {
     return (
         <span className={` 
          `}>
-            Garssete
+            Bycet
         </span>
     )
 }
@@ -1411,4 +1411,67 @@ export const logError = (e: any) => {
     if (environments.includes(config.ENV)) {
         console.log(e.message)
     }
+}
+
+
+export const getBusinessByCategoryAndCity = async (category: string | null, city: string | null): Promise<any | undefined> => {
+
+    const endpoint = `/api/listing/category_city/${category}/${city}`
+    const url = config.BASE_URL + endpoint
+
+
+    try {
+        const response = await fetch(url, {
+            method: "GET",
+            headers: headers,
+        }
+        )
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data: any = await response.json();
+
+        return new Promise((resolve) => setTimeout(() => {
+
+            resolve(data)
+        }, 10))
+    } catch (error: any) {
+        return undefined
+    }
+}
+
+
+
+export const getBusinessCategoryAndCity = async (): Promise<any | undefined> => {
+
+    const endpoint = `/api/listing/cat_city_sitexml`
+    const url = config.BASE_URL + endpoint
+
+    try {
+        const response = await fetch(url, {
+            method: "GET",
+            headers: headers,
+        }
+        )
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data: any = await response.json();
+
+        return new Promise((resolve) => setTimeout(() => {
+
+            resolve(data)
+        }, 10))
+    } catch (error: any) {
+        return undefined
+    }
+}
+
+export const sanitizeWord = (url: string) => {
+    return url
+        .trim() // Remove leading/trailing spaces
+        .replace(/\s+/g, '-') // Replace multiple spaces with single dash
+        .toLowerCase(); // Convert to lowercase (optional)
 }

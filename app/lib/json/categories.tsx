@@ -14,12 +14,12 @@ import FashionModel from "~/components/customicons/FashionModel";
 export const categories = [
     {
         name: "Business Services",
-        id: "business services",
+        id: "business-services",
         icon: <MdMeetingRoom size={20} />
     },
     {
         name: "Fashion & Accessories",
-        id: "fashion and accessories",
+        id: "fashion-accessories",
         icon: <GiFemaleLegs size={20} />
     },
     {
@@ -29,37 +29,37 @@ export const categories = [
     },
     {
         name: "Advertising & Marketing",
-        id: "advertising marketing",
+        id: "advertising-marketing",
         icon: <CgChart size={20} />
     },
     {
         name: "Financial Services",
-        id: "financial services",
+        id: "financial-services",
         icon: <MdDashboard size={20} />
     },
     {
         name: "Legal Services",
-        id: "legal services",
+        id: "legal-services",
         icon: <CgFeed size={20} />
     },
     {
         name: "Human Resource & Recruiting",
-        id: "human resource recruiting",
+        id: "human-resource-recruiting",
         icon: <GiHumanTarget size={20} />
     },
     {
         name: "Printing & Publishing",
-        id: "printing publishing",
+        id: "printing-publishing",
         icon: <CgPrinter size={20} />
     },
     {
         name: "Translation & Interpretation",
-        id: "translation and interpretation",
+        id: "translation-and-interpretation",
         icon: <GrLanguage size={20} />
     },
     {
         name: "Cleaning Services",
-        id: "cleaning services",
+        id: "cleaning-services",
         icon: <MdCleaningServices size={20} />
     },
     {
@@ -69,37 +69,37 @@ export const categories = [
     },
     {
         name: "Hotels",
-        id: "hotel",
+        id: "hotels",
         icon: <BiHotel size={20} />
     },
     {
         name: "Construction & Roofing",
-        id: "construction and roofing",
+        id: "construction-roofing",
         icon: <MdConstruction size={20} />
     },
     {
         name: "Electrical Services",
-        id: "electrical services",
+        id: "electrical-services",
         icon: <MdElectricalServices size={20} />
     },
     {
         name: "Landscaping & Gardening",
-        id: "landscaping and gardening",
+        id: "landscaping-gardening",
         icon: <FcLandscape size={20} />
     },
     {
         name: "Interior Design",
-        id: "interior design",
+        id: "interior-design",
         icon: <MdRoomService size={20} />
     },
     {
         name: "Logistics, Moving & Storage",
-        id: "logistics moving and storage",
+        id: "logistics-moving-storage",
         icon: <TbTruckDelivery size={20} />
     },
     {
         name: "Health & Fitness",
-        id: "health and fitness",
+        id: "health-fitness",
         icon: <GiHealthNormal size={20} />
     },
     {
@@ -114,17 +114,17 @@ export const categories = [
     },
     {
         name: "Food Delivery",
-        id: "food delivery",
+        id: "food-delivery",
         icon: <BiFoodMenu size={20} />
     },
     {
         name: "Shopping & Retail",
-        id: "shopping and retail",
+        id: "shopping-retail",
         icon: <CgShoppingBag size={20} />
     },
     {
         name: "Travel, Hospitality & Rentals",
-        id: "travel, hospitality and rentals",
+        id: "travel-hospitality-rentals",
         icon: <CgAirplane size={20} />
     },
     {
@@ -144,22 +144,22 @@ export const categories = [
     },
     {
         name: "Technology & IT",
-        id: "technology and it",
+        id: "technology-it",
         icon: <GrCloudComputer size={20} />
     },
     {
         name: "Real Estate",
-        id: "real estate",
+        id: "real-estate",
         icon: <MdRealEstateAgent size={20} />
     },
     {
         name: "Community & Government",
-        id: "community and government",
+        id: "community-government",
         icon: <RiGovernmentFill size={20} />
     },
     {
         name: "General Trading",
-        id: "general trading",
+        id: "general-trading",
         icon: <FcBusiness size={20} />
     },
 
