@@ -170,7 +170,7 @@ export async function action({ request, params }: ActionFunctionArgs) {
             const userGuid = body.owner
             const businessGuid = gid
 
-            const result2 = await query(`INSERT INTO tbl_rating SET
+            /* const result2 = await query(`INSERT INTO tbl_rating SET
                 rating = ?,
                 comment = ?,
                 fullname = ?,
@@ -184,7 +184,7 @@ export async function action({ request, params }: ActionFunctionArgs) {
                 userGuid,
                 businessGuid,
                 ratingGuid
-            ])
+            ]) */
 
 
 

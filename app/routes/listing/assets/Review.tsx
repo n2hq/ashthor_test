@@ -41,7 +41,7 @@ const Review = ({ listing }: any) => {
     const handleResult = (confirmed: boolean) => {
         if (confirmed) {
             notification.cancel()
-            window.location.href = "/signin"
+            window.location.href = "/web/signin"
         } else {
             notification.cancel()
         }

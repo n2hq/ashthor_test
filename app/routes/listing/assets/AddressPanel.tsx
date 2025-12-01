@@ -62,9 +62,12 @@ const AddressPanelContent = () => {
             } else if (ratingVal >= 2 && ratingVal < 3.5) {
                 setRatingText('Good')
             } else if (ratingVal >= 1 && ratingVal < 2) {
-                setRatingText('Poor')
+                setRatingText('Not Good')
             } else {
-                setRatingText('Very Poor')
+                if (ratingVal === 0)
+                    setRatingText('No reviews')
+                else
+                    setRatingText('Poor')
             }
         }
         if (addressCtx.ratingsData) {

@@ -1475,3 +1475,8 @@ export const sanitizeWord = (url: string) => {
         .replace(/\s+/g, '-') // Replace multiple spaces with single dash
         .toLowerCase(); // Convert to lowercase (optional)
 }
+
+
+export const convertDashToSpace = (str: string) => {
+    return str.replace(/-/g, ' ');
+};
