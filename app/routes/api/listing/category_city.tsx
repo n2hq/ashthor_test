@@ -20,6 +20,9 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     try {
         const rawdata: any = await query(`SELECT DISTINCT
                     d.id,
+                    d.rating_total,
+                    d.rating_count,
+                    d.rating_average,
                     d.gid,
                     d.title,
                     d.address_one,
