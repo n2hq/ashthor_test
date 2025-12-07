@@ -52,11 +52,11 @@ const moreTools = [
         icon: <HiMiniBriefcase />,
         link: '/web/account/portfolio'
     },
-    {
+    /* {
         title: "Add Event",
         icon: <HiMiniBriefcase />,
         link: '/web/account/events'
-    }
+    } */
 ]
 
 const LeftNav = ({ userProfile }: UserProfileProps) => {
