@@ -24,6 +24,7 @@ import { ReportTime } from '~/lib/ReportTime'
 import { OnlineStatusProvider } from '~/context/OnlineStatusContext'
 import FooterAlt from '~/components/footer/FooterAlt'
 import LoadingMessage from '~/components/content/LoadingMessage'
+import RelatedAlt from './assets/RelatedAlt'
 
 
 
@@ -193,9 +194,11 @@ const index = () => {
 
 
 
+
+
                     {
-                        listing?.category !== undefined ?
-                            <Related
+                        listing.category !== undefined ?
+                            <RelatedAlt
                                 category={listing?.category}
                                 limit={6}
                                 title={`Related: ${listing?.category}`}
@@ -204,7 +207,7 @@ const index = () => {
                             <ResourceNotFound />
                     }
                     <VerticalHeight />
-                    <CallToActionSection />
+                    {/* <CallToActionSection /> */}
                     {/** footer */}
                     <FooterAlt />
                 </Layout>
