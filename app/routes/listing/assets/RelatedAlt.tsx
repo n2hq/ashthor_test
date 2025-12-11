@@ -92,7 +92,7 @@ const RelatedAlt = ({
                                             key={index}
                                             className={`flex gap-3 place-items-start  group hover:cursor-pointer h-full rounded-md`}>
 
-                                            <div className={`w-[70px] min-w-[70px] h-[70px] relative border rounded-lg overflow-hidden`}>
+                                            <div className={`w-[70px] min-w-[70px] h-[70px] relative border rounded-lg overflow-hidden shadow-xl`}>
                                                 {
                                                     (item?.image_url === undefined || item?.image_url === null || item?.image_url === '') &&
                                                     <div className={`absolute bottom-2 h-full w-full flex -gap-y-2 place-content-end place-items-center font-bold z-[10] text-white bg-black/10 text-[6px] tracking-[1px] flex-col`}>
