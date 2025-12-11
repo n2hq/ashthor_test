@@ -163,6 +163,14 @@ const Card = ({ listing }: any) => {
 
                             >
                                 {
+                                    (listing?.image_url === undefined || listing?.image_url === null || listing?.image_url === '') &&
+                                    <div className={`absolute top-0 h-full w-full flex -gap-y-2 place-content-center place-items-center font-bold z-[10] text-white bg-black/10 text-[7px] tracking-[3px] flex-col`}>
+                                        <div>AUTOMATIC</div>
+                                        <div>GENERATED</div>
+                                    </div>
+                                }
+
+                                {
                                     listing?.image_url !== null ?
                                         <img
                                             src={imgscr}

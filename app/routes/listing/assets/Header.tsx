@@ -26,7 +26,14 @@ const Header = ({ listing, profileImageData, operatingHoursStatus, ratingsData }
             <div className={`flex gap-3  w-full   md:rounded-xl`}>
 
                 {/** business logo */}
-                <div className={`bg-white w-[60px] min-w-[60px] md:w-[95px] md:min-w-[95px] h-[60px] md:h-[95px] relative border-[1px]  border-gray-100 rounded-lg overflow-hidden`}>
+                <div className={`bg-white w-[60px] min-w-[60px] md:w-[95px] md:min-w-[95px] h-[60px] md:h-[95px] relative rounded-lg overflow-hidden `}>
+                    {
+                        (profileImageData?.image_url === undefined || profileImageData?.image_url === null || profileImageData?.image_url === '') &&
+                        <div className={`absolute top-0 h-full w-full flex place-content-center place-items-center font-bold text-white bg-black/20 text-[8px] tracking-[3px] flex-col`}>
+                            <div>AUTOMATIC</div>
+                            <div>GENERATED</div>
+                        </div>
+                    }
                     {
                         profileImageData?.image_url ?
                             <img
@@ -34,13 +41,11 @@ const Header = ({ listing, profileImageData, operatingHoursStatus, ratingsData }
                                 alt="85x90"
                                 className={` object-cover w-full h-full  shadow-gray-300 `}
                             /> :
-                            <div className={`h-full w-full  shadow-gray-300 relative`}>
-                                <img
-                                    src={appConfig.fallbackImg}
-                                    alt=""
-                                    className={`object-cover w-full h-full`}
-                                />
-                            </div>
+                            <img
+                                src={appConfig.fallbackImg}
+                                alt=""
+                                className={`object-cover w-full h-full shadow-lg shadow-gray-300`}
+                            />
                     }
                 </div>
 

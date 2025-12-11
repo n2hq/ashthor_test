@@ -1,0 +1,3 @@
+import{j as e}from"./jsx-runtime-0DLF9kdB.js";import{p as s}from"./lib-BZi2zCG3.js";function x({rating:t}){return e.jsx("div",{className:"flex gap-x-[3px]",children:Array.from({length:5}).map((l,r)=>{const a=Math.max(0,Math.min(1,t-r))*100;return e.jsxs("div",{className:`relative w-[20px] h-[20px] ${t>0?"bg-gray-200":"bg-gray-300"} rounded 
+                            overflow-hidden flex place-items-center
+                            place-content-center`,children:[e.jsx("div",{className:"absolute inset-0 bg-[#FF8742] text-white  z-[0]",style:{width:`${a}%`}}),e.jsx(s,{className:"relative z-[0] w-[14px] h-[14px] text-white ",fill:"currentColor"})]},r)})})}export{x as R};
