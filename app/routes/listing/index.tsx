@@ -122,7 +122,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
 
         const keywords: string[] | null = getKeyWords(listing?.business_phrases || null)
 
-        const descr = truncateText(removeAllParagraphs(listing?.short_description), 400)
+        const descr = removeAllParagraphs(listing?.short_description)
 
         return [
             { title: listing?.title || "Bycet Inc." },
