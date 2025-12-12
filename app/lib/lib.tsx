@@ -1537,3 +1537,12 @@ export const getBusinessByCategory = async (category: string | null, page: numbe
         return undefined
     }
 }
+
+
+
+export function generateRandom10DigitNumber() {
+    // Ensure the first digit is not 0
+    const min = 1000000000; // smallest 10-digit number
+    const max = 9999999999; // largest 10-digit number
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}

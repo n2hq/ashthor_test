@@ -11,7 +11,7 @@ import Hotels from './homepage/assets/hotels/Hotels'
 import YourGuide from './homepage/assets/yourguide/YourGuide'
 import FooterAlt from '~/components/footer/FooterAlt'
 import { LoaderFunction, MetaFunction } from '@remix-run/node'
-import { getHomeListingByCategory, getLatestBusinesses, getListingByCategory, logError } from '~/lib/lib'
+import { generateRandom10DigitNumber, getHomeListingByCategory, getLatestBusinesses, getListingByCategory, logError } from '~/lib/lib'
 import { useLoaderData } from '@remix-run/react'
 import { ListingType } from '~/lib/types'
 import { late } from 'zod'
@@ -22,12 +22,7 @@ import OperationDemo, { OperationProvider } from '~/context/OperationContext'
 
 
 export const loader: LoaderFunction = async ({ request, params }) => {
-  function generateRandom10DigitNumber() {
-    // Ensure the first digit is not 0
-    const min = 1000000000; // smallest 10-digit number
-    const max = 9999999999; // largest 10-digit number
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
+
 
   try {
     const id = params.id || null
