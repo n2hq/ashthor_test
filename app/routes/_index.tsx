@@ -85,10 +85,13 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
       { property: "og:image:width", content: "1200" },
       { property: "og:image:height", content: "630" },
       { property: "og:image:alt", content: "Bycet" },
-      { name: "twitter:creator", content: "bycetinc" },
+      { name: "twitter:site", content: "@bycetinc" },
+      { name: "twitter:creator", content: "@bycetinc" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Bycet - Online Business Directory, Explore Listings Around The World" },
-      { name: "twitter:description", content: "Discover and connect with businesses worldwide. Garssete.com helps you explore listings, find services, and grow your network across industries and countries." },
+      { name: "twitter:description", content: "Discover and connect with businesses worldwide. Bycet.com helps you explore listings, find services, and grow your network across industries and countries." },
+      { name: "twitter:image", content: `https://bycet.com/images/bycet.png?v=${randomNo}` },
+      { name: "twitter:image:alt", content: "Bycet Business Directory Logo" }
     ];
   } catch (e: any) {
     logError(e)
