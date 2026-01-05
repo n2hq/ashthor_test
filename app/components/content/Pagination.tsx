@@ -65,7 +65,7 @@ export default function Pagination({ pagination }: PaginationProps) {
         <div className="flex flex-row items-center justify-between gap-4">
             <div className="text-[13px] text-gray-500">
                 Results {((currentPage - 1) * pagination?.itemsPerPage) + 1} to{' '}
-                {Math.min(currentPage * pagination?.itemsPerPage, pagination.totalItems)} of{' '}
+                {Math.min(currentPage * pagination?.itemsPerPage, pagination?.totalItems)} of{' '}
                 {pagination?.totalItems}
             </div>
 
