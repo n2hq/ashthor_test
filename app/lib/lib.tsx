@@ -2200,7 +2200,7 @@ export const getSocialMediaProfile = async (socialMediaGuid: string | null): Pro
 
 export const filterCountry = (countries: CountryType[] | undefined, searchTerm: string) => {
 
-    const term = searchTerm.toLowerCase().trim()
+    const term = searchTerm?.toLowerCase().trim()
 
     const filtered = countries?.filter((country: CountryType) =>
         country.country_name?.toLowerCase().includes(term) ||
