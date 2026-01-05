@@ -64,21 +64,21 @@ export default function Pagination({ pagination }: PaginationProps) {
     return (
         <div className="flex flex-row items-center justify-between gap-4">
             <div className="text-[13px] text-gray-500">
-                Results {((currentPage - 1) * pagination.itemsPerPage) + 1} to{' '}
-                {Math.min(currentPage * pagination.itemsPerPage, pagination.totalItems)} of{' '}
-                {pagination.totalItems}
+                Results {((currentPage - 1) * pagination?.itemsPerPage) + 1} to{' '}
+                {Math.min(currentPage * pagination?.itemsPerPage, pagination.totalItems)} of{' '}
+                {pagination?.totalItems}
             </div>
 
             <nav className="flex items-center space-x-1">
                 {/* Previous Button */}
                 <a
-                    href={pagination.hasPrev ? createPageUrl(currentPage - 1) : '#'}
-                    className={`px-3 py-2 border rounded-md text-sm font-medium ${!pagination.hasPrev
+                    href={pagination?.hasPrev ? createPageUrl(currentPage - 1) : '#'}
+                    className={`px-3 py-2 border rounded-md text-sm font-medium ${!pagination?.hasPrev
                         ? 'opacity-50 cursor-not-allowed text-gray-400'
                         : 'text-gray-700 hover:bg-gray-100'
                         }`}
-                    aria-disabled={!pagination.hasPrev}
-                    onClick={(e) => !pagination.hasPrev && e.preventDefault()}
+                    aria-disabled={!pagination?.hasPrev}
+                    onClick={(e) => !pagination?.hasPrev && e.preventDefault()}
                 >
                     Prev
                 </a>
