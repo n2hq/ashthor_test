@@ -1,7 +1,7 @@
 import { FaFacebookSquare, FaLinkedinIn, FaPinterestSquare, FaTiktok, FaVimeoSquare, FaYoutubeSquare } from "react-icons/fa"
-import { AddVideoType, Category, City, ContactType, Country, ProductType, Rating, State, StateAlt, UserProfile } from "./types"
+import { AddVideoType, Category, City, ContactType, Country, CountryType, Currency, FacilityType, ProductType, Rating, ServiceType, SocialMediaType, State, StateAlt, UserProfile } from "./types"
 import CryptoJS from 'crypto-js'
-import { BsInstagram, BsLinkedin, BsPinterest, BsTwitterX } from "react-icons/bs"
+import { BsInstagram, BsLinkedin, BsPinterest, BsTwitterX, BsVimeo } from "react-icons/bs"
 import { CgFacebook } from "react-icons/cg"
 import { GrYoutube } from "react-icons/gr"
 import { categories } from "./json/categories"
@@ -15,7 +15,8 @@ export const config = {
     SITENAME: import.meta.env.VITE_SITENAME,
     FORMATTED_SITENAME: import.meta.env.VITE_SITENAME,
     SESSION_SECRET: import.meta.env.VITE_SESSION_SECRET,
-    ENV: import.meta.env.VITE_ENV
+    ENV: import.meta.env.VITE_ENV,
+    SITEMAIL: import.meta.env.VITE_SITEMAIL
 }
 
 
@@ -149,7 +150,7 @@ export const getFeaturedListing: any = async () => {
     const endpoint = `/api/listing/featured_listing`
     const url = config.BASE_URL + endpoint
 
-    console.log(url)
+
 
 
     try {
@@ -517,6 +518,31 @@ export const getCountries = async (): Promise<Country[] | undefined> => {
     }
 }
 
+export const getCountriesCurrencies = async (): Promise<CountryType[] | undefined> => {
+
+    const endpoint = "/api/util/country_currencies"
+    const url = config.BASE_URL + endpoint
+
+    try {
+        const response = await fetch(url, {
+            method: "GET",
+            headers: headers,
+        }
+        )
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data: CountryType[] = await response.json();
+
+
+
+        return data
+    } catch (error: any) {
+        return undefined
+    }
+}
+
 export const getStates = async (countryCode: string | null): Promise<State[] | undefined> => {
 
     const endpoint = "/api/util/state?country_code=" + countryCode
@@ -611,6 +637,42 @@ export const getCategories = async (): Promise<Category[] | undefined> => {
         return new Promise((resolve) => setTimeout(() => {
             resolve(data)
         }, 10))
+    } catch (error: any) {
+        return undefined
+    }
+}
+
+
+export const getCurrencies = async (): Promise<Currency[] | undefined> => {
+
+    const endpoint = "/api/util/currencies"
+    const url = config.BASE_URL + endpoint
+
+    try {
+        const response = await fetch(url, {
+            method: "GET",
+            headers: headers,
+        }
+        )
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data: Currency[] = await response.json();
+        const finaldata: any = data.map((currency) => {
+            return {
+                id: currency.id,
+                country: currency.country,
+                currency: currency.currency,
+                currency_name: currency.currency_name,
+                currency_symbol: currency.currency_symbol,
+                currency_code: currency.currency_code,
+                emoji: currency.emoji
+            }
+        })
+
+
+        return finaldata
     } catch (error: any) {
         return undefined
     }
@@ -737,7 +799,7 @@ export const getOperatingHours = async (businessGuid: string | null, userGuid: s
         }
 
         const data: any = await response.json();
-        console.log(data)
+
         return new Promise((resolve) => setTimeout(() => {
 
             resolve(data)
@@ -921,6 +983,34 @@ export const getSysSocialMedia = async (): Promise<any | undefined> => {
     }
 }
 
+
+export const getSysFacilities = async (): Promise<any | undefined> => {
+
+    const endpoint = `/api/listing/sys_facilities`
+    const url = config.BASE_URL + endpoint
+
+
+    try {
+        const response = await fetch(url, {
+            method: "GET",
+            headers: headers,
+        }
+        )
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data: any = await response.json();
+
+        return new Promise((resolve) => setTimeout(() => {
+
+            resolve(data)
+        }, 10))
+    } catch (error: any) {
+        return undefined
+    }
+}
+
 export const getSelectedSocialMedia = async (userGuid: string | null, businessGuid: string | null): Promise<any | undefined> => {
 
     const endpoint = `/api/listing/selected_social_media/${userGuid}/${businessGuid}`
@@ -1003,6 +1093,11 @@ export const getRecents = async (): Promise<any | undefined> => {
 }
 
 export const formatNumber = (num: number): string => {
+    // Handle 0 specifically
+    if (num === 0) {
+        return '0.00';
+    }
+
     if (num >= 1_000_000_000) {
         return (num / 1_000_000_000).toFixed(1).replace(/\.0$/, '') + 'b';
     }
@@ -1012,8 +1107,25 @@ export const formatNumber = (num: number): string => {
     if (num >= 1_000) {
         return (num / 1_000).toFixed(1).replace(/\.0$/, '') + 'k';
     }
+
+    // For numbers between 0 and 1, show with 2 decimal places
+    if (num > 0 && num < 1) {
+        return num.toFixed(2);
+    }
+
+    // For numbers between 1 and 1000, show with 2 decimal places if needed
+    if (num < 1000) {
+        return num % 1 === 0 ? num.toString() : num.toFixed(2);
+    }
+
     return num.toString();
+};
+
+export function removeCommas(numberString: string) {
+    // Removes all commas from the string
+    return numberString.replace(/,/g, '');
 }
+
 
 export function getFirstChar(word: string): string {
     if (!word || typeof word !== "string") return "";
@@ -1083,10 +1195,11 @@ export function escapeRegex(str: string): string {
     return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
-export const IsAuthenticated = (tokens: any) => {
+export const IsAuthenticated = (localStorage: any) => {
 
-    if (tokens === null) {
+    if (localStorage["authTokens"] === null || localStorage["authTokens"] === undefined) {
         window.location.href = "/web/signin"
+        return true;
     }
 }
 
@@ -1126,6 +1239,18 @@ export function getDateInTimeZoneX(timeZone: any) {
     const adjustment = 0;
     const timeObject = new Date(Date.now() - adjustment);
 
+    // Format to International
+    const formattedTimeIntl = new Intl.DateTimeFormat("en-US", {
+        timeZone,
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        timeZoneName: "long"
+    }).format(timeObject);
+
     // Format to parts in target timezone
     const formattedTime = new Intl.DateTimeFormat("en-US", {
         timeZone,
@@ -1139,8 +1264,8 @@ export function getDateInTimeZoneX(timeZone: any) {
     }).format(timeObject);
 
     const displayFormattedTime = <span className={`space-x-1 tracking-tight`}>
-        <span key={'a1'} className={`font-bold uppercase text-[13px]`}>Local Time:</span>
-        <span key={'a2'}>{formattedTime}</span>
+        <span key={'a1'} className={`font-bold uppercase text-[13px]`}></span>
+        <span key={'a2'}>{formattedTimeIntl}</span>
     </span>
 
     // Construct a Date from the parts (in local machine time)
@@ -1182,6 +1307,23 @@ export function getCardIcon(media: any) {
     return icon
 }
 
+export function getFormattedDateTime(dateString: string) {
+
+    const date = new Date(dateString);
+
+    const formattedTimeIntl = new Intl.DateTimeFormat("en-US", {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        timeZoneName: "long"
+    }).format(date);
+
+
+    return formattedTimeIntl
+}
 
 export function strToList(str: string, separator: string) {
     const list = str.split(separator)
@@ -1382,6 +1524,128 @@ export const getProductGallery = async (businessGuid: string | null, userGuid: s
     }
 }
 
+export const getServiceList = async (businessGuid: string | null, userGuid: string | null, page: number): Promise<any | null> => {
+
+    let endpoint: string = ""
+
+    if (businessGuid !== "" && userGuid !== "") {
+        endpoint = `/api/listing/services/${businessGuid}/${userGuid}?page=${page}`
+    } else {
+        console.log('Contact admin.')
+    }
+
+
+
+
+    const url = config.BASE_URL + endpoint
+
+
+    try {
+        const response = await fetch(url, {
+            method: "GET",
+            headers: headers,
+        }
+        )
+        if (!response.ok) {
+
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data: any = await response.json();
+
+        if (data.length <= 0) {
+            return null
+        }
+        return data
+
+    } catch (error: any) {
+        console.log(error.message)
+        return null
+    }
+}
+
+
+export const getServicesByBusinessGuid = async (businessGuid: string | null): Promise<any | null> => {
+
+    let endpoint: string = ""
+
+    if (businessGuid !== "") {
+        endpoint = `/api/listing/business/services/${businessGuid}`
+    } else {
+        console.log('Contact admin.')
+    }
+
+
+
+
+    const url = config.BASE_URL + endpoint
+
+
+    try {
+        const response = await fetch(url, {
+            method: "GET",
+            headers: headers,
+        }
+        )
+        if (!response.ok) {
+
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data: any = await response.json();
+
+        if (data.length <= 0) {
+            return null
+        }
+        return data
+
+    } catch (error: any) {
+        console.log(error.message)
+        return null
+    }
+}
+
+
+export const getFacilityList = async (businessGuid: string | null, userGuid: string | null, page: number): Promise<any | null> => {
+
+    let endpoint: string = ""
+
+    if (businessGuid !== "" && userGuid !== "") {
+        endpoint = `/api/listing/facilities/${businessGuid}/${userGuid}?page=${page}`
+    } else {
+        console.log('Contact admin.')
+    }
+
+
+
+
+    const url = config.BASE_URL + endpoint
+
+
+    try {
+        const response = await fetch(url, {
+            method: "GET",
+            headers: headers,
+        }
+        )
+        if (!response.ok) {
+
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data: any = await response.json();
+
+        if (data.length <= 0) {
+            return null
+        }
+        return data
+
+    } catch (error: any) {
+        console.log(error.message)
+        return null
+    }
+}
+
 
 export function getRandomImage(images: { image: string }[]): string {
     const randomIndex = Math.floor(Math.random() * images.length);
@@ -1547,13 +1811,402 @@ export function generateRandom10DigitNumber() {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+/**
+ * Remove plus signs from a string with various options
+ */
+export function removePlusSign(
+    text: string,
+    options: {
+        // Also remove leading/trailing plus signs only?
+        onlyFirst?: boolean; // Remove only the first plus sign
+        trimSpaces?: boolean; // Trim whitespace after removal
+        replaceWith?: string; // Replace plus with something else (default: empty)
+    } = {}
+): string {
+    const {
+        onlyFirst = false,
+        trimSpaces = false,
+        replaceWith = ''
+    } = options;
+
+    let result = text;
+
+    if (onlyFirst) {
+        // Remove only the first plus sign
+        result = result?.replace('+', replaceWith);
+    } else {
+        // Remove all plus signs
+        result = result?.replace(/\+/g, replaceWith);
+    }
+
+    if (trimSpaces) {
+        result = result?.trim();
+    }
+
+    return result;
+}
 
 export function removeAllParagraphs(text: string) {
-    return text.replace(/\n/g, ' ').replace(/\s+/g, ' ').trim();
+    return text?.replace(/\n/g, ' ').replace(/\s+/g, ' ').trim();
 }
 
 
 export function truncateText(text: string, desiredLength: number) {
     const strLen = text.length
     return (strLen > 100) ? text.substring(0, desiredLength) + '...' : text
+}
+
+
+
+export const getBusinessRating = async (businessGuid: string | null) => {
+    const endpoint = `/api/rating/get_business_rating/${businessGuid}`
+    const url = config.BASE_URL + endpoint
+
+
+
+
+    try {
+        const response = await fetch(url, {
+            method: "GET",
+            headers: headers,
+        }
+        )
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data: any = await response.json();
+        return data
+
+    } catch (error: any) {
+        return ({ "message": error.message })
+    }
+}
+
+
+
+export const getBusinessReviews = async (businessGuid: string | null) => {
+    const endpoint = `/api/rating/get_business_reviews/${businessGuid}`
+    const url = config.BASE_URL + endpoint
+
+
+    try {
+        const response = await fetch(url, {
+            method: "GET",
+            headers: headers,
+        }
+        )
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data: any = await response.json();
+        return data
+
+    } catch (error: any) {
+        return ({ "message": error.message })
+    }
+}
+
+
+export const getRelatedByCategory = async (category: string, limit: number) => {
+
+    const endpoint = `/api/listing/related_by_category/${category}/${limit}`
+    const url = config.BASE_URL + endpoint
+
+    //console.log(url)
+
+    try {
+        const response = await fetch(url, {
+            method: "GET",
+            headers: headers,
+        }
+        )
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data: any = await response.json();
+        return data
+    } catch (error: any) {
+        return ({ "message": error.message })
+    }
+}
+
+export function isValidUrl(string: any) {
+    try {
+        new URL(string);
+        return true;
+    } catch (err) {
+        return false;
+    }
+}
+
+export function getIcon(media: SocialMediaType) {
+    const socialMedia = [
+        {
+            name: "facebook",
+            id: "FBK",
+            icon: <FaFacebookSquare />
+        },
+        {
+            name: "twitterx",
+            id: "TWX",
+            icon: <BsTwitterX />
+        },
+        {
+            name: "linkedin",
+            id: "LNK",
+            icon: <BsLinkedin />
+        },
+        {
+            name: "instagram",
+            id: "INS",
+            icon: <BsInstagram />
+        },
+        {
+            name: "pinterest",
+            id: "PIN",
+            icon: <BsPinterest />
+        },
+        {
+            name: "vimeo",
+            id: "VIM",
+            icon: <BsVimeo />
+        },
+        {
+            name: "tiktok",
+            id: "TKT",
+            icon: <FaTiktok />
+        },
+        {
+            name: "youtube",
+            id: "YTB",
+            icon: <FaYoutubeSquare />
+        },
+
+    ]
+    let icon = null
+    let _mediaCode: string = media.social_media_code
+
+    let selectedMedia
+
+    for (let index = 0; index < socialMedia.length; index++) {
+        const element = socialMedia[index];
+        if (_mediaCode === element.id) {
+            selectedMedia = element.icon
+            break;
+        }
+    }
+
+    return selectedMedia
+
+}
+
+
+export const getNearbyBusinesses = async (cityId: string, limit: number) => {
+
+    const endpoint = `/api/listing/nearby_businesses/${cityId}/${limit}`
+    const url = config.BASE_URL + endpoint
+
+    //console.log(url)
+
+    try {
+        const response = await fetch(url, {
+            method: "GET",
+            headers: headers,
+        }
+        )
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data: any = await response.json();
+        return data
+    } catch (error: any) {
+        return ({ "message": error.message })
+    }
+}
+
+
+export const getInitials = (title: string) => {
+    const splitted = title?.split(' ')
+    let firstInitial: string
+    let secondInitial: string
+    if (splitted.length > 1) {
+        firstInitial = splitted[0]?.substring(0, 1)
+        secondInitial = splitted[1]?.substring(0, 1)
+    } else {
+        firstInitial = title.substring(0, 2)
+        secondInitial = ''
+    }
+    return `${firstInitial}${secondInitial}`
+}
+
+
+export const formatDecimalWithCommas = (value: string): string => {
+    // 1. Remove invalid characters
+    let clean = value.replace(/[^0-9.]/g, '');
+
+    // 2. If it starts with '.', prefix with 0
+    if (clean.startsWith('.')) {
+        clean = '0' + clean;
+    }
+
+    // 3. Allow only one dot
+    const firstDotIndex = clean.indexOf('.');
+    if (firstDotIndex !== -1) {
+        const beforeDot = clean.slice(0, firstDotIndex + 1);
+        const afterDot = clean.slice(firstDotIndex + 1).replace(/\./g, '');
+        clean = beforeDot + afterDot;
+    }
+
+    // 4. Split integer and decimal parts
+    let [integerPart, decimalPart] = clean.split('.');
+
+    // 5. Add commas to integer part
+    integerPart = integerPart.replace(/^0+(?=\d)/, ''); // remove leading zeros
+    integerPart = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+    // 6. Limit decimal places to 2 (but allow typing "34.")
+    if (decimalPart !== undefined) {
+        decimalPart = decimalPart.slice(0, 2);
+        return `${integerPart}.${decimalPart}`;
+    }
+
+    return integerPart;
+};
+
+
+export const getServiceProfile = async (serviceGuid: string | null): Promise<ServiceType | null> => {
+
+    const endpoint = "/api/listing/services/" + serviceGuid
+    const url = config.BASE_URL + endpoint
+
+    try {
+        const response = await fetch(url, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                'Access-Control-Allow-Origin': '*'
+            },
+        }
+        )
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data: ServiceType = await response.json();
+        return data
+    } catch (error: any) {
+        console.log(error.message)
+        return null
+    }
+}
+
+export const getFacilityProfile = async (facilityGuid: string | null): Promise<FacilityType | null> => {
+
+    const endpoint = "/api/listing/facilities/" + facilityGuid
+    const url = config.BASE_URL + endpoint
+
+    try {
+        const response = await fetch(url, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                'Access-Control-Allow-Origin': '*'
+            },
+        }
+        )
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data: FacilityType = await response.json();
+        return data
+    } catch (error: any) {
+        console.log(error.message)
+        return null
+    }
+}
+
+
+export const getSocialMediaList = async (businessGuid: string | null, userGuid: string | null, page: number): Promise<any | null> => {
+
+    let endpoint: string = ""
+
+    if (businessGuid !== "" && userGuid !== "") {
+        endpoint = `/api/listing/social_media/${businessGuid}/${userGuid}?page=${page}`
+    } else {
+        console.log('Contact admin.')
+    }
+
+
+
+
+    const url = config.BASE_URL + endpoint
+
+
+    try {
+        const response = await fetch(url, {
+            method: "GET",
+            headers: headers,
+        }
+        )
+        if (!response.ok) {
+
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data: any = await response.json();
+
+        if (data.length <= 0) {
+            return null
+        }
+        return data
+
+    } catch (error: any) {
+        console.log(error.message)
+        return null
+    }
+}
+
+
+export const getSocialMediaProfile = async (socialMediaGuid: string | null): Promise<SocialMediaType | null> => {
+
+    const endpoint = "/api/listing/social_media/" + socialMediaGuid
+    const url = config.BASE_URL + endpoint
+
+    try {
+        const response = await fetch(url, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                'Access-Control-Allow-Origin': '*'
+            },
+        }
+        )
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data: SocialMediaType = await response.json();
+        return data
+    } catch (error: any) {
+        console.log(error.message)
+        return null
+    }
+}
+
+export const filterCountry = (countries: CountryType[] | undefined, searchTerm: string) => {
+
+    const term = searchTerm.toLowerCase().trim()
+
+    const filtered = countries?.filter((country: CountryType) =>
+        country.country_name?.toLowerCase().includes(term) ||
+        country.currency?.toLowerCase().includes(term) ||
+        country.numeric_code?.toLowerCase().includes(term) ||
+        country.id.toString().includes(term)
+    )
+    return filtered
 }

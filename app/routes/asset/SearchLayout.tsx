@@ -1,4 +1,5 @@
 import React from 'react'
+import FooterAlt from '~/components/footer/FooterAlt'
 
 import Navbar from '~/components/header/new/Navbar'
 import SearchNavbar from '~/components/header/new/SearchNavbar'
@@ -22,6 +23,8 @@ const SearchLayout = ({ children }: { children: React.ReactNode }) => {
 
                 {children}
             </main>
+
+            <FooterAlt />
         </div>
     )
 }

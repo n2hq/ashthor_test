@@ -23,8 +23,23 @@ export const loader: LoaderFunction = async ({ request, params }) => {
         WHERE 
         a.business_guid = ?`
 
+    const facilitiesQuery = `SELECT 
+        f.*,  
+        sf.name AS facility_name,
+        sf.description AS facility_definition,
+        sf.active AS facility_active_status
+        FROM 
+            tbl_facilities f 
+        INNER JOIN 
+            tbl_sys_facilities sf 
+            ON f.facility_id = sf.facility_id
+        WHERE 
+            f.business_guid = 'bc28e31d-f128-4f7e-84ab-44c74bef86bb'
+        ORDER BY 
+            f.created_at DESC;`
+
     try {
-        const rawdata: any = await query(selectedFeatureQuery,
+        const rawdata: any = await query(facilitiesQuery,
             [
                 businessGuid
             ])

@@ -1,0 +1,9 @@
+import{j as d}from"./jsx-runtime-0DLF9kdB.js";import{L as c,r as o}from"./components-CqyJs_9b.js";import{l as s,az as t}from"./lib-BhVPRy-q.js";const x=({listing:e})=>d.jsxs("div",{children:[e==null?void 0:e.address_one,e!=null&&e.address_two?`, ${e==null?void 0:e.address_two}`:"",e!=null&&e.city_name?`, ${e==null?void 0:e.city_name}`:"",e!=null&&e.state_name?`, ${e==null?void 0:e.state_name}`:"",e!=null&&e.country_name?`, ${e==null?void 0:e.country_name}`:""]}),n=({feature:e})=>d.jsxs("div",{id:e.gid,className:"pb-4 pt-3",children:[d.jsx(c,{to:`/${e!=null&&e.username?e==null?void 0:e.username:e==null?void 0:e.gid}`,children:d.jsx("div",{className:`text-[15px] tracking-normal 
+                text-blue-700 font-normal`,children:e.title})}),d.jsx("div",{className:`text-md font-semibold 
+                tracking-tight mt-[2px]`,children:e.phone}),d.jsx("div",{className:`font-normal  
+                tracking-normal mt-[2px] leading-[1.3em]
+                text-black`,children:e.short_description.substring(0,80)}),d.jsx("div",{className:`text-[12px] font-normal 
+                tracking-tight mt-[5px] leading-[1.4em]
+                text-brown-700`,children:d.jsx(x,{listing:e})}),d.jsx("div",{className:` font-semibold  
+                tracking-tight mt-[8px] text-blue-800`,children:d.jsx(c,{to:e.website?e.website:`#${e.gid}`,children:"Website"})})]}),N=()=>{const[e,m]=o.useState([]),[p,h]=o.useState(0);return o.useEffect(()=>{const a=async()=>{const r=await t();m(r)};try{a()}catch(r){s(r.message)}},[]),d.jsxs("div",{className:`border-[1px] px-4 pt-4 pb-4
+        rounded-xl border-gray-200`,children:[d.jsx("div",{className:"font-bold text-lg",children:"Featured"}),d.jsx("div",{className:"divide-y divide-gray-200",children:(e==null?void 0:e.length)>0?e==null?void 0:e.map((a,r)=>r>2?null:d.jsx(n,{feature:a},r)):d.jsx("div",{className:"text-[15px] mt-4",children:"Loading..."})})]})};export{x as A,N as F};

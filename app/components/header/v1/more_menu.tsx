@@ -32,7 +32,7 @@ export const moremenu = [
     },
     {
         "title": "Responsible Disclosure",
-        "url": "/web/responsible_disclosure",
+        "url": "/web/responsible-disclosure",
         icon: <FaBlenderPhone />
     },
     {

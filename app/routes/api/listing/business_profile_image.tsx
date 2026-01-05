@@ -13,7 +13,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
             [guid]
         )
         if ((rows as any[]).length <= 0) {
-            return DoResponse([{}], 200)
+            return DoResponse(null, 200)
         }
 
         return DoResponse(rows[0], 200)

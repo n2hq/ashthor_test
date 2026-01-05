@@ -44,6 +44,8 @@ const index = () => {
             const businessProfile = await getBusinessProfile(businessGuid || "")
             setBusinessProfile(businessProfile)
         }
+
+
         try {
             if (business_guid && user_guid) {
                 getAllData(business_guid, user_guid)

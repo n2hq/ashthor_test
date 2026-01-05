@@ -18,8 +18,10 @@ import LoadingMessage from '~/components/content/LoadingMessage'
 const Index = () => {
     useEffect(() => {
 
-        IsAuthenticated(localStorage)
-    }, [])
+        if (localStorage) {
+            IsAuthenticated(localStorage)
+        }
+    }, [localStorage])
 
     const auth = useAuth()
     if (!auth) { return null }

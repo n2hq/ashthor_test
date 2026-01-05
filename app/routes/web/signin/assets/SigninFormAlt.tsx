@@ -7,8 +7,12 @@ import { LoginData } from "~/lib/types";
 import { useNotification } from "~/context/NotificationContext";
 import { useOperation } from "~/context/OperationContext";
 import { useAuth } from "~/context/AuthContext";
+import { config } from "~/lib/lib";
 
-export default function SigninFormAlt() {
+interface SigninFormAltProps {
+    referer: any
+}
+export default function SigninFormAlt({ referer }: SigninFormAltProps) {
     const [isVisible, setIsVisible] = useState(false);
     //const [email, setEmail] = useState("");
     ///const [password, setPassword] = useState("");
@@ -69,7 +73,10 @@ export default function SigninFormAlt() {
                 showSuccess('login', 'Signin is successful.')
                 await new Promise((resolve) => setTimeout(resolve, 1000));
                 completeOperation()
+
                 navigator("/")
+                return true;
+
             } else {
                 //alert(res.message))
                 //notification.alertCancel("Complete Your Signup", res.message)

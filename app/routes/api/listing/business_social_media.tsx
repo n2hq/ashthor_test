@@ -19,12 +19,18 @@ export const loader: LoaderFunction = async ({ request, params }) => {
 
     try {
         const rawdata: any = await query(`SELECT 
-            a.media_id, b.description, a.user_description, 
-            a.business_guid, b.name, b.base_url, b.media_icon
+            a.social_media_guid, 
+            a.social_media_code,
+            a.social_media_identifier, 
+            a.business_guid,
+            b.base_url, 
+            b.name as social_media_name, 
+            b.base_url
             FROM 
-            tbl_selected_social_media a, tbl_sys_social_media b 
-            WHERE a.media_id = b.media_id 
-            AND
+            tbl_social_media a 
+            INNER JOIN 
+                tbl_sys_social_media b ON a.social_media_code = b.media_id 
+            WHERE
             a.business_guid = ?`,
             [
                 businessGuid

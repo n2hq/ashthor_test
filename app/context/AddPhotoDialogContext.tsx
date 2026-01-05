@@ -1,6 +1,7 @@
 import { createContext, useContext, useState } from "react";
 import { useNotification } from "./NotificationContext";
 import { useOperation } from "./OperationContext";
+import { CgClose } from "react-icons/cg";
 
 const AddPhotoDialogContext = createContext<any | null>(null)
 
@@ -110,13 +111,20 @@ export function AddPhotoDialogProvider({ children }: any) {
                     className={`flex w-screen h-screen z-[3000] 
                 fixed top-0 left-0 right-0 bottom-0 bg-black/30
                 place-content-center place-items-center`}>
-                    <div className={`relative w-[90%] h-[80%] bg-white 
-                        rounded-[8px] overflow-x-hidden z-[3000]`}
+
+                    <div className={`relative max-w-[600px] mx-2 w-full h-fit bg-white 
+                        rounded-[40px] overflow-hidden z-[3000]`}
                         onClick={(event) => {
                             event.preventDefault()
                         }}
                     >
-                        <div className={`relative w-full h-[75%] bg-black`}>
+                        <CloseButton
+                            setShow={handleCloseDialog}
+                        />
+                        <div className={`pt-12 pb-5 px-3 text-2xl font-semibold`}>
+                            Add Photo
+                        </div>
+                        <div className={`relative w-full h-[300px] bg-gray-200`}>
                             <img
                                 src={imgSrc}
                                 alt=""
@@ -133,29 +141,48 @@ export function AddPhotoDialogProvider({ children }: any) {
                             ></textarea>
                         </div>
 
-                        <div className={`flex place-content-end px-3 gap-2`}>
-                            <button
-                                onMouseDown={() => handleCloseDialog()}
-                                className={`bg-gray-800 text-white px-3 py-1.5 rounded-md
-                                    shadow-md mb-2 mt-4`}
-                            >
-                                Close
-                            </button>
+                        <div className={`flex place-content-between place-items-center`}>
+                            <div className={`px-3 text-2xl`}>
 
-                            <button
-                                onClick={() => handleUpload()}
-                                className={`bg-blue-800 text-white px-3 py-1.5 rounded-md
-                                    shadow-md mb-2 mt-4`}
-                            >
-                                {
-                                    working ? 'Working...' : 'Submit'
-                                }
-                            </button>
+                            </div>
+                            <div className={`flex place-content-end px-6 gap-x-2 py-6`}>
+                                <button
+                                    onMouseDown={() => handleCloseDialog()}
+                                    className={`bg-gray-800 text-white px-3 py-1.5 rounded-md
+                                    shadow-md `}
+                                >
+                                    Close
+                                </button>
+
+                                <button
+                                    onClick={() => handleUpload()}
+                                    className={`bg-blue-800 text-white px-3 py-1.5 rounded-md
+                                    shadow-md `}
+                                >
+                                    {
+                                        working ? 'Working...' : 'Submit'
+                                    }
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
             }
             {children}
         </AddPhotoDialogContext.Provider>
+    )
+}
+
+
+export interface CloseButtonProps {
+    setShow: () => void
+}
+export const CloseButton = ({ setShow }: CloseButtonProps) => {
+    return (
+        <div className={`absolute top-8 right-6 text-3xl  rounded-xl  w-[40px] h-[40px] shadow-sm flex place-items-center place-content-center cursor-pointer bg-gray-200/70 hover:border-gray-200/50 text-gray-400 hover:text-gray-500 z-10`}
+            onClick={() => setShow()}
+        >
+            <CgClose />
+        </div>
     )
 }

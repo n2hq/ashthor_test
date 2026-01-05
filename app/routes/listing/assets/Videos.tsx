@@ -103,11 +103,7 @@ const Videos = ({ videoGallery, listing }: VideoGalleryProps) => {
         <div className={` `}
             id='video'
         >
-            <ShowVideo
-                setOpen={setOpen}
-                open={open}
-                currentVideo={currentVideo}
-            />
+
 
             <VideoScrollerAlt
                 outVideo={outVideo}

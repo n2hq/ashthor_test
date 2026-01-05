@@ -24,7 +24,7 @@ export const SliderProvider = ({ children }: any) => {
     const slideStep = useRef(0)
     const counter = useRef(0)
     let slideIncrement = 0
-    const [maximized, setMaximized] = useState(false)
+    const [maximized, setMaximized] = useState(true)
     const [normalState, setNormalState] = useState(true)
 
     const handleTouchStart = (e: any) => {
@@ -104,22 +104,30 @@ export const SliderProvider = ({ children }: any) => {
                                         return (
                                             <div className={`w-full h-full flex flex-shrink-0 flex-grow-0 transition-transform  place-content-center place-items-center  relative
                                             ease-in-out duration-1000`}
-                                                style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+                                                /* style={{ transform: `translateX(-${currentSlide * 100}%)` }} */
+                                                style={{ display: index === currentSlide ? 'block' : 'none' }}
                                             >
-                                                <img
-                                                    onTouchStart={handleTouchStart}
-                                                    onTouchEnd={handleTouchEnd}
-                                                    key={index}
-                                                    src={IMG_BASE_URL + slide.image_url}
-                                                    alt=""
+                                                <div className={`absolute top-10`}>
+                                                    <div className='text-white text-center '>{currentSlide + 1} / {slides.length}</div>
+                                                </div>
 
-                                                    className={`object-scale-down w-full h-full 
-                                            `}
-                                                />
-                                                <div className={`absolute bottom-[0px] w-full z-[20px] px-5 py-7 bg-black/30 md:hidden`}>
-                                                    <div className={` text-center text-white text-[19px]`}>
+                                                <div className={`max-w-[100%] md:max-w-[70%] h-[70%] relative `}>
+                                                    <img
+                                                        onTouchStart={handleTouchStart}
+                                                        onTouchEnd={handleTouchEnd}
+                                                        key={index}
+                                                        src={IMG_BASE_URL + slide.image_url}
+                                                        alt=""
+
+                                                        className={`object-scale-down w-full h-full`}
+                                                    />
+                                                </div>
+
+                                                <div className={`absolute bottom-[15px] w-full z-[20px] px-5 py-5 bg-black/30`}>
+                                                    <div className={` text-center text-white font-extralight text-[13px]`}>
                                                         {slide?.image_title}
                                                     </div>
+
                                                 </div>
                                             </div>
                                         )
@@ -140,7 +148,7 @@ export const SliderProvider = ({ children }: any) => {
 
                             {/**f next button */}
                             <button onMouseDown={next} className={`block absolute top-0 bottom-0 
-                                                    p-[1rem] cursor-pointer ${maximized ? 'right-5' : 'right-5 md:right-0'} group 
+                                                    p-[1rem] cursor-pointer ${maximized ? 'right-0' : 'right-0 md:right-0'} group 
                                                      transition duration-1000 ease-in-out`}>
                                 <div className={`w-[50px] h-[50px] bg-white/60 rounded-full flex place-content-center place-items-center group-hover:bg-white/30
                                                         transition duration-500 ease-in-out`}>
@@ -151,7 +159,7 @@ export const SliderProvider = ({ children }: any) => {
                             {/** close button handle */}
                             <div
                                 onMouseDown={() => handleClose()}
-                                className={`w-[50px] h-[50px] z-[300] bg-white
+                                className={`w-[30px] h-[30px] z-[300] bg-white
                                                     flex place-content-center place-items-center
                                                     rounded-full absolute left-2 top-2 cursor-pointer
                                                     hover:bg-white/40 transition duration-1000 ease-in-out`}>
@@ -165,12 +173,12 @@ export const SliderProvider = ({ children }: any) => {
                                     setMaximized(!maximized)
                                     setNormalState(!normalState)
                                 }}
-                                className={`w-[50px] h-[50px] z-[300] bg-white flex place-content-center place-items-center rounded-full absolute right-2 top-2 cursor-pointer hover:bg-white/40 transition duration-1000 ease-in-out`}>
+                                className={`w-[30px] h-[30px] z-[300] bg-white flex place-content-center place-items-center rounded-full absolute right-2 top-2 cursor-pointer hover:bg-white/40 transition duration-1000 ease-in-out`}>
                                 {
                                     maximized ?
-                                        <FaMinimize className={`text-[30px]`} />
+                                        <FaMinimize className={`text-[20px]`} />
                                         :
-                                        <FaMaximize className={`text-[30px]`} />
+                                        <FaMaximize className={`text-[20px]`} />
                                 }
                             </div>
                         </div>

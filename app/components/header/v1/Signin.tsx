@@ -39,7 +39,7 @@ const Signin = () => {
             {
                 !user ?
                     <Link to={`/web/signin`}>
-                        <button className={`text-lg border rounded-full w-[80px] py-[4px] hover:border border-[#6001D2] shadow-md hover:bg-[#6001D2] hover:text-white`}>
+                        <button className={`text-lg border rounded-full w-[80px] py-[4px] hover:border border-[#A52A2A] hover:bg-black hover:text-white`}>
                             Sign in
                         </button>
                     </Link> :

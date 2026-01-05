@@ -1,5 +1,5 @@
 import React from 'react'
-import { appConfig } from '~/lib/lib'
+import { appConfig, config } from '~/lib/lib'
 
 import VerticalHeight from '~/routes/asset/VerticalHeight'
 import CallToActionSection from '~/components/content/CallToActionSection'
@@ -35,15 +35,15 @@ export const InfoPrivacy = () => {
         <div className={`markdown prose dark:prose-invert w-full break-words light space-y-4`}>
 
             <h2 data-start="193" data-end="214" className={`text-xl`}>
-                <strong data-start="196" data-end="214"
-                    className={`text-2xl`}
-                >Privacy Policy</strong>
+                <span data-start="196" data-end="214"
+                    className={`text-3xl font-extrabold`}
+                ><i>P</i>rivacy Policy</span>
             </h2>
             <p data-start="216" data-end="249">
                 <strong data-start="216" data-end="235">Effective Date:</strong> 23 Jul 2025
             </p>
             <p data-start="251" data-end="429">
-                Thank you for trusting <strong data-start="274" data-end="293">Bycet</strong> with your information. Your privacy is important to us, and we’re committed to handling your data with care, respect, and transparency.
+                Thank you for trusting <strong data-start="274" data-end="293">{config?.SITENAME}</strong> with your information. Your privacy is important to us, and we’re committed to handling your data with care, respect, and transparency.
             </p>
             <hr data-start="431" data-end="434" />
             <h3 data-start="436" data-end="469">
@@ -200,7 +200,7 @@ export const InfoPrivacy = () => {
                     <p data-start="2281" data-end="2326">Contact us with any privacy-related questions</p>
                 </li>
             </ul>
-            <p data-start="2328" data-end="2401">To make a request, please reach out to us at <strong data-start="2373" data-end="2400">info@bycet.com</strong>.</p>
+            <p data-start="2328" data-end="2401">To make a request, please reach out to us at <strong data-start="2373" data-end="2400">{config?.SITEMAIL}</strong>.</p>
             <hr data-start="2403" data-end="2406" />
             <h3 data-start="2408" data-end="2427">
                 <strong data-start="2412" data-end="2427">7. Security</strong>
@@ -234,8 +234,8 @@ export const InfoPrivacy = () => {
                 If you have any questions or concerns about this Privacy Policy, feel free to contact us:
             </p>
             <p data-start="3296" data-end="3371">
-                <strong data-start="3299" data-end="3309">Email:</strong> <a href="mailto:info@bycet.com">info@bycet.com</a><br data-start="3331" data-end="3334" />
-                🌐 <strong data-start="3337" data-end="3349">Website:</strong> <a href="bycet.com/contact">bycet.com/contact</a>
+                <strong data-start="3299" data-end="3309">Email:</strong> <a href={`mailto:${config?.SITEMAIL}.com`}>{config?.SITEMAIL}</a><br data-start="3331" data-end="3334" />
+                🌐 <strong data-start="3337" data-end="3349">Website:</strong> <a href={`${config?.BASE_URL}/contact`}>{config?.BASE_URL}/contact</a>
             </p>
             <hr data-start="3373" data-end="3376" />
             <p data-start="3378" data-end="3557" data-is-last-node="" data-is-only-node="">Would you like me to turn this into a downloadable <code data-start="3429" data-end="3435">.txt</code> or <code data-start="3439" data-end="3444">.md</code> file? Or generate a version for Nigerian data compliance (NDPR) or GDPR if you’re targeting international users?</p>

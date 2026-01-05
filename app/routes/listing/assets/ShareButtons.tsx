@@ -14,6 +14,7 @@ const ShareButtons = ({ url, title }: { url: string; title: string }) => {
 
     // Standard share URLs
     const twitterShareUrl = `https://twitter.com/intent/tweet?url=${encodedUrl}?v=${randomNo}&text=${encodedTitle}`;
+
     const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}?v=${randomNo}&quote=${encodedTitle}`;
 
     return (
@@ -23,7 +24,7 @@ const ShareButtons = ({ url, title }: { url: string; title: string }) => {
                 href={twitterShareUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`flex place-items-center place-content-center text-white  rounded-lg bg-gradient-to-b from-[#629deb] to-blue-600 transition-colors text-3xl border hover:text-white pl-2 pr-4 py-2 border-[#629deb]`}
+                className={`flex place-items-center place-content-center text-white  rounded-lg bg-gradient-to-b from-[#629deb] to-blue-600 transition-colors text-3xl border hover:text-white pl-4 pr-4 py-1 border-[#629deb]`}
             >
                 <TwitterIcon />
                 <RxDividerVertical />

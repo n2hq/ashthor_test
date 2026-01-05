@@ -99,6 +99,78 @@ function formatTime(time24: string): string {
     return `${hour.toString().padStart(2, '0')}:${minute} ${ampm}`;
 }
 
+function getOpenStatusDisplaysTextOnly(openStatus: string, todayHoursFormatted: any) {
+    if (openStatus === "selected_hours") {
+        return (
+            <div>
+                {todayHoursFormatted}
+            </div>
+        )
+    }
+
+    if (openStatus === "always_open") {
+        return (
+            ' Always Open'
+        )
+    }
+
+    if (openStatus === "permanently_closed") {
+        return (
+            'Permantently Closed'
+        )
+    }
+
+    if (openStatus === "temporarily_closed") {
+        return (
+            'Temporarily Closed'
+        )
+    }
+
+    return (
+        'Hours not set'
+    )
+}
+function getOpenStatusDisplays(openStatus: string, todayHoursFormatted: any) {
+    if (openStatus === "selected_hours") {
+        return (
+            <div>
+                {todayHoursFormatted}
+            </div>
+        )
+    }
+
+    if (openStatus === "always_open") {
+        return (
+            <div key={'1'} className={`bg-blue-700 px-2 rounded w-fit text-white pt-[2px] pb-[4px]`}>
+                Always Open
+            </div>
+        )
+    }
+
+    if (openStatus === "permanently_closed") {
+        return (
+            <div key={'2'} className={`bg-red-700 px-2 rounded-lg w-fit text-white pt-[2px] pb-[4px]`}>
+                Permantently Closed
+            </div>
+        )
+    }
+
+    if (openStatus === "temporarily_closed") {
+        return (
+            <div key={'3'} className={`bg-orange-400 px-2 rounded-lg w-fit text-white pt-[2px] pb-[4px]`}>
+                Temporarily Closed
+            </div>
+        )
+    }
+
+    return (
+        <div key={'3'} className={`bg-orange-400 px-2 rounded-lg w-fit text-white pt-[2px] pb-[4px]`}>
+            Hours not set
+        </div>
+    )
+
+}
+
 export const getLocationAndBusinessStatus = async (listing: any) => {
     const countryCode: string = listing?.country_code
 
@@ -111,6 +183,7 @@ export const getLocationAndBusinessStatus = async (listing: any) => {
     const opHours = reconstructed.opHours
     country["hours"] = opHours
     country["openStatus"] = operatingHours?.open_status
+
 
 
     const dayMap = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
@@ -149,6 +222,8 @@ export const getLocationAndBusinessStatus = async (listing: any) => {
         </span>
     </span>;
 
+    let todayHoursOpenStatus
+
     if (todayHoursEntry && todayHoursEntry.hours.includes('-')) {
         const [openStr, closeStr] = todayHoursEntry.hours.split(' - ');
         const [openHour, openMinute] = openStr.split(':').map(Number);
@@ -179,6 +254,10 @@ export const getLocationAndBusinessStatus = async (listing: any) => {
                 <span key={'o5'}>{formatTime(closeStr)}</span>
             </div>
         );
+
+        todayHoursOpenStatus = formattedLabel(isOpen);
+
+
     }
 
 
@@ -189,13 +268,20 @@ export const getLocationAndBusinessStatus = async (listing: any) => {
                 Hours not set.
             </span>
         </div>
+
+        todayHoursOpenStatus = 'Hours not set';
     }
 
     const localTimeString = localTimeObject.toString()
+
+    const openStatusObject = getOpenStatusDisplays(country.openStatus, todayHoursFormatted);
+
     return {
         ...country,
         isOpen,
+        openStatusObject,
         todayHoursFormatted,
+        todayHoursOpenStatus,
         today,
         localTimeString,
         localTimeText

@@ -10,9 +10,9 @@ const VideoSliderContext = createContext<any | null>(null)
 
 export function useVideoSliderContext() {
     const context = useContext(VideoSliderContext)
-    /* if (!context) {
-        throw new Error("useSliderContext must be used within a SliderProvider")
-    } */
+    if (!context) {
+        null
+    }
     return context
 }
 
@@ -28,7 +28,7 @@ export const VideoSliderProvider = ({ children }: any) => {
     const counter = useRef(0)
     let slideIncrement = 0
 
-    const [maximized, setMaximized] = useState(false)
+    const [maximized, setMaximized] = useState(true)
 
     const handleTouchStart = (e: any) => {
         slideStep.current = e.touches[0].clientX;
@@ -62,10 +62,22 @@ export const VideoSliderProvider = ({ children }: any) => {
 
         let prevCount = (currentSlide === 0) ? slides.length - 1 : currentSlide - 1
         const prevVideo = slides[prevCount]
-        const iframeObject: any = document.getElementById(prevVideo?.video_guid)
+
+        let iframeObject: any
+
+        try {
+            //mute the current
+            const currentVideo = slides[currentCount]
+            iframeObject = document.getElementById(currentVideo?.video_guid)
+            iframeObject.src = ``
+        } finally {
+            //after start the next
+            iframeObject = document.getElementById(prevVideo?.video_guid)
+        }
+
+
         const videoId: string | null = getYoutubeId(prevVideo?.video_url)
         iframeObject.src = `https://www.youtube.com/embed/${videoId}`
-
 
 
         setCurrentSlide((currentSlide: any) => {
@@ -89,10 +101,24 @@ export const VideoSliderProvider = ({ children }: any) => {
 
         let nextCount = (currentSlide === slides.length - 1) ? 0 : currentSlide + 1
         const nextVideo = slides[nextCount]
-        const iframeObject: any = document.getElementById(nextVideo?.video_guid)
-        const videoId: string | null = getYoutubeId(nextVideo?.video_url)
 
+
+        let iframeObject: any
+
+        try {
+            //mute the current
+            const currentVideo = slides[currentCount]
+            iframeObject = document.getElementById(currentVideo?.video_guid)
+            iframeObject.src = ``
+        } finally {
+            //after start the next
+            iframeObject = document.getElementById(nextVideo?.video_guid)
+        }
+
+
+        const videoId: string | null = getYoutubeId(nextVideo?.video_url)
         iframeObject.src = `https://www.youtube.com/embed/${videoId}`
+
 
 
         setCurrentSlide((currentSlide: any) => {
@@ -143,7 +169,7 @@ export const VideoSliderProvider = ({ children }: any) => {
                                 {
                                     slides && selectedSlide &&
                                     slides.map((slide: AddVideoType, index: number) => {
-                                        console.log(slide?.video_url)
+
                                         const videoId = getYoutubeId(slide?.video_url)
                                         const videoSrc = `https://www.youtube.com/embed/${videoId}`
                                         const uniqueId = Date.now().toString() + videoId
@@ -151,24 +177,33 @@ export const VideoSliderProvider = ({ children }: any) => {
                                             <div
 
                                                 key={index}
-                                                style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+                                                /* style={{ transform: `translateX(-${currentSlide * 100}%)` }} */
+                                                style={{ display: index === currentSlide ? 'block' : 'none' }}
+
                                                 className="object-scale-down w-full h-full 
                    flex flex-shrink-0 flex-grow-0 transition-transform 
                    ease-in-out duration-1000 relative place-items-center place-content-center bg-black text-white"
 
                                             >
-                                                Loading...
-                                                <iframe
-                                                    id={slide?.video_guid}
-                                                    src={videoSrc}
-                                                    className="absolute top-0 left-0 w-full h-full"
-                                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                                />
+                                                <div className='absolute top-[15px] my-4 '>
+                                                    {currentSlide + 1} / {slides.length}
+                                                </div>
+                                                <div className={`absolute top-[50%] text-center w-full`}>
+                                                    Loading...
+                                                </div>
+                                                <div className={`w-[100%] md:w-[70%] h-[70%] relative`}>
+                                                    <iframe
+                                                        id={slide?.video_guid}
+                                                        src={videoSrc}
+                                                        className="absolute top-0 left-0 w-full h-full"
+                                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                                    />
+                                                </div>
 
-                                                <div className={`absolute bottom-[0px] w-full z-[20px] px-5 py-7 bg-black/80 md:hidden`}
+                                                <div className={`absolute bottom-[15px] w-full z-[20px] px-5 py-7 bg-black/80`}
                                                     id="vstitle"
                                                 >
-                                                    <div className={` text-center text-white text-[19px] `}>
+                                                    <div className={` text-center text-white text-[14px] font-extralight `}>
                                                         {slide?.video_title}
                                                     </div>
                                                 </div>
@@ -190,8 +225,9 @@ export const VideoSliderProvider = ({ children }: any) => {
 
                             </button>
                             <button onMouseDown={next} className={`block absolute top-0 bottom-0 
-                                                    p-[1rem] cursor-pointer ${maximized ? 'right-5' : 'right-5 md:right-0'}  group 
+                                                    p-[1rem] cursor-pointer ${maximized ? 'right-0' : 'right-5 md:right-0'}  group 
                                                      transition duration-1000 ease-in-out`}>
+
                                 <div className={`w-[50px] h-[50px] bg-white/60 rounded-full flex place-content-center place-items-center group-hover:bg-white/30
                                                         transition duration-500 ease-in-out`}>
                                     <BiChevronRight className=' stroke-white fill-black w-[2rem] h-[2rem]' />
@@ -201,7 +237,7 @@ export const VideoSliderProvider = ({ children }: any) => {
                             {/** close button handle */}
                             <div
                                 onMouseDown={() => handleClose()}
-                                className={`w-[50px] h-[50px] z-[300] bg-white
+                                className={`w-[30px] h-[30px] z-[300] bg-white
                                                     flex place-content-center place-items-center
                                                     rounded-full absolute left-2 top-2 cursor-pointer
                                                     hover:bg-white/40 transition duration-1000 ease-in-out`}>
@@ -211,12 +247,12 @@ export const VideoSliderProvider = ({ children }: any) => {
                             {/** Maximize or Minimize */}
                             <div
                                 onClick={() => { setMaximized(!maximized) }}
-                                className={`w-[50px] h-[50px] z-[300] bg-white flex place-content-center place-items-center rounded-full absolute top-2 right-2 cursor-pointer hover:bg-white/40 transition duration-1000 ease-in-out`}>
+                                className={`w-[30px] h-[30px] z-[300] bg-white flex place-content-center place-items-center rounded-full absolute top-2 right-2 cursor-pointer hover:bg-white/40 transition duration-1000 ease-in-out`}>
                                 {
                                     maximized ?
-                                        <FaMinimize className={`text-[30px]`} />
+                                        <FaMinimize className={`text-[20px]`} />
                                         :
-                                        <FaMaximize className={`text-[30px]`} />
+                                        <FaMaximize className={`text-[20px]`} />
                                 }
                             </div>
                         </div>

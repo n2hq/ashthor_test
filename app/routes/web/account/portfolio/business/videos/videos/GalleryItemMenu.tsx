@@ -25,6 +25,7 @@ const GalleryItemMenu = ({
         editVideo.setBusinessGuid(businessGuid)
         editVideo.setVideoGuid(item.video_guid)
         editVideo.setVideoDescription(item.video_description)
+        editVideo.setVideoVerified(false)
         //setDialog(true)
     }
 

@@ -1,15 +1,17 @@
+import { config } from "~/lib/lib";
+
 const ResponsibleDisclosurePolicy = () => {
     return (
         <div className="w-full  max-w-[1100px] mx-auto px-4 py-8">
             <div className={`max-w-[700px]`}>
-                <h1 className="text-3xl tracking-tighter font-black text-gray-900 mb-6 first-letter:italic">Responsible Disclosure Policy</h1>
+                <h1 className="text-3xl tracking-normal font-extrabold text-gray-900 mb-6 first-letter:italic">Responsible Disclosure Policy</h1>
                 <p className="text-gray-600 mb-8">Last Updated: {new Date().toLocaleDateString()}</p>
 
                 <div className="space-y-8">
                     <section>
                         <h2 className="text-xl font-semibold text-gray-800 mb-3">Our Commitment to Security</h2>
                         <p className="text-gray-600">
-                            At veycet, we consider the security of our systems and our clients' data a top priority.
+                            At <b>{config.SITENAME}</b>, we consider the security of our systems and our clients' data a top priority.
                             Despite our best efforts, vulnerabilities may still exist. We value the role that security
                             researchers and the wider community play in helping to keep our systems secure.
                         </p>
@@ -22,7 +24,7 @@ const ResponsibleDisclosurePolicy = () => {
                             in a responsible manner. Please act in good faith and follow these guidelines:
                         </p>
                         <ul className="list-disc list-inside text-gray-600 space-y-2 ml-4">
-                            <li>Submit your findings to <strong>info@bycet.com</strong></li>
+                            <li>Submit your findings to <strong>{config.SITEMAIL}</strong></li>
                             <li>Provide sufficient information to reproduce the vulnerability</li>
                             <li>Do not exploit the vulnerability beyond what is necessary to demonstrate it</li>
                             <li>Do not access, modify, or destroy data that does not belong to you</li>
@@ -88,7 +90,7 @@ const ResponsibleDisclosurePolicy = () => {
                             Please send all vulnerability reports to:
                         </p>
                         <div className="bg-gray-50 p-4 rounded-lg">
-                            <p className="text-gray-800 font-medium">Email: info@bycet.com</p>
+                            <p className="text-gray-800 font-medium">Email: {config.SITEMAIL}</p>
                             <p className="text-gray-600 text-sm mt-1">
                                 We prefer encrypted communications. Please use our PGP key if possible.
                             </p>
@@ -98,7 +100,7 @@ const ResponsibleDisclosurePolicy = () => {
                     <section className="bg-blue-50 p-6 rounded-lg">
                         <h2 className="text-lg font-semibold text-red-800 mb-3">Thank You</h2>
                         <p className="text-gray-500">
-                            We appreciate your efforts to make Veycet and the internet a safer place. Your
+                            We appreciate your efforts to make {config.SITENAME} and the internet a safer place. Your
                             expertise and ethical approach help us maintain the highest security standards
                             for our clients and their users.
                         </p>

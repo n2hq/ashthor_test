@@ -4,7 +4,7 @@ import ContentLayout from '../../assets/ContentLayout'
 import { useAuth } from '~/context/AuthContext'
 import { LoaderFunction } from '@remix-run/node'
 import { Link, useLoaderData, useNavigation } from '@remix-run/react'
-import { getBusinessProfile, getBusinessProfileBgData, getBusinessProfileImageData, getCategories, getCities, getCountries, getStates, getUserProfile, getUserProfileImageData, IsAuthenticated } from '~/lib/lib'
+import { getBusinessProfile, getBusinessProfileBgData, getBusinessProfileImageData, getCategories, getCities, getCountries, getCurrencies, getStates, getUserProfile, getUserProfileImageData, IsAuthenticated } from '~/lib/lib'
 import BusinessProfileForm from './assets/BusinessProfileForm'
 import BusinessMenu from './assets/BusinessMenu'
 import CardTitle from '../../assets/CardTitle'
@@ -13,6 +13,7 @@ import ProfileLayout from '../../assets/ProfileLayout'
 import BusinessProfile from './assets/BusinessProfile'
 import { OperationProvider } from '~/context/OperationContext'
 import LoadingMessage from '~/components/content/LoadingMessage'
+import { Currency } from '~/lib/types'
 
 
 export const loader: LoaderFunction = async ({ request, params }) => {
@@ -24,9 +25,10 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     return data
 }
 const Index = () => {
-    const tokens = localStorage?.getItem("authTokens")
-    IsAuthenticated(tokens)
 
+    useEffect(() => {
+        IsAuthenticated(localStorage)
+    }, [])
     const loaderData: any = useLoaderData()
     const auth = useAuth();
     if (!auth) { return null }
@@ -45,6 +47,8 @@ const Index = () => {
     const [businessProfileBgData, setBusinessProfileBgData] = useState<any | null>(null)
     const [categories, setCategories] = useState<any | null>(null)
     const [data, setData] = useState<any | null>(null)
+    const [currencies, setCurrencies] = useState<Currency[] | undefined>(undefined)
+
 
     const navigation = useNavigation();
 
@@ -52,15 +56,17 @@ const Index = () => {
         async function getAllData(userGuid: string, businessGuid: string) {
             const userProfile = await getUserProfile(userGuid || "")
             const businessProfile = await getBusinessProfile(businessGuid || "")
+
+            console.log(businessProfile)
             const countries = await getCountries()
             const businessObject: any = businessProfile
             const states = await getStates(businessObject.country_code || "")
             const cities = await getCities(businessObject.country_code || "", businessObject.state_code || "")
             const categories = await getCategories()
             const userProfileImageData = await getUserProfileImageData(userGuid || "")
-            const businessProfileImageData = await getBusinessProfileImageData(businessGuid || "")
+            const businessProfileImageData = await getBusinessProfileImageData(businessGuid || null)
             const businessProfileBgData = await getBusinessProfileBgData(businessGuid || "")
-
+            const currencies = await getCurrencies()
 
 
             setUserProfile(userProfile)
@@ -72,12 +78,14 @@ const Index = () => {
             setBusinessProfileImageData(businessProfileImageData)
             setCategories(categories)
             setBusinessProfileBgData(businessProfileBgData)
+            setCurrencies(currencies)
 
             //console.log(businessProfileBgData)
         }
 
         try {
             if (userGuid && businessGuid) {
+
                 getAllData(userGuid, businessGuid)
             }
         } catch (e: any) {
@@ -86,10 +94,10 @@ const Index = () => {
     }, [userGuid, businessGuid])
 
     useEffect(() => {
+
         if (userProfile && businessProfile &&
             countries && states && cities &&
-            userProfileImageData && categories &&
-            businessProfileImageData && businessProfileBgData) {
+            userProfileImageData && categories && businessProfileBgData && currencies) {
 
             const data = {
 
@@ -101,7 +109,8 @@ const Index = () => {
                 userProfileImageData,
                 businessProfileImageData,
                 businessProfileBgData,
-                categories
+                categories,
+                currencies
             }
 
             setData(data)
@@ -115,7 +124,8 @@ const Index = () => {
         businessProfileImageData,
         userProfile,
         businessProfile,
-        businessProfileBgData
+        businessProfileBgData,
+        currencies
     ])
 
     useEffect(() => {

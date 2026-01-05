@@ -124,7 +124,7 @@ const Header = ({ listing, profileImageData, operatingHoursStatus, ratingsData }
             {/** share */}
             {
                 (fullPath !== '' && listing?.title !== null && listing?.title !== undefined) &&
-                <div className={`flex w-full gap-3 mt-4`}>
+                <div className={`flex w-full gap-3 mt-6`}>
                     <ShareButtons
                         url={fullPath}
                         title={listing?.title + " - " + removeAllParagraphs(truncateText(listing?.short_description, 150)) + ` via @bycetinc`}

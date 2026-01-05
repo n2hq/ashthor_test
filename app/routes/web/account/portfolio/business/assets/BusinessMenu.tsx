@@ -20,6 +20,10 @@ const settingsLinks = [
         link: "/products"
     },
     {
+        title: "Services",
+        link: "/services"
+    },
+    {
         title: "Facilities",
         link: "/facilities"
     },

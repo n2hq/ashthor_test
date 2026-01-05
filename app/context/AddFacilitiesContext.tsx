@@ -1,0 +1,346 @@
+import { zodResolver } from "@hookform/resolvers/zod";
+import { createContext, useContext, useEffect, useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { BiChevronLeft } from "react-icons/bi";
+import { CgClose } from "react-icons/cg";
+import { z } from 'zod'
+import Button from "~/components/content/button/Button";
+import Input from "~/components/content/input/Input";
+import TextareaWithWordLimit from "~/components/content/textarea/TextareaWithWordLimit";
+import { controlInformationClass } from "~/lib/css";
+import { useOperation } from "./OperationContext";
+import { config, headers } from "~/lib/lib";
+import { FacilityType, ServiceType, SysFacilityType } from "~/lib/types";
+import Select from "~/components/content/select/Select";
+
+export interface AddFacilitiesProps {
+    setDialog: (dialog: boolean) => void
+    setUserGuid: (userGuid: string) => void
+    setBusinessGuid: (businessGuid: string) => void
+    setFacilityProfile: (facilityProfile: any) => void
+    setSysFacilities: (sysFacilities: SysFacilityType[] | null | undefined) => void
+}
+const AddFacilitiesContext = createContext<AddFacilitiesProps | null>(null)
+
+export default AddFacilitiesContext
+
+export const useAddFacilitiesContext = () => {
+    const ctx = useContext(AddFacilitiesContext)
+    if (ctx) { return ctx }
+    return null
+}
+
+export const AddFacilitiesProvider = ({ children }: any) => {
+    const [dialog, setDialog] = useState(false)
+    const [userGuid, setUserGuid] = useState('')
+    const [businessGuid, setBusinessGuid] = useState('')
+    const [facilityProfile, setFacilityProfile] = useState<FacilityType | null>(null)
+    const [sysFacilities, setSysFacilities] = useState<SysFacilityType[] | null | undefined>(null)
+
+    const [formdata, setFormdata] = useState<any | null>(null)
+    const [working, setWorking] = useState(false)
+
+    useEffect(() => {
+        if (facilityProfile !== null) {
+            reset(facilityProfile)
+        }
+
+        if (facilityProfile === null) {
+            setValue("facility_id", "")
+            setValue("facility_description", "")
+
+        }
+    }, [facilityProfile])
+
+    const { showOperation, showSuccess, showError, showWarning, showInfo, completeOperation } = useOperation();
+
+
+    const AddFacility = async (data: any) => {
+        const endpoint = "/api/listing/facilities"
+        const url = config.BASE_URL + endpoint
+
+        try {
+            const response = await fetch(url, {
+                method: "POST",
+                headers: headers,
+                body: JSON.stringify(data)
+            })
+
+            if (!response.ok) {
+                const errorData = await response.text();
+                const errorObject = JSON.parse(errorData)
+                throw new Error(`${errorObject.error}`);
+
+            } else {
+
+                showSuccess('Success', 'Service added successfully.')
+
+
+                await new Promise((resolve) => setTimeout(resolve, 2000));
+                showOperation('processing', 'Reloading...')
+                await new Promise((resolve) => setTimeout(resolve, 3000));
+                window.location.reload()
+                await new Promise((resolve) => setTimeout(resolve, 3000));
+                completeOperation()
+            }
+
+        } catch (error: any) {
+            showError('error', `${error.message}`)
+            completeOperation()
+        } finally {
+            setWorking(false)
+        }
+    }
+
+    const UpdateFacility = async (data: any) => {
+        const endpoint = "/api/listing/facilities/" + facilityProfile?.facility_guid
+        const url = config.BASE_URL + endpoint
+
+
+        try {
+            const response = await fetch(url, {
+                method: "PUT",
+                headers: headers,
+                body: JSON.stringify(data)
+            })
+
+            if (!response.ok) {
+                const errorData = await response.text();
+                const errorObject = JSON.parse(errorData)
+                throw new Error(`${errorObject.error}`);
+
+            } else {
+
+                showSuccess('Success', 'Facility UPDATED successfully.')
+
+                await new Promise((resolve) => setTimeout(resolve, 2000));
+                showOperation('processing', 'Reloading...')
+                await new Promise((resolve) => setTimeout(resolve, 3000));
+                window.location.reload()
+                await new Promise((resolve) => setTimeout(resolve, 3000));
+                completeOperation()
+            }
+
+        } catch (error: any) {
+            showError('error', `${error.message}`)
+            completeOperation()
+        } finally {
+            setWorking(false)
+        }
+    }
+
+    const handleAddFacility: SubmitHandler<any> = async (data: any) => {
+        setWorking(true)
+
+        if (facilityProfile === null) {
+            showOperation('processing', 'Adding service...')
+        } else {
+            showOperation('processing', 'Updating service...')
+        }
+
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+
+
+        if (facilityProfile === null) {
+            data['user_guid'] = userGuid
+            data['business_guid'] = businessGuid
+            const finalData = JSON.parse(JSON.stringify(data))
+
+            AddFacility(data)
+        } else {
+
+            UpdateFacility(data)
+        }
+
+
+    }
+
+    const changeHandler = (e: any) => {
+        let value = e.target.value
+        let name = e.target.name
+        setFormdata((previousValue: any) => {
+            return (
+                {
+                    ...previousValue, [name]: value
+                }
+            )
+        })
+    }
+    const {
+        register,
+        handleSubmit,
+        getValues,
+        setValue,
+        watch,
+        reset,
+        setError,
+        formState: { errors, isSubmitting }
+    } = useForm<any>({
+        defaultValues: (facilityProfile),
+        resolver: zodResolver(FacilityProfileSchema)
+    })
+
+    let vals = {
+        setDialog,
+        setUserGuid,
+        setBusinessGuid,
+        setFacilityProfile,
+        setSysFacilities
+    }
+
+    const handleDelete = async (serviceGuid: string) => {
+        const result = confirm('Do you wish to delete this service. Once deleted, you cannot recover it?')
+        if (result === true) {
+            showOperation('processing', 'Deleting service...')
+            await new Promise((resolve) => setTimeout(resolve, 2000));
+
+            const endpoint = "/api/listing/services/" + facilityProfile?.facility_guid
+            const url = config.BASE_URL + endpoint
+
+
+            try {
+                const response = await fetch(url, {
+                    method: "DELETE",
+                    headers: headers
+                })
+
+                if (!response.ok) {
+                    const errorData = await response.text();
+                    const errorObject = JSON.parse(errorData)
+                    throw new Error(`${errorObject.error}`);
+
+                } else {
+
+                    showSuccess('Success', 'Service DELETED successfully.')
+
+
+                    await new Promise((resolve) => setTimeout(resolve, 2000));
+                    showOperation('processing', 'Reloading...')
+                    await new Promise((resolve) => setTimeout(resolve, 3000));
+                    window.location.reload()
+                    await new Promise((resolve) => setTimeout(resolve, 3000));
+                    completeOperation()
+                }
+
+            } catch (error: any) {
+                showError('error', `${error.message}`)
+                completeOperation()
+            } finally {
+                setWorking(false)
+            }
+        } else {
+            //alert('abort')
+        }
+    }
+
+    return (
+        <AddFacilitiesContext.Provider value={vals}>
+            <div>
+                {
+                    dialog &&
+                    <div className={`fixed top-0 left-0 w-full right-0 bg-black/40 z-[4000] h-full flex place-items-center place-content-center`}
+                        onClick={() => setDialog(false)}
+                    >
+                        <CloseButton setDialog={setDialog} />
+                        <div className={`mx-3 w-full`}>
+                            <div className={`max-w-[600px] mx-auto w-full bg-white rounded-[40px] px-[24px] pt-16 relative pb-12`}
+                                onClick={(e) => e.stopPropagation()}
+                            >
+                                <div className={`absolute top-8 right-8 text-3xl border-[2px] rounded-xl border-gray-500/20 w-[40px] h-[40px] shadow-sm flex place-items-center place-content-center text-gray-500 cursor-pointer hover:bg-gray-100 hover:border-gray-200/50`}
+                                    onClick={() => setDialog(false)}
+                                >
+                                    <CgClose />
+                                </div>
+                                <div className={`text-3xl font-semibold`}>
+                                    {
+                                        facilityProfile === null ? 'Add' : 'Edit'
+                                    } Facility
+                                </div>
+
+                                <div className={`border rounded-2xl overflow-hidden pl-3 pt-3 mt-4`}>
+                                    <div className={`mt-0  h-[330px] overflow-x-hidden overflow-y-scroll pr-3`}>
+                                        <form className={`w-full `} onSubmit={handleSubmit(handleAddFacility)}>
+
+                                            <Select
+                                                controlTitle={"Facility Name"}
+                                                controlName={"facility_id"}
+                                                controlPlaceholder={"Select Facility"}
+                                                selectJson={sysFacilities}
+                                                register={register}
+                                                changeHandler={changeHandler}
+                                                error={errors.category}
+                                                controlInformation={`Select facility to add to the business.`}
+                                            />
+
+
+                                            <TextareaWithWordLimit
+                                                controlTitle={"Facility Description"}
+                                                controlPlaceholder={"Facility description"}
+                                                controlName={"facility_description"}
+                                                register={register}
+                                                changeHandler={changeHandler}
+                                                error={errors.facility_description}
+                                                setValue={setValue}
+                                                getValues={getValues}
+                                                watch={watch}
+                                                controlInformationClass={controlInformationClass}
+                                                controlInformation={`Service description for this business activities`}
+                                            />
+
+
+
+
+                                            <Button working={working} />
+
+                                        </form>
+                                    </div>
+                                </div>
+
+                                {
+                                    facilityProfile !== null &&
+                                    <div className={`flex flex-col`} onClick={() => handleDelete(facilityProfile?.facility_guid)}>
+                                        <div className={`py-4 underline text-xl  cursor-pointer`}>
+                                            Delete Facility
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+
+                        </div>
+
+                    </div>
+                }
+            </div>
+            {children}
+        </AddFacilitiesContext.Provider>
+    )
+}
+
+
+export interface CloseButtonProps {
+    setDialog: (dialog: boolean) => void
+}
+export const CloseButton = ({ setDialog }: CloseButtonProps) => {
+    return (
+        <div onClick={() => setDialog(false)}>
+            <div className={`w-[30px] h-[30px] flex place-items-center place-content-center rounded-full absolute top-2 left-2 bg-white text-[25px] font-bold transition-all ease-in-out duration-700 cursor-pointer hover:bg-white/40`}>
+                <BiChevronLeft />
+            </div>
+        </div>
+    )
+}
+
+
+
+const urlvalidator = /^(?!https?)(?!www\.?).*\..+$/g
+
+
+export const FacilityProfileSchema = z.object({
+    facility_id: z.string({ message: "Please enter a service name" })
+        .min(1, { message: "Please enter a service name" }),
+    facility_description: z.string({ message: "Please enter a facility description" })
+        .min(1, { message: "Please enter a service description" }),
+
+
+})
+

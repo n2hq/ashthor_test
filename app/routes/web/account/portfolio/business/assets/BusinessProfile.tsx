@@ -2,7 +2,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import React, { useEffect, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import BusinessProfileSchema from './BusinessProfileSchema'
-import { config, getCities, getStates, headers } from '~/lib/lib'
+import { config, formatDecimalWithCommas, getCities, getStates, headers } from '~/lib/lib'
 import { categories as category } from '~/lib/json/categories'
 import { pageType } from '~/lib/json/page_type'
 import { useNotification } from '~/context/NotificationContext'
@@ -16,19 +16,31 @@ import Select from '~/components/content/select/Select'
 import BusinessMenu from './BusinessMenu'
 import { useOperation } from '~/context/OperationContext'
 import BusinessDrawer from '../../../assets/BusinessDrawer'
+import PhoneNoInput from '~/components/content/input/PhoneNoInput'
+import InputNumberOnly from '~/components/content/input/InputNumberOnly'
+import SelectCurrency from '~/components/content/select/SelectCurrency'
 
 const BusinessProfile = ({ data }: any) => {
     //console.log(data.businessProfile)
+    const [businessProfile, setBusinessProfile] = useState<any | null>(data.businessProfile)
     const [formdata, setFormdata] = useState<any | null>(null)
     const [working, setWorking] = useState<boolean>(false)
     const notification = useNotification()
     const [errorMsg, setErrorMsg] = useState<any>(null)
     const [isOpen, setIsOpen] = useState(false)
 
+    useEffect(() => {
+        if (data.businessProfile) {
+            const minAmt = formatDecimalWithCommas(businessProfile.minimum_amount.toString())
+            setValue("minimum_amount", minAmt)
+        }
+    }, [data])
+
 
     const { showOperation, showSuccess, showError, showWarning, showInfo, completeOperation } = useOperation();
 
-    const countries = data.countries
+    const currencies = data?.currencies
+    const countries = data?.countries
     let [states, setStates] = useState(data.states)
     let [cities, setCities] = useState(data.cities)
     //const categories = data.categories.data
@@ -36,8 +48,8 @@ const BusinessProfile = ({ data }: any) => {
         a.name.localeCompare(b.name)
     )
 
-    const [countryCode, setCountryCode] = useState(data.businessProfile.country_code)
-    const [stateCode, setStateCode] = useState(data.businessProfile.state_code)
+    const [countryCode, setCountryCode] = useState(data?.businessProfile?.country_code)
+    const [stateCode, setStateCode] = useState(data?.businessProfile?.state_code)
 
     const [newCountryCode, setNewCountryCode] = useState('')
     const [newStateCode, setNewStateCode] = useState('')
@@ -71,12 +83,13 @@ const BusinessProfile = ({ data }: any) => {
     const handleUpdateBusiness: SubmitHandler<any> = async (datar: any) => {
         setWorking(true)
         //alert(JSON.stringify(datar))
+        console.log(datar)
         //return false
         //notification.notify('Updating business profile...')
         showOperation('processing', 'Updating page profile')
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
-        const endpoint = "/api/listing/" + data.businessProfile.gid
+        const endpoint = "/api/listing/" + data?.businessProfile?.gid
         const url = config.BASE_URL + endpoint
 
         try {
@@ -115,7 +128,7 @@ const BusinessProfile = ({ data }: any) => {
         setError,
         formState: { errors, isSubmitting }
     } = useForm<any>({
-        defaultValues: (data.businessProfile),
+        defaultValues: (businessProfile),
         resolver: zodResolver(BusinessProfileSchema)
     })
 
@@ -145,7 +158,7 @@ const BusinessProfile = ({ data }: any) => {
 
     return (
         <div>
-            <BusinessDrawer isOpen={isOpen} businessGuid={data.businessProfile.gid} userGuid={data.businessProfile?.owner} />
+            <BusinessDrawer isOpen={isOpen} businessGuid={data.businessProfile?.gid} userGuid={data.businessProfile?.owner} />
 
             <BgComponent
                 listing={data.businessProfile}
@@ -179,7 +192,7 @@ const BusinessProfile = ({ data }: any) => {
                         Portfolio
                     </a>
 
-                    <a href={`/${data.businessProfile.gid}`}
+                    <a href={`/${data.businessProfile?.gid}`}
                         className={` py-[9px] px-[20px] rounded-full bg-blue-900 shadow-lg shadow-blue-400 text-white`}
                     >
                         Preview
@@ -191,8 +204,8 @@ const BusinessProfile = ({ data }: any) => {
                         data?.businessProfile &&
                         <BusinessMenu
                             setIsOpen={setIsOpen}
-                            guid={data?.businessProfile.gid}
-                            userGuid={data?.businessProfile.owner} />
+                            guid={data?.businessProfile?.gid}
+                            userGuid={data?.businessProfile?.owner} />
                     }
 
 
@@ -207,7 +220,7 @@ const BusinessProfile = ({ data }: any) => {
 
 
                         <div className={`text-2xl leading-[1.4em] px-[10px] text-gray-500 mb-[32px] font-bold text-center bg-gray-100 w-full p-3 border rounded`}>
-                            {data?.businessProfile.title}
+                            {data?.businessProfile?.title}
                         </div>
 
                         <Input
@@ -350,11 +363,13 @@ const BusinessProfile = ({ data }: any) => {
                             controlInformation={`Enter the zipcode. E.g.: 51234 or 845219 `}
                         />
 
-                        <Input
+                        <PhoneNoInput
                             controlTitle={"Phone number"}
                             controlPlaceholder={"Enter phone number"}
                             controlName={"phone"}
                             register={register}
+                            setValue={setValue}
+                            getValues={getValues}
                             changeHandler={changeHandler}
                             error={errors.phone}
                             controlInformation={`Mobile number or phone number. `}
@@ -363,35 +378,45 @@ const BusinessProfile = ({ data }: any) => {
 
 
 
-                        <Input
-                            controlTitle={"Business Phrases"}
-                            controlPlaceholder={"E.g. Advocates, Software Developers, Architect"}
-                            controlName={"business_phrases"}
-                            register={register}
-                            changeHandler={changeHandler}
-                            error={errors.business_phrases}
-                            controlInformation={`Enter business phrases like: Solicitor, Advocate, Plumber, Business Analyst, Mechanical Engineers.`}
-                        />
 
-                        <Input
-                            controlTitle={"Products"}
-                            controlPlaceholder={"E.g.: Publications, Accessories, Shoes, Subscriptions, Magazines, Cars"}
-                            controlName={"products"}
-                            register={register}
-                            changeHandler={changeHandler}
-                            error={errors.products}
-                            controlInformation={`Enter your products name like: Magazines, Generators, Accessories, Perfumes, Publications etc.`}
-                        />
 
-                        <Input
-                            controlTitle={"Services"}
-                            controlPlaceholder={"E.g.: Consulting Services, Project Management, Outsourcing or BPO, Training and Development. etc."}
-                            controlName={"services"}
-                            register={register}
-                            changeHandler={changeHandler}
-                            error={errors.services}
-                            controlInformation={`Enter your services E.g.: Consulting Services, Project Management, Outsourcing or BPO, Training and Development. etc.`}
-                        />
+
+
+
+
+                        <div className={`w-full mt-4 mb-12`}>
+                            <div className={`text-2xl font-semibold`}>
+                                Minimum rate charged by this business.
+                            </div>
+                            <div className={`text-[14px] py-4 mb-0 leading-[1.3em]`}>Select the minimum amount customers or clients are charged to purchase goods/services from this business. This is optional.</div>
+
+                            <div className={`p-4 border rounded-xl`}>
+                                <SelectCurrency
+                                    controlTitle={"Currency"}
+                                    controlName={"minimum_amount_currency_code"}
+                                    controlPlaceholder={"Select currency"}
+                                    selectJson={currencies}
+                                    register={register}
+                                    changeHandler={changeHandler}
+                                    error={errors.minimum_amount_currency_code}
+                                    setCode={resetStates}
+                                    controlInformation={`Default currency to receive funds.`}
+                                />
+
+                                <div className={`h-2`}></div>
+
+                                <InputNumberOnly
+                                    controlTitle={"Minimum amount charged"}
+                                    controlPlaceholder={"Starting amount. E.g. 10 or 30..."}
+                                    controlName={"minimum_amount"}
+                                    register={register}
+                                    changeHandler={changeHandler}
+                                    error={errors.minimum_amount}
+                                    controlInformation={`Enter the starting amount charged by this business`}
+                                />
+
+                            </div>
+                        </div>
 
                         <TextareaWithWordLimit
                             controlTitle={"Short Description"}

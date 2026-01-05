@@ -9,8 +9,8 @@ const ImgComponent = ({ listing, user, businessProfileImageData }: any) => {
 
     let imgconst = ""
 
-    if (businessProfileImageData.image_url) {
-        imgconst = config.IMG_BASE_URL + businessProfileImageData.image_url
+    if (businessProfileImageData?.image_url) {
+        imgconst = config.IMG_BASE_URL + businessProfileImageData?.image_url
     }
 
 

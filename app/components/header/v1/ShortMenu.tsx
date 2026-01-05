@@ -9,7 +9,7 @@ const ShortMenu = () => {
     const location = useLocation()
 
     return (
-        <div className={`lg:flex gap-8 hidden px-4 place-items-center`}>
+        <div className={`lg:flex gap-3 hidden px-4 place-items-center`}>
 
             <SearchLink />
 
@@ -17,14 +17,13 @@ const ShortMenu = () => {
             {
                 ShortMenuJson.map((item, index: number) => {
                     return (
-                        <div key={index} className={`hover:text-[#6001D2] `}>
+                        <div key={index} className={`hover:text-[#6001D2] underline `}>
                             <Link to={item.url}>
-                                <div className={`flex place-items-center group hover:underline px-3 py-2  rounded-md hover:bg-blue-100 hover:text-black ${location.pathname === item.url ? 'underline bg-blue-700 text-white' : 'bg-gray-100'}`}>
+                                <div className={`flex place-items-center group hover:underline px-5 py-2  rounded-full hover:bg-[#D2B48C]/20 hover:text-black ${location.pathname === item.url ? 'bg-[#D2B48C]/20 text-black' : ''}`}>
                                     <div className={`text-[14px]`}>
                                         {item.title}
                                     </div>
-                                    <CgChevronRight
-                                        className={`text-[15px] relative group-hover:rotate-90 transition-all ease-in-out duration-500 font-bold `} />
+
                                 </div>
                             </Link>
                         </div>
@@ -55,8 +54,8 @@ export const SearchLink = () => {
     return (
         <div className={``}>
             <Link to={'/web/search'}>
-                <div className={`flex place-items-center group`}>
-                    <div className={`text-[14px] font-normal py-2 px-3  hover:bg-blue-100 rounded-md text-black hover:text-blue-700 ${location.pathname.includes('/web/search') ? 'underline bg-blue-600 text-white' : 'bg-gray-100'}`}>
+                <div className={`flex place-items-center group underline`}>
+                    <div className={`text-[14px] font-normal py-2 px-4  hover:bg-[#D2B48C]/20 rounded-full text-black hover:text-gray-700 ${location.pathname.includes('/web/search') ? 'bg-[#D2B48C]/20 text-black' : ''}`}>
                         Search
                     </div>
 

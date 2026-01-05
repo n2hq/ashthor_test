@@ -60,6 +60,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
             reportTime = await ReportTime(listing)
             randomNumber = generateRandom10DigitNumber()
             fullPath = config.BASE_URL + pathname
+
             //console.log(profileImageData)
         } catch (error: any) {
             console.log(error.message)
@@ -177,7 +178,7 @@ const index = () => {
     businessProfileBgData = data.businessProfileBgData
     reportTime = data.reportTime
 
-    console.log(reportTime)
+    console.log(ratingsData)
 
 
 
@@ -230,7 +231,7 @@ const index = () => {
                     <VerticalHeight />
                     {/* <CallToActionSection /> */}
                     {/** footer */}
-                    <FooterAlt />
+
                 </Layout>
             </GalleryProvider>
 

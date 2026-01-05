@@ -106,6 +106,10 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
             let city_id = body.city_id as string === undefined ? listing.city_id : body.city_id
             let website = body.website as string === undefined ? listing.website : body.website
 
+            let minimum_amount_currency_code = body.minimum_amount_currency_code as string === undefined ? listing.minimum_amount_currency_code : body.minimum_amount_currency_code
+
+            let minimum_amount = body.minimum_amount as string === undefined ? listing.minimum_amount : body.minimum_amount
+
             {/** check if username has not been taken */ }
             if (username !== "" && username !== null) {
                 if (username === listing?.username) {
@@ -191,7 +195,9 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
                 country_code = ?,
                 state_code = ?,
                 city_id = ?,
-                website = ?
+                website = ?,
+                minimum_amount_currency_code = ?,
+                minimum_amount = ? 
                 WHERE
                 gid = ?`,
                 [
@@ -221,6 +227,8 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
                     state_code,
                     city_id,
                     website,
+                    minimum_amount_currency_code,
+                    minimum_amount,
                     guid
                 ])
 

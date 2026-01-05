@@ -94,6 +94,8 @@ const BusinessProfileSchema = z.object({
             (val) => !val || val.trim().length > 0,
             { message: "Phone must not be empty" }
         ),
+    minimum_amount_currency_code: z.any(),
+    minimum_amount: z.any(),
 
     intro: z.any(),
     category: z.string()

@@ -76,7 +76,7 @@ export async function action({ request }: ActionFunctionArgs) {
 
             if ((rows as any[]).length > 0) {
                 {/** update if rating exists */ }
-                console.log('here')
+
                 const result = await query(`UPDATE tbl_rating 
                     SET 
                     rating = ?, 

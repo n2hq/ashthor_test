@@ -3,6 +3,7 @@ import { MdEditSquare } from "react-icons/md";
 import { headers } from "~/lib/lib";
 import { useNotification } from "./NotificationContext";
 import { useOperation } from "./OperationContext";
+import { CgClose } from "react-icons/cg";
 
 
 const EditPhotoDialogContext = createContext<any | null>(null)
@@ -179,15 +180,21 @@ export function EditPhotoDialogProvider({ children }: any) {
             {
                 dialog &&
                 <div className={`fixed w-screen h-screen bg-black/30 z-[3000]`}>
-                    <div className={`fixed w-screen h-screen z-[3000] 
+
+                    <div className={`fixed flex w-screen h-screen z-[3000] 
                  top-0 left-0 right-0 bottom-0 bg-black/30
                 place-content-center place-items-center`}>
-                        <div className={`relative max-w-[90%] w-[90%] h-[80%] bg-white 
-                        rounded-[8px] overflow-hidden z-[3100] mx-auto `}
+
+                        <div className={`relative max-w-[600px] w-full bg-white 
+                        rounded-[40px] overflow-hidden z-[3100] mx-2 h-fit `}
 
                         >
                             <div className={`w-full h-full overflow-y-auto`}>
-                                <div className={`relative w-full h-[75%] bg-black`}>
+                                <CloseButton setShow={handleCloseDialog} />
+                                <div className={`pt-12 pb-5 px-3 text-2xl font-semibold`}>
+                                    Edit Photo
+                                </div>
+                                <div className={`relative w-full h-[300px] bg-black`}>
                                     <img
                                         src={imgSrc}
                                         alt=""
@@ -215,7 +222,7 @@ export function EditPhotoDialogProvider({ children }: any) {
                                     </div>
                                 </div>
 
-                                <div className={`h-[25%]`}>
+                                <div className={``}>
 
                                     <textarea
                                         onChange={(e) => setImageTitle(e.target.value)}
@@ -225,18 +232,18 @@ export function EditPhotoDialogProvider({ children }: any) {
                                         className={`w-full bg-gray-100 px-3  h-[60px] py-3`}
                                     ></textarea>
 
-                                    <div className={`flex place-content-end px-3 gap-2`}>
+                                    <div className={`flex place-content-end px-6 gap-2 py-6`}>
                                         <button
                                             onMouseDown={() => window.location.reload()}
                                             className={`bg-gray-800 text-white px-3 py-1.5 rounded-md
-                                    shadow-md mb-2 mt-4`}
+                                    shadow-md`}
                                         >
                                             Reload
                                         </button>
                                         <button
                                             onMouseDown={() => handleCloseDialog()}
                                             className={`bg-gray-800 text-white px-3 py-1.5 rounded-md
-                                    shadow-md mb-2 mt-4`}
+                                    shadow-md `}
                                         >
                                             Close
                                         </button>
@@ -244,7 +251,7 @@ export function EditPhotoDialogProvider({ children }: any) {
                                         <button
                                             onClick={() => handleUpdate()}
                                             className={`bg-blue-800 text-white px-3 py-1.5 rounded-md
-                                    shadow-md mb-2 mt-4`}
+                                    shadow-md `}
                                         >
                                             {
                                                 working ? 'Working...' : 'Submit'
@@ -261,5 +268,19 @@ export function EditPhotoDialogProvider({ children }: any) {
             }
             {children}
         </EditPhotoDialogContext.Provider>
+    )
+}
+
+
+export interface CloseButtonProps {
+    setShow: () => void
+}
+export const CloseButton = ({ setShow }: CloseButtonProps) => {
+    return (
+        <div className={`absolute top-8 right-6 text-3xl  rounded-xl  w-[40px] h-[40px] shadow-sm flex place-items-center place-content-center cursor-pointer bg-gray-200/70 hover:border-gray-200/50 text-gray-400 hover:text-gray-500 z-10`}
+            onClick={() => setShow()}
+        >
+            <CgClose />
+        </div>
     )
 }

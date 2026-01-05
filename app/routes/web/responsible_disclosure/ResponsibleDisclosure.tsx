@@ -3,6 +3,7 @@ import { MetaFunction } from "@remix-run/react";
 import PolicyInfoHeader from "~/components/content/PolicyInfoHeader";
 import ResponsibleDisclosurePolicy from "./ResponsibleDisclosurePolicy";
 import MainNav from "~/components/header/v1/MainNav";
+import FooterAlt from "~/components/footer/FooterAlt";
 
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
@@ -30,6 +31,8 @@ export default function ResponsbileDisclosure() {
 
 
             <ResponsibleDisclosurePolicy />
+            <div className={`h-[60px]`}></div>
+            <FooterAlt />
 
         </div>
     )

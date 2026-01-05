@@ -27,6 +27,8 @@ import { OnlineStatusProvider } from "./context/OnlineStatusContext";
 import { OperationProvider } from "./context/OperationContext";
 import { CustomNetworkError, isNetworkError, NetworkErrorBoundary } from "./components/utils/NetworkErrorBoundary";
 import LoadingMessage from "./components/content/LoadingMessage";
+import { WriteReviewAltProvider } from "./context/WriteReviewAltContext";
+import { ShareDialogProvider } from "./context/ShareDialogContext";
 
 
 export const links: LinksFunction = () => [
@@ -134,8 +136,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
                       <AddVideoDialogProvider>
                         <AuthProvider>
                           <OnlineStatusProvider>
+                            <WriteReviewAltProvider>
+                              <ShareDialogProvider>
+                                {children}
+                              </ShareDialogProvider>
+                            </WriteReviewAltProvider>
 
-                            {children}
                           </OnlineStatusProvider>
                         </AuthProvider>
                       </AddVideoDialogProvider>

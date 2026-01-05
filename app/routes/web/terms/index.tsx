@@ -1,5 +1,5 @@
 import React from 'react'
-import { appConfig } from '~/lib/lib'
+import { appConfig, config } from '~/lib/lib'
 import VerticalHeight from '~/routes/asset/VerticalHeight'
 import CallToActionSection from '~/components/content/CallToActionSection'
 import FooterSection from '~/routes/landing/assets/FooterSection'
@@ -34,15 +34,15 @@ export const InfoTerms = () => {
         <div className={`markdown prose dark:prose-invert w-full break-words light space-y-4`}>
 
             <h2 data-start="208" data-end="235" className={`text-xl`}>
-                <strong data-start="211" data-end="235"
-                    className={`text-2xl`}
-                >Terms and Conditions</strong>
+                <span data-start="211" data-end="235"
+                    className={`text-3xl font-extrabold`}
+                >Terms and Conditions</span>
             </h2>
             <p data-start="237" data-end="270">
                 <strong data-start="237" data-end="256">Effective Date:</strong> 12 July 2025
             </p>
             <p data-start="272" data-end="485">
-                Welcome to <strong data-start="283" data-end="302">Garssete</strong>. We're glad to have you here! To ensure a safe and positive experience for everyone, we kindly ask that you review the terms below. By using our platform, you agree to the following:
+                Welcome to <strong data-start="283" data-end="302">{config.SITENAME}</strong>. We're glad to have you here! To ensure a safe and positive experience for everyone, we kindly ask that you review the terms below. By using our platform, you agree to the following:
             </p>
             <hr data-start="487" data-end="490" />
             <h3 data-start="492" data-end="522">
@@ -114,7 +114,7 @@ export const InfoTerms = () => {
                 </strong>
             </h3>
             <p data-start="1674" data-end="1874">
-                All content, including our logo, platform design, and written materials, is the property of [Your Company Name] or its partners. Please don’t reproduce, copy, or use it without our written permission.
+                All content, including our logo, platform design, and written materials, is the property of {config.SITENAME} or its partners. Please don’t reproduce, copy, or use it without our written permission.
             </p>
             <hr data-start="1876" data-end="1879" />
             <h3 data-start="1881" data-end="1903">
@@ -132,7 +132,7 @@ export const InfoTerms = () => {
                 </strong>
             </h3>
             <p data-start="2154" data-end="2362">
-                By using our platform, you agree to kindly hold harmless and indemnify [Your Company Name], our team, and partners from any claims, damages, losses, or expenses (including reasonable legal fees) arising from:
+                By using our platform, you agree to kindly hold harmless and indemnify {config?.SITENAME}, our team, and partners from any claims, damages, losses, or expenses (including reasonable legal fees) arising from:
             </p>
             <ul data-start="2364" data-end="2490">
                 <li data-start="2364" data-end="2393">
@@ -162,7 +162,7 @@ export const InfoTerms = () => {
                 </strong>
             </h3>
             <p data-start="2623" data-end="2808">
-                While we do our best to provide a reliable service, [Your Company Name] cannot be held liable for any direct or indirect damages resulting from the use or inability to use our platform.
+                While we do our best to provide a reliable service, {config?.SITENAME} cannot be held liable for any direct or indirect damages resulting from the use or inability to use our platform.
             </p>
             <hr data-start="2810" data-end="2813" />
             <h3 data-start="2815" data-end="2842">
@@ -180,11 +180,11 @@ export const InfoTerms = () => {
                 </strong>
             </h3>
             <p data-start="3090" data-end="3181">
-                These Terms shall be governed by and interpreted under the laws of [Your Country or State].
+                These Terms shall be governed by and interpreted under the laws of the country in which {config.SITENAME} is based.
             </p>
             <hr data-start="3183" data-end="3186" />
             <p data-start="3188" data-end="3318">
-                If you have any questions or suggestions about these Terms, we’d love to hear from you at <a href="mailto:support@garssete.com" className='text-blue-600'>support@garssete.com</a>. Thank you for being part of our community!
+                If you have any questions or suggestions about these Terms, we’d love to hear from you at <a href={`mailto:${config.SITEMAIL}`} className='text-blue-600'>{config.SITEMAIL}</a>. Thank you for being part of our community!
             </p>
             <hr data-start="3320" data-end="3323" />
 

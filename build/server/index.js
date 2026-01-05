@@ -4,37 +4,39 @@ var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "sy
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { PassThrough } from "node:stream";
 import { createReadableStreamFromReadable } from "@remix-run/node";
-import { RemixServer, useNavigate, useRouteError, Outlet, useNavigation, isRouteErrorResponse, Meta, Links, ScrollRestoration, Scripts, Link, useLocation, useLoaderData, useSearchParams, useParams } from "@remix-run/react";
+import { RemixServer, useNavigate, useRouteError, useLocation, Outlet, useNavigation, isRouteErrorResponse, Meta, Links, ScrollRestoration, Scripts, Link, useLoaderData, useSearchParams, useParams } from "@remix-run/react";
 import { isbot } from "isbot";
 import { renderToPipeableStream } from "react-dom/server";
-import React, { createContext, useContext, useState, useEffect, useRef } from "react";
+import React, { useContext, createContext, useState, useEffect, useRef } from "react";
 import NProgress from "nprogress";
-import { FaSpinner, FaSchool, FaWheelchair, FaSwimmingPool, FaParking, FaTiktok, FaVimeoSquare, FaLinkedinIn, FaWifi, FaSignOutAlt, FaCarSide, FaAngleDown, FaMobile, FaQuestion, FaBriefcase, FaHome, FaShoppingBag, FaBlenderPhone, FaSearch, FaChevronLeft, FaChevronRight, FaFacebook, FaInstagram, FaYoutubeSquare, FaPinterestSquare, FaFacebookSquare } from "react-icons/fa";
+import { FaSpinner, FaSchool, FaWheelchair, FaSwimmingPool, FaParking, FaFacebookSquare, FaTiktok, FaYoutubeSquare, FaVimeoSquare, FaLinkedinIn, FaWifi, FaTelegram, FaLinkedin, FaSignOutAlt, FaCarSide, FaAngleDown, FaMobile, FaQuestion, FaBriefcase, FaHome, FaShoppingBag, FaBlenderPhone, FaSearch, FaChevronLeft, FaChevronRight, FaFacebook, FaInstagram, FaPinterestSquare } from "react-icons/fa";
 import CryptoJS from "crypto-js";
-import { BsPersonWheelchair, BsPinterest, BsInstagram, BsTwitterX, BsPersonFillGear, BsPersonFill, BsCircleFill, BsCircle, BsSearchHeart, BsHouse, BsAirplane, BsStarFill, BsStar, BsBagCheckFill, BsPhone, BsLinkedin, BsBank } from "react-icons/bs";
-import { CgChart, CgFeed, CgPrinter, CgShoppingCart, CgShoppingBag, CgAirplane, CgGym, CgFacebook, CgMoreVertical, CgChevronDown, CgChevronRight, CgPhone, CgMenu, CgWebsite, CgBandAid } from "react-icons/cg";
-import { GrLanguage, GrRestaurant, GrCloudComputer, GrCafeteria, GrLounge, GrWheelchairActive, GrYoutube, GrClose, GrLaunch } from "react-icons/gr";
-import { BiHotel, BiFoodMenu, BiWine, BiLibrary, BiSpa, BiChevronLeft, BiChevronRight, BiSearch, BiBriefcase, BiUser, BiSolidRightArrow, BiHome, BiCategory, BiMenu, BiBullseye, BiLock, BiCopyright, BiSolidStar, BiPhone, BiSolidUser, BiBuilding, BiEditAlt } from "react-icons/bi";
+import { BsPersonWheelchair, BsTwitterX, BsLinkedin, BsInstagram, BsPinterest, BsVimeo, BsWhatsapp, BsFacebook, BsPersonFillGear, BsPersonFill, BsCircleFill, BsCircle, BsSearchHeart, BsHouse, BsAirplane, BsStarFill, BsStar, BsBagCheckFill, BsPhone, BsTrophy, BsBank } from "react-icons/bs";
+import { CgChart, CgFeed, CgPrinter, CgShoppingCart, CgShoppingBag, CgAirplane, CgGym, CgFacebook, CgClose, CgWebsite, CgMoreVertical, CgChevronDown, CgChevronRight, CgPhone, CgMenu, CgMenuGridR, CgBandAid } from "react-icons/cg";
+import { GrLanguage, GrRestaurant, GrCloudComputer, GrCafeteria, GrLounge, GrWheelchairActive, GrYoutube, GrLaunch } from "react-icons/gr";
+import { BiHotel, BiFoodMenu, BiWine, BiLibrary, BiSpa, BiChevronLeft, BiChevronRight, BiPhone, BiSearch, BiBriefcase, BiUser, BiSolidRightArrow, BiHome, BiCategory, BiMenu, BiBullseye, BiLock, BiCopyright, BiSolidStar, BiHeart, BiBuilding, BiChat, BiSolidUser, BiEditAlt } from "react-icons/bi";
 import { FcLandscape, FcAutomotive, FcBusiness, FcSettings, FcHome, FcBusinessman } from "react-icons/fc";
 import { GiFemaleLegs, GiHumanTarget, GiHealthNormal, GiPadlock, GiStarGate, GiKnifeFork } from "react-icons/gi";
 import { IoMdMusicalNotes } from "react-icons/io";
-import { MdMeetingRoom, MdAdsClick, MdDashboard, MdCleaningServices, MdPlumbing, MdConstruction, MdElectricalServices, MdRoomService, MdRealEstateAgent, MdBusinessCenter, MdOutlineWheelchairPickup, MdWheelchairPickup, MdLocalLaundryService, MdAirportShuttle, MdEditSquare, MdOutlineAttachEmail, MdPassword, MdWifiPassword, MdContacts, MdMusicNote, MdOutlineImage, MdEmail, MdBrowseGallery, MdLocationPin, MdPhone, MdMenu, MdError } from "react-icons/md";
-import { RiGovernmentFill, RiMusic2Line, RiTrademarkLine, RiRestaurantFill, RiYoutubeFill, RiCommunityFill } from "react-icons/ri";
+import { MdMeetingRoom, MdAdsClick, MdDashboard, MdCleaningServices, MdPlumbing, MdConstruction, MdElectricalServices, MdRoomService, MdRealEstateAgent, MdBusinessCenter, MdOutlineWheelchairPickup, MdWheelchairPickup, MdLocalLaundryService, MdAirportShuttle, MdEditSquare, MdEmail, MdMail, MdOutlineAttachEmail, MdPassword, MdWifiPassword, MdContacts, MdMusicNote, MdOutlineImage, MdBrowseGallery, MdLocationPin, MdPhone, MdOutlineHighQuality, MdSentimentVerySatisfied, MdMenu, MdError, MdArrowDropDown } from "react-icons/md";
+import { RiGovernmentFill, RiMusic2Line, RiTrademarkLine, RiRestaurantFill, RiYoutubeFill, RiCustomerService2Fill, RiInformation2Fill, RiCommunityFill } from "react-icons/ri";
 import { TbTruckDelivery, TbAirConditioning, TbWritingSign, TbPasswordUser } from "react-icons/tb";
-import { FaToilet, FaMinimize, FaMaximize, FaBagShopping, FaXTwitter, FaBuildingNgo } from "react-icons/fa6";
+import { FaToilet, FaMinimize, FaMaximize, FaCopy, FaBagShopping, FaXTwitter, FaBuildingNgo } from "react-icons/fa6";
 import { TiWiFi } from "react-icons/ti";
 import { IoClose } from "react-icons/io5";
 import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm, Controller } from "react-hook-form";
+import { FiMessageSquare, FiEdit2 } from "react-icons/fi";
 import { HiBars3BottomRight, HiMiniBriefcase, HiHome } from "react-icons/hi2";
 import { motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAudible, faFacebookSquare, faInstagram, faTwitterSquare, faLinkedin, faYoutubeSquare } from "@fortawesome/free-brands-svg-icons";
 import { Link as Link$1 } from "react-router-dom";
 import { useNavigate as useNavigate$1, useLocation as useLocation$1 } from "react-router";
-import { useForm, Controller } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { RxDividerVertical } from "react-icons/rx";
 import tzLookup from "tz-lookup";
+import { LuMapPinPlus } from "react-icons/lu";
 import { DatePicker } from "antd";
 import mysql from "mysql2/promise";
 import jwt from "jsonwebtoken";
@@ -192,7 +194,7 @@ const NotificationProvider = ({ children }) => {
     setShow(true);
     setType(3);
   };
-  const confirm = async (message2 = "Do you wish to continue?", onClose) => {
+  const confirm2 = async (message2 = "Do you wish to continue?", onClose) => {
     cancel();
     setMessage(message2);
     await new Promise((resolve) => setTimeout(resolve, 100));
@@ -205,7 +207,7 @@ const NotificationProvider = ({ children }) => {
     cancel,
     alert: alert2,
     alertReload,
-    confirm,
+    confirm: confirm2,
     confirmCancel,
     confirmOk,
     alertCancel
@@ -668,13 +670,14 @@ const facilityFeatures = [
   }
 ];
 const config = {
-  BASE_URL: "https://bycet.com",
-  IMG_BASE_URL: "https://pics.gasimg.com",
+  BASE_URL: "https://test.bycet.com",
+  IMG_BASE_URL: "https://tpics.gasimg.com",
   MAIL_SERVICE: "https://mailsvc.gasimg.com/emailservice/",
-  SITENAME: "Bycet",
-  FORMATTED_SITENAME: "Bycet",
+  SITENAME: "Ashthor",
+  FORMATTED_SITENAME: "Ashthor",
   SESSION_SECRET: void 0,
-  ENV: "prod"
+  ENV: "test",
+  SITEMAIL: "info@ashthor.com"
 };
 const appConfig = {
   NAVBAR_HEIGHT: 0,
@@ -780,7 +783,6 @@ const getSearch = async (criteria, city, state, country, category, page) => {
 const getFeaturedListing = async () => {
   const endpoint = `/api/listing/featured_listing`;
   const url = config.BASE_URL + endpoint;
-  console.log(url);
   try {
     const response = await fetch(url, {
       method: "GET",
@@ -920,7 +922,7 @@ const getBusinessProfileBgData = async (guid) => {
   }
 };
 const getBusinessGallery = async (businessGuid) => {
-  const BASE_URL = "https://bycet.com";
+  const BASE_URL = "https://test.bycet.com";
   const endpoint = `/api/listing/business_gallery/${businessGuid}`;
   const url = BASE_URL + endpoint;
   try {
@@ -978,7 +980,7 @@ const getPage = async (criteria) => {
   }
 };
 const getBusinessRatings = async (businessGuid) => {
-  const BASE_URL = "https://bycet.com";
+  const BASE_URL = "https://test.bycet.com";
   const endpoint = `/api/rating/business_ratings/${businessGuid}`;
   const url = BASE_URL + endpoint;
   try {
@@ -1015,7 +1017,7 @@ const getLocalDate = (date) => {
   return formatted;
 };
 const getBusinessFeatures = async (businessGuid) => {
-  const BASE_URL = "https://bycet.com";
+  const BASE_URL = "https://test.bycet.com";
   const endpoint = `/api/listing/business_facility_features/${businessGuid}`;
   const url = BASE_URL + endpoint;
   try {
@@ -1083,6 +1085,26 @@ const getCountries = async () => {
         id: country.id
       };
     });
+    return data;
+  } catch (error) {
+    return void 0;
+  }
+};
+const getCountriesCurrencies = async () => {
+  const endpoint = "/api/util/country_currencies";
+  const url = config.BASE_URL + endpoint;
+  try {
+    const response = await fetch(
+      url,
+      {
+        method: "GET",
+        headers: headers$1
+      }
+    );
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    const data = await response.json();
     return data;
   } catch (error) {
     return void 0;
@@ -1176,8 +1198,39 @@ const getCategories = async () => {
     return void 0;
   }
 };
+const getCurrencies = async () => {
+  const endpoint = "/api/util/currencies";
+  const url = config.BASE_URL + endpoint;
+  try {
+    const response = await fetch(
+      url,
+      {
+        method: "GET",
+        headers: headers$1
+      }
+    );
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    const data = await response.json();
+    const finaldata = data.map((currency) => {
+      return {
+        id: currency.id,
+        country: currency.country,
+        currency: currency.currency,
+        currency_name: currency.currency_name,
+        currency_symbol: currency.currency_symbol,
+        currency_code: currency.currency_code,
+        emoji: currency.emoji
+      };
+    });
+    return finaldata;
+  } catch (error) {
+    return void 0;
+  }
+};
 const getUserProfile = async (guid) => {
-  const BASE_URL = "https://bycet.com";
+  const BASE_URL = "https://test.bycet.com";
   const endpoint = "/api/user/" + guid;
   const url = BASE_URL + endpoint;
   try {
@@ -1266,7 +1319,7 @@ const getPortfolio = async (guid, q) => {
   }
 };
 const getOperatingHours = async (businessGuid, userGuid) => {
-  const BASE_URL = "https://bycet.com";
+  const BASE_URL = "https://test.bycet.com";
   const endpoint = `/api/listing/operating_hours?business_guid=${businessGuid}&user_guid=${userGuid}`;
   const url = BASE_URL + endpoint;
   try {
@@ -1281,7 +1334,6 @@ const getOperatingHours = async (businessGuid, userGuid) => {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
     const data = await response.json();
-    console.log(data);
     return new Promise((resolve) => setTimeout(() => {
       resolve(data);
     }, 10));
@@ -1291,7 +1343,7 @@ const getOperatingHours = async (businessGuid, userGuid) => {
   }
 };
 const saveOperatingHours = async (openStatus, workingHours, businessGuid, userGuid) => {
-  const BASE_URL = "https://bycet.com";
+  const BASE_URL = "https://test.bycet.com";
   const endpoint = `/api/listing/operating_hours?business_guid=${businessGuid}&user_guid=${userGuid}`;
   const url = BASE_URL + endpoint;
   try {
@@ -1339,51 +1391,6 @@ const getGallery = async (businessGuid, userGuid) => {
     return void 0;
   }
 };
-const getSysFacilityFeatures = async () => {
-  const endpoint = `/api/listing/sys_facility_features`;
-  const url = config.BASE_URL + endpoint;
-  try {
-    const response = await fetch(
-      url,
-      {
-        method: "GET",
-        headers: headers$1
-      }
-    );
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-    const data = await response.json();
-    return new Promise((resolve) => setTimeout(() => {
-      resolve(data);
-    }, 10));
-  } catch (error) {
-    return void 0;
-  }
-};
-const getSelectedFacilityFeatures = async (userGuid, businessGuid) => {
-  const BASE_URL = "https://bycet.com";
-  const endpoint = `/api/listing/selected_facility_features/${userGuid}/${businessGuid}`;
-  const url = BASE_URL + endpoint;
-  try {
-    const response = await fetch(
-      url,
-      {
-        method: "GET",
-        headers: headers$1
-      }
-    );
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-    const data = await response.json();
-    return new Promise((resolve) => setTimeout(() => {
-      resolve(data);
-    }, 10));
-  } catch (error) {
-    return void 0;
-  }
-};
 const getSysSocialMedia = async () => {
   const endpoint = `/api/listing/sys_social_media`;
   const url = config.BASE_URL + endpoint;
@@ -1406,8 +1413,8 @@ const getSysSocialMedia = async () => {
     return void 0;
   }
 };
-const getSelectedSocialMedia = async (userGuid, businessGuid) => {
-  const endpoint = `/api/listing/selected_social_media/${userGuid}/${businessGuid}`;
+const getSysFacilities = async () => {
+  const endpoint = `/api/listing/sys_facilities`;
   const url = config.BASE_URL + endpoint;
   try {
     const response = await fetch(
@@ -1473,6 +1480,9 @@ const getRecents = async () => {
   }
 };
 const formatNumber = (num) => {
+  if (num === 0) {
+    return "0.00";
+  }
   if (num >= 1e9) {
     return (num / 1e9).toFixed(1).replace(/\.0$/, "") + "b";
   }
@@ -1482,8 +1492,17 @@ const formatNumber = (num) => {
   if (num >= 1e3) {
     return (num / 1e3).toFixed(1).replace(/\.0$/, "") + "k";
   }
+  if (num > 0 && num < 1) {
+    return num.toFixed(2);
+  }
+  if (num < 1e3) {
+    return num % 1 === 0 ? num.toString() : num.toFixed(2);
+  }
   return num.toString();
 };
+function removeCommas(numberString) {
+  return numberString.replace(/,/g, "");
+}
 function getFirstChar(word) {
   if (!word || typeof word !== "string") return "";
   return word.trim().charAt(0);
@@ -1537,9 +1556,10 @@ const sendEmail = async (data) => {
 function escapeRegex(str) {
   return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
-const IsAuthenticated = (tokens) => {
-  if (tokens === null) {
+const IsAuthenticated = (localStorage2) => {
+  if (localStorage2["authTokens"] === null || localStorage2["authTokens"] === void 0) {
     window.location.href = "/web/signin";
+    return true;
   }
 };
 function getDateInTimeZone(timeZone) {
@@ -1566,7 +1586,17 @@ function getDateInTimeZone(timeZone) {
 function getDateInTimeZoneX(timeZone) {
   const adjustment = 0;
   const timeObject = new Date(Date.now() - adjustment);
-  const formattedTime = new Intl.DateTimeFormat("en-US", {
+  const formattedTimeIntl = new Intl.DateTimeFormat("en-US", {
+    timeZone,
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    timeZoneName: "long"
+  }).format(timeObject);
+  new Intl.DateTimeFormat("en-US", {
     timeZone,
     year: "numeric",
     month: "2-digit",
@@ -1577,8 +1607,8 @@ function getDateInTimeZoneX(timeZone) {
     timeZoneName: "long"
   }).format(timeObject);
   const displayFormattedTime = /* @__PURE__ */ jsxs("span", { className: `space-x-1 tracking-tight`, children: [
-    /* @__PURE__ */ jsx("span", { className: `font-bold uppercase text-[13px]`, children: "Local Time:" }, "a1"),
-    /* @__PURE__ */ jsx("span", { children: formattedTime }, "a2")
+    /* @__PURE__ */ jsx("span", { className: `font-bold uppercase text-[13px]` }, "a1"),
+    /* @__PURE__ */ jsx("span", { children: formattedTimeIntl }, "a2")
   ] });
   return displayFormattedTime;
 }
@@ -1611,6 +1641,19 @@ function getCardIcon(media) {
       break;
   }
   return icon;
+}
+function getFormattedDateTime(dateString) {
+  const date = new Date(dateString);
+  const formattedTimeIntl = new Intl.DateTimeFormat("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    timeZoneName: "long"
+  }).format(date);
+  return formattedTimeIntl;
 }
 function strToList(str, separator) {
   const list = str.split(separator).map((item) => item.trim()).filter((item) => item.length > 0);
@@ -1743,6 +1786,93 @@ const getProductGallery = async (businessGuid, userGuid) => {
     return null;
   }
 };
+const getServiceList = async (businessGuid, userGuid, page) => {
+  let endpoint = "";
+  if (businessGuid !== "" && userGuid !== "") {
+    endpoint = `/api/listing/services/${businessGuid}/${userGuid}?page=${page}`;
+  } else {
+    console.log("Contact admin.");
+  }
+  const url = config.BASE_URL + endpoint;
+  try {
+    const response = await fetch(
+      url,
+      {
+        method: "GET",
+        headers: headers$1
+      }
+    );
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    const data = await response.json();
+    if (data.length <= 0) {
+      return null;
+    }
+    return data;
+  } catch (error) {
+    console.log(error.message);
+    return null;
+  }
+};
+const getServicesByBusinessGuid = async (businessGuid) => {
+  let endpoint = "";
+  if (businessGuid !== "") {
+    endpoint = `/api/listing/business/services/${businessGuid}`;
+  } else {
+    console.log("Contact admin.");
+  }
+  const url = config.BASE_URL + endpoint;
+  try {
+    const response = await fetch(
+      url,
+      {
+        method: "GET",
+        headers: headers$1
+      }
+    );
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    const data = await response.json();
+    if (data.length <= 0) {
+      return null;
+    }
+    return data;
+  } catch (error) {
+    console.log(error.message);
+    return null;
+  }
+};
+const getFacilityList = async (businessGuid, userGuid, page) => {
+  let endpoint = "";
+  if (businessGuid !== "" && userGuid !== "") {
+    endpoint = `/api/listing/facilities/${businessGuid}/${userGuid}?page=${page}`;
+  } else {
+    console.log("Contact admin.");
+  }
+  const url = config.BASE_URL + endpoint;
+  try {
+    const response = await fetch(
+      url,
+      {
+        method: "GET",
+        headers: headers$1
+      }
+    );
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    const data = await response.json();
+    if (data.length <= 0) {
+      return null;
+    }
+    return data;
+  } catch (error) {
+    console.log(error.message);
+    return null;
+  }
+};
 const searchFacilities = (selectedFacilities) => {
   const mappedFacilities = selectedFacilities.map((sel) => {
     const fac = facilityFeatures.find((fac2) => fac2.feature_id === sel.featureId);
@@ -1862,14 +1992,301 @@ function generateRandom10DigitNumber() {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 function removeAllParagraphs(text) {
-  return text.replace(/\n/g, " ").replace(/\s+/g, " ").trim();
+  return text == null ? void 0 : text.replace(/\n/g, " ").replace(/\s+/g, " ").trim();
 }
 function truncateText(text, desiredLength) {
   const strLen = text.length;
   return strLen > 100 ? text.substring(0, desiredLength) + "..." : text;
 }
+const getBusinessRating = async (businessGuid) => {
+  const endpoint = `/api/rating/get_business_rating/${businessGuid}`;
+  const url = config.BASE_URL + endpoint;
+  try {
+    const response = await fetch(
+      url,
+      {
+        method: "GET",
+        headers: headers$1
+      }
+    );
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    return { "message": error.message };
+  }
+};
+const getBusinessReviews = async (businessGuid) => {
+  const endpoint = `/api/rating/get_business_reviews/${businessGuid}`;
+  const url = config.BASE_URL + endpoint;
+  try {
+    const response = await fetch(
+      url,
+      {
+        method: "GET",
+        headers: headers$1
+      }
+    );
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    return { "message": error.message };
+  }
+};
+const getRelatedByCategory = async (category, limit) => {
+  const endpoint = `/api/listing/related_by_category/${category}/${limit}`;
+  const url = config.BASE_URL + endpoint;
+  try {
+    const response = await fetch(
+      url,
+      {
+        method: "GET",
+        headers: headers$1
+      }
+    );
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    return { "message": error.message };
+  }
+};
+function isValidUrl(string) {
+  try {
+    new URL(string);
+    return true;
+  } catch (err) {
+    return false;
+  }
+}
+function getIcon(media) {
+  const socialMedia = [
+    {
+      name: "facebook",
+      id: "FBK",
+      icon: /* @__PURE__ */ jsx(FaFacebookSquare, {})
+    },
+    {
+      name: "twitterx",
+      id: "TWX",
+      icon: /* @__PURE__ */ jsx(BsTwitterX, {})
+    },
+    {
+      name: "linkedin",
+      id: "LNK",
+      icon: /* @__PURE__ */ jsx(BsLinkedin, {})
+    },
+    {
+      name: "instagram",
+      id: "INS",
+      icon: /* @__PURE__ */ jsx(BsInstagram, {})
+    },
+    {
+      name: "pinterest",
+      id: "PIN",
+      icon: /* @__PURE__ */ jsx(BsPinterest, {})
+    },
+    {
+      name: "vimeo",
+      id: "VIM",
+      icon: /* @__PURE__ */ jsx(BsVimeo, {})
+    },
+    {
+      name: "tiktok",
+      id: "TKT",
+      icon: /* @__PURE__ */ jsx(FaTiktok, {})
+    },
+    {
+      name: "youtube",
+      id: "YTB",
+      icon: /* @__PURE__ */ jsx(FaYoutubeSquare, {})
+    }
+  ];
+  let _mediaCode = media.social_media_code;
+  let selectedMedia;
+  for (let index2 = 0; index2 < socialMedia.length; index2++) {
+    const element = socialMedia[index2];
+    if (_mediaCode === element.id) {
+      selectedMedia = element.icon;
+      break;
+    }
+  }
+  return selectedMedia;
+}
+const getNearbyBusinesses = async (cityId, limit) => {
+  const endpoint = `/api/listing/nearby_businesses/${cityId}/${limit}`;
+  const url = config.BASE_URL + endpoint;
+  try {
+    const response = await fetch(
+      url,
+      {
+        method: "GET",
+        headers: headers$1
+      }
+    );
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    return { "message": error.message };
+  }
+};
+const getInitials = (title) => {
+  var _a, _b;
+  const splitted = title == null ? void 0 : title.split(" ");
+  let firstInitial;
+  let secondInitial;
+  if (splitted.length > 1) {
+    firstInitial = (_a = splitted[0]) == null ? void 0 : _a.substring(0, 1);
+    secondInitial = (_b = splitted[1]) == null ? void 0 : _b.substring(0, 1);
+  } else {
+    firstInitial = title.substring(0, 2);
+    secondInitial = "";
+  }
+  return `${firstInitial}${secondInitial}`;
+};
+const formatDecimalWithCommas = (value) => {
+  let clean = value.replace(/[^0-9.]/g, "");
+  if (clean.startsWith(".")) {
+    clean = "0" + clean;
+  }
+  const firstDotIndex = clean.indexOf(".");
+  if (firstDotIndex !== -1) {
+    const beforeDot = clean.slice(0, firstDotIndex + 1);
+    const afterDot = clean.slice(firstDotIndex + 1).replace(/\./g, "");
+    clean = beforeDot + afterDot;
+  }
+  let [integerPart, decimalPart] = clean.split(".");
+  integerPart = integerPart.replace(/^0+(?=\d)/, "");
+  integerPart = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  if (decimalPart !== void 0) {
+    decimalPart = decimalPart.slice(0, 2);
+    return `${integerPart}.${decimalPart}`;
+  }
+  return integerPart;
+};
+const getServiceProfile = async (serviceGuid) => {
+  const endpoint = "/api/listing/services/" + serviceGuid;
+  const url = config.BASE_URL + endpoint;
+  try {
+    const response = await fetch(
+      url,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*"
+        }
+      }
+    );
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.log(error.message);
+    return null;
+  }
+};
+const getFacilityProfile = async (facilityGuid) => {
+  const endpoint = "/api/listing/facilities/" + facilityGuid;
+  const url = config.BASE_URL + endpoint;
+  try {
+    const response = await fetch(
+      url,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*"
+        }
+      }
+    );
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.log(error.message);
+    return null;
+  }
+};
+const getSocialMediaList = async (businessGuid, userGuid, page) => {
+  let endpoint = "";
+  if (businessGuid !== "" && userGuid !== "") {
+    endpoint = `/api/listing/social_media/${businessGuid}/${userGuid}?page=${page}`;
+  } else {
+    console.log("Contact admin.");
+  }
+  const url = config.BASE_URL + endpoint;
+  try {
+    const response = await fetch(
+      url,
+      {
+        method: "GET",
+        headers: headers$1
+      }
+    );
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    const data = await response.json();
+    if (data.length <= 0) {
+      return null;
+    }
+    return data;
+  } catch (error) {
+    console.log(error.message);
+    return null;
+  }
+};
+const getSocialMediaProfile = async (socialMediaGuid) => {
+  const endpoint = "/api/listing/social_media/" + socialMediaGuid;
+  const url = config.BASE_URL + endpoint;
+  try {
+    const response = await fetch(
+      url,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*"
+        }
+      }
+    );
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.log(error.message);
+    return null;
+  }
+};
+const filterCountry = (countries, searchTerm) => {
+  const term = searchTerm.toLowerCase().trim();
+  const filtered = countries == null ? void 0 : countries.filter(
+    (country) => {
+      var _a, _b, _c;
+      return ((_a = country.country_name) == null ? void 0 : _a.toLowerCase().includes(term)) || ((_b = country.currency) == null ? void 0 : _b.toLowerCase().includes(term)) || ((_c = country.numeric_code) == null ? void 0 : _c.toLowerCase().includes(term)) || country.id.toString().includes(term);
+    }
+  );
+  return filtered;
+};
 const AuthContext = createContext(null);
-const SITE_BASE_URL = "https://bycet.com";
+const SITE_BASE_URL = "https://test.bycet.com";
 function useAuth() {
   const context = useContext(AuthContext);
   if (context)
@@ -1982,7 +2399,7 @@ function AuthProvider({ children }) {
     window.location.reload();
   };
   const resetpw = async (data) => {
-    const BASE_URL = "https://bycet.com";
+    const BASE_URL = "https://test.bycet.com";
     const endpoint2 = "/api/user/reset_password_request";
     const url = BASE_URL + endpoint2;
     try {
@@ -2024,16 +2441,16 @@ function useSliderContext() {
   const context = useContext(SliderContext);
   return context;
 }
-const IMG_BASE_URL$1 = "https://pics.gasimg.com";
+const IMG_BASE_URL$1 = "https://tpics.gasimg.com";
 const SliderProvider = ({ children }) => {
   const [dialog, setDialog] = useState(false);
   const [selectedSlide, setSelectedSlide] = useState(null);
   const [slides, setGallery] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [listing, setListing] = useState(null);
+  const [listing2, setListing] = useState(null);
   const slideStep = useRef(0);
   useRef(0);
-  const [maximized, setMaximized] = useState(false);
+  const [maximized, setMaximized] = useState(true);
   const [normalState, setNormalState] = useState(true);
   const handleTouchStart = (e) => {
     slideStep.current = e.touches[0].clientX;
@@ -2097,21 +2514,25 @@ const SliderProvider = ({ children }) => {
             {
               className: `w-full h-full flex flex-shrink-0 flex-grow-0 transition-transform  place-content-center place-items-center  relative
                                             ease-in-out duration-1000`,
-              style: { transform: `translateX(-${currentSlide * 100}%)` },
+              style: { display: index2 === currentSlide ? "block" : "none" },
               children: [
-                /* @__PURE__ */ jsx(
+                /* @__PURE__ */ jsx("div", { className: `absolute top-10`, children: /* @__PURE__ */ jsxs("div", { className: "text-white text-center ", children: [
+                  currentSlide + 1,
+                  " / ",
+                  slides.length
+                ] }) }),
+                /* @__PURE__ */ jsx("div", { className: `max-w-[100%] md:max-w-[70%] h-[70%] relative `, children: /* @__PURE__ */ jsx(
                   "img",
                   {
                     onTouchStart: handleTouchStart,
                     onTouchEnd: handleTouchEnd,
                     src: IMG_BASE_URL$1 + slide.image_url,
                     alt: "",
-                    className: `object-scale-down w-full h-full 
-                                            `
+                    className: `object-scale-down w-full h-full`
                   },
                   index2
-                ),
-                /* @__PURE__ */ jsx("div", { className: `absolute bottom-[0px] w-full z-[20px] px-5 py-7 bg-black/30 md:hidden`, children: /* @__PURE__ */ jsx("div", { className: ` text-center text-white text-[19px]`, children: slide == null ? void 0 : slide.image_title }) })
+                ) }),
+                /* @__PURE__ */ jsx("div", { className: `absolute bottom-[15px] w-full z-[20px] px-5 py-5 bg-black/30`, children: /* @__PURE__ */ jsx("div", { className: ` text-center text-white font-extralight text-[13px]`, children: slide == null ? void 0 : slide.image_title }) })
               ]
             }
           );
@@ -2121,14 +2542,14 @@ const SliderProvider = ({ children }) => {
                                                 transition duration-1000 ease-in-out`, children: /* @__PURE__ */ jsx("div", { className: `w-[50px] h-[50px] bg-white/60 rounded-full flex place-content-center place-items-center group-hover:bg-white/30
                                                         transition duration-500 ease-in-out`, children: /* @__PURE__ */ jsx(BiChevronLeft, { className: " stroke-white fill-black w-[2rem] h-[2rem]" }) }) }),
         /* @__PURE__ */ jsx("button", { onMouseDown: next, className: `block absolute top-0 bottom-0 
-                                                    p-[1rem] cursor-pointer ${maximized ? "right-5" : "right-5 md:right-0"} group 
+                                                    p-[1rem] cursor-pointer ${maximized ? "right-0" : "right-0 md:right-0"} group 
                                                      transition duration-1000 ease-in-out`, children: /* @__PURE__ */ jsx("div", { className: `w-[50px] h-[50px] bg-white/60 rounded-full flex place-content-center place-items-center group-hover:bg-white/30
                                                         transition duration-500 ease-in-out`, children: /* @__PURE__ */ jsx(BiChevronRight, { className: " stroke-white fill-black w-[2rem] h-[2rem]" }) }) }),
         /* @__PURE__ */ jsx(
           "div",
           {
             onMouseDown: () => handleClose(),
-            className: `w-[50px] h-[50px] z-[300] bg-white
+            className: `w-[30px] h-[30px] z-[300] bg-white
                                                     flex place-content-center place-items-center
                                                     rounded-full absolute left-2 top-2 cursor-pointer
                                                     hover:bg-white/40 transition duration-1000 ease-in-out`,
@@ -2142,15 +2563,15 @@ const SliderProvider = ({ children }) => {
               setMaximized(!maximized);
               setNormalState(!normalState);
             },
-            className: `w-[50px] h-[50px] z-[300] bg-white flex place-content-center place-items-center rounded-full absolute right-2 top-2 cursor-pointer hover:bg-white/40 transition duration-1000 ease-in-out`,
-            children: maximized ? /* @__PURE__ */ jsx(FaMinimize, { className: `text-[30px]` }) : /* @__PURE__ */ jsx(FaMaximize, { className: `text-[30px]` })
+            className: `w-[30px] h-[30px] z-[300] bg-white flex place-content-center place-items-center rounded-full absolute right-2 top-2 cursor-pointer hover:bg-white/40 transition duration-1000 ease-in-out`,
+            children: maximized ? /* @__PURE__ */ jsx(FaMinimize, { className: `text-[20px]` }) : /* @__PURE__ */ jsx(FaMaximize, { className: `text-[20px]` })
           }
         )
       ] }),
       /* @__PURE__ */ jsxs("div", { className: `${maximized ? "hidden" : "hidden md:block md:col-span-3"} px-5`, children: [
         /* @__PURE__ */ jsxs("h1", { className: " text-[22px] my-4 font-sans font-extrabold tracking-tight leading-[24px]", children: [
           "Photos for ",
-          listing && listing.title
+          listing2 && listing2.title
         ] }),
         /* @__PURE__ */ jsxs("div", { className: " my-4 ", children: [
           currentSlide + 1,
@@ -2319,7 +2740,7 @@ const OperationNotification = () => {
     }
   };
   if (!isVisible) return null;
-  return /* @__PURE__ */ jsx("div", { className: "fixed inset-0 flex items-center justify-center z-[10000] bg-black bg-opacity-50", children: /* @__PURE__ */ jsxs("div", { className: "bg-white rounded-xl shadow-2xl p-6 w-80 animate-fade-in", children: [
+  return /* @__PURE__ */ jsx("div", { className: "fixed inset-0 flex items-center justify-center z-[10000] bg-black bg-opacity-50", children: /* @__PURE__ */ jsxs("div", { className: "bg-white rounded-xl shadow-2xl px-6 py-4 w-[300px] animate-fade-in", children: [
     /* @__PURE__ */ jsxs("div", { className: "flex items-center mb-4", children: [
       /* @__PURE__ */ jsx("div", { className: "bg-blue-100 p-3 rounded-full mr-3", children: /* @__PURE__ */ jsxs("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 24 24", className: "w-6 h-6 animate-pulse", children: [
         /* @__PURE__ */ jsx("path", { d: "M6 2h12v4l-4 4 4 4v4H6v-4l4-4-4-4V2z", fill: "none", stroke: "currentColor", strokeWidth: "1.5" }),
@@ -2339,20 +2760,7 @@ const OperationNotification = () => {
         style: { width: `${progress}%` }
       }
     ) }),
-    /* @__PURE__ */ jsx("p", { className: "text-gray-600 text-sm mb-4", children: getOperationMessage() }),
-    /* @__PURE__ */ jsx("div", { className: "flex justify-center", children: /* @__PURE__ */ jsxs("div", { className: "flex space-x-2", children: [
-      /* @__PURE__ */ jsx("div", { className: "w-3 h-3 bg-blue-500 rounded-full animate-bounce" }),
-      /* @__PURE__ */ jsx("div", { className: "w-3 h-3 bg-blue-500 rounded-full animate-bounce", style: { animationDelay: "0.2s" } }),
-      /* @__PURE__ */ jsx("div", { className: "w-3 h-3 bg-blue-500 rounded-full animate-bounce", style: { animationDelay: "0.4s" } })
-    ] }) }),
-    /* @__PURE__ */ jsx(
-      "button",
-      {
-        onClick: hideOperation,
-        className: "mt-4 text-sm text-gray-500 hover:text-gray-700 transition-colors",
-        children: "Cancel"
-      }
-    )
+    /* @__PURE__ */ jsx("p", { className: "text-gray-600 text-sm mb-4", children: getOperationMessage() })
   ] }) });
 };
 const AlertNotification = () => {
@@ -2442,7 +2850,7 @@ function AddPhotoDialogProvider({ children }) {
       formData.append("image_title", imageTitle.value);
       showOperation("processing", "Saving picture");
       await new Promise((resolve) => setTimeout(resolve, 2e3));
-      const IMG_BASE_URL2 = "https://pics.gasimg.com";
+      const IMG_BASE_URL2 = "https://tpics.gasimg.com";
       const endpoint = "/business_gallery_pic_upload";
       const url = IMG_BASE_URL2 + endpoint;
       try {
@@ -2502,13 +2910,20 @@ function AddPhotoDialogProvider({ children }) {
         children: /* @__PURE__ */ jsxs(
           "div",
           {
-            className: `relative w-[90%] h-[80%] bg-white 
-                        rounded-[8px] overflow-x-hidden z-[3000]`,
+            className: `relative max-w-[600px] mx-2 w-full h-fit bg-white 
+                        rounded-[40px] overflow-hidden z-[3000]`,
             onClick: (event) => {
               event.preventDefault();
             },
             children: [
-              /* @__PURE__ */ jsx("div", { className: `relative w-full h-[75%] bg-black`, children: /* @__PURE__ */ jsx(
+              /* @__PURE__ */ jsx(
+                CloseButton$b,
+                {
+                  setShow: handleCloseDialog
+                }
+              ),
+              /* @__PURE__ */ jsx("div", { className: `pt-12 pb-5 px-3 text-2xl font-semibold`, children: "Add Photo" }),
+              /* @__PURE__ */ jsx("div", { className: `relative w-full h-[300px] bg-gray-200`, children: /* @__PURE__ */ jsx(
                 "img",
                 {
                   src: imgSrc,
@@ -2524,25 +2939,28 @@ function AddPhotoDialogProvider({ children }) {
                   className: `w-full bg-gray-100 px-3  h-[60px] py-3`
                 }
               ) }),
-              /* @__PURE__ */ jsxs("div", { className: `flex place-content-end px-3 gap-2`, children: [
-                /* @__PURE__ */ jsx(
-                  "button",
-                  {
-                    onMouseDown: () => handleCloseDialog(),
-                    className: `bg-gray-800 text-white px-3 py-1.5 rounded-md
-                                    shadow-md mb-2 mt-4`,
-                    children: "Close"
-                  }
-                ),
-                /* @__PURE__ */ jsx(
-                  "button",
-                  {
-                    onClick: () => handleUpload(),
-                    className: `bg-blue-800 text-white px-3 py-1.5 rounded-md
-                                    shadow-md mb-2 mt-4`,
-                    children: working ? "Working..." : "Submit"
-                  }
-                )
+              /* @__PURE__ */ jsxs("div", { className: `flex place-content-between place-items-center`, children: [
+                /* @__PURE__ */ jsx("div", { className: `px-3 text-2xl` }),
+                /* @__PURE__ */ jsxs("div", { className: `flex place-content-end px-6 gap-x-2 py-6`, children: [
+                  /* @__PURE__ */ jsx(
+                    "button",
+                    {
+                      onMouseDown: () => handleCloseDialog(),
+                      className: `bg-gray-800 text-white px-3 py-1.5 rounded-md
+                                    shadow-md `,
+                      children: "Close"
+                    }
+                  ),
+                  /* @__PURE__ */ jsx(
+                    "button",
+                    {
+                      onClick: () => handleUpload(),
+                      className: `bg-blue-800 text-white px-3 py-1.5 rounded-md
+                                    shadow-md `,
+                      children: working ? "Working..." : "Submit"
+                    }
+                  )
+                ] })
               ] })
             ]
           }
@@ -2552,6 +2970,16 @@ function AddPhotoDialogProvider({ children }) {
     children
   ] });
 }
+const CloseButton$b = ({ setShow }) => {
+  return /* @__PURE__ */ jsx(
+    "div",
+    {
+      className: `absolute top-8 right-6 text-3xl  rounded-xl  w-[40px] h-[40px] shadow-sm flex place-items-center place-content-center cursor-pointer bg-gray-200/70 hover:border-gray-200/50 text-gray-400 hover:text-gray-500 z-10`,
+      onClick: () => setShow(),
+      children: /* @__PURE__ */ jsx(CgClose, {})
+    }
+  );
+};
 const EditPhotoDialogContext = createContext(null);
 function useEditPhotoDialogContext() {
   const context = useContext(EditPhotoDialogContext);
@@ -2603,7 +3031,7 @@ function EditPhotoDialogProvider({ children }) {
     formData2.append("bid", businessGuid);
     formData2.append("image_title", imageTitle2.value);
     formData2.append("image_guid", imageGuid);
-    const IMG_BASE_URL2 = "https://pics.gasimg.com";
+    const IMG_BASE_URL2 = "https://tpics.gasimg.com";
     const endpoint = "/business_gallery_pic_update";
     const url = IMG_BASE_URL2 + endpoint;
     try {
@@ -2633,7 +3061,7 @@ function EditPhotoDialogProvider({ children }) {
     }
   };
   const deletePhoto = async (userGuid2, businessGuid2, imageGuid2) => {
-    const IMG_BASE_URL2 = "https://pics.gasimg.com";
+    const IMG_BASE_URL2 = "https://tpics.gasimg.com";
     const endpoint = `/delete_business_gallery_pic`;
     const url = IMG_BASE_URL2 + endpoint;
     const data = {
@@ -2691,15 +3119,17 @@ function EditPhotoDialogProvider({ children }) {
     deletePhoto
   };
   return /* @__PURE__ */ jsxs(EditPhotoDialogContext.Provider, { value: vals, children: [
-    dialog && /* @__PURE__ */ jsx("div", { className: `fixed w-screen h-screen bg-black/30 z-[3000]`, children: /* @__PURE__ */ jsx("div", { className: `fixed w-screen h-screen z-[3000] 
+    dialog && /* @__PURE__ */ jsx("div", { className: `fixed w-screen h-screen bg-black/30 z-[3000]`, children: /* @__PURE__ */ jsx("div", { className: `fixed flex w-screen h-screen z-[3000] 
                  top-0 left-0 right-0 bottom-0 bg-black/30
                 place-content-center place-items-center`, children: /* @__PURE__ */ jsx(
       "div",
       {
-        className: `relative max-w-[90%] w-[90%] h-[80%] bg-white 
-                        rounded-[8px] overflow-hidden z-[3100] mx-auto `,
+        className: `relative max-w-[600px] w-full bg-white 
+                        rounded-[40px] overflow-hidden z-[3100] mx-2 h-fit `,
         children: /* @__PURE__ */ jsxs("div", { className: `w-full h-full overflow-y-auto`, children: [
-          /* @__PURE__ */ jsxs("div", { className: `relative w-full h-[75%] bg-black`, children: [
+          /* @__PURE__ */ jsx(CloseButton$a, { setShow: handleCloseDialog }),
+          /* @__PURE__ */ jsx("div", { className: `pt-12 pb-5 px-3 text-2xl font-semibold`, children: "Edit Photo" }),
+          /* @__PURE__ */ jsxs("div", { className: `relative w-full h-[300px] bg-black`, children: [
             /* @__PURE__ */ jsx(
               "img",
               {
@@ -2732,7 +3162,7 @@ function EditPhotoDialogProvider({ children }) {
               }
             )
           ] }),
-          /* @__PURE__ */ jsxs("div", { className: `h-[25%]`, children: [
+          /* @__PURE__ */ jsxs("div", { className: ``, children: [
             /* @__PURE__ */ jsx(
               "textarea",
               {
@@ -2743,13 +3173,13 @@ function EditPhotoDialogProvider({ children }) {
                 className: `w-full bg-gray-100 px-3  h-[60px] py-3`
               }
             ),
-            /* @__PURE__ */ jsxs("div", { className: `flex place-content-end px-3 gap-2`, children: [
+            /* @__PURE__ */ jsxs("div", { className: `flex place-content-end px-6 gap-2 py-6`, children: [
               /* @__PURE__ */ jsx(
                 "button",
                 {
                   onMouseDown: () => window.location.reload(),
                   className: `bg-gray-800 text-white px-3 py-1.5 rounded-md
-                                    shadow-md mb-2 mt-4`,
+                                    shadow-md`,
                   children: "Reload"
                 }
               ),
@@ -2758,7 +3188,7 @@ function EditPhotoDialogProvider({ children }) {
                 {
                   onMouseDown: () => handleCloseDialog(),
                   className: `bg-gray-800 text-white px-3 py-1.5 rounded-md
-                                    shadow-md mb-2 mt-4`,
+                                    shadow-md `,
                   children: "Close"
                 }
               ),
@@ -2767,7 +3197,7 @@ function EditPhotoDialogProvider({ children }) {
                 {
                   onClick: () => handleUpdate(),
                   className: `bg-blue-800 text-white px-3 py-1.5 rounded-md
-                                    shadow-md mb-2 mt-4`,
+                                    shadow-md `,
                   children: working ? "Working..." : "Submit"
                 }
               )
@@ -2779,6 +3209,16 @@ function EditPhotoDialogProvider({ children }) {
     children
   ] });
 }
+const CloseButton$a = ({ setShow }) => {
+  return /* @__PURE__ */ jsx(
+    "div",
+    {
+      className: `absolute top-8 right-6 text-3xl  rounded-xl  w-[40px] h-[40px] shadow-sm flex place-items-center place-content-center cursor-pointer bg-gray-200/70 hover:border-gray-200/50 text-gray-400 hover:text-gray-500 z-10`,
+      onClick: () => setShow(),
+      children: /* @__PURE__ */ jsx(CgClose, {})
+    }
+  );
+};
 const AddVideoDialogContext = createContext(null);
 function useAddVideoDialogContext() {
   const context = useContext(AddVideoDialogContext);
@@ -2880,7 +3320,8 @@ function AddVideoDialogProvider({ children }) {
         showSuccess("Verified", "Enter the video title and optional description to continue.");
       }
     } else {
-      notification.alertCancel("Video error!", "Video could not be loaded!");
+      showError("Video Error", "Video could not be loaded.");
+      completeOperation();
     }
     await new Promise((resolve) => setTimeout(resolve, 1e3));
     setVideo(videoObject);
@@ -2966,96 +3407,102 @@ function AddVideoDialogProvider({ children }) {
         className: `flex w-screen h-screen z-[3000] 
                 fixed top-0 left-0 right-0 bottom-0 bg-black/30 rounded-[8px]
                 place-content-center place-items-center overflow-hidden`,
-        children: /* @__PURE__ */ jsx(
+        children: /* @__PURE__ */ jsxs(
           "div",
           {
-            className: `relative w-[90%] h-[80%] bg-white 
-                        rounded-[8px] overflow-x-hidden overflow-y-hidden z-[3000]`,
+            className: `relative max-w-[600px] w-full h-fit bg-white mx-2
+                        rounded-[40px] overflow-x-hidden overflow-y-hidden z-[3000]`,
             onClick: (event) => {
               event.preventDefault();
             },
-            children: /* @__PURE__ */ jsxs("div", { className: `relative h-full overflow-y-auto`, children: [
-              /* @__PURE__ */ jsx("div", { className: `relative w-full h-[75%] max-h-[75%] bg-black`, children: /* @__PURE__ */ jsxs("div", { className: ` relative w-full h-full text-white flex place-items-center place-content-center flex-col`, children: [
-                working ? "Loading..." : "Paste a Youtube link below!",
-                /* @__PURE__ */ jsx(
-                  "iframe",
-                  {
-                    id: "yt-iframe",
-                    src: (video == null ? void 0 : video.videoId) ? `https://www.youtube.com/embed/${video == null ? void 0 : video.videoId}` : void 0,
-                    className: "absolute top-0 left-0 w-full h-full",
-                    allow: "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  }
-                )
-              ] }) }),
-              /* @__PURE__ */ jsxs("div", { className: `flex mb-1 flex-col mx-3 `, children: [
-                /* @__PURE__ */ jsx("div", { className: `text-[14px] font-semibold py-1`, children: "Paste a Youtube video link" }),
-                /* @__PURE__ */ jsx(
-                  "input",
-                  {
-                    id: "videolink",
-                    type: "text",
-                    placeholder: "Paste a Youtube Video",
-                    className: `w-full border-[1px] border-gray-700 bg-gray-100 px-3 py-4 outline-none rounded-lg`,
-                    onKeyUp: (e) => {
-                      handleVideoUrlKeyUp(e.target.value);
+            children: [
+              /* @__PURE__ */ jsx(CloseButton$9, { setShow: setDialog }),
+              /* @__PURE__ */ jsx("div", { className: `pt-12 pb-2 px-3 text-2xl font-semibold`, children: "Add Video" }),
+              /* @__PURE__ */ jsxs("div", { className: `flex mb-3 flex-col mx-3 `, children: [
+                /* @__PURE__ */ jsx("div", { className: `text-[15px] pt-1 pb-1`, children: "Paste a Youtube video link" }),
+                /* @__PURE__ */ jsxs("div", { className: `flex place-content-between place-items-center gap-x-4`, children: [
+                  /* @__PURE__ */ jsx("div", { className: `grow`, children: /* @__PURE__ */ jsx(
+                    "input",
+                    {
+                      id: "videolink",
+                      type: "text",
+                      placeholder: "Paste a Youtube Video",
+                      className: `w-full border-[1px] border-gray-300 bg-gray-100 px-3 py-2 outline-none rounded-lg text-xl`,
+                      onKeyUp: (e) => {
+                        handleVideoUrlKeyUp(e.target.value);
+                      }
                     }
-                  }
-                )
+                  ) }),
+                  /* @__PURE__ */ jsx("div", { children: /* @__PURE__ */ jsx(
+                    "button",
+                    {
+                      onClick: () => handleVerify(),
+                      disabled: videoUrlState ? false : true,
+                      className: `${videoUrlState ? "bg-blue-800" : "bg-blue-300"} ${videoVerified && "hidden"} text-white px-3 py-2.5 rounded-md
+                                    shadow-md `,
+                      children: "Verify"
+                    }
+                  ) })
+                ] })
               ] }),
-              /* @__PURE__ */ jsxs("div", { className: `flex mb-1 flex-col mx-3 `, children: [
-                /* @__PURE__ */ jsx("div", { className: `text-[14px] font-semibold py-1`, children: "Enter video title" }),
-                /* @__PURE__ */ jsx(
-                  "input",
-                  {
-                    id: "videotitle",
-                    type: "text",
-                    placeholder: "Enter Video Title",
-                    className: `w-full border-[1px] border-gray-700 bg-gray-100 px-3 py-4 outline-none rounded-lg`
-                  }
-                )
-              ] }),
-              /* @__PURE__ */ jsxs("div", { className: `flex mb-1 flex-col mx-3 `, children: [
-                /* @__PURE__ */ jsx("div", { className: `text-[14px] font-semibold py-1`, children: "Enter title description" }),
-                /* @__PURE__ */ jsx(
-                  "textarea",
-                  {
-                    id: "videodescr",
-                    placeholder: `Enter picture description.`,
-                    className: `w-full border-[1px] border-gray-700 bg-gray-100 px-3 py-4 outline-none rounded-lg`
-                  }
-                )
-              ] }),
-              /* @__PURE__ */ jsxs("div", { className: `flex place-content-end px-3 gap-2`, children: [
-                /* @__PURE__ */ jsx(
-                  "button",
-                  {
-                    onMouseDown: () => handleCloseDialog(),
-                    className: `bg-gray-800 text-white px-3 py-1.5 rounded-md
-                                    shadow-md mb-2 mt-4`,
-                    children: "Cancel"
-                  }
-                ),
-                /* @__PURE__ */ jsx(
-                  "button",
-                  {
-                    onClick: () => handleUpload(),
-                    className: `bg-blue-800 text-white px-3 py-1.5 rounded-md
-                                    shadow-md mb-2 mt-4 ${!videoVerified ? "hidden" : "block"}`,
-                    children: "Submit"
-                  }
-                ),
-                /* @__PURE__ */ jsx(
-                  "button",
-                  {
-                    onClick: () => handleVerify(),
-                    disabled: videoUrlState ? false : true,
-                    className: `${videoUrlState ? "bg-blue-800" : "bg-blue-300"} ${videoVerified && "hidden"} text-white px-3 py-1.5 rounded-md
-                                    shadow-md mb-2 mt-4`,
-                    children: "Verify"
-                  }
-                )
+              /* @__PURE__ */ jsxs("div", { className: `relative w-full h-[300px] overflow-y-auto`, children: [
+                /* @__PURE__ */ jsx("div", { className: `relative w-full h-full bg-black`, children: /* @__PURE__ */ jsxs("div", { className: ` relative w-full h-full text-white flex place-items-center place-content-center flex-col`, children: [
+                  working ? "Loading..." : "Waiting...",
+                  /* @__PURE__ */ jsx(
+                    "iframe",
+                    {
+                      id: "yt-iframe",
+                      src: (video == null ? void 0 : video.videoId) ? `https://www.youtube.com/embed/${video == null ? void 0 : video.videoId}` : void 0,
+                      className: "absolute top-0 left-0 w-full h-full bg-transparent",
+                      allow: "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    }
+                  )
+                ] }) }),
+                /* @__PURE__ */ jsxs("div", { className: `flex mb-1 flex-col mx-3 `, children: [
+                  /* @__PURE__ */ jsx("div", { className: `text-[15px] pt-3 pb-1`, children: "Enter video title" }),
+                  /* @__PURE__ */ jsx(
+                    "input",
+                    {
+                      id: "videotitle",
+                      type: "text",
+                      placeholder: "Enter Video Title",
+                      className: `w-full border-[1px] border-gray-300 bg-gray-100 px-3 py-4 outline-none rounded-lg text-xl`
+                    }
+                  )
+                ] }),
+                /* @__PURE__ */ jsxs("div", { className: `flex mb-1 flex-col mx-3 `, children: [
+                  /* @__PURE__ */ jsx("div", { className: `text-[15px] pt-3 pb-1`, children: "Enter title description" }),
+                  /* @__PURE__ */ jsx(
+                    "textarea",
+                    {
+                      id: "videodescr",
+                      placeholder: `Enter picture description.`,
+                      className: `w-full border-[1px] border-gray-300 bg-gray-100 px-3 py-4 outline-none rounded-lg text-xl`
+                    }
+                  )
+                ] }),
+                /* @__PURE__ */ jsxs("div", { className: `flex place-content-end px-6 gap-2 py-6`, children: [
+                  /* @__PURE__ */ jsx(
+                    "button",
+                    {
+                      onMouseDown: () => handleCloseDialog(),
+                      className: `bg-gray-800 text-white px-3 py-1.5 rounded-md
+                                    shadow-md `,
+                      children: "Cancel"
+                    }
+                  ),
+                  /* @__PURE__ */ jsx(
+                    "button",
+                    {
+                      onClick: () => handleUpload(),
+                      className: `bg-blue-800 text-white px-3 py-1.5 rounded-md
+                                    shadow-md  ${!videoVerified ? "hidden" : "block"}`,
+                      children: "Submit"
+                    }
+                  )
+                ] })
               ] })
-            ] })
+            ]
           }
         )
       }
@@ -3063,6 +3510,16 @@ function AddVideoDialogProvider({ children }) {
     children
   ] });
 }
+const CloseButton$9 = ({ setShow }) => {
+  return /* @__PURE__ */ jsx(
+    "div",
+    {
+      className: `absolute top-8 right-6 text-3xl  rounded-xl  w-[40px] h-[40px] shadow-sm flex place-items-center place-content-center cursor-pointer bg-gray-200/70 hover:border-gray-200/50 text-gray-400 hover:text-gray-500 z-10`,
+      onClick: () => setShow(false),
+      children: /* @__PURE__ */ jsx(CgClose, {})
+    }
+  );
+};
 const VideoSliderContext = createContext(null);
 function useVideoSliderContext() {
   const context = useContext(VideoSliderContext);
@@ -3073,10 +3530,10 @@ const VideoSliderProvider = ({ children }) => {
   const [selectedSlide, setSelectedSlide] = useState(null);
   const [slides, setGallery] = useState([]);
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [listing, setListing] = useState(null);
+  const [listing2, setListing] = useState(null);
   useRef(0);
   useRef(0);
-  const [maximized, setMaximized] = useState(false);
+  const [maximized, setMaximized] = useState(true);
   const handleClose = () => {
     setDialog(false);
   };
@@ -3089,7 +3546,14 @@ const VideoSliderProvider = ({ children }) => {
     }
     let prevCount = currentSlide === 0 ? slides.length - 1 : currentSlide - 1;
     const prevVideo = slides[prevCount];
-    const iframeObject = document.getElementById(prevVideo == null ? void 0 : prevVideo.video_guid);
+    let iframeObject;
+    try {
+      const currentVideo2 = slides[currentCount];
+      iframeObject = document.getElementById(currentVideo2 == null ? void 0 : currentVideo2.video_guid);
+      iframeObject.src = ``;
+    } finally {
+      iframeObject = document.getElementById(prevVideo == null ? void 0 : prevVideo.video_guid);
+    }
     const videoId = getYoutubeId(prevVideo == null ? void 0 : prevVideo.video_url);
     iframeObject.src = `https://www.youtube.com/embed/${videoId}`;
     setCurrentSlide((currentSlide2) => {
@@ -3105,7 +3569,14 @@ const VideoSliderProvider = ({ children }) => {
     }
     let nextCount = currentSlide === slides.length - 1 ? 0 : currentSlide + 1;
     const nextVideo = slides[nextCount];
-    const iframeObject = document.getElementById(nextVideo == null ? void 0 : nextVideo.video_guid);
+    let iframeObject;
+    try {
+      const currentVideo2 = slides[currentCount];
+      iframeObject = document.getElementById(currentVideo2 == null ? void 0 : currentVideo2.video_guid);
+      iframeObject.src = ``;
+    } finally {
+      iframeObject = document.getElementById(nextVideo == null ? void 0 : nextVideo.video_guid);
+    }
     const videoId = getYoutubeId(nextVideo == null ? void 0 : nextVideo.video_url);
     iframeObject.src = `https://www.youtube.com/embed/${videoId}`;
     setCurrentSlide((currentSlide2) => {
@@ -3144,18 +3615,22 @@ const VideoSliderProvider = ({ children }) => {
                 fixed top-0 left-0 right-0 bottom-0 `, children: /* @__PURE__ */ jsxs("div", { className: `grid grid-cols-12 gap-0 w-full`, children: [
       /* @__PURE__ */ jsxs("div", { className: `${maximized ? "col-span-12" : "col-span-12 md:col-span-9"}  w-full h-full relative bg-black flex`, children: [
         /* @__PURE__ */ jsx("div", { className: ` w-full h-screen flex overflow-hidden`, children: slides && selectedSlide && slides.map((slide, index2) => {
-          console.log(slide == null ? void 0 : slide.video_url);
           const videoId = getYoutubeId(slide == null ? void 0 : slide.video_url);
           const videoSrc = `https://www.youtube.com/embed/${videoId}`;
           Date.now().toString() + videoId;
           return /* @__PURE__ */ jsxs(
             "div",
             {
-              style: { transform: `translateX(-${currentSlide * 100}%)` },
+              style: { display: index2 === currentSlide ? "block" : "none" },
               className: "object-scale-down w-full h-full \n                   flex flex-shrink-0 flex-grow-0 transition-transform \n                   ease-in-out duration-1000 relative place-items-center place-content-center bg-black text-white",
               children: [
-                "Loading...",
-                /* @__PURE__ */ jsx(
+                /* @__PURE__ */ jsxs("div", { className: "absolute top-[15px] my-4 ", children: [
+                  currentSlide + 1,
+                  " / ",
+                  slides.length
+                ] }),
+                /* @__PURE__ */ jsx("div", { className: `absolute top-[50%] text-center w-full`, children: "Loading..." }),
+                /* @__PURE__ */ jsx("div", { className: `w-[100%] md:w-[70%] h-[70%] relative`, children: /* @__PURE__ */ jsx(
                   "iframe",
                   {
                     id: slide == null ? void 0 : slide.video_guid,
@@ -3163,13 +3638,13 @@ const VideoSliderProvider = ({ children }) => {
                     className: "absolute top-0 left-0 w-full h-full",
                     allow: "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   }
-                ),
+                ) }),
                 /* @__PURE__ */ jsx(
                   "div",
                   {
-                    className: `absolute bottom-[0px] w-full z-[20px] px-5 py-7 bg-black/80 md:hidden`,
+                    className: `absolute bottom-[15px] w-full z-[20px] px-5 py-7 bg-black/80`,
                     id: "vstitle",
-                    children: /* @__PURE__ */ jsx("div", { className: ` text-center text-white text-[19px] `, children: slide == null ? void 0 : slide.video_title })
+                    children: /* @__PURE__ */ jsx("div", { className: ` text-center text-white text-[14px] font-extralight `, children: slide == null ? void 0 : slide.video_title })
                   }
                 )
               ]
@@ -3184,14 +3659,14 @@ const VideoSliderProvider = ({ children }) => {
                                                 transition duration-1000 ease-in-out`, children: /* @__PURE__ */ jsx("div", { className: `w-[50px] h-[50px] bg-white/60 rounded-full flex place-content-center place-items-center group-hover:bg-white/30
                                                         transition duration-500 ease-in-out`, children: /* @__PURE__ */ jsx(BiChevronLeft, { className: " stroke-white fill-black w-[2rem] h-[2rem]" }) }) }),
         /* @__PURE__ */ jsx("button", { onMouseDown: next, className: `block absolute top-0 bottom-0 
-                                                    p-[1rem] cursor-pointer ${maximized ? "right-5" : "right-5 md:right-0"}  group 
+                                                    p-[1rem] cursor-pointer ${maximized ? "right-0" : "right-5 md:right-0"}  group 
                                                      transition duration-1000 ease-in-out`, children: /* @__PURE__ */ jsx("div", { className: `w-[50px] h-[50px] bg-white/60 rounded-full flex place-content-center place-items-center group-hover:bg-white/30
                                                         transition duration-500 ease-in-out`, children: /* @__PURE__ */ jsx(BiChevronRight, { className: " stroke-white fill-black w-[2rem] h-[2rem]" }) }) }),
         /* @__PURE__ */ jsx(
           "div",
           {
             onMouseDown: () => handleClose(),
-            className: `w-[50px] h-[50px] z-[300] bg-white
+            className: `w-[30px] h-[30px] z-[300] bg-white
                                                     flex place-content-center place-items-center
                                                     rounded-full absolute left-2 top-2 cursor-pointer
                                                     hover:bg-white/40 transition duration-1000 ease-in-out`,
@@ -3204,15 +3679,15 @@ const VideoSliderProvider = ({ children }) => {
             onClick: () => {
               setMaximized(!maximized);
             },
-            className: `w-[50px] h-[50px] z-[300] bg-white flex place-content-center place-items-center rounded-full absolute top-2 right-2 cursor-pointer hover:bg-white/40 transition duration-1000 ease-in-out`,
-            children: maximized ? /* @__PURE__ */ jsx(FaMinimize, { className: `text-[30px]` }) : /* @__PURE__ */ jsx(FaMaximize, { className: `text-[30px]` })
+            className: `w-[30px] h-[30px] z-[300] bg-white flex place-content-center place-items-center rounded-full absolute top-2 right-2 cursor-pointer hover:bg-white/40 transition duration-1000 ease-in-out`,
+            children: maximized ? /* @__PURE__ */ jsx(FaMinimize, { className: `text-[20px]` }) : /* @__PURE__ */ jsx(FaMaximize, { className: `text-[20px]` })
           }
         )
       ] }),
       /* @__PURE__ */ jsxs("div", { className: `${maximized ? "hidden" : "hidden md:block md:col-span-3"}   px-5 overflow-x-hidden overflow-y-auto h-full bg-white`, children: [
         /* @__PURE__ */ jsxs("h1", { className: " text-[22px] my-4 font-sans font-extrabold tracking-tight leading-[24px]", children: [
           "Videos for ",
-          listing && listing.title
+          listing2 && listing2.title
         ] }),
         /* @__PURE__ */ jsxs("div", { className: " my-4 ", children: [
           currentSlide + 1,
@@ -3428,114 +3903,122 @@ function EditVideoDialogProvider({ children }) {
     videoGuid,
     setVideoGuid,
     setVideoDescription,
-    deleteVideo
+    deleteVideo,
+    setVideoVerified
   };
   return /* @__PURE__ */ jsxs(EditVideoDialogContext.Provider, { value: vals, children: [
     dialog && /* @__PURE__ */ jsx(
       "div",
       {
-        className: `flex w-screen h-screen z-[3000] 
-                fixed top-0 left-0 right-0 bottom-0 bg-black/30 rounded-[8px]
+        className: `fixed flex w-screen h-screen z-[3000] 
+                 top-0 left-0 right-0 bottom-0 bg-black/30 rounded-[8px]
                 place-content-center place-items-center overflow-hidden`,
-        children: /* @__PURE__ */ jsx(
+        children: /* @__PURE__ */ jsxs(
           "div",
           {
-            className: `relative w-[90%] h-[80%] bg-white 
-                        rounded-[8px] overflow-x-hidden overflow-y-hidden z-[3000]`,
+            className: `relative max-w-[600px] h-fit w-full bg-white mx-2
+                        rounded-[40px] overflow-x-hidden overflow-y-hidden z-[3000]`,
             onClick: (event) => {
               event.preventDefault();
             },
-            children: /* @__PURE__ */ jsxs("div", { className: `relative h-full overflow-y-auto`, children: [
-              /* @__PURE__ */ jsx("div", { className: `relative w-full h-[75%] max-h-[75%] bg-black`, children: /* @__PURE__ */ jsx("div", { className: ` relative w-full h-full`, children: /* @__PURE__ */ jsx(
-                "iframe",
-                {
-                  id: "yt-iframe",
-                  src: videoSrc ? `https://www.youtube.com/embed/${videoId}` : void 0,
-                  className: "absolute top-0 left-0 w-full h-full",
-                  allow: "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                }
-              ) }) }),
-              /* @__PURE__ */ jsxs("div", { className: `flex mb-1 flex-col mx-3 `, children: [
-                /* @__PURE__ */ jsx("div", { className: `text-[14px] font-semibold py-1`, children: "Paste a Youtube video link" }),
-                /* @__PURE__ */ jsx(
-                  "input",
-                  {
-                    id: "videolink",
-                    type: "text",
-                    defaultValue: videoSrc,
-                    placeholder: "Enter Video Link",
-                    className: `w-full border-[1px] border-gray-700 bg-gray-100 px-3 py-4 outline-none rounded-lg`,
-                    onKeyUp: (e) => {
-                      handleVideoUrlKeyUp(e.target.value);
+            children: [
+              /* @__PURE__ */ jsx(CloseButton$8, { setShow: setDialog }),
+              /* @__PURE__ */ jsx("div", { className: `pt-12 pb-4 px-3 text-2xl font-semibold`, children: "Add Video" }),
+              /* @__PURE__ */ jsxs("div", { className: `flex mb-3 flex-col mx-3 `, children: [
+                /* @__PURE__ */ jsx("div", { className: `text-[15px] pt-1 pb-1`, children: "Paste a Youtube video link" }),
+                /* @__PURE__ */ jsxs("div", { className: `flex place-content-between place-items-center gap-x-4`, children: [
+                  /* @__PURE__ */ jsx("div", { className: `grow`, children: /* @__PURE__ */ jsx(
+                    "input",
+                    {
+                      id: "videolink",
+                      type: "text",
+                      defaultValue: videoSrc,
+                      placeholder: "Enter Video Link",
+                      className: `w-full border-[1px] border-gray-300 bg-gray-100 px-3 py-2 outline-none rounded-lg text-xl`,
+                      onKeyUp: (e) => {
+                        handleVideoUrlKeyUp(e.target.value);
+                      }
                     }
-                  }
-                )
+                  ) }),
+                  /* @__PURE__ */ jsx("div", { children: /* @__PURE__ */ jsx(
+                    "button",
+                    {
+                      onClick: () => handleVerify(),
+                      disabled: videoUrlState ? false : true,
+                      className: `${videoUrlState ? "bg-blue-800" : "bg-blue-300"} ${videoVerified && "hidden"} text-white px-3 py-2.5 rounded-md
+                                    shadow-md `,
+                      children: "Verify"
+                    }
+                  ) })
+                ] })
               ] }),
-              /* @__PURE__ */ jsxs("div", { className: `flex mb-1 flex-col mx-3 `, children: [
-                /* @__PURE__ */ jsx("div", { className: `text-[14px] font-semibold py-1`, children: "Enter video title" }),
-                /* @__PURE__ */ jsx(
-                  "input",
+              /* @__PURE__ */ jsxs("div", { className: `relative w-full h-[300px] overflow-y-auto`, children: [
+                /* @__PURE__ */ jsx("div", { className: `relative w-full h-full bg-black`, children: /* @__PURE__ */ jsx("div", { className: ` relative w-full h-full`, children: /* @__PURE__ */ jsx(
+                  "iframe",
                   {
-                    id: "videotitle",
-                    defaultValue: videoTitle,
-                    type: "text",
-                    placeholder: "Enter Video Title",
-                    className: `w-full border-[1px] border-gray-700 bg-gray-100 px-3 py-4 outline-none rounded-lg`
+                    id: "yt-iframe",
+                    src: videoSrc ? `https://www.youtube.com/embed/${videoId}` : void 0,
+                    className: "absolute top-0 left-0 w-full h-full bg-black",
+                    allow: "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   }
-                )
-              ] }),
-              /* @__PURE__ */ jsxs("div", { className: `flex mb-1 flex-col mx-3 `, children: [
-                /* @__PURE__ */ jsx("div", { className: `text-[14px] font-semibold py-1`, children: "Enter title description" }),
-                /* @__PURE__ */ jsx(
-                  "textarea",
-                  {
-                    id: "videodescr",
-                    defaultValue: videoDescription,
-                    placeholder: `Enter video description.`,
-                    className: `w-full border-[1px] border-gray-700 bg-gray-100 px-3 py-4 outline-none rounded-lg`
-                  }
-                )
-              ] }),
-              /* @__PURE__ */ jsxs("div", { className: `flex place-content-end px-3 gap-2`, children: [
-                /* @__PURE__ */ jsx(
-                  "button",
-                  {
-                    onMouseDown: () => window.location.reload(),
-                    className: `bg-gray-800 text-white px-3 py-1.5 rounded-md
-                                    shadow-md mb-2 mt-4`,
-                    children: "Reload"
-                  }
-                ),
-                /* @__PURE__ */ jsx(
-                  "button",
-                  {
-                    onMouseDown: () => handleCloseDialog(),
-                    className: `bg-gray-800 text-white px-3 py-1.5 rounded-md
-                                    shadow-md mb-2 mt-4`,
-                    children: "Close"
-                  }
-                ),
-                /* @__PURE__ */ jsx(
-                  "button",
-                  {
-                    onClick: () => handleSubmit(),
-                    className: `bg-blue-800 text-white px-3 py-1.5 rounded-md
-                                    shadow-md mb-2 mt-4 ${!videoVerified ? "hidden" : "block"}`,
-                    children: "Submit"
-                  }
-                ),
-                /* @__PURE__ */ jsx(
-                  "button",
-                  {
-                    onClick: () => handleVerify(),
-                    disabled: videoUrlState ? false : true,
-                    className: `${videoUrlState ? "bg-blue-800" : "bg-blue-300"} ${videoVerified && "hidden"} text-white px-3 py-1.5 rounded-md
-                                    shadow-md mb-2 mt-4`,
-                    children: "Verify"
-                  }
-                )
+                ) }) }),
+                /* @__PURE__ */ jsxs("div", { className: `flex mb-1 flex-col mx-3 `, children: [
+                  /* @__PURE__ */ jsx("div", { className: `text-[15px] pl-1 pt-3 pb-1`, children: "Title" }),
+                  /* @__PURE__ */ jsx(
+                    "input",
+                    {
+                      id: "videotitle",
+                      defaultValue: videoTitle,
+                      type: "text",
+                      placeholder: "Enter Video Title",
+                      className: `w-full border-[1px] border-gray-300 bg-gray-100 px-3 py-4 outline-none rounded-lg text-xl`
+                    }
+                  )
+                ] }),
+                /* @__PURE__ */ jsxs("div", { className: `flex mb-1 flex-col mx-3 `, children: [
+                  /* @__PURE__ */ jsx("div", { className: `text-[15px] pl-1 pt-3 pb-1`, children: "Description" }),
+                  /* @__PURE__ */ jsx(
+                    "textarea",
+                    {
+                      id: "videodescr",
+                      defaultValue: videoDescription,
+                      placeholder: `Enter video description.`,
+                      className: `w-full border-[1px] border-gray-300 bg-gray-100 px-3 py-4 outline-none rounded-lg text-xl`
+                    }
+                  )
+                ] }),
+                /* @__PURE__ */ jsxs("div", { className: `flex place-content-end px-6 gap-2 py-6`, children: [
+                  /* @__PURE__ */ jsx(
+                    "button",
+                    {
+                      onMouseDown: () => window.location.reload(),
+                      className: `bg-gray-800 text-white px-3 py-1.5 rounded-md
+                                    shadow-md`,
+                      children: "Reload"
+                    }
+                  ),
+                  /* @__PURE__ */ jsx(
+                    "button",
+                    {
+                      onMouseDown: () => handleCloseDialog(),
+                      className: `bg-gray-800 text-white px-3 py-1.5 rounded-md
+                                    shadow-md`,
+                      children: "Close"
+                    }
+                  ),
+                  /* @__PURE__ */ jsx(
+                    "button",
+                    {
+                      onClick: () => handleSubmit(),
+                      disabled: !videoVerified ? true : false,
+                      className: `bg-blue-800 text-white px-3 py-1.5 rounded-md
+                                    shadow-md `,
+                      children: !videoVerified ? "Click verify above" : "Submit"
+                    }
+                  )
+                ] })
               ] })
-            ] })
+            ]
           }
         )
       }
@@ -3543,6 +4026,16 @@ function EditVideoDialogProvider({ children }) {
     children
   ] });
 }
+const CloseButton$8 = ({ setShow }) => {
+  return /* @__PURE__ */ jsx(
+    "div",
+    {
+      className: `absolute top-8 right-6 text-3xl  rounded-xl  w-[40px] h-[40px] shadow-sm flex place-items-center place-content-center cursor-pointer bg-gray-200/70 hover:border-gray-200/50 text-gray-400 hover:text-gray-500 z-10`,
+      onClick: () => setShow(false),
+      children: /* @__PURE__ */ jsx(CgClose, {})
+    }
+  );
+};
 const OnlineStatusContext = createContext(null);
 const OnlineStatusProvider = ({ children }) => {
   const [isOnline, setIsOnline] = useState(navigator == null ? void 0 : navigator.onLine);
@@ -3652,10 +4145,554 @@ const LoadingMessage = ({ loading }) => {
       style: { display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" },
       children: /* @__PURE__ */ jsx("div", { className: "text-lg", children: /* @__PURE__ */ jsxs("div", { style: { marginBottom: "0px", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", gap: "0.5em" }, children: [
         /* @__PURE__ */ jsx("div", { className: "spinner" }),
-        /* @__PURE__ */ jsx("b", { style: { fontFamily: "arial", fontSize: "13px", fontWeight: "bold" }, children: "Bycet" })
+        /* @__PURE__ */ jsx("b", { style: { fontFamily: "arial", fontSize: "13px", fontWeight: "bold", textTransform: "lowercase" }, children: config.SITENAME })
       ] }) })
     }
   ) });
+};
+const WriteReviewAltContext = createContext(null);
+const useWriteReviewAltContext = () => {
+  const ctx = useContext(WriteReviewAltContext);
+  if (ctx) {
+    return ctx;
+  }
+  return null;
+};
+const WriteReviewAltProvider = ({ children }) => {
+  const [dialog, showDialog] = useState(false);
+  const [listing2, setListing] = useState();
+  let vals = {
+    showDialog,
+    setListing
+  };
+  return /* @__PURE__ */ jsxs(WriteReviewAltContext.Provider, { value: vals, children: [
+    dialog && /* @__PURE__ */ jsx("div", { children: /* @__PURE__ */ jsx(
+      "div",
+      {
+        className: `w-full h-full fixed bg-white top-0 left-0 z-[3000]`,
+        children: /* @__PURE__ */ jsx(WriteReivewAltForm, { listing: listing2 })
+      }
+    ) }),
+    children
+  ] });
+};
+const CloseHandle = () => {
+  const wrCxt = useWriteReviewAltContext();
+  return /* @__PURE__ */ jsx(
+    "div",
+    {
+      className: `w-[30px] h-[30px] rounded-full bg-white border place-items-center place-content-center cursor-pointer text-3xl`,
+      onClick: () => wrCxt == null ? void 0 : wrCxt.showDialog(false),
+      children: /* @__PURE__ */ jsx(BiChevronLeft, {})
+    }
+  );
+};
+const formFields = {
+  QUALITY: "quality",
+  CUSTOMER_SERVICE: "customer_service",
+  COMMUNICATION: "communication",
+  VALUE: "value",
+  OVERALL_SATISFACTION: "overall_satisfaction"
+};
+const ReviewSchema = z.object({
+  quality: z.string({ message: "Please rate qualify of product or service" }).min(1, "Please rate qualify of product or service"),
+  customer_service: z.string({ message: "Please rate customer service experience" }).min(1, "Please rate accuracy"),
+  communication: z.string({ message: "Please rate communication" }).min(1, "Please rate communication"),
+  value: z.string({ message: "Please rate value for money" }).min(1, "Please rate value for money"),
+  overall_satisfaction: z.string({ message: "Please rate your overall satisfaction" }).min(1, "Please rate your overall satisfaction"),
+  title: z.string({ message: "Please enter title" }).min(1, "Please enter title"),
+  experience: z.string({ message: "Please enter experience" }).min(1, "Please write your experience"),
+  avgRating: z.any(),
+  businessGuid: z.any(),
+  userGuid: z.any()
+});
+const WriteReivewAltForm = ({ listing: listing2 }) => {
+  var _a, _b, _c;
+  const STORAGE_KEY = "REVIEW_FORM_DATA";
+  const auth = useAuth();
+  const initVals = {
+    "title": "",
+    "experience": "",
+    "quality": "",
+    "customer_service": "",
+    "communication": "",
+    "value": "",
+    "overall_satisfaction": "",
+    "avgRating": "",
+    "businessGuid": "",
+    "userGuid": ""
+  };
+  const getStoredData = () => {
+    try {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      return stored ? JSON.parse(stored) : initVals;
+    } catch {
+      return initVals;
+    }
+  };
+  const {
+    register,
+    handleSubmit,
+    watch,
+    reset,
+    clearErrors,
+    // Add clearErrors
+    formState: { errors, isSubmitting, isDirty }
+  } = useForm({
+    resolver: zodResolver(ReviewSchema),
+    defaultValues: getStoredData(),
+    mode: "onChange"
+    // Add this to validate on change
+  });
+  const handleClearForm = () => {
+    localStorage.removeItem(STORAGE_KEY);
+    clearErrors();
+    reset(initVals);
+  };
+  const doSubmit = async (data) => {
+    const {
+      quality,
+      customer_service,
+      communication,
+      value,
+      overall_satisfaction
+    } = data;
+    const avgRating = (parseInt(quality) + parseInt(customer_service) + parseInt(communication) + parseInt(value) + parseInt(overall_satisfaction)) / 5;
+    data.avgRating = avgRating;
+    data.businessGuid = listing2 == null ? void 0 : listing2.gid;
+    data.userGuid = auth == null ? void 0 : auth.user.guid;
+    console.log("Submitting:", data);
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 1e3));
+      localStorage.removeItem(STORAGE_KEY);
+      clearErrors();
+      reset(initVals);
+    } catch (error) {
+      console.error("Submission error:", error);
+      alert("Failed to submit review");
+    }
+  };
+  const formValues = watch();
+  useEffect(() => {
+    if (isDirty) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(formValues));
+    }
+  }, [formValues, isDirty]);
+  return /* @__PURE__ */ jsx("div", { className: `w-full h-full flex place-items-center place-content-center`, children: /* @__PURE__ */ jsxs("div", { className: `max-w-full mx-auto w-full h-[100%]`, children: [
+    /* @__PURE__ */ jsxs("div", { className: `flex bg-orange-100 py-6 px-5 place-items-center gap-3`, children: [
+      /* @__PURE__ */ jsx(CloseHandle, {}),
+      /* @__PURE__ */ jsxs("div", { className: `text-2xl `, children: [
+        "Tell us, how was your experience at ",
+        /* @__PURE__ */ jsx("span", { className: `text-[18px] font-bold`, children: listing2 == null ? void 0 : listing2.title })
+      ] })
+    ] }),
+    /* @__PURE__ */ jsx(
+      "form",
+      {
+        onSubmit: handleSubmit(doSubmit),
+        className: `h-[100%] overflow-y-auto px-[20px]`,
+        children: /* @__PURE__ */ jsxs("div", { className: `lg:max-w-[80%] mx-auto w-full mt-12`, children: [
+          /* @__PURE__ */ jsxs("div", { className: `mt-12 `, children: [
+            "Review Title ",
+            errors.title && /* @__PURE__ */ jsx("span", { className: "text-red-500", children: "*" }),
+            /* @__PURE__ */ jsx("div", { className: `text-2xl mb-4`, children: "Title of Review?" }),
+            /* @__PURE__ */ jsx(
+              "input",
+              {
+                type: "text",
+                ...register("title"),
+                placeholder: `Enter title of review.`,
+                className: `w-full bg-gray-100 p-6 rounded-2xl outline-none text-xl ${errors.title ? "border-2 border-red-500" : ""}`
+              }
+            ),
+            errors.title && /* @__PURE__ */ jsx("p", { className: "text-red-500 text-lg mt-2", children: (_a = errors.title.message) == null ? void 0 : _a.toString() })
+          ] }),
+          /* @__PURE__ */ jsxs("div", { className: `mt-12`, children: [
+            /* @__PURE__ */ jsx("div", { className: `border-b text-2xl font-bold`, children: "Ratings" }),
+            /* @__PURE__ */ jsxs("div", { className: ` md:px-8 `, children: [
+              /* @__PURE__ */ jsx(
+                RadioInput,
+                {
+                  question: "1. How would you rate the quality of product/service?",
+                  controlName: formFields.QUALITY,
+                  error: errors.quality,
+                  register
+                }
+              ),
+              /* @__PURE__ */ jsx(
+                RadioInput,
+                {
+                  question: "2. Did you have a good customer service?",
+                  controlName: formFields.CUSTOMER_SERVICE,
+                  error: errors.customer_service,
+                  register
+                }
+              ),
+              /* @__PURE__ */ jsx(
+                RadioInput,
+                {
+                  question: "3. How well did they communicate with you?",
+                  controlName: formFields.COMMUNICATION,
+                  error: errors.communication,
+                  register
+                }
+              ),
+              /* @__PURE__ */ jsx(
+                RadioInput,
+                {
+                  question: "4. Is it worth your money and time visiting this business?",
+                  controlName: formFields.VALUE,
+                  error: errors.value,
+                  register
+                }
+              ),
+              /* @__PURE__ */ jsx(
+                RadioInput,
+                {
+                  question: "5. How would you rate overall satisfaction?",
+                  controlName: formFields.OVERALL_SATISFACTION,
+                  error: errors.overall_satisfaction,
+                  register
+                }
+              )
+            ] })
+          ] }),
+          /* @__PURE__ */ jsxs("div", { className: `mt-12`, children: [
+            /* @__PURE__ */ jsx("div", { className: `text-2xl mb-3`, children: "Write your experience." }),
+            /* @__PURE__ */ jsx(
+              "textarea",
+              {
+                ...register("experience"),
+                placeholder: `Write your review of this place.`,
+                className: `w-[100%] h-[300px] bg-gray-100 rounded-2xl border p-8 text-xl ${errors.experience ? "border-2 border-red-500" : ""}`
+              }
+            ),
+            errors.experience && /* @__PURE__ */ jsx("p", { className: "text-red-500 text-lg mt-2", children: (_c = (_b = errors == null ? void 0 : errors.experience) == null ? void 0 : _b.message) == null ? void 0 : _c.toString() })
+          ] }),
+          /* @__PURE__ */ jsxs("div", { className: `mt-12`, children: [
+            /* @__PURE__ */ jsx(
+              "button",
+              {
+                type: "submit",
+                className: `bg-gray-900 w-[200px] py-5 rounded-full text-white text-2xl hover:bg-gray-800`,
+                disabled: isSubmitting,
+                children: isSubmitting ? "Submitting..." : "Submit"
+              }
+            ),
+            /* @__PURE__ */ jsx(
+              "button",
+              {
+                type: "button",
+                onClick: handleClearForm,
+                className: `ml-4 bg-gray-300 w-[200px] py-5 rounded-full text-gray-800 text-2xl hover:bg-gray-400`,
+                children: "Clear Form"
+              }
+            )
+          ] }),
+          /* @__PURE__ */ jsx("div", { className: `h-[200px]` })
+        ] })
+      }
+    )
+  ] }) });
+};
+const RadioInput = ({ question, register, controlName, error }) => {
+  var _a;
+  const ratings = ["Poor", "Fair", "Good", "Very Good", "Excellent"];
+  return /* @__PURE__ */ jsxs("div", { className: `mt-12`, children: [
+    /* @__PURE__ */ jsx("div", { className: `text-2xl `, children: question }),
+    /* @__PURE__ */ jsxs("div", { className: `flex flex-col w-full md:w-fit`, children: [
+      /* @__PURE__ */ jsx("div", { className: `grid grid-cols-5 gap-4 mt-4 w-full md:w-fit `, children: ratings.map((item, index2) => {
+        const value = (index2 + 1).toString();
+        return /* @__PURE__ */ jsxs("div", { className: `flex flex-col place-items-center  md:w-[100px] border border-gray-200 rounded-lg py-1 lg:py-2 bg-gray-50 group hover:cursor-pointer`, children: [
+          /* @__PURE__ */ jsx("span", { className: `font-semibold`, children: value }),
+          /* @__PURE__ */ jsx("label", { className: "relative cursor-pointer", children: /* @__PURE__ */ jsx(
+            "input",
+            {
+              type: "radio",
+              ...register(controlName),
+              value,
+              className: `w-[30px] h-[30px] border border-gray-500 rounded-full appearance-none
+                                            checked:bg-green-700 checked:border-green-700
+                                            focus:outline-none focus:ring-2 focus:ring-green-300
+                                            transition-all duration-200
+                                            group-hover:cursor-pointer
+                                        `
+            }
+          ) }),
+          /* @__PURE__ */ jsx("div", { className: `w-full text-center`, children: item })
+        ] }, index2);
+      }) }),
+      error && /* @__PURE__ */ jsx("p", { className: `text-red-500 mt-3 text-lg bg-gray-100 py-2 px-2 rounded-md`, children: (_a = error.message) == null ? void 0 : _a.toString() })
+    ] })
+  ] });
+};
+const ShareDialogContext = createContext(null);
+const useShareDialogContext = () => {
+  const cxt = useContext(ShareDialogContext);
+  if (cxt) {
+    return cxt;
+  }
+  return null;
+};
+async function copyUrlToClipboard(location2) {
+  const url = config.BASE_URL + location2.pathname;
+  try {
+    await navigator.clipboard.writeText(url);
+    console.log("URL copied to clipboard:", url);
+  } catch (err) {
+    console.error("Failed to copy:", err);
+  }
+}
+function getEncodedShareLinks(listing2, location2) {
+  const url = config.BASE_URL + location2.pathname;
+  const baseUrl = `${url}?v=${Date.now()}`;
+  const shareText = (listing2 == null ? void 0 : listing2.title) + " - " + removeAllParagraphs(truncateText(listing2 == null ? void 0 : listing2.short_description, 150)) + ` via @bycetinc`;
+  const encodedBaseUrl = encodeURIComponent(baseUrl);
+  const encodedShareText = encodeURIComponent(shareText);
+  const twitterShare = `https://twitter.com/intent/tweet?url=${encodedBaseUrl}&text=${encodedShareText}`;
+  const facebookShare = `https://www.facebook.com/sharer/sharer.php?u=${encodedBaseUrl}&quote=${encodedShareText}`;
+  const whatsappShare = `https://wa.me/?text=${encodedShareText} ${encodedBaseUrl}`;
+  const mailtoSubject = `Check out ${listing2 == null ? void 0 : listing2.title} on Bycet.com`;
+  const encodedSubject = encodeURIComponent(mailtoSubject);
+  const body = `${shareText}
+
+View here: ${baseUrl}
+
+Shared via @bycetinc`;
+  const encodedBody = encodeURIComponent(body);
+  const mailtoShare = `mailto:?subject=${encodedSubject}&body=${encodedBody}`;
+  const sms = `${shareText}
+
+View here: ${baseUrl}
+
+Shared via @bycetinc`;
+  const encodedSms = encodeURIComponent(sms);
+  const smsShare = `sms:&body=${encodedSms}`;
+  const telegramShare = `https://t.me/share/url?url=${encodedBaseUrl}&text=${encodedShareText}`;
+  const linkedInShare = `https://www.linkedin.com/sharing/share-offsite/?url=${encodedBaseUrl}`;
+  let shareObject;
+  shareList.map((item, i) => {
+    if (item.key === "twitter") {
+      item.url = twitterShare;
+    }
+    if (item.key === "facebook") {
+      item.url = facebookShare;
+    }
+    if (item.key === "whatsapp") {
+      item.url = whatsappShare;
+    }
+    if (item.key === "email") {
+      item.url = mailtoShare;
+    }
+    if (item.key === "messages") {
+      item.url = smsShare;
+    }
+    if (item.key === "telegram") {
+      item.url = telegramShare;
+    }
+    if (item.key === "linkedin") {
+      item.url = linkedInShare;
+    }
+  });
+  shareObject = shareList;
+  return shareObject;
+}
+let shareList = [
+  {
+    key: "copy",
+    title: "Copy Link",
+    url: `#copy`,
+    icon: /* @__PURE__ */ jsx(FaCopy, {})
+  },
+  {
+    key: "email",
+    title: "Email",
+    url: `mailto:`,
+    icon: /* @__PURE__ */ jsx(MdMail, {})
+  },
+  {
+    key: "whatsapp",
+    title: "Whatsapp",
+    url: ``,
+    icon: /* @__PURE__ */ jsx(BsWhatsapp, {})
+  },
+  {
+    key: "facebook",
+    title: "Facebook",
+    url: ``,
+    icon: /* @__PURE__ */ jsx(BsFacebook, {})
+  },
+  {
+    key: "twitter",
+    title: "Twitter",
+    url: ``,
+    icon: /* @__PURE__ */ jsx(BsTwitterX, {})
+  },
+  {
+    key: "messages",
+    title: "Messages",
+    url: ``,
+    icon: /* @__PURE__ */ jsx(FiMessageSquare, {})
+  },
+  {
+    key: "telegram",
+    title: "Telegram",
+    url: ``,
+    icon: /* @__PURE__ */ jsx(FaTelegram, {})
+  },
+  {
+    key: "linkedin",
+    title: "LinkedIn",
+    url: ``,
+    icon: /* @__PURE__ */ jsx(FaLinkedin, {})
+  }
+];
+const ShareDialogProvider = ({ children }) => {
+  const [show, setShow] = useState(false);
+  const [listing2, setListing] = useState(null);
+  const location2 = useLocation();
+  const [shareData, setShareData] = useState(null);
+  const [itemCopiedText, setItemCopiedText] = useState("Copy Link");
+  const [profileImg, setProfileImg] = useState("");
+  const [profileImageData, setProfileImageData] = useState(null);
+  useEffect(() => {
+    if (itemCopiedText === "Link Copied") {
+      setTimeout(() => {
+        setItemCopiedText("Copy Link");
+      }, 3e3);
+    }
+  }, [itemCopiedText]);
+  const [social, setSocial] = useState(null);
+  useEffect(() => {
+    const getSocialMedia = async (listing22) => {
+      const socials2 = [];
+      const socialMedia = await getSocialMediaByBusinessGuid(listing22 == null ? void 0 : listing22.gid);
+      socialMedia == null ? void 0 : socialMedia.map((media, index2) => {
+        const handle = media == null ? void 0 : media.user_description;
+        const isValidURL = isValidUrl(handle);
+        let link = "";
+        if (isValidURL) {
+          link = handle;
+        } else {
+          link = `${media == null ? void 0 : media.base_url}${media == null ? void 0 : media.user_description}`;
+        }
+        socials2.push({
+          media: media == null ? void 0 : media.name,
+          icon: getIcon(media),
+          name: media == null ? void 0 : media.name,
+          link
+        });
+      });
+      if (listing22 == null ? void 0 : listing22.website) {
+        socials2.push({
+          media: listing22 == null ? void 0 : listing22.website,
+          icon: /* @__PURE__ */ jsx(CgWebsite, {}),
+          name: "Website",
+          link: `${listing22 == null ? void 0 : listing22.website}`
+        });
+      }
+      if (listing22 == null ? void 0 : listing22.email_address) {
+        socials2.push({
+          media: listing22 == null ? void 0 : listing22.email_address,
+          icon: /* @__PURE__ */ jsx(MdEmail, {}),
+          name: "Email Address",
+          link: `mailto:${listing22 == null ? void 0 : listing22.email_address}`
+        });
+      }
+      if (listing22 == null ? void 0 : listing22.phone) {
+        socials2.push({
+          media: listing22 == null ? void 0 : listing22.phone,
+          icon: /* @__PURE__ */ jsx(BiPhone, {}),
+          name: "Phone",
+          link: `tel:${listing22 == null ? void 0 : listing22.phone}`
+        });
+      }
+      setSocial(socials2);
+    };
+    if (listing2) {
+      getSocialMedia(listing2);
+    }
+  }, [listing2]);
+  useEffect(() => {
+    if (listing2) {
+      const sharelinks = getEncodedShareLinks(listing2, location2);
+      setShareData(sharelinks);
+    }
+  }, [listing2]);
+  let vals = {
+    setShow,
+    setListing,
+    setProfileImg,
+    setProfileImageData
+  };
+  return /* @__PURE__ */ jsxs(ShareDialogContext.Provider, { value: vals, children: [
+    /* @__PURE__ */ jsx("div", { children: show && /* @__PURE__ */ jsxs(
+      "div",
+      {
+        className: `fixed top-0 left-0 w-full right-0 bg-black/40 z-[4000] h-full flex place-items-center place-content-center`,
+        onClick: () => setShow(false),
+        children: [
+          /* @__PURE__ */ jsx(CloseButton$7, { setShow }),
+          /* @__PURE__ */ jsx("div", { className: `mx-3 w-full`, children: /* @__PURE__ */ jsxs(
+            "div",
+            {
+              className: `max-w-[560px] mx-auto w-full bg-white h-fit rounded-[40px] px-[24px] py-16 relative`,
+              onClick: (e) => e.stopPropagation(),
+              children: [
+                /* @__PURE__ */ jsx(
+                  "div",
+                  {
+                    className: `absolute top-8 right-8 text-3xl border-[2px] rounded-xl border-gray-500/20 w-[40px] h-[40px] shadow-sm flex place-items-center place-content-center text-gray-500 cursor-pointer hover:bg-gray-100 hover:border-gray-200/50`,
+                    onClick: () => setShow(false),
+                    children: /* @__PURE__ */ jsx(CgClose, {})
+                  }
+                ),
+                /* @__PURE__ */ jsx("div", { className: `text-3xl`, children: "Share this place" }),
+                /* @__PURE__ */ jsxs("div", { className: ` mt-8 flex place-items-center place-content-start gap-3`, children: [
+                  /* @__PURE__ */ jsx("div", { className: `w-[60px] min-w-[60px] h-[60px] relative rounded-lg overflow-hidden`, children: profileImageData !== null ? /* @__PURE__ */ jsx(
+                    "img",
+                    {
+                      src: (config == null ? void 0 : config.IMG_BASE_URL) + (profileImageData == null ? void 0 : profileImageData.image_url) || `/images/pcho.png`,
+                      alt: "",
+                      className: `object-cover w-full h-full`
+                    }
+                  ) : /* @__PURE__ */ jsx("div", { className: `w-full h-full flex place-items-center place-content-center bg-gray-400 text-gray-100`, children: /* @__PURE__ */ jsx("span", { className: `uppercase text-2xl md:text-2xl`, children: getInitials((listing2 == null ? void 0 : listing2.title) || "") }) }) }),
+                  /* @__PURE__ */ jsx("div", { className: `text-xl `, children: /* @__PURE__ */ jsx("div", { className: `h-full text-gray-700 text-[16px] leading-snug`, children: listing2 == null ? void 0 : listing2.title }) })
+                ] }),
+                /* @__PURE__ */ jsx("div", { className: `mt-8 grid grid-cols-2 gap-x-6 gap-y-5`, children: shareData == null ? void 0 : shareData.map((item, i) => {
+                  return /* @__PURE__ */ jsx("div", { children: /* @__PURE__ */ jsx(
+                    "a",
+                    {
+                      target: (item == null ? void 0 : item.key) === "copy" ? "_self" : "_blank",
+                      href: item.url,
+                      onClick: async () => {
+                        if (item.key === "copy") {
+                          copyUrlToClipboard(location2);
+                          setItemCopiedText("Link Copied");
+                        }
+                      },
+                      children: /* @__PURE__ */ jsxs("div", { className: `flex place-items-center gap-3 border px-4 py-4 rounded-xl border-gray-300 hover:bg-gray-50`, children: [
+                        /* @__PURE__ */ jsx("div", { className: `text-2xl`, children: item == null ? void 0 : item.icon }),
+                        /* @__PURE__ */ jsx("div", { className: `text-[15px] font-normal`, children: (item == null ? void 0 : item.key) === "copy" ? itemCopiedText : item == null ? void 0 : item.title })
+                      ] })
+                    }
+                  ) }, i);
+                }) }),
+                /* @__PURE__ */ jsxs("div", { className: `mt-6 text-[14px]`, children: [
+                  /* @__PURE__ */ jsx("b", { children: "Description: " }),
+                  listing2 == null ? void 0 : listing2.short_description
+                ] })
+              ]
+            }
+          ) })
+        ]
+      }
+    ) }),
+    children
+  ] });
+};
+const CloseButton$7 = ({ setShow }) => {
+  return /* @__PURE__ */ jsx("div", { onClick: () => setShow(false), children: /* @__PURE__ */ jsx("div", { className: `w-[30px] h-[30px] flex place-items-center place-content-center rounded-full absolute top-2 left-2 bg-white text-[25px] font-bold transition-all ease-in-out duration-700 cursor-pointer hover:bg-white/40`, children: /* @__PURE__ */ jsx(BiChevronLeft, {}) }) });
 };
 const links = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -3713,20 +4750,13 @@ function Layout$1({ children }) {
       /* @__PURE__ */ jsx("meta", { charSet: "utf-8" }),
       /* @__PURE__ */ jsx("meta", { name: "viewport", content: "width=device-width, initial-scale=1" }),
       /* @__PURE__ */ jsx("link", { rel: "icon", href: "/bycetlogo.png?v=3", type: "image/png" }),
-      /* @__PURE__ */ jsx(
-        "script",
-        {
-          async: true,
-          src: "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js",
-          crossOrigin: "anonymous"
-        }
-      ),
+      false,
       /* @__PURE__ */ jsx(Meta, {}),
       /* @__PURE__ */ jsx(Links, {})
     ] }),
     /* @__PURE__ */ jsxs("body", { children: [
       loading && /* @__PURE__ */ jsx(LoadingMessage, { loading }),
-      /* @__PURE__ */ jsx(NotificationProvider, { children: /* @__PURE__ */ jsx(OperationProvider, { children: /* @__PURE__ */ jsx(VideoSliderProvider, { children: /* @__PURE__ */ jsx(SliderProvider, { children: /* @__PURE__ */ jsx(EditVideoDialogProvider, { children: /* @__PURE__ */ jsx(EditPhotoDialogProvider, { children: /* @__PURE__ */ jsx(AddPhotoDialogProvider, { children: /* @__PURE__ */ jsx(AddVideoDialogProvider, { children: /* @__PURE__ */ jsx(AuthProvider, { children: /* @__PURE__ */ jsx(OnlineStatusProvider, { children }) }) }) }) }) }) }) }) }) }),
+      /* @__PURE__ */ jsx(NotificationProvider, { children: /* @__PURE__ */ jsx(OperationProvider, { children: /* @__PURE__ */ jsx(VideoSliderProvider, { children: /* @__PURE__ */ jsx(SliderProvider, { children: /* @__PURE__ */ jsx(EditVideoDialogProvider, { children: /* @__PURE__ */ jsx(EditPhotoDialogProvider, { children: /* @__PURE__ */ jsx(AddPhotoDialogProvider, { children: /* @__PURE__ */ jsx(AddVideoDialogProvider, { children: /* @__PURE__ */ jsx(AuthProvider, { children: /* @__PURE__ */ jsx(OnlineStatusProvider, { children: /* @__PURE__ */ jsx(WriteReviewAltProvider, { children: /* @__PURE__ */ jsx(ShareDialogProvider, { children }) }) }) }) }) }) }) }) }) }) }) }),
       /* @__PURE__ */ jsx(ScrollRestoration, {}),
       /* @__PURE__ */ jsx(Scripts, {})
     ] })
@@ -3742,7 +4772,7 @@ const route0 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProper
   headers,
   links
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$19 = async ({ params }) => {
+const loader$1v = async ({ params }) => {
   const baseUrl = config.BASE_URL;
   const items = await getBusinessCategoryAndCity();
   const homeUrl = `<url>
@@ -3773,9 +4803,9 @@ const loader$19 = async ({ params }) => {
 };
 const route1 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  loader: loader$19
+  loader: loader$1v
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$18 = async ({ params }) => {
+const loader$1u = async ({ params }) => {
   const baseUrl = config.BASE_URL;
   const items = await getBusinessCategory();
   const homeUrl = `<url>
@@ -3806,7 +4836,7 @@ const loader$18 = async ({ params }) => {
 };
 const route2 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  loader: loader$18
+  loader: loader$1u
 }, Symbol.toStringTag, { value: "Module" }));
 const HomeNav = () => {
   const [scrollHeight, setScrollHeight] = useState(1);
@@ -4337,7 +5367,7 @@ const SearchBox$1 = ({ query: query2 }) => {
     )
   ] }) }) }) });
 };
-const heroimgs$1 = [
+const heroimgs$2 = [
   {
     img: "/images/hero/man_with_reading_glasses.jpg"
   },
@@ -4373,13 +5403,13 @@ const HomepageHero$1 = () => {
     const endX = e.changedTouches[0].clientX;
     const deltaX = slideStep.current - endX;
     if (deltaX > 50) {
-      setCurrentSlide((i) => (i + 1) % heroimgs$1.length);
+      setCurrentSlide((i) => (i + 1) % heroimgs$2.length);
     } else if (deltaX < -50) {
-      setCurrentSlide((i) => (i - 1 + heroimgs$1.length) % heroimgs$1.length);
+      setCurrentSlide((i) => (i - 1 + heroimgs$2.length) % heroimgs$2.length);
     }
   };
   useEffect(() => {
-    setSlides(heroimgs$1);
+    setSlides(heroimgs$2);
   }, []);
   const prev = () => {
     setCurrentSlide((currentSlide2) => {
@@ -4503,7 +5533,7 @@ const Recents = ({
   const [ti, setTi] = useState("");
   const [st, setSt] = useState("");
   const [listings, setListings] = useState([]);
-  const IMG_BASE_URL2 = "https://pics.gasimg.com";
+  const IMG_BASE_URL2 = "https://tpics.gasimg.com";
   useEffect(() => {
     if (title && subtitle) {
       setTi(title);
@@ -4644,22 +5674,9 @@ function TopAd() {
   const [adsLoaded, setAdsLoaded] = useState(false);
   useEffect(() => {
   }, []);
-  if (!adsLoaded) {
+  {
     return null;
   }
-  return /* @__PURE__ */ jsxs(
-    "div",
-    {
-      className: `max-w-[1000px] min-h-[90px] bg-blue-50
-                mx-auto w-full mt-4 flex place-items-center 
-                place-content-center font-light text-[14px]
-                `,
-      children: [
-        "Ads by google",
-        adInfo.adslot !== testAdInfo.adslot
-      ]
-    }
-  );
 }
 const meta$b = () => {
   return [
@@ -5341,7 +6358,7 @@ const siteUrls = [
     priority: 0.6
   }
 ];
-const loader$17 = async ({ params }) => {
+const loader$1t = async ({ params }) => {
   const baseUrl = config.BASE_URL;
   `<url>
     <loc>${baseUrl}</loc>
@@ -5371,7 +6388,7 @@ const loader$17 = async ({ params }) => {
 };
 const route5 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  loader: loader$17,
+  loader: loader$1t,
   siteUrls
 }, Symbol.toStringTag, { value: "Module" }));
 const meta$9 = () => {
@@ -5443,7 +6460,7 @@ const HeaderNav = () => {
     )
   ] });
 };
-const heroimgs = [
+const heroimgs$1 = [
   {
     img: "images/dubai7star.jpeg"
   },
@@ -5461,7 +6478,7 @@ const HomepageHero = () => {
   const [slides, setSlides] = useState(null);
   let timeoutId = useRef(null);
   useEffect(() => {
-    setSlides(heroimgs);
+    setSlides(heroimgs$1);
   }, []);
   const prev = () => {
     setCurrentSlide((currentSlide2) => {
@@ -5625,7 +6642,7 @@ const route6 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProper
   default: Index$5,
   meta: meta$9
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$16 = async () => {
+const loader$1s = async () => {
   const baseUrl = config.BASE_URL;
   const sitemapContent = `<?xml version="1.0" encoding="UTF-8"?>
   <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -5654,12 +6671,12 @@ const loader$16 = async () => {
 };
 const route7 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  loader: loader$16
+  loader: loader$1s
 }, Symbol.toStringTag, { value: "Module" }));
 const HeaderLogo = () => {
-  return /* @__PURE__ */ jsx("div", { className: `text-3xl font-extrabold font-sans tracking-tight text-[#6001D2]`, children: /* @__PURE__ */ jsxs(Link, { to: `/`, children: [
-    /* @__PURE__ */ jsx("i", { children: "b" }),
-    "ycet"
+  return /* @__PURE__ */ jsx("div", { className: `text-3xl font-bold font-sans tracking-tight text-[rgb(131,39,39)]`, children: /* @__PURE__ */ jsxs(Link, { to: `/`, className: "italic", children: [
+    /* @__PURE__ */ jsx("span", { children: "ash" }),
+    /* @__PURE__ */ jsx("span", { className: `text-blue-600`, children: "thor." })
   ] }) });
 };
 const MainNavContext = createContext(null);
@@ -5710,7 +6727,7 @@ const moremenu = [
   },
   {
     "title": "Responsible Disclosure",
-    "url": "/web/responsible_disclosure",
+    "url": "/web/responsible-disclosure",
     icon: /* @__PURE__ */ jsx(FaBlenderPhone, {})
   },
   {
@@ -5925,7 +6942,7 @@ const Signin = () => {
     }
   }, [user]);
   return /* @__PURE__ */ jsxs("div", { children: [
-    !user ? /* @__PURE__ */ jsx(Link, { to: `/web/signin`, children: /* @__PURE__ */ jsx("button", { className: `text-lg border rounded-full w-[80px] py-[4px] hover:border border-[#6001D2] shadow-md hover:bg-[#6001D2] hover:text-white`, children: "Sign in" }) }) : /* @__PURE__ */ jsx(
+    !user ? /* @__PURE__ */ jsx(Link, { to: `/web/signin`, children: /* @__PURE__ */ jsx("button", { className: `text-lg border rounded-full w-[80px] py-[4px] hover:border border-[#A52A2A] hover:bg-black hover:text-white`, children: "Sign in" }) }) : /* @__PURE__ */ jsx(
       "button",
       {
         onClick: (e) => showMenu(),
@@ -5953,23 +6970,15 @@ const ShortMenuJson = [
 ];
 const ShortMenu = () => {
   const location2 = useLocation();
-  return /* @__PURE__ */ jsxs("div", { className: `lg:flex gap-8 hidden px-4 place-items-center`, children: [
+  return /* @__PURE__ */ jsxs("div", { className: `lg:flex gap-3 hidden px-4 place-items-center`, children: [
     /* @__PURE__ */ jsx(SearchLink, {}),
     ShortMenuJson.map((item, index2) => {
-      return /* @__PURE__ */ jsx("div", { className: `hover:text-[#6001D2] `, children: /* @__PURE__ */ jsx(Link, { to: item.url, children: /* @__PURE__ */ jsxs("div", { className: `flex place-items-center group hover:underline px-3 py-2  rounded-md hover:bg-blue-100 hover:text-black ${location2.pathname === item.url ? "underline bg-blue-700 text-white" : "bg-gray-100"}`, children: [
-        /* @__PURE__ */ jsx("div", { className: `text-[14px]`, children: item.title }),
-        /* @__PURE__ */ jsx(
-          CgChevronRight,
-          {
-            className: `text-[15px] relative group-hover:rotate-90 transition-all ease-in-out duration-500 font-bold `
-          }
-        )
-      ] }) }) }, index2);
+      return /* @__PURE__ */ jsx("div", { className: `hover:text-[#6001D2] underline `, children: /* @__PURE__ */ jsx(Link, { to: item.url, children: /* @__PURE__ */ jsx("div", { className: `flex place-items-center group hover:underline px-5 py-2  rounded-full hover:bg-[#D2B48C]/20 hover:text-black ${location2.pathname === item.url ? "bg-[#D2B48C]/20 text-black" : ""}`, children: /* @__PURE__ */ jsx("div", { className: `text-[14px]`, children: item.title }) }) }) }, index2);
     })
   ] });
 };
 const SearchLink = () => {
-  return /* @__PURE__ */ jsx("div", { className: ``, children: /* @__PURE__ */ jsx(Link, { to: "/web/search", children: /* @__PURE__ */ jsx("div", { className: `flex place-items-center group`, children: /* @__PURE__ */ jsx("div", { className: `text-[14px] font-normal py-2 px-3  hover:bg-blue-100 rounded-md text-black hover:text-blue-700 ${location.pathname.includes("/web/search") ? "underline bg-blue-600 text-white" : "bg-gray-100"}`, children: "Search" }) }) }) });
+  return /* @__PURE__ */ jsx("div", { className: ``, children: /* @__PURE__ */ jsx(Link, { to: "/web/search", children: /* @__PURE__ */ jsx("div", { className: `flex place-items-center group underline`, children: /* @__PURE__ */ jsx("div", { className: `text-[14px] font-normal py-2 px-4  hover:bg-[#D2B48C]/20 rounded-full text-black hover:text-gray-700 ${location.pathname.includes("/web/search") ? "bg-[#D2B48C]/20 text-black" : ""}`, children: "Search" }) }) }) });
 };
 const QueryBuilder = ({
   queryInput,
@@ -6257,7 +7266,7 @@ const MainSearch = () => {
               }
             }
           ),
-          /* @__PURE__ */ jsx("button", { className: `bg-[#6001D2] h-full w-[60px] rounded-full flex place-items-center place-content-center text-white`, children: /* @__PURE__ */ jsx(FaSearch, {}) })
+          /* @__PURE__ */ jsx("button", { className: `bg-[#A52A2A] h-full w-[60px] rounded-full flex place-items-center place-content-center text-white`, children: /* @__PURE__ */ jsx(FaSearch, {}) })
         ]
       }
     ),
@@ -6333,34 +7342,39 @@ const catlnks = [
     title: "Hotels",
     category: "hotel",
     icon: /* @__PURE__ */ jsx(BiHotel, { size: 20 }),
-    color: "text-purple-700"
+    color: "text-purple-700",
+    url: "/web/category/hotels"
   },
   {
     title: "Real Estate",
     category: "real-estate",
     icon: /* @__PURE__ */ jsx(BsHouse, { size: 17 }),
-    color: "text-orange-600"
+    color: "text-orange-600",
+    url: "/web/category/real-estate"
   },
   {
     title: "Restaurants",
     category: "restaurants",
     icon: /* @__PURE__ */ jsx(GiKnifeFork, { size: 17 }),
-    color: "text-black"
+    color: "text-black",
+    url: "/web/category/restaurants"
   },
   {
     title: "Business",
     category: "business-services",
-    icon: /* @__PURE__ */ jsx(FcBusiness, { size: 17 })
+    icon: /* @__PURE__ */ jsx(FcBusiness, { size: 17 }),
+    url: "/web/category/business-services"
   },
   {
     title: "Entertainment",
     category: "entertainment",
-    icon: /* @__PURE__ */ jsx(RiGovernmentFill, { size: 17 })
+    icon: /* @__PURE__ */ jsx(RiGovernmentFill, { size: 17 }),
+    url: "/web/category/entertainment"
   }
   // Added more categories to demonstrate overflow
 ];
 const CategoryLinks = () => {
-  return /* @__PURE__ */ jsx("div", { className: "flex space-x-6 md:space-x-8 lg:justify-evenly lg:space-x-0", children: catlnks == null ? void 0 : catlnks.map((link, index2) => /* @__PURE__ */ jsx("a", { href: `/web/search?q=&category=${link.category}`, children: /* @__PURE__ */ jsxs(
+  return /* @__PURE__ */ jsx("div", { className: "flex space-x-6 md:space-x-8 lg:justify-evenly lg:space-x-0", children: catlnks == null ? void 0 : catlnks.map((link, index2) => /* @__PURE__ */ jsx("a", { href: link == null ? void 0 : link.url, children: /* @__PURE__ */ jsxs(
     "div",
     {
       className: "flex items-center gap-2 px-3 py-2 rounded-lg transition-all duration-200 hover:bg-gray-100 min-w-max cursor-pointer",
@@ -6823,12 +7837,6 @@ const YourGuide = () => {
     ) })
   ] }) }) });
 };
-const MainLogo = () => {
-  return /* @__PURE__ */ jsx(Fragment, { children: /* @__PURE__ */ jsx(Link, { to: "/", children: /* @__PURE__ */ jsx("div", { className: `flex place-items-center w-fit text-[21px] tracking-tight gap-[2px] font-extrabold font-sans place-content-start`, children: /* @__PURE__ */ jsxs("div", { className: `text-blue-800 first-letter:`, children: [
-    /* @__PURE__ */ jsx("i", { children: "b" }),
-    "ycet."
-  ] }) }) }) });
-};
 const aboutLinks = [
   {
     title: "Terms",
@@ -6910,15 +7918,15 @@ const doBusinessLinks = [
 const garsseteSocialLinks = [
   {
     icon: /* @__PURE__ */ jsx(FaFacebook, {}),
-    link: "http://facebook.com/bycetinc"
+    link: "http://facebook.com/ashthors"
   },
   {
     icon: /* @__PURE__ */ jsx(FaXTwitter, {}),
-    link: "http://x.com/bycetinc"
+    link: "http://x.com/ashthors"
   },
   {
     icon: /* @__PURE__ */ jsx(FaInstagram, {}),
-    link: "http://instagram.com/bycetinc"
+    link: "http://instagram.com/ashthors"
   }
 ];
 const garsseteSites = [
@@ -6932,10 +7940,10 @@ const garsseteSites = [
   }
 ];
 const FooterAlt = () => {
-  return /* @__PURE__ */ jsx("div", { className: `px-[15px] bg-gray-100 pt-[50px] pb-[70px]`, children: /* @__PURE__ */ jsxs("div", { className: `max-w-[1200px] mx-auto w-full`, children: [
+  return /* @__PURE__ */ jsx("div", { className: `px-[25px] bg-[#EADDCA]/50 pt-[50px] pb-[70px]`, children: /* @__PURE__ */ jsxs("div", { className: `max-w-[1100px] mx-auto w-full`, children: [
     /* @__PURE__ */ jsxs("div", { className: `w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-y-8 lg:gap-x-4`, children: [
       /* @__PURE__ */ jsxs("div", { className: `lg:col-span-2 flex flex-col place-items-center text-center md:place-items-start md:text-left`, children: [
-        /* @__PURE__ */ jsx("div", { className: `font-poppins font-[300] text-xl`, children: "About Bycet" }),
+        /* @__PURE__ */ jsx("div", { className: `font-poppins font-[300] text-xl`, children: "About us" }),
         /* @__PURE__ */ jsx("div", { className: `flex flex-col space-y-2 mt-2 font-poppins font-[300]`, children: aboutLinks.map((link, index2) => {
           return /* @__PURE__ */ jsx(
             Link,
@@ -7004,12 +8012,19 @@ const FooterAlt = () => {
             className: ` object-cover w-full h-full`
           }
         ) }),
-        /* @__PURE__ */ jsx("div", { className: `font-poppins text-[22px] font-[600]`, children: /* @__PURE__ */ jsx(MainLogo, {}) })
+        /* @__PURE__ */ jsx("div", { className: `font-poppins text-[22px] font-[600]`, children: /* @__PURE__ */ jsx(HeaderLogo, {}) })
       ] }),
-      /* @__PURE__ */ jsx("div", { className: `font-poppins text-[13px] mt-[-2px]`, children: "© 2025 Bycet. All rights reserved." })
+      /* @__PURE__ */ jsxs("div", { className: `font-poppins text-[13px] mt-[-2px]`, children: [
+        "© 2025 ",
+        config.SITENAME,
+        ". All rights reserved."
+      ] })
     ] }),
     /* @__PURE__ */ jsxs("div", { className: `mt-3 font-poppins font-[300] grid-cols-1 md:grid-cols-12 flex flex-col place-items-center text-center md:place-items-start md:text-left`, children: [
-      /* @__PURE__ */ jsx("div", { className: `md:col-span-8`, children: "Bycet connects you to trusted local businesses. Discover services, read reviews, and support your community. Find everything from restaurants to contractors in one comprehensive directory. Your journey to better local experiences starts here." }),
+      /* @__PURE__ */ jsxs("div", { className: `md:col-span-8`, children: [
+        config.SITENAME,
+        " connects you to trusted local businesses. Discover services, read reviews, and support your community. Find everything from restaurants to contractors in one comprehensive directory. Your journey to better local experiences starts here."
+      ] }),
       /* @__PURE__ */ jsx("div", { className: `md:col-span-4` })
     ] }),
     /* @__PURE__ */ jsx("div", { children: /* @__PURE__ */ jsx("div", { className: `flex gap-2 place-items-center place-content-center md:place-content-start mt-4`, children: garsseteSocialLinks.map((media, index2) => {
@@ -7021,13 +8036,16 @@ const FooterAlt = () => {
         }
       ) }) }, index2);
     }) }) }),
-    /* @__PURE__ */ jsx("div", { children: /* @__PURE__ */ jsx("div", { children: /* @__PURE__ */ jsx("p", { className: "text-[10px] text-gray-400 text-center mt-2", children: /* @__PURE__ */ jsx(
+    /* @__PURE__ */ jsx("div", { children: /* @__PURE__ */ jsx("div", { children: /* @__PURE__ */ jsx("p", { className: "text-[10px] text-gray-400 text-center mt-2", children: /* @__PURE__ */ jsxs(
       "a",
       {
-        href: "https://bycet.com/",
+        href: config.BASE_URL,
         target: "_blank",
         className: `hover:underline`,
-        children: "Bycet Business Directory"
+        children: [
+          config.SITENAME,
+          " Business Directory"
+        ]
       }
     ) }) }) })
   ] }) });
@@ -7145,7 +8163,7 @@ const TopDestinations = () => {
     ] })
   ] }) });
 };
-const loader$15 = async ({ request, params }) => {
+const loader$1r = async ({ request, params }) => {
   try {
     const id = params.id || null;
     let hotels2 = [];
@@ -7185,14 +8203,14 @@ const homepage = () => {
 const route8 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: homepage,
-  loader: loader$15
+  loader: loader$1r
 }, Symbol.toStringTag, { value: "Module" }));
-const index$s = () => {
+const index$w = () => {
   return /* @__PURE__ */ jsx("div", {});
 };
-const route15 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route16 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: index$s
+  default: index$w
 }, Symbol.toStringTag, { value: "Module" }));
 const GalleryContext = createContext(null);
 function useGallery() {
@@ -7203,8 +8221,8 @@ const GalleryProvider = ({ children }) => {
   const [show, setShow] = useState(false);
   const [gallery, setGallery] = useState(null);
   const slider = useSliderContext();
-  const [listing, setListing] = useState(null);
-  const IMG_BASE_URL2 = "https://pics.gasimg.com";
+  const [listing2, setListing] = useState(null);
+  const IMG_BASE_URL2 = "https://tpics.gasimg.com";
   const handleClose = () => setShow(false);
   let vals = {
     setShow,
@@ -7229,12 +8247,17 @@ const GalleryProvider = ({ children }) => {
       document.removeEventListener("keydown", handleKeyDown);
     };
   }, [show]);
+  useEffect(() => {
+    if (gallery) {
+      console.log(gallery);
+    }
+  }, [gallery]);
   return /* @__PURE__ */ jsxs(GalleryContext.Provider, { value: vals, children: [
     show && /* @__PURE__ */ jsxs(
       "div",
       {
         onMouseDown: (e) => setShow(false),
-        className: `flex w-screen h-screen bg-black/40 
+        className: `flex w-screen h-screen bg-black/80 
                         z-[20000] fixed top-0 left-0 right-0 bottom-0
                         place-items-center place-content-center px-[15px]`,
         children: [
@@ -7242,36 +8265,42 @@ const GalleryProvider = ({ children }) => {
             "div",
             {
               onMouseDown: (e) => e.stopPropagation(),
-              className: `min-w-[95%] w-[95%] sm:w-[95%] md:w-[80%] h-[80%] max-h-[80%] 
-                            mx-auto bg-white rounded-lg shadow-lg shadow-black/50 
+              className: `w-[95%] sm:w-[85%] md:w-[75%] lg:w-[70%] xl:w-[60%] h-[70%] 
+                            mx-auto bg-white rounded-lg shadow-lg border
                             space-y-6 z-[3100] overflow-hidden`,
               children: /* @__PURE__ */ jsxs("div", { className: `w-full h-full`, children: [
                 /* @__PURE__ */ jsx("div", { className: `border-b py-3 px-3`, children: /* @__PURE__ */ jsxs("div", { className: `font-bold text-gray-700
                                     text-xl w-[80%]  truncate`, children: [
                   "Gallery for ",
-                  listing && (listing == null ? void 0 : listing.title)
+                  listing2 && (listing2 == null ? void 0 : listing2.title)
                 ] }) }),
-                /* @__PURE__ */ jsx("div", { className: ` 
-                                h-full overflow-y-auto pt-2 px-2 pb-2
-                                bg-white `, children: /* @__PURE__ */ jsx("div", { className: `grid grid-cols-4 md:grid-cols-6 gap-2`, children: gallery && (gallery == null ? void 0 : gallery.map((image, index2) => {
-                  return /* @__PURE__ */ jsx(
-                    "div",
-                    {
-                      onClick: () => showCarousel(index2),
-                      className: `relative hover:cursor-pointer
+                /* @__PURE__ */ jsxs("div", { className: ` 
+                                h-[90%] overflow-y-auto pt-2 px-2 pb-2
+                                bg-white `, children: [
+                  /* @__PURE__ */ jsx("div", { className: `grid grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-2 h-auto`, children: gallery && (gallery == null ? void 0 : gallery.map((image, index2) => {
+                    return /* @__PURE__ */ jsxs("div", { children: [
+                      /* @__PURE__ */ jsx(
+                        "div",
+                        {
+                          onClick: () => showCarousel(index2),
+                          className: `relative hover:cursor-pointer
                                                  bg-red-200 h-[80px] md:h-[100px] lg:h-[120px] rounded-md
                                                  overflow-hidden`,
-                      children: /* @__PURE__ */ jsx(
-                        "img",
-                        {
-                          className: `object-cover w-full h-full`,
-                          src: IMG_BASE_URL2 + image.image_url,
-                          alt: ""
+                          children: /* @__PURE__ */ jsx(
+                            "img",
+                            {
+                              className: `object-cover w-full h-full`,
+                              src: IMG_BASE_URL2 + image.image_url,
+                              alt: ""
+                            }
+                          )
                         }
-                      )
-                    }
-                  );
-                })) }) })
+                      ),
+                      /* @__PURE__ */ jsx("div", { className: `line-clamp-2 leading-[1.2em] text-sm mt-2`, children: image == null ? void 0 : image.image_title })
+                    ] }, index2);
+                  })) }),
+                  /* @__PURE__ */ jsx("div", { className: `h-4` })
+                ] })
               ] })
             }
           ),
@@ -7279,11 +8308,11 @@ const GalleryProvider = ({ children }) => {
             "div",
             {
               onMouseDown: () => handleClose(),
-              className: `w-[50px] h-[50px] z-[300] bg-white
+              className: `w-[30px] h-[30px] z-[300] bg-white
                                 flex place-content-center place-items-center
                                 rounded-full absolute left-2 top-2 cursor-pointer
                                 hover:bg-white/40 transition duration-1000 ease-in-out`,
-              children: /* @__PURE__ */ jsx(IoClose, { className: `text-[30px]` })
+              children: /* @__PURE__ */ jsx(BiChevronLeft, { className: `text-[30px]` })
             }
           )
         ]
@@ -7307,7 +8336,7 @@ function RatingProvider({ children }) {
   var _a, _b, _c;
   const [show, setShow] = useState(false);
   const [working, setWorking] = useState(false);
-  const [listing, setListing] = useState(null);
+  const [listing2, setListing] = useState(null);
   const [ratingData, setRatingData] = useState(void 0);
   const [text, setText] = useState("");
   useNotification();
@@ -7361,10 +8390,10 @@ function RatingProvider({ children }) {
     showOperation("processing");
     await new Promise((resolve) => setTimeout(resolve, 1e3));
     const userGuid = user.guid;
-    const businessGuid = listing.gid;
+    const businessGuid = listing2.gid;
     data["user_guid"] = userGuid;
     data["business_guid"] = businessGuid;
-    const BASE_URL = "https://bycet.com";
+    const BASE_URL = "https://test.bycet.com";
     const endpoint = `/api/rating`;
     const url = BASE_URL + endpoint;
     try {
@@ -7531,11 +8560,11 @@ function RatingProvider({ children }) {
     children
   ] });
 }
-const FormattedAddress$1 = ({ listing }) => {
+const FormattedAddress$1 = ({ listing: listing2 }) => {
   return /* @__PURE__ */ jsxs("div", { children: [
-    (listing == null ? void 0 : listing.address_one) ? (listing == null ? void 0 : listing.address_one) + ", " : "",
-    (listing == null ? void 0 : listing.state_code) ? (listing == null ? void 0 : listing.state_name) + ", " : "",
-    (listing == null ? void 0 : listing.country_code) ? listing == null ? void 0 : listing.country_code : ""
+    (listing2 == null ? void 0 : listing2.address_one) ? (listing2 == null ? void 0 : listing2.address_one) + ", " : "",
+    (listing2 == null ? void 0 : listing2.state_code) ? (listing2 == null ? void 0 : listing2.state_name) + ", " : "",
+    (listing2 == null ? void 0 : listing2.country_code) ? listing2 == null ? void 0 : listing2.country_code : ""
   ] });
 };
 const ShareButtons = ({ url, title }) => {
@@ -7551,7 +8580,7 @@ const ShareButtons = ({ url, title }) => {
         href: twitterShareUrl,
         target: "_blank",
         rel: "noopener noreferrer",
-        className: `flex place-items-center place-content-center text-white  rounded-lg bg-gradient-to-b from-[#629deb] to-blue-600 transition-colors text-3xl border hover:text-white pl-2 pr-4 py-2 border-[#629deb]`,
+        className: `flex place-items-center place-content-center text-white  rounded-lg bg-gradient-to-b from-[#629deb] to-blue-600 transition-colors text-3xl border hover:text-white pl-4 pr-4 py-1 border-[#629deb]`,
         children: [
           /* @__PURE__ */ jsx(TwitterIcon, {}),
           /* @__PURE__ */ jsx(RxDividerVertical, {}),
@@ -7577,7 +8606,7 @@ const ShareButtons = ({ url, title }) => {
 function TwitterIcon() {
   return /* @__PURE__ */ jsx("svg", { width: "20", height: "20", viewBox: "0 0 24 24", fill: "currentColor", children: /* @__PURE__ */ jsx("path", { d: "M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" }) });
 }
-const Header = ({ listing, profileImageData, operatingHoursStatus, ratingsData }) => {
+const Header = ({ listing: listing2, profileImageData, operatingHoursStatus, ratingsData }) => {
   const [profileImg, setProfileImg] = useState("");
   const [placeholder, setPlaceholder] = useState("/images/bycetplaceholder.png");
   useEffect(() => {
@@ -7617,9 +8646,9 @@ const Header = ({ listing, profileImageData, operatingHoursStatus, ratingsData }
       ] }),
       /* @__PURE__ */ jsxs("div", { className: `w-full block`, children: [
         /* @__PURE__ */ jsx("div", { className: `text-[19px] md:text-[22px]
-                font-semibold  leading-[1.1em] font-sans text-blue-800 `, children: listing == null ? void 0 : listing.title }),
+                font-semibold  leading-[1.1em] font-sans text-blue-800 `, children: listing2 == null ? void 0 : listing2.title }),
         /* @__PURE__ */ jsx("div", { className: ` leading-[1.3em] space-x-1 mt-1`, children: operatingHoursStatus !== void 0 && /* @__PURE__ */ jsxs("div", { className: ` leading-[1.2em]`, children: [
-          /* @__PURE__ */ jsx("div", { className: ` line-clamp-1`, children: /* @__PURE__ */ jsx(FormattedAddress$1, { listing }) }),
+          /* @__PURE__ */ jsx("div", { className: ` line-clamp-1`, children: /* @__PURE__ */ jsx(FormattedAddress$1, { listing: listing2 }) }),
           /* @__PURE__ */ jsx("div", { className: ` w-full mx-auto mt-1.5`, children: operatingHoursStatus == null ? void 0 : operatingHoursStatus.localTimeText }),
           /* @__PURE__ */ jsx("div", { className: `mt-1.5`, children: operatingHoursStatus.openStatus === "selected_hours" ? /* @__PURE__ */ jsx("div", { children: operatingHoursStatus.todayHoursFormatted }) : /* @__PURE__ */ jsxs("div", { children: [
             operatingHoursStatus.openStatus === "always_open" && /* @__PURE__ */ jsx("div", { className: `bg-blue-700 px-2 rounded w-fit text-white pt-[2px] pb-[4px]`, children: "Always Open" }, "1"),
@@ -7629,11 +8658,11 @@ const Header = ({ listing, profileImageData, operatingHoursStatus, ratingsData }
         ] }) })
       ] })
     ] }),
-    fullPath !== "" && (listing == null ? void 0 : listing.title) !== null && (listing == null ? void 0 : listing.title) !== void 0 && /* @__PURE__ */ jsx("div", { className: `flex w-full gap-3 mt-4`, children: /* @__PURE__ */ jsx(
+    fullPath !== "" && (listing2 == null ? void 0 : listing2.title) !== null && (listing2 == null ? void 0 : listing2.title) !== void 0 && /* @__PURE__ */ jsx("div", { className: `flex w-full gap-3 mt-6`, children: /* @__PURE__ */ jsx(
       ShareButtons,
       {
         url: fullPath,
-        title: (listing == null ? void 0 : listing.title) + " - " + removeAllParagraphs(truncateText(listing == null ? void 0 : listing.short_description, 150)) + ` via @bycetinc`
+        title: (listing2 == null ? void 0 : listing2.title) + " - " + removeAllParagraphs(truncateText(listing2 == null ? void 0 : listing2.short_description, 150)) + ` via @bycetinc`
       }
     ) })
   ] });
@@ -7642,13 +8671,13 @@ const ComponentTitle = ({ title }) => {
   return /* @__PURE__ */ jsx("div", { className: `text-[19px] font-bold
                 border-b mb-6`, children: title });
 };
-const Description = ({ listing }) => {
+const Description = ({ listing: listing2 }) => {
   var _a;
   const [img, setImg] = useState("");
   const [placeholder, setPlaceholder] = useState(appConfig.fallbackImg);
   useEffect(() => {
-    if (listing.gid) {
-      let imgdata = getBusinessProfileImageData(listing.gid);
+    if (listing2.gid) {
+      let imgdata = getBusinessProfileImageData(listing2.gid);
       imgdata.then((data) => {
         if ((data == null ? void 0 : data.image_url) === "" || (data == null ? void 0 : data.image_url) === void 0 || (data == null ? void 0 : data.image_url) === null) {
           setImg(placeholder);
@@ -7657,7 +8686,7 @@ const Description = ({ listing }) => {
         }
       });
     }
-  }, [listing]);
+  }, [listing2]);
   return /* @__PURE__ */ jsxs("div", { className: "mt-12", children: [
     /* @__PURE__ */ jsx(ComponentTitle, { title: "About this business" }),
     /* @__PURE__ */ jsxs("div", { className: `flex place-items-start place-content-start
@@ -7672,17 +8701,17 @@ const Description = ({ listing }) => {
         }
       ) }),
       /* @__PURE__ */ jsxs("div", { className: `flex flex-col`, children: [
-        /* @__PURE__ */ jsx("div", { className: `text-md font-bold tracking-tight leading-[1.2em]`, children: listing.title }),
-        /* @__PURE__ */ jsx("div", { className: `text-[12px] capitalize`, children: (_a = searchCategories(listing.category)) == null ? void 0 : _a.name })
+        /* @__PURE__ */ jsx("div", { className: `text-md font-bold tracking-tight leading-[1.2em]`, children: listing2.title }),
+        /* @__PURE__ */ jsx("div", { className: `text-[12px] capitalize`, children: (_a = searchCategories(listing2.category)) == null ? void 0 : _a.name })
       ] })
     ] }),
-    /* @__PURE__ */ jsx("div", { className: `flex flex-col gap-y-5 text-[14px] mt-4 whitespace-pre-wrap`, children: listing == null ? void 0 : listing.long_description })
+    /* @__PURE__ */ jsx("div", { className: `flex flex-col gap-y-5 text-[14px] mt-4 whitespace-pre-wrap`, children: listing2 == null ? void 0 : listing2.long_description })
   ] });
 };
-const BusinessFeatures = ({ listing }) => {
+const BusinessFeatures = ({ listing: listing2 }) => {
   const [features, setFeatures] = useState(void 0);
   useEffect(() => {
-    getBusinessFeatures(listing == null ? void 0 : listing.gid).then((data) => {
+    getBusinessFeatures(listing2 == null ? void 0 : listing2.gid).then((data) => {
       const mergedFeatures = data == null ? void 0 : data.map((dbF) => {
         const facility = facilityFeatures.find((f) => f.feature_id === dbF.feature_id);
         return {
@@ -7695,7 +8724,7 @@ const BusinessFeatures = ({ listing }) => {
       });
       setFeatures(mergedFeatures);
     });
-  }, [listing.business_guid]);
+  }, [listing2.business_guid]);
   return /* @__PURE__ */ jsxs("div", { className: " mt-12", children: [
     /* @__PURE__ */ jsx(ComponentTitle, { title: "Facility Features" }),
     /* @__PURE__ */ jsx("div", { className: `grid grid-cols-2 gap-x-4 gap-y-8 mt-3`, children: features == null ? void 0 : features.map((feature, index2) => {
@@ -7709,10 +8738,10 @@ const BusinessFeatures = ({ listing }) => {
     }) })
   ] });
 };
-const ShortDescription = ({ listing }) => {
+const ShortDescription = ({ listing: listing2 }) => {
   return /* @__PURE__ */ jsxs("div", { className: `mt-4`, children: [
     /* @__PURE__ */ jsx(ComponentTitle, { title: "Intro" }),
-    /* @__PURE__ */ jsx("div", { className: ` text-[14px] flex flex-col gap-y-4 whitespace-pre-wrap `, children: listing.short_description })
+    /* @__PURE__ */ jsx("div", { className: ` text-[14px] flex flex-col gap-y-4 whitespace-pre-wrap `, children: listing2.short_description })
   ] });
 };
 const SingleStarRating = ({ rating = 3.5, maxStars = 5 }) => {
@@ -7761,7 +8790,7 @@ function RatingBoxSquare({ rating }) {
     );
   }) });
 }
-const BusinessRatings = ({ listing }) => {
+const BusinessRatings = ({ listing: listing2 }) => {
   const [reviews, setReviews] = useState([]);
   const [ratingsRevews, setRatingsReviews] = useState({});
   const [img, setImg] = useState("");
@@ -7780,11 +8809,11 @@ const BusinessRatings = ({ listing }) => {
         });
       }
     };
-    if (listing.gid) {
-      getReviews(listing.gid);
-      getRatingsReviewsData(listing.gid);
+    if (listing2.gid) {
+      getReviews(listing2.gid);
+      getRatingsReviewsData(listing2.gid);
     }
-  }, [listing]);
+  }, [listing2]);
   return /* @__PURE__ */ jsxs("div", { className: `mt-12`, children: [
     /* @__PURE__ */ jsx(ComponentTitle, { title: "Reviews" }),
     /* @__PURE__ */ jsxs("div", { className: `-mt-1 text-[14px] flex flex-col -gap-y-1 font-light`, children: [
@@ -7819,7 +8848,7 @@ const BusinessRatings = ({ listing }) => {
     })) })
   ] });
 };
-const ImageBlock = ({ images, listing }) => {
+const ImageBlock = ({ images, listing: listing2 }) => {
   const [items, setItems] = useState([]);
   const slider = useSliderContext();
   const gallery = useGallery();
@@ -7841,13 +8870,13 @@ const ImageBlock = ({ images, listing }) => {
       slider.setDialog(true);
       slider.setSelectedSlide(index2 + 1);
       slider.setGallery(images);
-      slider.setListing(listing);
+      slider.setListing(listing2);
     }
   };
   const showGallery = (index2) => {
     gallery.setShow(true);
     gallery.setGallery(images);
-    gallery.setListing(listing);
+    gallery.setListing(listing2);
   };
   return /* @__PURE__ */ jsx("div", { children: /* @__PURE__ */ jsx("div", { className: `w-full h-auto mb-[32px] flex flex-col gap-2`, children: /* @__PURE__ */ jsx(ComposeImages, { imgs: images, showCarousel, index: 0, showGallery }) }) });
 };
@@ -8027,7 +9056,7 @@ function ComposeImages({ imgs, index: index2, showCarousel, showGallery }) {
     ] })
   ] });
 }
-const ListingCarousel = ({ images, listing }) => {
+const ListingCarousel = ({ images, listing: listing2 }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const slideStep = useRef(0);
   useRef(0);
@@ -8065,7 +9094,7 @@ const ListingCarousel = ({ images, listing }) => {
       slider.setDialog(true);
       slider.setSelectedSlide(index2 + 1);
       slider.setGallery(images);
-      slider.setListing(listing);
+      slider.setListing(listing2);
     }
   };
   useEffect(() => {
@@ -8161,13 +9190,13 @@ const StringToListMaker = ({ phrasesString, useGrid }) => {
                         rounded-md shadow-none shadow-gray-500`, children: phrase }, index2);
   }) }) });
 };
-const BusinessPhrases = ({ listing }) => {
+const BusinessPhrases = ({ listing: listing2 }) => {
   return /* @__PURE__ */ jsxs("div", { className: "mt-12", children: [
     /* @__PURE__ */ jsx(ComponentTitle, { title: "Business Offerings" }),
-    /* @__PURE__ */ jsx("div", { className: `flex gap-3 flex-wrap`, children: (listing == null ? void 0 : listing.business_phrases) && /* @__PURE__ */ jsx(StringToListMaker, { useGrid: true, phrasesString: listing == null ? void 0 : listing.business_phrases }) })
+    /* @__PURE__ */ jsx("div", { className: `flex gap-3 flex-wrap`, children: (listing2 == null ? void 0 : listing2.business_phrases) && /* @__PURE__ */ jsx(StringToListMaker, { useGrid: true, phrasesString: listing2 == null ? void 0 : listing2.business_phrases }) })
   ] });
 };
-const Services = ({ listing }) => {
+const Services$1 = ({ listing: listing2 }) => {
   const [serviceList, setServiceList] = useState([]);
   useEffect(() => {
     const convertToList = (phrases) => {
@@ -8176,19 +9205,19 @@ const Services = ({ listing }) => {
         setServiceList(serviceList2);
       }
     };
-    if (listing !== null) {
-      convertToList(listing == null ? void 0 : listing.services);
+    if (listing2 !== null) {
+      convertToList(listing2 == null ? void 0 : listing2.services);
     }
-  }, [listing]);
+  }, [listing2]);
   return /* @__PURE__ */ jsxs("div", { className: "mt-12", children: [
     /* @__PURE__ */ jsx(ComponentTitle, { title: "Services" }),
-    /* @__PURE__ */ jsx("div", { className: `flex gap-3 flex-wrap`, children: (listing == null ? void 0 : listing.services) && /* @__PURE__ */ jsx(StringToListMaker, { useGrid: true, phrasesString: listing == null ? void 0 : listing.services }) })
+    /* @__PURE__ */ jsx("div", { className: `flex gap-3 flex-wrap`, children: (listing2 == null ? void 0 : listing2.services) && /* @__PURE__ */ jsx(StringToListMaker, { useGrid: true, phrasesString: listing2 == null ? void 0 : listing2.services }) })
   ] });
 };
-const SocialMedia$1 = ({ listing }) => {
+const SocialMedia$1 = ({ listing: listing2 }) => {
   const [img, setImg] = useState("");
   const [social, setSocial] = useState(null);
-  function getIcon(media) {
+  function getIcon2(media) {
     let icon = null;
     switch (media == null ? void 0 : media.media_id) {
       case "facebook":
@@ -8218,7 +9247,7 @@ const SocialMedia$1 = ({ listing }) => {
     }
     return icon;
   }
-  function isValidUrl(string) {
+  function isValidUrl2(string) {
     try {
       new URL(string);
       return true;
@@ -8227,12 +9256,12 @@ const SocialMedia$1 = ({ listing }) => {
     }
   }
   useEffect(() => {
-    const getSocialMedia = async (listing2) => {
+    const getSocialMedia = async (listing22) => {
       const socials2 = [];
-      const socialMedia = await getSocialMediaByBusinessGuid(listing2 == null ? void 0 : listing2.gid);
+      const socialMedia = await getSocialMediaByBusinessGuid(listing22 == null ? void 0 : listing22.gid);
       socialMedia == null ? void 0 : socialMedia.map((media, index2) => {
         const handle = media == null ? void 0 : media.user_description;
-        const isValidURL = isValidUrl(handle);
+        const isValidURL = isValidUrl2(handle);
         let link = "";
         if (isValidURL) {
           link = handle;
@@ -8241,41 +9270,41 @@ const SocialMedia$1 = ({ listing }) => {
         }
         socials2.push({
           media: media == null ? void 0 : media.name,
-          icon: getIcon(media),
+          icon: getIcon2(media),
           name: media == null ? void 0 : media.name,
           link
         });
       });
-      if (listing2 == null ? void 0 : listing2.website) {
+      if (listing22 == null ? void 0 : listing22.website) {
         socials2.push({
-          media: listing2 == null ? void 0 : listing2.website,
+          media: listing22 == null ? void 0 : listing22.website,
           icon: /* @__PURE__ */ jsx(CgWebsite, {}),
           name: "Website",
-          link: `${listing2 == null ? void 0 : listing2.website}`
+          link: `${listing22 == null ? void 0 : listing22.website}`
         });
       }
-      if (listing2 == null ? void 0 : listing2.email_address) {
+      if (listing22 == null ? void 0 : listing22.email_address) {
         socials2.push({
-          media: listing2 == null ? void 0 : listing2.email_address,
+          media: listing22 == null ? void 0 : listing22.email_address,
           icon: /* @__PURE__ */ jsx(MdEmail, {}),
           name: "Email Address",
-          link: `mailto:${listing2 == null ? void 0 : listing2.email_address}`
+          link: `mailto:${listing22 == null ? void 0 : listing22.email_address}`
         });
       }
-      if (listing2 == null ? void 0 : listing2.phone) {
+      if (listing22 == null ? void 0 : listing22.phone) {
         socials2.push({
-          media: listing2 == null ? void 0 : listing2.phone,
+          media: listing22 == null ? void 0 : listing22.phone,
           icon: /* @__PURE__ */ jsx(BsPhone, {}),
           name: "Phone",
-          link: `tel:${listing2 == null ? void 0 : listing2.phone}`
+          link: `tel:${listing22 == null ? void 0 : listing22.phone}`
         });
       }
       setSocial(socials2);
     };
-    if (listing !== null) {
-      getSocialMedia(listing);
+    if (listing2 !== null) {
+      getSocialMedia(listing2);
     }
-  }, [listing]);
+  }, [listing2]);
   return /* @__PURE__ */ jsxs("div", { className: "mt-12", children: [
     /* @__PURE__ */ jsx(ComponentTitle, { title: "Social Media" }),
     /* @__PURE__ */ jsx("div", { className: `flex flex-col gap-y-5 text-[14px] mt-4 whitespace-pre-wrap`, children: /* @__PURE__ */ jsx("div", { className: `flex gap-3 flex-wrap`, children: social !== null && (social == null ? void 0 : social.map((socialMedia, index2) => {
@@ -8297,7 +9326,7 @@ const SocialMedia$1 = ({ listing }) => {
     })) }) })
   ] });
 };
-const ClaimBusiness = ({ listing }) => {
+const ClaimBusiness$1 = ({ listing: listing2 }) => {
   const [ownerRole, setOwnerRole] = useState("user");
   useEffect(() => {
     const getOwnerRole = async (owner) => {
@@ -8306,17 +9335,17 @@ const ClaimBusiness = ({ listing }) => {
         setOwnerRole(user == null ? void 0 : user.role);
       });
     };
-    if ((listing == null ? void 0 : listing.owner) !== "") {
-      getOwnerRole(listing == null ? void 0 : listing.owner);
+    if ((listing2 == null ? void 0 : listing2.owner) !== "") {
+      getOwnerRole(listing2 == null ? void 0 : listing2.owner);
     }
-  }, [listing]);
+  }, [listing2]);
   return /* @__PURE__ */ jsx(Fragment, { children: ownerRole === "admin" && /* @__PURE__ */ jsx("div", { className: ` md:mt-0 `, children: /* @__PURE__ */ jsxs("div", { className: `px-3  border  md:rounded-xl  underline-offset-2  bg-gray-100 mx-[0px] md:mx-[0px] mb-[40px] md:mb-[40px] divide-y-1 divide-gray-600`, children: [
     /* @__PURE__ */ jsx("a", { href: "/web/contact", children: /* @__PURE__ */ jsx("div", { className: `text-[15px] text-center  py-[10px] `, children: "Is this your business? Claim it for free!" }) }),
     /* @__PURE__ */ jsx("div", { className: `border-b-[1px] border-gray-50/20` }),
     /* @__PURE__ */ jsx("a", { href: "/web/contact", children: /* @__PURE__ */ jsx("div", { className: `text-[12px] text-center underline py-[10px]`, children: "Request removal." }) })
   ] }) }) });
 };
-const LocationWithHours = ({ listing, operatingHoursStatus }) => {
+const LocationWithHours = ({ listing: listing2, operatingHoursStatus }) => {
   const [dense, setDense] = React.useState(true);
   const [secondary, setSecondary] = React.useState(false);
   const [businessGuid, setBusinessGuid] = useState("");
@@ -8328,11 +9357,11 @@ const LocationWithHours = ({ listing, operatingHoursStatus }) => {
   const [addressLink, setAddressLink] = useState("");
   const [opHoursStatus, setOpHoursStatus] = useState(void 0);
   useEffect(() => {
-    if (listing) {
-      setBusinessGuid(listing == null ? void 0 : listing.gid);
-      setUserGuid(listing == null ? void 0 : listing.owner);
+    if (listing2) {
+      setBusinessGuid(listing2 == null ? void 0 : listing2.gid);
+      setUserGuid(listing2 == null ? void 0 : listing2.owner);
     }
-  }, [listing]);
+  }, [listing2]);
   const constructDailyHour2 = (start, end) => {
     if (start === "Closed" || end == "Closed") {
       return "Closed";
@@ -8387,22 +9416,22 @@ const LocationWithHours = ({ listing, operatingHoursStatus }) => {
     }
   }, [businessGuid, userGuid]);
   useEffect(() => {
-    let getListingAddress = async (listing2) => {
-      let address2 = listing2 == null ? void 0 : listing2.title;
-      address2 += (listing2 == null ? void 0 : listing2.address_one) ? ", " + (listing2 == null ? void 0 : listing2.address_one) : "";
-      address2 += (listing2 == null ? void 0 : listing2.address_two) ? ", " + (listing2 == null ? void 0 : listing2.address_two) : "";
-      address2 += (listing2 == null ? void 0 : listing2.city_name) ? ", " + (listing2 == null ? void 0 : listing2.city_name) : "";
-      address2 += (listing2 == null ? void 0 : listing2.state_name) ? ", " + (listing2 == null ? void 0 : listing2.state_name) : "";
-      address2 += (listing2 == null ? void 0 : listing2.zipcode) ? ", " + (listing2 == null ? void 0 : listing2.zipcode) : "";
-      address2 += (listing2 == null ? void 0 : listing2.country_code) ? ", " + (listing2 == null ? void 0 : listing2.country_code) : "";
+    let getListingAddress = async (listing22) => {
+      let address2 = listing22 == null ? void 0 : listing22.title;
+      address2 += (listing22 == null ? void 0 : listing22.address_one) ? ", " + (listing22 == null ? void 0 : listing22.address_one) : "";
+      address2 += (listing22 == null ? void 0 : listing22.address_two) ? ", " + (listing22 == null ? void 0 : listing22.address_two) : "";
+      address2 += (listing22 == null ? void 0 : listing22.city_name) ? ", " + (listing22 == null ? void 0 : listing22.city_name) : "";
+      address2 += (listing22 == null ? void 0 : listing22.state_name) ? ", " + (listing22 == null ? void 0 : listing22.state_name) : "";
+      address2 += (listing22 == null ? void 0 : listing22.zipcode) ? ", " + (listing22 == null ? void 0 : listing22.zipcode) : "";
+      address2 += (listing22 == null ? void 0 : listing22.country_code) ? ", " + (listing22 == null ? void 0 : listing22.country_code) : "";
       let addressLink2 = `https://www.google.com/maps?q=${address2}&t=&z=15&ie=UTF8&iwloc=B&output=`;
       setAddress(address2);
       setAddressLink(addressLink2);
     };
-    if (listing !== null) {
-      getListingAddress(listing);
+    if (listing2 !== null) {
+      getListingAddress(listing2);
     }
-  }, [listing]);
+  }, [listing2]);
   useEffect(() => {
     if (operatingHoursStatus !== void 0) {
       setOpHoursStatus(operatingHoursStatus);
@@ -8460,7 +9489,7 @@ const LocationWithHours = ({ listing, operatingHoursStatus }) => {
     ] }) })
   ] });
 };
-const videos = [
+const videos$1 = [
   {
     url: "https://youtu.be/fxbCHn6gE3U?si=GneGFZachbQdDEIO",
     title: "The surprising habits of original thinkers"
@@ -8494,9 +9523,9 @@ const videos = [
     title: "How to be a creative thinker"
   }
 ];
-const Videos = ({ videoGallery, listing }) => {
+const Videos$1 = ({ videoGallery, listing: listing2 }) => {
   const [outVideo, setOutVideo] = useState(null);
-  const [rawVideos, setRawVideos] = useState(videos);
+  const [rawVideos, setRawVideos] = useState(videos$1);
   const [open, setOpen] = useState(false);
   const [currentVideo, setCurrentVideo] = useState(null);
   const slider = useVideoSliderContext();
@@ -8529,64 +9558,26 @@ const Videos = ({ videoGallery, listing }) => {
     slider.setDialog(true);
     slider.setSelectedSlide(index2 + 1);
     slider.setGallery(videoGallery);
-    slider.setListing(listing);
+    slider.setListing(listing2);
   };
-  return /* @__PURE__ */ jsxs(
+  return /* @__PURE__ */ jsx(
     "div",
     {
       className: ` `,
       id: "video",
-      children: [
-        /* @__PURE__ */ jsx(
-          ShowVideo,
-          {
-            setOpen,
-            open,
-            currentVideo
-          }
-        ),
-        /* @__PURE__ */ jsx(
-          VideoScrollerAlt,
-          {
-            outVideo,
-            handleOpen,
-            showCarousel,
-            listing
-          }
-        )
-      ]
+      children: /* @__PURE__ */ jsx(
+        VideoScrollerAlt,
+        {
+          outVideo,
+          handleOpen,
+          showCarousel,
+          listing: listing2
+        }
+      )
     }
   );
 };
-const ShowVideo = ({ currentVideo, setOpen, open }) => {
-  const handleClose = () => {
-    const iframe = document.getElementById("yt-iframe");
-    iframe.src = iframe.src;
-    setOpen(false);
-  };
-  return /* @__PURE__ */ jsxs("div", { className: ` ${open ? "fixed" : "hidden"} z-[20010] top-[0px] left-[0px] w-full h-full bg-black/90`, children: [
-    /* @__PURE__ */ jsx(
-      "div",
-      {
-        className: `absolute bg-black w-[40px] h-[40px] z-20 rounded-full text-white flex place-items-center place-content-center mt-20 ml-5 hover:cursor-pointer`,
-        onClick: () => {
-          handleClose();
-        },
-        children: /* @__PURE__ */ jsx(GrClose, {})
-      }
-    ),
-    /* @__PURE__ */ jsx("div", { className: ` relative w-full h-full`, children: /* @__PURE__ */ jsx(
-      "iframe",
-      {
-        id: "yt-iframe",
-        src: `${open ? `https://www.youtube.com/embed/${currentVideo == null ? void 0 : currentVideo.videoId}` : ""}`,
-        className: "absolute top-0 left-0 w-full h-full",
-        allow: "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      }
-    ) })
-  ] });
-};
-const VideoScrollerAlt = ({ outVideo, handleOpen, showCarousel, listing }) => {
+const VideoScrollerAlt = ({ outVideo, handleOpen, showCarousel, listing: listing2 }) => {
   const [openGallery, setOpenGallery] = useState(false);
   const [slideWidth, setSlideWidth] = useState(150);
   const [slideHeight, setSlideHeight] = useState(90);
@@ -8622,7 +9613,7 @@ const VideoScrollerAlt = ({ outVideo, handleOpen, showCarousel, listing }) => {
           setOpenGallery,
           handleOpen,
           showCarousel,
-          listing
+          listing: listing2
         }
       ),
       /* @__PURE__ */ jsx(
@@ -8704,7 +9695,7 @@ const VideoGallery = ({
   setOpenGallery,
   handleOpen,
   showCarousel,
-  listing
+  listing: listing2
 }) => {
   return /* @__PURE__ */ jsx(Fragment, { children: openGallery && /* @__PURE__ */ jsxs(
     "div",
@@ -8725,7 +9716,7 @@ const VideoGallery = ({
               /* @__PURE__ */ jsx("div", { className: `border-b py-3 px-3`, children: /* @__PURE__ */ jsxs("div", { className: `font-bold text-gray-700
                                     text-xl w-[80%]  truncate`, children: [
                 "Gallery for ",
-                listing == null ? void 0 : listing.title
+                listing2 == null ? void 0 : listing2.title
               ] }) }),
               /* @__PURE__ */ jsx("div", { className: ` 
                                 h-full overflow-y-auto pt-2 px-2 pb-2
@@ -8781,17 +9772,22 @@ const VideoGallery = ({
 const ProductSliderContext = createContext(null);
 function useProductSliderContext() {
   const context = useContext(ProductSliderContext);
+  if (!context) {
+    console.log(`Wrap product slider Provider around this component.`);
+    return null;
+  }
   return context;
 }
-const IMG_BASE_URL = "https://pics.gasimg.com";
+const IMG_BASE_URL = "https://tpics.gasimg.com";
 const ProductSliderProvider = ({ children }) => {
   const [dialog, setDialog] = useState(false);
   const [selectedSlide, setSelectedSlide] = useState(null);
   const [slides, setGallery] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [listing, setListing] = useState(null);
+  const [listing2, setListing] = useState(null);
   const slideStep = useRef(0);
   useRef(0);
+  const [maximized, setMaximized] = useState(true);
   const handleTouchStart = (e) => {
     slideStep.current = e.touches[0].clientX;
   };
@@ -8845,23 +9841,36 @@ const ProductSliderProvider = ({ children }) => {
     };
   }, [dialog]);
   return /* @__PURE__ */ jsxs(ProductSliderContext.Provider, { value: vals, children: [
-    dialog && /* @__PURE__ */ jsx("div", { className: `flex w-screen h-screen bg-white z-[20001] 
+    dialog && /* @__PURE__ */ jsx("div", { className: `flex w-full h-full bg-white z-[20001] 
                 fixed top-0 left-0 right-0 bottom-0 `, children: /* @__PURE__ */ jsxs("div", { className: `grid grid-cols-12 gap-0 w-full`, children: [
-      /* @__PURE__ */ jsxs("div", { className: `col-span-12 md:col-span-9 w-full h-full relative bg-black flex`, children: [
-        /* @__PURE__ */ jsx("div", { className: ` w-full h-screen flex overflow-hidden`, children: slides && selectedSlide && slides.map((slide, index2) => {
-          return /* @__PURE__ */ jsx(
-            "img",
+      /* @__PURE__ */ jsxs("div", { className: `${maximized ? "col-span-12" : "col-span-12 md:col-span-9"} w-full h-full relative bg-black flex`, children: [
+        /* @__PURE__ */ jsx("div", { className: ` w-full h-screen flex overflow-hidden place-items-center place-content-center`, children: slides && selectedSlide && slides.map((slide, index2) => {
+          return /* @__PURE__ */ jsxs(
+            "div",
             {
-              onTouchStart: handleTouchStart,
-              onTouchEnd: handleTouchEnd,
-              src: IMG_BASE_URL + slide.product_image_url,
-              alt: "",
-              style: { transform: `translateX(-${currentSlide * 100}%)` },
-              className: `object-scale-down w-full h-full 
-                                            block flex-shrink-0 flex-grow-0 transition-transform
-                                            ease-in-out duration-1000`
-            },
-            index2
+              className: `w-full h-full flex flex-shrink-0 flex-grow-0 transition-transform  place-content-center place-items-center  relative
+                                            ease-in-out duration-1000`,
+              style: { display: index2 === currentSlide ? "block" : "none" },
+              children: [
+                /* @__PURE__ */ jsx("div", { className: `absolute top-10`, children: /* @__PURE__ */ jsxs("div", { className: "text-white text-center ", children: [
+                  currentSlide + 1,
+                  " / ",
+                  slides.length
+                ] }) }),
+                /* @__PURE__ */ jsx("div", { className: `w-[100%] md:w-[70%] h-[70%]`, children: /* @__PURE__ */ jsx(
+                  "img",
+                  {
+                    onTouchStart: handleTouchStart,
+                    onTouchEnd: handleTouchEnd,
+                    src: IMG_BASE_URL + slide.product_image_url,
+                    alt: "",
+                    className: `object-scale-down w-full h-full `
+                  },
+                  index2
+                ) }),
+                /* @__PURE__ */ jsx("div", { className: `absolute bottom-[15px] w-full z-[20px] px-5 py-7 bg-black/30`, children: /* @__PURE__ */ jsx("div", { className: ` text-center text-white font-extralight text-[13px]`, children: slide == null ? void 0 : slide.product_title }) })
+              ]
+            }
           );
         }) }),
         /* @__PURE__ */ jsx("button", { onMouseDown: prev, className: `block absolute top-0 bottom-0 
@@ -8869,25 +9878,35 @@ const ProductSliderProvider = ({ children }) => {
                                                 transition duration-1000 ease-in-out`, children: /* @__PURE__ */ jsx("div", { className: `w-[50px] h-[50px] bg-white/60 rounded-full flex place-content-center place-items-center group-hover:bg-white/30
                                                         transition duration-500 ease-in-out`, children: /* @__PURE__ */ jsx(BiChevronLeft, { className: " stroke-white fill-black w-[2rem] h-[2rem]" }) }) }),
         /* @__PURE__ */ jsx("button", { onMouseDown: next, className: `block absolute top-0 bottom-0 
-                                                    p-[1rem] cursor-pointer right-0 group 
+                                                    p-[1rem] cursor-pointer ${maximized ? "right-0" : "right-0 md:right-0"} group 
                                                      transition duration-1000 ease-in-out`, children: /* @__PURE__ */ jsx("div", { className: `w-[50px] h-[50px] bg-white/60 rounded-full flex place-content-center place-items-center group-hover:bg-white/30
                                                         transition duration-500 ease-in-out`, children: /* @__PURE__ */ jsx(BiChevronRight, { className: " stroke-white fill-black w-[2rem] h-[2rem]" }) }) }),
         /* @__PURE__ */ jsx(
           "div",
           {
             onMouseDown: () => handleClose(),
-            className: `w-[50px] h-[50px] z-[300] bg-white
+            className: `w-[30px] h-[30px] z-[300] bg-white
                                                     flex place-content-center place-items-center
                                                     rounded-full absolute left-2 top-2 cursor-pointer
                                                     hover:bg-white/40 transition duration-1000 ease-in-out`,
             children: /* @__PURE__ */ jsx(IoClose, { className: `text-[30px]` })
           }
+        ),
+        /* @__PURE__ */ jsx(
+          "div",
+          {
+            onClick: () => {
+              setMaximized(!maximized);
+            },
+            className: `w-[30px] h-[30px] z-[300] bg-white flex place-content-center place-items-center rounded-full absolute top-2 right-2 cursor-pointer hover:bg-white/40 transition duration-1000 ease-in-out`,
+            children: maximized ? /* @__PURE__ */ jsx(FaMinimize, { className: `text-[20px]` }) : /* @__PURE__ */ jsx(FaMaximize, { className: `text-[20px]` })
+          }
         )
       ] }),
-      /* @__PURE__ */ jsxs("div", { className: `hidden md:block md:col-span-3 px-5`, children: [
+      /* @__PURE__ */ jsxs("div", { className: `${maximized ? "hidden" : "hidden md:block md:col-span-3"} px-5`, children: [
         /* @__PURE__ */ jsxs("h1", { className: " text-[22px] my-4 font-sans font-extrabold tracking-tight leading-[24px]", children: [
           "Products for ",
-          listing && listing.title
+          listing2 && listing2.title
         ] }),
         /* @__PURE__ */ jsxs("div", { className: " my-4 ", children: [
           currentSlide + 1,
@@ -8902,8 +9921,8 @@ const ProductSliderProvider = ({ children }) => {
           {
             target: "_product",
             href: slides[currentSlide].product_link,
-            className: `bg-blue-600 text-white px-12 py-4 text-center rounded-md cursor-pointer hover:shadow-lg hover:shadow-gray-300`,
-            children: "Go"
+            className: `bg-gray-500 text-white px-12 py-4 text-center rounded-md cursor-pointer hover:shadow-lg hover:shadow-gray-300`,
+            children: "Continue"
           }
         ) })
       ] })
@@ -8975,7 +9994,7 @@ const ProductGallery$1 = (productGallery) => {
     }
   ) }) });
 };
-const Products = (products) => {
+const Products$1 = (products) => {
   var _a;
   const [galleryDaialog, setGalleryDialog] = useState(false);
   const showGallery = () => {
@@ -9019,14 +10038,14 @@ const Products = (products) => {
     ] })
   ] }) });
 };
-const Review = ({ listing }) => {
+const Review = ({ listing: listing2 }) => {
   const rating = useRating();
   const { user } = useAuth();
   const notification = useNotification();
   useEffect(() => {
-    if ((listing == null ? void 0 : listing.gid) && (user == null ? void 0 : user.guid)) {
-      rating.setListing(listing);
-      getRating(user.guid, listing.gid).then((data) => {
+    if ((listing2 == null ? void 0 : listing2.gid) && (user == null ? void 0 : user.guid)) {
+      rating.setListing(listing2);
+      getRating(user.guid, listing2.gid).then((data) => {
         if ((data == null ? void 0 : data.length) !== 0) {
           rating.reset(data);
           rating.setRatingData(data);
@@ -9035,7 +10054,7 @@ const Review = ({ listing }) => {
         }
       });
     }
-  }, [listing, user]);
+  }, [listing2, user]);
   const handleResult = (confirmed) => {
     if (confirmed) {
       notification.cancel();
@@ -9055,8 +10074,8 @@ const Review = ({ listing }) => {
     "button",
     {
       onClick: () => handleShow(),
-      className: `bg-[#D71616] text-white flex flex-col
-                items-center pt-[2px] pb-[3px] w-full outline-none `,
+      className: `bg-blue-400 text-white flex flex-col
+                items-center py-3 h-full w-full outline-none `,
       children: "Write Review"
     }
   ) }) });
@@ -9114,13 +10133,13 @@ const AddressPanelContent = () => {
   }, [addressCtx == null ? void 0 : addressCtx.ratingsData]);
   useEffect(() => {
     if (addressCtx == null ? void 0 : addressCtx.businessProfile) {
-      let listing = addressCtx == null ? void 0 : addressCtx.businessProfile;
-      let address2 = (listing == null ? void 0 : listing.address_one) ? listing == null ? void 0 : listing.address_one : "";
-      address2 += (listing == null ? void 0 : listing.address_two) ? ", " + (listing == null ? void 0 : listing.address_two) : "";
-      address2 += (listing == null ? void 0 : listing.city_name) ? ", " + (listing == null ? void 0 : listing.city_name) : "";
-      address2 += (listing == null ? void 0 : listing.state_name) ? ", " + (listing == null ? void 0 : listing.state_name) : "";
-      address2 += (listing == null ? void 0 : listing.zipcode) ? ", " + (listing == null ? void 0 : listing.zipcode) : "";
-      address2 += (listing == null ? void 0 : listing.country_name) ? ", " + (listing == null ? void 0 : listing.country_name) : "";
+      let listing2 = addressCtx == null ? void 0 : addressCtx.businessProfile;
+      let address2 = (listing2 == null ? void 0 : listing2.address_one) ? listing2 == null ? void 0 : listing2.address_one : "";
+      address2 += (listing2 == null ? void 0 : listing2.address_two) ? ", " + (listing2 == null ? void 0 : listing2.address_two) : "";
+      address2 += (listing2 == null ? void 0 : listing2.city_name) ? ", " + (listing2 == null ? void 0 : listing2.city_name) : "";
+      address2 += (listing2 == null ? void 0 : listing2.state_name) ? ", " + (listing2 == null ? void 0 : listing2.state_name) : "";
+      address2 += (listing2 == null ? void 0 : listing2.zipcode) ? ", " + (listing2 == null ? void 0 : listing2.zipcode) : "";
+      address2 += (listing2 == null ? void 0 : listing2.country_name) ? ", " + (listing2 == null ? void 0 : listing2.country_name) : "";
       setAddress(address2);
     }
   }, [addressCtx == null ? void 0 : addressCtx.businessProfile]);
@@ -9138,7 +10157,7 @@ const AddressPanelContent = () => {
           ] })
         ] })
       ] }) }),
-      /* @__PURE__ */ jsx("div", { children: /* @__PURE__ */ jsx("div", { className: `flex place-items-center place-content-center w-[40px] h-[40px] border shadow bg-[#D71616]  rounded-xl text-white text-[22px] font-bold `, children: ((_d = addressCtx.ratingsData) == null ? void 0 : _d.rating) >= 0 ? formatNumber(Number((_e = addressCtx.ratingsData) == null ? void 0 : _e.rating)) : 0 }) })
+      /* @__PURE__ */ jsx("div", { children: /* @__PURE__ */ jsx("div", { className: `flex place-items-center place-content-center w-[40px] h-[40px] border shadow bg-blue-100  rounded-xl text-black text-[22px] font-bold border-gray-300`, children: ((_d = addressCtx.ratingsData) == null ? void 0 : _d.rating) >= 0 ? formatNumber(Number((_e = addressCtx.ratingsData) == null ? void 0 : _e.rating)) : 0 }) })
     ] }),
     /* @__PURE__ */ jsxs("div", { children: [
       /* @__PURE__ */ jsx("div", { className: `py-4`, children: /* @__PURE__ */ jsx("div", { className: `px-4 py-5 bg-gray-200/80 rounded-r-lg text-xl w-fit`, children: "Contact" }) }),
@@ -9165,13 +10184,13 @@ const AddressPanelContent = () => {
                                                     line-clamp-1`, children: /* @__PURE__ */ jsx("a", { href: `mailto:${(_k = addressCtx == null ? void 0 : addressCtx.businessProfile) == null ? void 0 : _k.email_address}`, children: (_l = addressCtx == null ? void 0 : addressCtx.businessProfile) == null ? void 0 : _l.email_address }) })
         ] }),
         /* @__PURE__ */ jsx("div", { className: `pb-6`, children: /* @__PURE__ */ jsx("div", { className: `bg-[#D71616] mt-[30px] 
-                        text-white text-center py-2 rounded`, children: (addressCtx == null ? void 0 : addressCtx.businessProfile) && /* @__PURE__ */ jsx(Review, { listing: addressCtx == null ? void 0 : addressCtx.businessProfile }) }) })
+                        text-white text-center rounded`, children: (addressCtx == null ? void 0 : addressCtx.businessProfile) && /* @__PURE__ */ jsx(Review, { listing: addressCtx == null ? void 0 : addressCtx.businessProfile }) }) })
       ] })
     ] })
   ] }) });
 };
 const BusinessLayout = ({
-  listing,
+  listing: listing2,
   images,
   ratingsData,
   videoGallery,
@@ -9184,25 +10203,25 @@ const BusinessLayout = ({
   const [operatingHoursStatus, setOperatingHoursStatus] = useState(void 0);
   const [bListing, setbListing] = useState(null);
   useEffect(() => {
-    if (listing) {
-      setbListing(listing);
+    if (listing2) {
+      setbListing(listing2);
     }
-  }, [listing]);
+  }, [listing2]);
   useEffect(() => {
-    if (listing && ratingsData) {
+    if (listing2 && ratingsData) {
       setRatingDisplayData({
         totalReviews: 0,
-        category: listing == null ? void 0 : listing.category,
+        category: listing2 == null ? void 0 : listing2.category,
         rating: ratingsData.rating_average,
         ratingCount: ratingsData.rating_count
       });
     }
-  }, [listing, ratingsData]);
+  }, [listing2, ratingsData]);
   useEffect(() => {
-    if (listing && reportTime) {
+    if (listing2 && reportTime) {
       setOperatingHoursStatus(reportTime);
     }
-  }, [listing, reportTime]);
+  }, [listing2, reportTime]);
   useEffect(() => {
     const script = document.createElement("script");
     script.id = "facebook-jssdk";
@@ -9229,32 +10248,32 @@ const BusinessLayout = ({
           ] })
         ] })
       ] }) }),
-      /* @__PURE__ */ jsx("div", { className: " ", children: listing && profileImageData && /* @__PURE__ */ jsx(
+      /* @__PURE__ */ jsx("div", { className: " ", children: listing2 && profileImageData && /* @__PURE__ */ jsx(
         Header,
         {
-          listing,
+          listing: listing2,
           profileImageData,
           operatingHoursStatus,
           ratingsData
         }
       ) })
     ] }) }),
-    (images == null ? void 0 : images.length) > 0 && listing && /* @__PURE__ */ jsx("div", { className: `bg-black h-fit md:hidden
+    (images == null ? void 0 : images.length) > 0 && listing2 && /* @__PURE__ */ jsx("div", { className: `bg-black h-fit md:hidden
                             mt-12 `, children: /* @__PURE__ */ jsx(
       ListingCarousel,
       {
         images,
-        listing
+        listing: listing2
       }
     ) }),
     /* @__PURE__ */ jsx("div", { className: ` md:pt-12 md:px-[12px]`, children: /* @__PURE__ */ jsx("div", { className: `max-w-[1200px] w-full mx-auto bg-white`, children: /* @__PURE__ */ jsxs("div", { className: `grid grid-cols-12 gap-0 md:gap-6 relative
                     `, children: [
       /* @__PURE__ */ jsxs("div", { className: ` col-span-12 lg:col-span-8`, children: [
-        /* @__PURE__ */ jsx("div", { className: `hidden md:block mt-0`, children: Array.isArray(images) && (images == null ? void 0 : images.length) > 0 && listing && /* @__PURE__ */ jsx(
+        /* @__PURE__ */ jsx("div", { className: `hidden md:block mt-0`, children: Array.isArray(images) && (images == null ? void 0 : images.length) > 0 && listing2 && /* @__PURE__ */ jsx(
           ImageBlock,
           {
             images,
-            listing
+            listing: listing2
           }
         ) }),
         /* @__PURE__ */ jsxs("div", { className: ``, children: [
@@ -9266,31 +10285,31 @@ const BusinessLayout = ({
                 businessProfile: bListing
               }
             ),
-            bListing !== null && /* @__PURE__ */ jsx(ClaimBusiness, { listing: bListing })
+            bListing !== null && /* @__PURE__ */ jsx(ClaimBusiness$1, { listing: bListing })
           ] }),
           (videoGallery == null ? void 0 : videoGallery.length) > 0 && /* @__PURE__ */ jsx(
-            Videos,
+            Videos$1,
             {
               videoGallery,
-              listing
+              listing: listing2
             }
           ),
           /* @__PURE__ */ jsxs("div", { className: `px-[15px] md:px-[0px]`, children: [
-            /* @__PURE__ */ jsx(ShortDescription, { listing }),
-            listing && operatingHoursStatus && /* @__PURE__ */ jsx(LocationWithHours, { listing, operatingHoursStatus }),
-            /* @__PURE__ */ jsx(Description, { listing }),
-            listing && /* @__PURE__ */ jsx(SocialMedia$1, { listing }),
-            listing && /* @__PURE__ */ jsx(BusinessFeatures, { listing }),
-            listing && /* @__PURE__ */ jsx(BusinessPhrases, { listing }),
-            listing && /* @__PURE__ */ jsx(
-              Products,
+            /* @__PURE__ */ jsx(ShortDescription, { listing: listing2 }),
+            listing2 && operatingHoursStatus && /* @__PURE__ */ jsx(LocationWithHours, { listing: listing2, operatingHoursStatus }),
+            /* @__PURE__ */ jsx(Description, { listing: listing2 }),
+            listing2 && /* @__PURE__ */ jsx(SocialMedia$1, { listing: listing2 }),
+            listing2 && /* @__PURE__ */ jsx(BusinessFeatures, { listing: listing2 }),
+            listing2 && /* @__PURE__ */ jsx(BusinessPhrases, { listing: listing2 }),
+            listing2 && /* @__PURE__ */ jsx(
+              Products$1,
               {
                 products,
-                listing
+                listing: listing2
               }
             ),
-            listing && /* @__PURE__ */ jsx(Services, { listing }),
-            listing && /* @__PURE__ */ jsx(BusinessRatings, { listing })
+            listing2 && /* @__PURE__ */ jsx(Services$1, { listing: listing2 }),
+            listing2 && /* @__PURE__ */ jsx(BusinessRatings, { listing: listing2 })
           ] })
         ] })
       ] }),
@@ -9303,7 +10322,7 @@ const BusinessLayout = ({
           }
         ),
         /* @__PURE__ */ jsx("div", { className: "h-[40px]" }),
-        listing && /* @__PURE__ */ jsx(ClaimBusiness, { listing })
+        listing2 && /* @__PURE__ */ jsx(ClaimBusiness$1, { listing: listing2 })
       ] }) })
     ] }) }) })
   ] });
@@ -9311,7 +10330,8 @@ const BusinessLayout = ({
 const SearchLayout = ({ children }) => {
   return /* @__PURE__ */ jsxs("div", { className: `h-full w-full`, children: [
     /* @__PURE__ */ jsx(MainNav, {}),
-    /* @__PURE__ */ jsx("main", { className: `h-full flex w-full flex-col `, children })
+    /* @__PURE__ */ jsx("main", { className: `h-full flex w-full flex-col `, children }),
+    /* @__PURE__ */ jsx(FooterAlt, {})
   ] });
 };
 const VerticalHeight = () => {
@@ -9418,11 +10438,26 @@ function formatTime(time24) {
   hour = hour % 12 || 12;
   return `${hour.toString().padStart(2, "0")}:${minute} ${ampm}`;
 }
-const getLocationAndBusinessStatus = async (listing) => {
-  const countryCode = listing == null ? void 0 : listing.country_code;
+function getOpenStatusDisplays(openStatus, todayHoursFormatted) {
+  if (openStatus === "selected_hours") {
+    return /* @__PURE__ */ jsx("div", { children: todayHoursFormatted });
+  }
+  if (openStatus === "always_open") {
+    return /* @__PURE__ */ jsx("div", { className: `bg-blue-700 px-2 rounded w-fit text-white pt-[2px] pb-[4px]`, children: "Always Open" }, "1");
+  }
+  if (openStatus === "permanently_closed") {
+    return /* @__PURE__ */ jsx("div", { className: `bg-red-700 px-2 rounded-lg w-fit text-white pt-[2px] pb-[4px]`, children: "Permantently Closed" }, "2");
+  }
+  if (openStatus === "temporarily_closed") {
+    return /* @__PURE__ */ jsx("div", { className: `bg-orange-400 px-2 rounded-lg w-fit text-white pt-[2px] pb-[4px]`, children: "Temporarily Closed" }, "3");
+  }
+  return /* @__PURE__ */ jsx("div", { className: `bg-orange-400 px-2 rounded-lg w-fit text-white pt-[2px] pb-[4px]`, children: "Hours not set" }, "3");
+}
+const getLocationAndBusinessStatus = async (listing2) => {
+  const countryCode = listing2 == null ? void 0 : listing2.country_code;
   const data = await getCountriesWithTimezone();
   const country = getCountryTimezoneData(countryCode, data);
-  const operatingHours = await getOperatingHours(listing == null ? void 0 : listing.gid, listing == null ? void 0 : listing.owner);
+  const operatingHours = await getOperatingHours(listing2 == null ? void 0 : listing2.gid, listing2 == null ? void 0 : listing2.owner);
   const reconstructed = reConstructHours(operatingHours);
   const opHours = reconstructed.opHours;
   country["hours"] = opHours;
@@ -9431,7 +10466,7 @@ const getLocationAndBusinessStatus = async (listing) => {
   const nowUTC = /* @__PURE__ */ new Date();
   const offsetMs = country.gmtOffset * 1e3;
   new Date(nowUTC.getTime() + offsetMs);
-  const localTimeZone = tzLookup(listing.lat, listing.lng);
+  const localTimeZone = tzLookup(listing2.lat, listing2.lng);
   let localTimeObject = getDateInTimeZone(localTimeZone);
   let localTimeText = getDateInTimeZoneX(localTimeZone);
   const dayIndex = localTimeObject.getDay();
@@ -9442,6 +10477,7 @@ const getLocationAndBusinessStatus = async (listing) => {
     /* @__PURE__ */ jsx("span", { className: `underline font-bold`, children: "Status:" }, "n1"),
     /* @__PURE__ */ jsx("span", { children: "Closed Today" }, "n2")
   ] }, "m1");
+  let todayHoursOpenStatus;
   if (todayHoursEntry && todayHoursEntry.hours.includes("-")) {
     const [openStr, closeStr] = todayHoursEntry.hours.split(" - ");
     const [openHour, openMinute] = openStr.split(":").map(Number);
@@ -9464,25 +10500,30 @@ const getLocationAndBusinessStatus = async (listing) => {
       /* @__PURE__ */ jsx("span", { children: "-" }, "o4"),
       /* @__PURE__ */ jsx("span", { children: formatTime(closeStr) }, "o5")
     ] });
+    todayHoursOpenStatus = formattedLabel(isOpen);
   }
   if (todayHoursEntry && todayHoursEntry.hours.includes("Not Set")) {
     todayHoursFormatted = /* @__PURE__ */ jsxs("div", { className: `text-[12px]`, children: [
       /* @__PURE__ */ jsx("span", { children: "OPERATING HOURS: " }, "p1"),
       /* @__PURE__ */ jsx("span", { className: ` rounded text-black px-1 py-[2px] uppercase text-sm font-semibold`, children: "Hours not set." }, "p2")
     ] });
+    todayHoursOpenStatus = "Hours not set";
   }
   const localTimeString = localTimeObject.toString();
+  const openStatusObject = getOpenStatusDisplays(country.openStatus, todayHoursFormatted);
   return {
     ...country,
     isOpen,
+    openStatusObject,
     todayHoursFormatted,
+    todayHoursOpenStatus,
     today,
     localTimeString,
     localTimeText
   };
 };
-const ReportTime = async (listing) => {
-  const locationDetails = getLocationAndBusinessStatus(listing);
+const ReportTime = async (listing2) => {
+  const locationDetails = getLocationAndBusinessStatus(listing2);
   return locationDetails;
 };
 const RelatedAlt = ({
@@ -9495,7 +10536,7 @@ const RelatedAlt = ({
   const [st, setSt] = useState("");
   const [listings, setListings] = useState([]);
   const [userId, setUserId] = useState("");
-  const IMG_BASE_URL2 = "https://pics.gasimg.com";
+  const IMG_BASE_URL2 = "https://tpics.gasimg.com";
   const [placeholder, setPlaceholder] = useState("/images/placeholder22.png");
   useEffect(() => {
     if (title && subtitle) {
@@ -9569,10 +10610,10 @@ const RelatedAlt = ({
     }) })
   ] }) });
 };
-const loader$14 = async ({ request, params }) => {
+const loader$1q = async ({ request, params }) => {
   try {
     const id = params.id || null;
-    let listing;
+    let listing2;
     let profileImageData;
     let gallery;
     let ratingData;
@@ -9585,21 +10626,21 @@ const loader$14 = async ({ request, params }) => {
     let fullPath;
     let randomNumber;
     try {
-      listing = await getPage(id);
-      profileImageData = await getBusinessProfileImageData(listing == null ? void 0 : listing.gid);
-      businessProfileBgData = await getBusinessProfileBgData(listing == null ? void 0 : listing.gid);
-      gallery = await getBusinessGallery(listing.gid);
-      ratingData = await getRatingsReviews(listing.gid);
-      videoGallery = await getBusinessVideoGallery(listing == null ? void 0 : listing.gid);
-      products = await getProductGallery(listing == null ? void 0 : listing.gid, listing == null ? void 0 : listing.owner);
-      reportTime = await ReportTime(listing);
+      listing2 = await getPage(id);
+      profileImageData = await getBusinessProfileImageData(listing2 == null ? void 0 : listing2.gid);
+      businessProfileBgData = await getBusinessProfileBgData(listing2 == null ? void 0 : listing2.gid);
+      gallery = await getBusinessGallery(listing2.gid);
+      ratingData = await getRatingsReviews(listing2.gid);
+      videoGallery = await getBusinessVideoGallery(listing2 == null ? void 0 : listing2.gid);
+      products = await getProductGallery(listing2 == null ? void 0 : listing2.gid, listing2 == null ? void 0 : listing2.owner);
+      reportTime = await ReportTime(listing2);
       randomNumber = generateRandom10DigitNumber();
       fullPath = config.BASE_URL + pathname;
     } catch (error) {
       console.log(error.message);
     }
     return {
-      listing,
+      listing: listing2,
       gallery,
       ratingsData: ratingData,
       profileImageData,
@@ -9618,7 +10659,7 @@ const meta$8 = ({ data }) => {
   try {
     let randomNo = data == null ? void 0 : data.randomNumber;
     let fullPath = data == null ? void 0 : data.fullPath;
-    const listing = data == null ? void 0 : data.listing;
+    const listing2 = data == null ? void 0 : data.listing;
     const profileImageData = data == null ? void 0 : data.profileImageData;
     let profileImageLink = "";
     if ((profileImageData == null ? void 0 : profileImageData.image_url) === "" || (profileImageData == null ? void 0 : profileImageData.image_url) === null || (profileImageData == null ? void 0 : profileImageData.image_url) === void 0) {
@@ -9636,39 +10677,39 @@ const meta$8 = ({ data }) => {
       const arr = (_b = (_a = cleaned == null ? void 0 : cleaned.split(",")) == null ? void 0 : _a.map((item) => item.trim())) == null ? void 0 : _b.filter((item) => item.length > 0);
       return arr;
     };
-    const keywords = getKeyWords((listing == null ? void 0 : listing.business_phrases) || null);
-    const descr = removeAllParagraphs(listing == null ? void 0 : listing.short_description);
+    const keywords = getKeyWords((listing2 == null ? void 0 : listing2.business_phrases) || null);
+    const descr = removeAllParagraphs(listing2 == null ? void 0 : listing2.short_description);
     return [
-      { title: (listing == null ? void 0 : listing.title) || "Bycet Inc." },
+      { title: (listing2 == null ? void 0 : listing2.title) || "Bycet Inc." },
       { name: "description", content: descr },
       { name: "keywords", content: keywords },
       { property: "fb:app_id", content: "834713989354015" },
       { property: "og:url", content: fullPath || "https://bycet.com" },
       { property: "og:type", content: "website" },
-      { property: "og:title", content: (listing == null ? void 0 : listing.title) || "Bycet Business Directory" },
+      { property: "og:title", content: (listing2 == null ? void 0 : listing2.title) || "Bycet Business Directory" },
       { property: "og:description", content: descr },
       { property: "og:image", content: `${profileImageLink}?v=${randomNo}` },
       { property: "og:image:secure_url", content: `${profileImageLink}?v=${randomNo}` },
       { property: "og:image:type", content: mimetype },
       { property: "og:image:width", content: "1200" },
       { property: "og:image:height", content: "630" },
-      { property: "og:image:alt", content: (listing == null ? void 0 : listing.title) || "Bycet" },
+      { property: "og:image:alt", content: (listing2 == null ? void 0 : listing2.title) || "Bycet" },
       { name: "twitter:site", content: "@bycetinc" },
       { name: "twitter:creator", content: "@bycetinc" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: (listing == null ? void 0 : listing.title) || "Bycet Business Directory" },
+      { name: "twitter:title", content: (listing2 == null ? void 0 : listing2.title) || "Bycet Business Directory" },
       { name: "twitter:description", content: descr },
       { name: "twitter:image", content: `${profileImageLink}?v=${randomNo}` },
-      { name: "twitter:image:alt", content: (listing == null ? void 0 : listing.title) || "Bycet.com" }
+      { name: "twitter:image:alt", content: (listing2 == null ? void 0 : listing2.title) || "Bycet.com" }
     ];
   } catch (e) {
     logError(e);
   }
   return [];
 };
-const index$r = () => {
+const index$v = () => {
   const data = useLoaderData();
-  let listing;
+  let listing2;
   let gallery = null;
   let ratingsData;
   let videoGallery = null;
@@ -9676,7 +10717,7 @@ const index$r = () => {
   let profileImageData;
   let businessProfileBgData;
   let reportTime;
-  listing = data.listing;
+  listing2 = data.listing;
   gallery = data.gallery;
   ratingsData = data.ratingsData;
   videoGallery = data.videoGallery;
@@ -9684,13 +10725,13 @@ const index$r = () => {
   profileImageData = data.profileImageData;
   businessProfileBgData = data.businessProfileBgData;
   reportTime = data.reportTime;
-  console.log(reportTime);
+  console.log(ratingsData);
   return /* @__PURE__ */ jsx(RatingProvider, { children: /* @__PURE__ */ jsx(GalleryProvider, { children: /* @__PURE__ */ jsxs(SearchLayout, { children: [
     /* @__PURE__ */ jsx(TopAd, {}),
-    (listing == null ? void 0 : listing.gid) !== null && (listing == null ? void 0 : listing.gid) !== void 0 && gallery && ratingsData && videoGallery && products && profileImageData && reportTime && /* @__PURE__ */ jsx(
+    (listing2 == null ? void 0 : listing2.gid) !== null && (listing2 == null ? void 0 : listing2.gid) !== void 0 && gallery && ratingsData && videoGallery && products && profileImageData && reportTime && /* @__PURE__ */ jsx(
       BusinessLayout,
       {
-        listing,
+        listing: listing2,
         images: gallery,
         ratingsData,
         videoGallery,
@@ -9700,26 +10741,25 @@ const index$r = () => {
         reportTime
       }
     ),
-    listing.category !== void 0 ? /* @__PURE__ */ jsx(
+    listing2.category !== void 0 ? /* @__PURE__ */ jsx(
       RelatedAlt,
       {
-        category: listing == null ? void 0 : listing.category,
+        category: listing2 == null ? void 0 : listing2.category,
         limit: 6,
-        title: `Related: ${listing == null ? void 0 : listing.category}`,
+        title: `Related: ${listing2 == null ? void 0 : listing2.category}`,
         subtitle: "Related based on the same category."
       }
     ) : /* @__PURE__ */ jsx(ResourceNotFound, {}),
-    /* @__PURE__ */ jsx(VerticalHeight, {}),
-    /* @__PURE__ */ jsx(FooterAlt, {})
+    /* @__PURE__ */ jsx(VerticalHeight, {})
   ] }) }) });
 };
-const route14 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route15 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: index$r,
-  loader: loader$14,
+  default: index$v,
+  loader: loader$1q,
   meta: meta$8
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$13 = async ({ request, params }) => {
+const loader$1p = async ({ request, params }) => {
   try {
     const id = params.id || null;
     let hotels2 = [];
@@ -9789,10 +10829,10 @@ const _index = () => {
 const route11 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: _index,
-  loader: loader$13,
+  loader: loader$1p,
   meta: meta$7
 }, Symbol.toStringTag, { value: "Module" }));
-function loader$12() {
+function loader$1o() {
   return null;
 }
 function NotFound() {
@@ -9824,22 +10864,1885 @@ function NotFound() {
 const route12 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: NotFound,
-  loader: loader$12
+  loader: loader$1o
 }, Symbol.toStringTag, { value: "Module" }));
-const index$q = () => {
+const index$u = () => {
   return /* @__PURE__ */ jsx("div", {});
 };
 const route13 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: index$q
+  default: index$u
 }, Symbol.toStringTag, { value: "Module" }));
-const Address$1 = ({ listing }) => {
+const defaultImg$1 = [{
+  image_url: "/images/abstract_placeholder.jpg",
+  default: true
+}];
+const Hero = ({ images, listing: listing2 }) => {
+  const [loaded, setLoaded] = useState(false);
+  const slider = useSliderContext();
+  const gallery = useGallery();
+  const [heroImages, setHeroImages] = useState([]);
+  useEffect(() => {
+    setLoaded(true);
+  }, []);
+  useEffect(() => {
+    if (images === null || images.length === 0) {
+      setHeroImages(defaultImg$1);
+    } else {
+      setHeroImages(images);
+    }
+  }, [images]);
+  const showCarousel = (index2, images2) => {
+    if (index2 < images2.length) {
+      slider.setDialog(true);
+      slider.setSelectedSlide(index2 + 1);
+      slider.setGallery(images2);
+      slider.setListing(listing2);
+    }
+  };
+  const showGallery = (index2) => {
+    gallery.setShow(true);
+    gallery.setGallery(images);
+    gallery.setListing(listing2);
+  };
+  return /* @__PURE__ */ jsx("div", { children: (heroImages == null ? void 0 : heroImages.length) > 0 && /* @__PURE__ */ jsxs("div", { className: `mt-6 h-[350px] relative`, children: [
+    /* @__PURE__ */ jsx(ShowGallery, { showGallery }),
+    loaded && (heroImages == null ? void 0 : heroImages.length) === 1 && /* @__PURE__ */ jsx("div", { className: `relative rounded-xl overflow-hidden h-full`, children: /* @__PURE__ */ jsx(SinglePhoto, { imgs: heroImages, index: 0, showCarousel }) }),
+    loaded && (heroImages == null ? void 0 : heroImages.length) === 2 && /* @__PURE__ */ jsx("div", { className: `relative rounded-xl overflow-hidden h-full`, children: /* @__PURE__ */ jsxs("div", { className: `grid grid-cols-12 gap-2 h-full`, children: [
+      /* @__PURE__ */ jsx("div", { className: `col-span-7
+                    row-span-2 overflow-hidden
+                    relative cursor-pointer`, children: /* @__PURE__ */ jsx(SinglePhoto, { imgs: heroImages, index: 0, showCarousel }) }),
+      /* @__PURE__ */ jsx(
+        "div",
+        {
+          className: `col-span-5 row-span-2 overflow-hidden relative cursor-pointer h-full`,
+          children: /* @__PURE__ */ jsx(SinglePhoto, { imgs: heroImages, index: 1, showCarousel })
+        }
+      )
+    ] }) }),
+    loaded && (heroImages == null ? void 0 : heroImages.length) === 3 && /* @__PURE__ */ jsx("div", { className: `relative rounded-xl overflow-hidden h-full`, children: /* @__PURE__ */ jsxs("div", { className: `grid grid-cols-12 gap-2 h-full`, children: [
+      /* @__PURE__ */ jsx("div", { className: `col-span-7
+                    row-span-2 overflow-hidden
+                    relative cursor-pointer`, children: /* @__PURE__ */ jsx(SinglePhoto, { imgs: heroImages, index: 0, showCarousel }) }),
+      /* @__PURE__ */ jsx(
+        "div",
+        {
+          className: `col-span-5 overflow-hidden relative cursor-pointer h-full`,
+          children: /* @__PURE__ */ jsx(SinglePhoto, { imgs: heroImages, index: 1, showCarousel })
+        }
+      ),
+      /* @__PURE__ */ jsx(
+        "div",
+        {
+          className: `col-span-5 overflow-hidden relative cursor-pointer h-full`,
+          children: /* @__PURE__ */ jsx(SinglePhoto, { imgs: heroImages, index: 2, showCarousel })
+        }
+      )
+    ] }) }),
+    loaded && heroImages.length === 4 && /* @__PURE__ */ jsx("div", { className: "relative rounded-2xl overflow-hidden h-full", children: /* @__PURE__ */ jsxs("div", { className: "grid grid-cols-12 grid-rows-2 h-full gap-2.5", children: [
+      /* @__PURE__ */ jsx("div", { className: "col-span-5 row-span-2 relative overflow-hidden", children: /* @__PURE__ */ jsx(SinglePhoto, { imgs: heroImages, index: 0, showCarousel }) }),
+      /* @__PURE__ */ jsx("div", { className: "col-span-4 row-span-2 relative overflow-hidden", children: /* @__PURE__ */ jsx(SinglePhoto, { imgs: heroImages, index: 1, showCarousel }) }),
+      /* @__PURE__ */ jsx("div", { className: "col-span-3 row-span-1 relative overflow-hidden", children: /* @__PURE__ */ jsx(SinglePhoto, { imgs: heroImages, index: 2, showCarousel }) }),
+      /* @__PURE__ */ jsx("div", { className: "col-span-3 row-span-1 relative overflow-hidden", children: /* @__PURE__ */ jsx(SinglePhoto, { imgs: heroImages, index: 3, showCarousel }) })
+    ] }) }),
+    loaded && heroImages !== null && heroImages.length > 4 && /* @__PURE__ */ jsx("div", { className: "relative rounded-2xl overflow-hidden h-full", children: /* @__PURE__ */ jsxs("div", { className: "grid h-full grid-cols-4 grid-rows-2 gap-2.5", children: [
+      /* @__PURE__ */ jsx("div", { className: "col-span-2 row-span-2 relative", children: /* @__PURE__ */ jsx(SinglePhoto, { imgs: heroImages, index: 0, showCarousel }) }),
+      /* @__PURE__ */ jsx("div", { className: "relative", children: /* @__PURE__ */ jsx(SinglePhoto, { imgs: heroImages, index: 1, showCarousel }) }),
+      /* @__PURE__ */ jsx("div", { className: "relative", children: /* @__PURE__ */ jsx(SinglePhoto, { imgs: heroImages, index: 2, showCarousel }) }),
+      /* @__PURE__ */ jsx("div", { className: "relative", children: /* @__PURE__ */ jsx(SinglePhoto, { imgs: heroImages, index: 3, showCarousel }) }),
+      /* @__PURE__ */ jsx("div", { className: "relative", children: /* @__PURE__ */ jsx(SinglePhoto, { imgs: heroImages, index: 4, showCarousel }) })
+    ] }) })
+  ] }) });
+};
+const SinglePhoto = ({ index: index2, imgs: imgs2, showCarousel }) => {
+  const [loaded, setLoaded] = useState(false);
+  const handleShadowDelay = async () => {
+    await new Promise((resolve) => setTimeout(resolve, 1e3));
+    setLoaded(true);
+  };
+  useEffect(() => {
+    handleShadowDelay();
+  }, []);
+  return /* @__PURE__ */ jsxs(
+    "div",
+    {
+      className: ` overflow-hidden  
+                    relative cursor-pointer w-full h-full`,
+      onMouseDown: (e) => {
+        if (showCarousel) {
+          showCarousel(index2, imgs2);
+        }
+      },
+      children: [
+        /* @__PURE__ */ jsx("div", { className: `w-full h-[30%] absolute bottom-0 left-0 right-0 bg-gradient-to-b from-transparent to-black/70 z-[2] rounded-xl` }),
+        /* @__PURE__ */ jsx("div", { className: `relative w-full h-full rounded-xl`, children: /* @__PURE__ */ jsx(
+          "img",
+          {
+            src: imgs2[index2].default ? imgs2[index2].image_url : config.IMG_BASE_URL + imgs2[index2].image_url,
+            alt: "",
+            className: `object-cover w-full h-full`
+          }
+        ) })
+      ]
+    }
+  );
+};
+const ShowGallery = ({ showGallery }) => {
+  return /* @__PURE__ */ jsx(
+    "div",
+    {
+      className: `absolute bottom-5 z-[5] right-5 group`,
+      onMouseDown: (e) => showGallery && showGallery(0),
+      children: /* @__PURE__ */ jsxs("div", { className: `w-fit px-4 py-2 bg-white rounded-lg group-hover:underline cursor-pointer flex place-items-center gap-2`, children: [
+        /* @__PURE__ */ jsx(CgMenuGridR, { className: `text-2xl` }),
+        /* @__PURE__ */ jsx("span", { className: `font-semibold text-lg`, children: "Show Gallery" })
+      ] })
+    }
+  );
+};
+const Reviews = ({ listing: listing2, reviewContext }) => {
+  const [business, setListing] = useState();
+  useWriteReviewAltContext();
+  const auth = useAuth();
+  useEffect(() => {
+    if (listing2) {
+      setListing(listing2);
+    }
+  }, [listing2]);
+  const showReviewDialog = () => {
+    if (!(auth == null ? void 0 : auth.user)) {
+      alert("Sign in to Write a Review.");
+      return false;
+    }
+    reviewContext == null ? void 0 : reviewContext.showDialog(true);
+    reviewContext == null ? void 0 : reviewContext.setListing(listing2);
+  };
+  return /* @__PURE__ */ jsx("div", { className: `text-lg underline text-black flex gap-3 place-items-center`, children: /* @__PURE__ */ jsx(
+    "div",
+    {
+      className: `cursor-pointer`,
+      onClick: () => showReviewDialog(),
+      children: "Write Review"
+    }
+  ) });
+};
+const Share = ({ shareContext, listing: listing2, profileImg, profileImageData }) => {
+  const [show, setShow] = useState(false);
+  useShareDialogContext();
+  const showShareDialog = () => {
+    shareContext == null ? void 0 : shareContext.setShow(true);
+    shareContext == null ? void 0 : shareContext.setListing(listing2);
+    shareContext == null ? void 0 : shareContext.setProfileImg(profileImg);
+    shareContext == null ? void 0 : shareContext.setProfileImageData(profileImageData);
+  };
   return /* @__PURE__ */ jsxs("div", { children: [
-    listing == null ? void 0 : listing.address_one,
-    (listing == null ? void 0 : listing.address_two) ? `, ${listing == null ? void 0 : listing.address_two}` : "",
-    (listing == null ? void 0 : listing.city_name) ? `, ${listing == null ? void 0 : listing.city_name}` : "",
-    (listing == null ? void 0 : listing.state_name) ? `, ${listing == null ? void 0 : listing.state_name}` : "",
-    (listing == null ? void 0 : listing.country_name) ? `, ${listing == null ? void 0 : listing.country_name}` : ""
+    /* @__PURE__ */ jsx(ShareModal, { showShare: show }),
+    /* @__PURE__ */ jsxs(
+      "div",
+      {
+        className: `flex place-items-center gap-1  rounded-full pl-2 pr-4 py-2  underline cursor-pointer bg-[#D2B48C]/40  hover:bg-[#D2B48C]/20`,
+        onClick: () => showShareDialog(),
+        children: [
+          /* @__PURE__ */ jsx(BiHeart, { className: `text-xl` }),
+          /* @__PURE__ */ jsx("span", { className: `text-lg`, children: "Share" })
+        ]
+      }
+    )
+  ] });
+};
+const ShareModal = ({ showShare }) => {
+  const [show, setShow] = useState(false);
+  useEffect(() => {
+    if (showShare) {
+      setShow(showShare);
+    }
+  }, [showShare]);
+  return /* @__PURE__ */ jsx("div", {});
+};
+const HeaderTitle = ({ listing: listing2, ratingsData, reviewContext, showShare, shareContext, profileImg, profileImageData }) => {
+  const [ratings, setRatings] = useState();
+  useEffect(() => {
+    if (ratingsData) {
+      setRatings(ratingsData);
+    }
+  }, [ratingsData]);
+  return /* @__PURE__ */ jsxs("div", { className: `flex place-content-between place-items-center relative`, children: [
+    /* @__PURE__ */ jsx("div", { className: `text-[24px] font-semibold text-center leading-[1.3em]  text-gray-700 line-clamp-1 w-auto tracking-tight`, children: listing2.title }),
+    /* @__PURE__ */ jsxs("div", { className: ` place-items-center gap-4 flex relative top-1 w-fit`, children: [
+      /* @__PURE__ */ jsx(WriteReviewAltProvider, { children: /* @__PURE__ */ jsx(Reviews, { listing: listing2, reviewContext }) }),
+      /* @__PURE__ */ jsx(ShareDialogProvider, { children: /* @__PURE__ */ jsx(
+        Share,
+        {
+          shareContext,
+          listing: listing2,
+          profileImg,
+          profileImageData
+        }
+      ) })
+    ] })
+  ] });
+};
+const AlternateImage = ({ title }) => {
+  return /* @__PURE__ */ jsx("div", { className: `w-full h-full flex place-items-center place-content-center bg-gray-200 text-gray-500 `, children: /* @__PURE__ */ jsx("span", { className: `uppercase text-3xl md:4xl font-semibold`, children: getInitials(title) }) });
+};
+const ReadMoreAboutContext = createContext(null);
+const useReadMoreContext = () => {
+  const ctx = useContext(ReadMoreAboutContext);
+  if (ctx) return ctx;
+  return null;
+};
+const ReadMoreAboutProvider = ({ children }) => {
+  const [show, setShow] = useState(false);
+  const [description, setDescription] = useState("");
+  const [title, setTitle] = useState("");
+  let vals = {
+    setDescription,
+    setShow,
+    setTitle
+  };
+  return /* @__PURE__ */ jsxs(ReadMoreAboutContext.Provider, { value: vals, children: [
+    /* @__PURE__ */ jsx("div", { children: show && /* @__PURE__ */ jsxs(
+      "div",
+      {
+        className: `fixed top-0 left-0 w-full right-0 bg-black/40 z-[4000] h-full flex place-items-center place-content-center`,
+        onClick: () => setShow(false),
+        children: [
+          /* @__PURE__ */ jsx(CloseButton$6, { setShow }),
+          /* @__PURE__ */ jsxs(
+            "div",
+            {
+              className: `max-w-[660px] min-h-[50%] max-h-[80%]  mx-auto w-full bg-white rounded-[40px] px-[32px] py-16 relative`,
+              onClick: (e) => e.stopPropagation(),
+              children: [
+                /* @__PURE__ */ jsx(
+                  "div",
+                  {
+                    className: `absolute top-8 right-8 text-3xl border-[2px] rounded-xl border-gray-500/20 w-[40px] h-[40px] shadow-sm flex place-items-center place-content-center text-gray-500 cursor-pointer hover:bg-gray-100 hover:border-gray-200/50`,
+                    onClick: () => setShow(false),
+                    children: /* @__PURE__ */ jsx(CgClose, {})
+                  }
+                ),
+                /* @__PURE__ */ jsx("div", { className: `text-2xl`, children: title }),
+                /* @__PURE__ */ jsxs("div", { className: ` whitespace-pre-wrap mt-6 max-h-[300px] overflow-y-auto`, children: [
+                  description,
+                  /* @__PURE__ */ jsx("div", { className: `h-[60px]` })
+                ] })
+              ]
+            }
+          )
+        ]
+      }
+    ) }),
+    children
+  ] });
+};
+const CloseButton$6 = ({ setShow }) => {
+  return /* @__PURE__ */ jsx("div", { onClick: () => setShow(false), children: /* @__PURE__ */ jsx("div", { className: `w-[30px] h-[30px] flex place-items-center place-content-center rounded-full absolute top-2 left-2 bg-white text-[25px] font-bold transition-all ease-in-out duration-700 cursor-pointer hover:bg-white/40`, children: /* @__PURE__ */ jsx(BiChevronLeft, {}) }) });
+};
+const About = ({ listing: listing2 }) => {
+  const [img, setImg] = useState("");
+  const [placeholder, setPlaceholder] = useState(appConfig.fallbackImg);
+  const [isImgNull, setIsImgNull] = useState(false);
+  useEffect(() => {
+    if (listing2.gid) {
+      let imgdata = getBusinessProfileImageData(listing2.gid);
+      imgdata.then((data) => {
+        if ((data == null ? void 0 : data.image_url) === "" || (data == null ? void 0 : data.image_url) === void 0 || (data == null ? void 0 : data.image_url) === null) {
+          setImg(placeholder);
+          setIsImgNull(true);
+        } else {
+          setImg(config.IMG_BASE_URL + data.image_url);
+        }
+      });
+    }
+  }, [listing2]);
+  const readMoreCtx = useReadMoreContext();
+  const handleReadMore = (description) => {
+    readMoreCtx == null ? void 0 : readMoreCtx.setDescription(description);
+    readMoreCtx == null ? void 0 : readMoreCtx.setShow(true);
+    readMoreCtx == null ? void 0 : readMoreCtx.setTitle("About this business");
+  };
+  return /* @__PURE__ */ jsxs("div", { className: `mt-12 border-t py-10`, children: [
+    /* @__PURE__ */ jsx("div", { className: `text-[22px] md:text-[25px] font-bold`, children: "About" }),
+    /* @__PURE__ */ jsxs("div", { className: `flex place-items-center gap-x-3 mt-4`, children: [
+      /* @__PURE__ */ jsx("div", { className: `relative w-[50px] h-[50px] rounded-2xl overflow-hidden border`, children: !isImgNull ? /* @__PURE__ */ jsx(
+        "img",
+        {
+          src: img,
+          alt: "",
+          className: `object-cover w-full h-full`
+        }
+      ) : /* @__PURE__ */ jsx(AlternateImage, { title: listing2 == null ? void 0 : listing2.title }) }),
+      /* @__PURE__ */ jsxs("div", { className: `flex flex-col`, children: [
+        /* @__PURE__ */ jsx("div", { className: `text-lg font-semibold`, children: listing2.title }),
+        /* @__PURE__ */ jsx("div", { className: `text-black font-semibold text-[10px] uppercase`, children: convertDashToSpace(listing2.category) })
+      ] })
+    ] }),
+    /* @__PURE__ */ jsx("div", { className: `text-[15px] text-gray-700 mt-6 font-light`, children: listing2.short_description }),
+    /* @__PURE__ */ jsx("div", { className: `mt-6`, children: /* @__PURE__ */ jsx("button", { onClick: () => handleReadMore(listing2 == null ? void 0 : listing2.long_description), className: `px-5 py-3 bg-[#895129]/20 text-[15px] w-full md:w-fit rounded-2xl`, children: "Read more" }) })
+  ] });
+};
+const DropBy = ({ listing: listing2, reportTime, operatingHoursStatus }) => {
+  const [address, setAddress] = useState("");
+  const [contacts, setContacts] = useState();
+  useEffect(() => {
+    if (listing2) {
+      let address2 = "";
+      if (listing2.address_one) {
+        address2 += listing2.address_one + ", ";
+      }
+      if (listing2.address_two) {
+        address2 += listing2.address_two + ", ";
+      }
+      if (listing2.city_name) {
+        address2 += listing2.city_name + " ";
+      }
+      if (listing2.zipcode) {
+        address2 += listing2.zipcode + " ";
+      }
+      if (listing2.country_name) {
+        address2 += listing2.country_name;
+      }
+      setAddress(address2);
+    }
+  }, [listing2]);
+  useEffect(() => {
+    if (listing2) {
+      let contacts3 = [];
+      let website = {
+        title: "Website",
+        url: (listing2 == null ? void 0 : listing2.website) || "#",
+        icon: /* @__PURE__ */ jsx(CgWebsite, {})
+      };
+      let phone = {
+        title: "Phone",
+        url: `tel:${listing2 == null ? void 0 : listing2.phone}` || "#",
+        icon: /* @__PURE__ */ jsx(BiPhone, {})
+      };
+      let email = {
+        title: "Email",
+        url: `mailto:${listing2 == null ? void 0 : listing2.email_address}` || "#",
+        icon: /* @__PURE__ */ jsx(MdEmail, {})
+      };
+      contacts3.push(website);
+      contacts3.push(phone);
+      contacts3.push(email);
+      setContacts(contacts3);
+    }
+  }, [listing2]);
+  return /* @__PURE__ */ jsxs("div", { children: [
+    /* @__PURE__ */ jsxs("div", { children: [
+      /* @__PURE__ */ jsxs("div", { className: `text-[22px] md:text-[25px] font-bold`, children: [
+        "Welcome to",
+        /* @__PURE__ */ jsx("i", { children: "!" })
+      ] }),
+      /* @__PURE__ */ jsx("div", { className: ` font-light text-[15px] -mt-1 underline`, children: listing2 == null ? void 0 : listing2.title })
+    ] }),
+    /* @__PURE__ */ jsxs("div", { className: `mt-8`, children: [
+      /* @__PURE__ */ jsxs("div", { className: `flex place-items-center gap-3`, children: [
+        /* @__PURE__ */ jsx("span", { className: `text-[15px] font-semibold`, children: reportTime.openStatusObject }),
+        /* @__PURE__ */ jsx(Link, { to: `#workinghours`, children: /* @__PURE__ */ jsx("span", { className: `text-[15px] font-light border-b border-gray-500`, children: "See all hours" }) })
+      ] }),
+      /* @__PURE__ */ jsx("div", { className: `mt-4`, children: operatingHoursStatus == null ? void 0 : operatingHoursStatus.localTimeText }),
+      /* @__PURE__ */ jsx("div", { className: `mt-4`, children: /* @__PURE__ */ jsxs("div", { className: `flex place-items-center gap-3`, children: [
+        /* @__PURE__ */ jsx(LuMapPinPlus, { className: `text-3xl` }),
+        /* @__PURE__ */ jsx("div", { className: ` border-b border-gray-300 w-fit text-[14px]`, children: address })
+      ] }) }),
+      /* @__PURE__ */ jsx("div", { className: `mt-6`, children: /* @__PURE__ */ jsx("div", { className: `flex place-items-center gap-5`, children: contacts == null ? void 0 : contacts.map((item, i) => {
+        return /* @__PURE__ */ jsx("div", { children: /* @__PURE__ */ jsx(Link, { to: item.url, children: /* @__PURE__ */ jsxs("div", { className: `flex place-items-center gap-2`, children: [
+          /* @__PURE__ */ jsx("div", { className: `text-2xl`, children: item.icon }),
+          /* @__PURE__ */ jsx("div", { className: `text-[15px] underline`, children: item.title })
+        ] }) }) }, i);
+      }) }) })
+    ] })
+  ] });
+};
+const WorkingHours = ({ listing: listing2, operatingHoursStatus, workTimeStatusObject }) => {
+  const [businessGuid, setBusinessGuid] = useState("");
+  const [userGuid, setUserGuid] = useState("");
+  const [opHours, setOpHours] = useState(null);
+  const [openStatus, setopenStatus] = useState("");
+  const [opHoursStatus, setOpHoursStatus] = useState(void 0);
+  const constructDailyHour2 = (start, end) => {
+    if (start === "Closed" || end == "Closed") {
+      return "Closed";
+    } else {
+      const startNumber = parseInt(start);
+      const endNumber = parseInt(end);
+      const startAMPM = startNumber < 12 ? "AM" : "PM";
+      const endAMPM = endNumber < 12 ? "AM" : "PM";
+      return `${start} ${startAMPM} - ${end} ${endAMPM}`;
+    }
+  };
+  const constructHours = (operatingHours) => {
+    const opHours2 = [];
+    setopenStatus(operatingHours == null ? void 0 : operatingHours.open_status);
+    if ((operatingHours == null ? void 0 : operatingHours.monday_from) && (operatingHours == null ? void 0 : operatingHours.monday_to)) {
+      opHours2.push({
+        day: "Monday",
+        hours: constructDailyHour2(operatingHours == null ? void 0 : operatingHours.monday_from, operatingHours == null ? void 0 : operatingHours.monday_to)
+      });
+    }
+    if ((operatingHours == null ? void 0 : operatingHours.tuesday_from) && (operatingHours == null ? void 0 : operatingHours.tuesday_to)) {
+      opHours2.push({
+        day: "Tuesday",
+        hours: constructDailyHour2(operatingHours == null ? void 0 : operatingHours.tuesday_from, operatingHours == null ? void 0 : operatingHours.tuesday_to)
+      });
+    }
+    if ((operatingHours == null ? void 0 : operatingHours.wednesday_from) && (operatingHours == null ? void 0 : operatingHours.wednesday_to)) {
+      opHours2.push({
+        day: "Wednesday",
+        hours: constructDailyHour2(operatingHours == null ? void 0 : operatingHours.wednesday_from, operatingHours == null ? void 0 : operatingHours.wednesday_to)
+      });
+    }
+    if ((operatingHours == null ? void 0 : operatingHours.thursday_from) && (operatingHours == null ? void 0 : operatingHours.thursday_to)) {
+      opHours2.push({
+        day: "Thursday",
+        hours: constructDailyHour2(operatingHours == null ? void 0 : operatingHours.thursday_from, operatingHours == null ? void 0 : operatingHours.thursday_to)
+      });
+    }
+    if ((operatingHours == null ? void 0 : operatingHours.friday_from) && (operatingHours == null ? void 0 : operatingHours.friday_to)) {
+      opHours2.push({
+        day: "Friday",
+        hours: constructDailyHour2(operatingHours == null ? void 0 : operatingHours.friday_from, operatingHours == null ? void 0 : operatingHours.friday_to)
+      });
+    }
+    if ((operatingHours == null ? void 0 : operatingHours.saturday_from) && (operatingHours == null ? void 0 : operatingHours.saturday_to)) {
+      opHours2.push({
+        day: "Saturday",
+        hours: constructDailyHour2(operatingHours == null ? void 0 : operatingHours.saturday_from, operatingHours == null ? void 0 : operatingHours.saturday_to)
+      });
+    }
+    if ((operatingHours == null ? void 0 : operatingHours.sunday_from) && (operatingHours == null ? void 0 : operatingHours.sunday_to)) {
+      opHours2.push({
+        day: "Sunday",
+        hours: constructDailyHour2(operatingHours == null ? void 0 : operatingHours.sunday_from, operatingHours == null ? void 0 : operatingHours.sunday_to)
+      });
+    }
+    setOpHours(opHours2);
+  };
+  useEffect(() => {
+    if (listing2) {
+      setBusinessGuid(listing2 == null ? void 0 : listing2.gid);
+      setUserGuid(listing2 == null ? void 0 : listing2.owner);
+    }
+  }, [listing2]);
+  useEffect(() => {
+    const getOpHours = async (businessGuid2, userGuid2) => {
+      const operatingHours = await getOperatingHours(businessGuid2, userGuid2);
+      return operatingHours;
+    };
+    if (businessGuid !== "" && userGuid !== "") {
+      getOpHours(businessGuid, userGuid).then((data) => {
+        if (data) {
+          constructHours(data);
+        }
+      });
+    }
+  }, [businessGuid, userGuid]);
+  useEffect(() => {
+    if (operatingHoursStatus !== void 0) {
+      setOpHoursStatus(operatingHoursStatus);
+    }
+  }, [operatingHoursStatus]);
+  const [displayHours, setDisplayHours] = useState(null);
+  const getDisplayHours = () => {
+    switch (openStatus) {
+      case "no_hours": {
+        return /* @__PURE__ */ jsx("div", { children: "No hours set." });
+      }
+      case "always_open": {
+        return /* @__PURE__ */ jsx("div", { children: "Business is always open" });
+      }
+      case "permanently_closed": {
+        return /* @__PURE__ */ jsx("div", { children: "Permanently Closed" });
+      }
+      case "temporarily_closed": {
+        return /* @__PURE__ */ jsx("div", { children: "Temporarily Closed" });
+      }
+      case "selected_hours": {
+        return opHours !== null && openStatus === "selected_hours" && (opHours == null ? void 0 : opHours.map((item, index2) => {
+          return /* @__PURE__ */ jsxs(
+            "div",
+            {
+              className: `grid grid-cols-12 place-items-start text-[14px] py-2 w-full`,
+              children: [
+                /* @__PURE__ */ jsx("div", { className: "w-full font-semibold col-span-4", children: item.day }),
+                /* @__PURE__ */ jsxs("div", { className: `text-right w-full col-span-8 flex gap-1 place-content-end place-items-center`, children: [
+                  /* @__PURE__ */ jsx("span", { className: `text-[12px]`, children: (item == null ? void 0 : item.hours.includes("Closed")) ? "Closed" : String(item == null ? void 0 : item.day).startsWith(opHoursStatus.today) && (opHoursStatus.isOpen ? "Open Now" : "Closed Now") }),
+                  /* @__PURE__ */ jsx("span", { children: item.hours })
+                ] })
+              ]
+            },
+            index2
+          );
+        }));
+      }
+      default: {
+        return /* @__PURE__ */ jsxs("div", { children: [
+          /* @__PURE__ */ jsx("div", { children: "This business has no set hours. " }),
+          /* @__PURE__ */ jsx("div", { className: `text-gray-500`, children: "Assume: 8:30AM - 5:30PM" }),
+          (listing2 == null ? void 0 : listing2.phone) !== null && (listing2 == null ? void 0 : listing2.phone) !== void 0 && (listing2 == null ? void 0 : listing2.phone) !== "" && /* @__PURE__ */ jsx("div", { className: `text-sm mt-2`, children: /* @__PURE__ */ jsx(Link, { to: `tel:${listing2 == null ? void 0 : listing2.phone}`, children: /* @__PURE__ */ jsxs("div", { children: [
+            "Contact directly: ",
+            listing2 == null ? void 0 : listing2.phone
+          ] }) }) })
+        ] });
+      }
+    }
+  };
+  return /* @__PURE__ */ jsx("div", { id: "workinghours", className: `w-full`, children: /* @__PURE__ */ jsxs("div", { className: `border border-gray-100 px-5 pt-7 pb-7 rounded-xl  shadow-lg shadow-gray-200`, children: [
+    /* @__PURE__ */ jsxs("div", { className: `flex place-content-between w-full `, children: [
+      /* @__PURE__ */ jsx("div", { className: `text-[22px] md:text-[25px] font-semibold`, children: "Hours" }),
+      /* @__PURE__ */ jsxs("div", { className: `flex place-items-center gap-1`, children: [
+        /* @__PURE__ */ jsx(FiEdit2, {}),
+        /* @__PURE__ */ jsx("div", { className: `underline text-[13px]`, children: "Suggest an edit" })
+      ] })
+    ] }),
+    /* @__PURE__ */ jsxs("div", { className: `flex place-items-center mt-2 text-[15px] font-normal gap-1`, children: [
+      /* @__PURE__ */ jsx("span", { children: workTimeStatusObject }),
+      /* @__PURE__ */ jsx("span", { children: "•" }),
+      /* @__PURE__ */ jsx("span", { children: "Check timing below." })
+    ] }),
+    /* @__PURE__ */ jsx("div", { className: `mt-6`, children: getDisplayHours() })
+  ] }) });
+};
+const Features = ({ listing: listing2 }) => {
+  const [features, setFeatures] = useState(void 0);
+  const showDescr = useReadMoreContext();
+  useEffect(() => {
+    const fetchFacilities = async (business_guid) => {
+      const facilities = await getBusinessFeatures(listing2 == null ? void 0 : listing2.gid);
+      console.log(facilities);
+      setFeatures(facilities);
+    };
+    if (listing2 == null ? void 0 : listing2.gid) {
+      fetchFacilities(listing2 == null ? void 0 : listing2.gid);
+    }
+  }, [listing2 == null ? void 0 : listing2.gid]);
+  const handleDescription = (inputStr, title) => {
+    showDescr == null ? void 0 : showDescr.setDescription(inputStr);
+    showDescr == null ? void 0 : showDescr.setTitle(title);
+    showDescr == null ? void 0 : showDescr.setShow(true);
+  };
+  return /* @__PURE__ */ jsxs("div", { className: `mt-12 border-t py-10`, children: [
+    /* @__PURE__ */ jsx("div", { className: `text-[22px] md:text-[25px]  font-semibold `, children: "What this business offers" }),
+    /* @__PURE__ */ jsx("div", { className: `mt-6`, children: /* @__PURE__ */ jsx("div", { className: `grid grid-cols-2 w-full gap-x-4 gap-y-6`, children: (features == null ? void 0 : features.length) > 0 && (features == null ? void 0 : features.map((feature, index2) => {
+      return /* @__PURE__ */ jsx("div", { onClick: () => handleDescription(feature == null ? void 0 : feature.facility_description, `${feature == null ? void 0 : feature.facility_name} information`), children: /* @__PURE__ */ jsx("div", { className: `hover:underline cursor-pointer text-lg`, children: feature == null ? void 0 : feature.facility_name }) });
+    })) }) })
+  ] });
+};
+const Location = ({ listing: listing2 }) => {
+  const [address, setAddress] = useState("");
+  const [addressLink, setAddressLink] = useState("");
+  const [cityCountry, setCityCountry] = useState("");
+  useEffect(() => {
+    let getListingAddress = async (listing22) => {
+      let address2 = listing22 == null ? void 0 : listing22.title;
+      address2 += (listing22 == null ? void 0 : listing22.address_one) ? ", " + (listing22 == null ? void 0 : listing22.address_one) : "";
+      address2 += (listing22 == null ? void 0 : listing22.address_two) ? ", " + (listing22 == null ? void 0 : listing22.address_two) : "";
+      address2 += (listing22 == null ? void 0 : listing22.city_name) ? ", " + (listing22 == null ? void 0 : listing22.city_name) : "";
+      address2 += (listing22 == null ? void 0 : listing22.state_name) ? ", " + (listing22 == null ? void 0 : listing22.state_name) : "";
+      address2 += (listing22 == null ? void 0 : listing22.zipcode) ? ", " + (listing22 == null ? void 0 : listing22.zipcode) : "";
+      address2 += (listing22 == null ? void 0 : listing22.country_code) ? ", " + (listing22 == null ? void 0 : listing22.country_code) : "";
+      let addressLink2 = `https://www.google.com/maps?q=${address2}&t=&z=15&ie=UTF8&iwloc=B&output=`;
+      setAddress(address2);
+      setAddressLink(addressLink2);
+      setCityCountry(`${(listing22 == null ? void 0 : listing22.city_name) && (listing22 == null ? void 0 : listing22.city_name) + ", "} ${listing22 == null ? void 0 : listing22.country_name}`);
+    };
+    if (listing2 !== null) {
+      getListingAddress(listing2);
+    }
+  }, [listing2]);
+  return /* @__PURE__ */ jsx("div", { className: `mt-12 border-t`, children: /* @__PURE__ */ jsxs("div", { className: `my-10`, children: [
+    /* @__PURE__ */ jsx("div", { className: `text-[22px] md:text-[25px] font-semibold`, children: "Location" }),
+    /* @__PURE__ */ jsx("div", { className: `mt-6`, children: /* @__PURE__ */ jsxs("div", { className: `grid grid-cols-12 gap-4 h-[200px]`, children: [
+      /* @__PURE__ */ jsx("div", { className: `col-span-6 rounded-xl overflow-hidden border border-gray-300`, children: /* @__PURE__ */ jsx("div", { className: `relative h-full w-full`, children: /* @__PURE__ */ jsx(
+        "img",
+        {
+          src: `https://m.media-amazon.com/images/I/81WGuaolxhL._AC_SL1500_.jpg`,
+          alt: "",
+          className: ` object-center object-cover w-full h-full`
+        }
+      ) }) }),
+      /* @__PURE__ */ jsxs("div", { className: `col-span-6`, children: [
+        /* @__PURE__ */ jsxs("div", { className: `flex gap-3 place-items-start hover:underline hover:cursor-pointer`, children: [
+          /* @__PURE__ */ jsx("div", { children: /* @__PURE__ */ jsx(LuMapPinPlus, { className: `text-3xl` }) }),
+          /* @__PURE__ */ jsx("div", { children: /* @__PURE__ */ jsx(Link, { to: addressLink, target: "_blank", children: /* @__PURE__ */ jsxs("div", { className: `flex place-items-center`, children: [
+            /* @__PURE__ */ jsx("div", { className: `font-semibold hover:underline text-[14px]`, children: address }),
+            /* @__PURE__ */ jsx("div", { children: /* @__PURE__ */ jsx(CgChevronRight, { className: `text-4xl` }) })
+          ] }) }) })
+        ] }),
+        /* @__PURE__ */ jsxs("div", { className: `flex mt-6 place-items-center gap-4 `, children: [
+          /* @__PURE__ */ jsx("div", { className: `text-3xl`, children: /* @__PURE__ */ jsx(BiBuilding, {}) }),
+          /* @__PURE__ */ jsx("div", { className: `font-semibold text-[14px]`, children: cityCountry })
+        ] }),
+        /* @__PURE__ */ jsx("div", { className: `mt-12`, children: /* @__PURE__ */ jsx(Link, { to: addressLink, target: "_blank", children: /* @__PURE__ */ jsx("button", { className: `bg-gray-200 px-4 py-3 rounded-full w-32 hover:shadow-md hover:shadow-gray-400 transition-all ease-out duration-500 outline-none`, children: "Map" }) }) })
+      ] })
+    ] }) })
+  ] }) });
+};
+let reviewReport = [
+  {
+    title: "Overall Rating",
+    score: "0",
+    icon: /* @__PURE__ */ jsx(BsStarFill, { className: `` })
+  },
+  {
+    title: "Quality",
+    score: "0",
+    icon: /* @__PURE__ */ jsx(MdOutlineHighQuality, {})
+  },
+  {
+    title: "Customer Service",
+    score: "0",
+    icon: /* @__PURE__ */ jsx(RiCustomerService2Fill, {})
+  },
+  {
+    title: "Communication",
+    score: "0",
+    icon: /* @__PURE__ */ jsx(BiChat, {})
+  },
+  {
+    title: "Value",
+    score: "0",
+    icon: /* @__PURE__ */ jsx(RiInformation2Fill, {})
+  },
+  {
+    title: "Overall Satisfaction",
+    score: "0",
+    icon: /* @__PURE__ */ jsx(MdSentimentVerySatisfied, {})
+  }
+];
+const ReviewReport = ({ businessRating, listing: listing2 }) => {
+  const [ratingReport, setRatingReport] = useState(null);
+  useEffect(() => {
+    if (businessRating) {
+      setRatingReport(businessRating);
+      console.log(businessRating);
+    }
+  }, [businessRating]);
+  useEffect(() => {
+    var _a, _b, _c, _d, _e, _f;
+    if (ratingReport) {
+      console.log(ratingReport);
+      let rpt = reviewReport;
+      rpt[0].score = (_a = ratingReport == null ? void 0 : ratingReport.avg_rating) == null ? void 0 : _a.toString();
+      rpt[1].score = (_b = ratingReport == null ? void 0 : ratingReport.avg_quality) == null ? void 0 : _b.toString();
+      rpt[2].score = (_c = ratingReport == null ? void 0 : ratingReport.avg_customer_service) == null ? void 0 : _c.toString();
+      rpt[3].score = (_d = ratingReport == null ? void 0 : ratingReport.avg_communication) == null ? void 0 : _d.toString();
+      rpt[4].score = (_e = ratingReport == null ? void 0 : ratingReport.avg_value) == null ? void 0 : _e.toString();
+      rpt[5].score = (_f = ratingReport == null ? void 0 : ratingReport.avg_overall_satisfaction) == null ? void 0 : _f.toString();
+      console.log(reviewReport);
+    }
+  }, [ratingReport]);
+  return /* @__PURE__ */ jsxs("div", { className: `mt-24`, children: [
+    /* @__PURE__ */ jsx("div", { className: " border-t border-gray-300 mb-20" }),
+    /* @__PURE__ */ jsx("div", { className: `text-center text-5xl font-semibold`, children: ratingReport ? ratingReport.avg_rating : /* @__PURE__ */ jsxs("span", { children: [
+      "Oops",
+      /* @__PURE__ */ jsx("i", { children: "!" }),
+      " No rating yet.'"
+    ] }) }),
+    /* @__PURE__ */ jsxs("div", { className: `mt-6 flex place-items-center flex-col gap-y-2`, children: [
+      /* @__PURE__ */ jsx("div", { className: `text-2xl font-semibold`, children: listing2 == null ? void 0 : listing2.title }),
+      /* @__PURE__ */ jsx("div", { className: `max-w-[800px] mx-auto w-full text-center text-[15px] font-light mt-6`, children: listing2 == null ? void 0 : listing2.short_description })
+    ] }),
+    /* @__PURE__ */ jsx("div", { className: `mt-20`, children: /* @__PURE__ */ jsx("div", { className: `max-w-[1100px] mx-auto w-full`, children: /* @__PURE__ */ jsx("div", { className: `grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 place-content-between `, children: reviewReport == null ? void 0 : reviewReport.map((item, i) => {
+      return /* @__PURE__ */ jsxs(
+        "div",
+        {
+          className: `flex flex-col gap-y-3 p-5 border rounded-xl  relative h-auto shadow-lg shadow-gray-200/50`,
+          children: [
+            /* @__PURE__ */ jsx("div", { className: `text-[15px] font-base leading-[1.1em] font-semibold text-gray-800 `, children: item.title }),
+            /* @__PURE__ */ jsxs("div", { className: `text-3xl flex flex-col grow w-full text-start place-content-end gap-y-1`, children: [
+              /* @__PURE__ */ jsx("div", { className: ` ${ratingReport ? "text-[16px]" : "text-[13px]"} `, children: ratingReport ? item.score : "No Rating" }),
+              /* @__PURE__ */ jsx("div", { className: `text-cyan-500 text-3xl`, children: item.icon })
+            ] })
+          ]
+        },
+        i
+      );
+    }) }) }) }),
+    /* @__PURE__ */ jsx("div", { className: `mt-20 border-t` })
+  ] });
+};
+function RatingBoxInfoCard({ rating }) {
+  const starPath = "M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z";
+  return /* @__PURE__ */ jsx("div", { className: "flex gap-x-[0px]", children: Array.from({ length: 5 }).map((_, i) => {
+    const fillPercent = Math.max(0, Math.min(1, rating - i)) * 100;
+    return /* @__PURE__ */ jsxs("div", { className: `relative w-[20px] h-[20px] -top-[1.2px] flex gap-3`, children: [
+      /* @__PURE__ */ jsx("svg", { width: "30", height: "30", viewBox: "0 0 35 35", className: "absolute", children: /* @__PURE__ */ jsx("path", { d: starPath, fill: "#d1d5db" }) }),
+      /* @__PURE__ */ jsx("div", { className: "absolute overflow-hidden", style: { width: `${fillPercent}%` }, children: /* @__PURE__ */ jsx("svg", { width: "30", height: "30", viewBox: "0 0 35 35", children: /* @__PURE__ */ jsx("path", { d: starPath, fill: "#FFA500" }) }) })
+    ] }, i);
+  }) });
+}
+const UserReviews = ({ businessReviews }) => {
+  return /* @__PURE__ */ jsx("div", { className: `my-16`, children: /* @__PURE__ */ jsx("div", { className: `grid md:grid-cols-2 gap-16`, children: businessReviews == null ? void 0 : businessReviews.map((item, i) => {
+    const date = getFormattedDateTime(item.created_at);
+    return /* @__PURE__ */ jsx("div", { children: /* @__PURE__ */ jsx(Link, { to: `/`, children: /* @__PURE__ */ jsxs("div", { children: [
+      /* @__PURE__ */ jsxs("div", { className: `flex place-items-start gap-3`, children: [
+        /* @__PURE__ */ jsx("div", { className: `relative h-[40px] w-[40px] rounded-full overflow-hidden`, children: /* @__PURE__ */ jsx(
+          "img",
+          {
+            src: item.img || `/images/pcho.png`,
+            alt: "",
+            className: `object-cover h-full w-full`
+          }
+        ) }),
+        /* @__PURE__ */ jsxs("div", { children: [
+          /* @__PURE__ */ jsx("div", { className: `text-lg font-semibold`, children: `${item.firstname} ${item.lastname}` }),
+          /* @__PURE__ */ jsxs("div", { children: [
+            item.city_name && item.city_name + ", ",
+            item.country_name
+          ] }),
+          /* @__PURE__ */ jsx("div", { className: `flex place-items-center`, children: /* @__PURE__ */ jsxs("div", { className: `text-[15px] flex place-items-center gap-2`, children: [
+            /* @__PURE__ */ jsx(RatingBoxInfoCard, { rating: Number(item.avg_rating) }),
+            /* @__PURE__ */ jsx("span", { children: item.avg_rating })
+          ] }) })
+        ] })
+      ] }),
+      /* @__PURE__ */ jsx("div", { className: `flex place-items-center gap-3 mt-2`, children: /* @__PURE__ */ jsx("div", { children: date }) }),
+      /* @__PURE__ */ jsx("div", { className: `text-[14px] font-light mt-2`, children: item.experience })
+    ] }) }) }, i);
+  }) }) });
+};
+const Related = ({ related }) => {
+  const scrollRef = useRef(null);
+  const scrollLeft = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: -300, behavior: "smooth" });
+    }
+  };
+  const scrollRight = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: 300, behavior: "smooth" });
+    }
+  };
+  return /* @__PURE__ */ jsx("div", { className: `border-t py-10`, children: /* @__PURE__ */ jsxs("div", { className: "", children: [
+    /* @__PURE__ */ jsx("div", { className: `text-[19px] font-semibold`, children: "Related Businesses" }),
+    /* @__PURE__ */ jsxs("div", { className: `mt-6 relative`, children: [
+      /* @__PURE__ */ jsx("div", { ref: scrollRef, className: `flex place-items-start overflow-x-hidden  gap-4 rounded-xl  h-[300px]`, children: /* @__PURE__ */ jsx("div", { className: `flex gap-3`, children: related == null ? void 0 : related.map((item, i) => {
+        let url = config.BASE_URL + "/" + ((item == null ? void 0 : item.username) || (item == null ? void 0 : item.gid));
+        let img = "";
+        let imgPath = "";
+        if (item == null ? void 0 : item.bg_image_url_ext) {
+          img = item == null ? void 0 : item.bg_image_url_ext;
+        } else if (item == null ? void 0 : item.profile_image_url_ext) {
+          img = item == null ? void 0 : item.profile_image_url_ext;
+        } else ;
+        imgPath = config.IMG_BASE_URL + img;
+        console.log(imgPath);
+        return /* @__PURE__ */ jsx("div", { className: `w-[200px] group`, children: /* @__PURE__ */ jsxs(Link, { to: url, children: [
+          /* @__PURE__ */ jsx("div", { className: `relative w-full h-[180px]  rounded-3xl overflow-hidden border group-hover:shadow-lg`, children: img !== "" ? /* @__PURE__ */ jsx(
+            "img",
+            {
+              src: `${imgPath}`,
+              alt: "",
+              className: `object-cover h-full w-full`
+            }
+          ) : /* @__PURE__ */ jsx(AlternateImage, { title: item == null ? void 0 : item.title }) }),
+          /* @__PURE__ */ jsxs("div", { className: `mt-2 `, children: [
+            /* @__PURE__ */ jsx("div", { className: `text-[13px] leading-[1.2em] group-hover:underline pl-1 `, children: item.title }),
+            /* @__PURE__ */ jsxs("div", { className: ` mt-1`, children: [
+              /* @__PURE__ */ jsxs("div", { className: `flex place-items-center gap-2`, children: [
+                /* @__PURE__ */ jsxs("div", { className: `text-base flex place-items-center gap-0`, children: [
+                  /* @__PURE__ */ jsx(BiSolidStar, { className: `relative top-[-1px]` }),
+                  /* @__PURE__ */ jsx("span", { children: (item == null ? void 0 : item.avg_rating) || 0 })
+                ] }),
+                /* @__PURE__ */ jsxs("div", { className: `text-base`, children: [
+                  "(",
+                  (item == null ? void 0 : item.count_of_rating) || 0,
+                  ")",
+                  /* @__PURE__ */ jsxs("span", { className: `text-[12px] top-[-1px]`, children: [
+                    " Review",
+                    (item == null ? void 0 : item.count_of_rating) > 1 && "s"
+                  ] })
+                ] })
+              ] }),
+              /* @__PURE__ */ jsx("div", {})
+            ] })
+          ] })
+        ] }) }, i);
+      }) }) }),
+      (related == null ? void 0 : related.length) > 0 && /* @__PURE__ */ jsxs("div", { children: [
+        /* @__PURE__ */ jsx(
+          "div",
+          {
+            className: `absolute text-black top-1/3 -translate-y-1/2 left-2 w-[40px] min-w-[40px] h-[40px] bg-white hover:bg-white/70 hover:text-black flex place-content-center place-items-center hover:cursor-pointer border-[1px] border-gray-400 rounded-full z-[5]`,
+            onClick: () => {
+              scrollLeft();
+            },
+            children: /* @__PURE__ */ jsx(FaChevronLeft, {})
+          }
+        ),
+        /* @__PURE__ */ jsx(
+          "div",
+          {
+            className: `absolute text-black top-1/3 -translate-y-1/2 right-2 w-[40px] min-w-[40px] h-[40px] bg-white hover:bg-white/70 hover:text-black flex place-content-center place-items-center hover:cursor-pointer border-[1px] border-gray-400 rounded-full z-[5] transition-all ease-in-out duration-1000`,
+            onClick: () => {
+              scrollRight();
+            },
+            children: /* @__PURE__ */ jsx(FaChevronRight, {})
+          }
+        )
+      ] })
+    ] })
+  ] }) });
+};
+const NearbyBusinesses = ({ nearby }) => {
+  console.log(nearby);
+  console.log("hala");
+  return /* @__PURE__ */ jsx("div", { className: "mt-12", children: /* @__PURE__ */ jsxs("div", { className: `border-t border-gray-200 py-10`, children: [
+    /* @__PURE__ */ jsx("div", { className: `text-[22px] md:text-[25px] font-semibold`, children: "Businesses nearby" }),
+    /* @__PURE__ */ jsxs("div", { className: `grid lg:grid-cols-12`, children: [
+      /* @__PURE__ */ jsx("div", { className: `lg:col-span-8`, children: /* @__PURE__ */ jsx(BestNearbyList, { nearby }) }),
+      /* @__PURE__ */ jsx("div", { className: `lg:col-span-4` })
+    ] })
+  ] }) });
+};
+const BestNearbyList = ({ nearby }) => {
+  return /* @__PURE__ */ jsxs("div", { children: [
+    /* @__PURE__ */ jsx("div", { className: `mt-4`, children: /* @__PURE__ */ jsxs("div", { className: `flex place-content-between place-items-center`, children: [
+      /* @__PURE__ */ jsx("div", { className: `text-[16px] font-semibold`, children: "Businesses near here" }),
+      /* @__PURE__ */ jsx("div", { className: `text-[14px] text-right underline`, children: "See all" })
+    ] }) }),
+    /* @__PURE__ */ jsx("div", { className: `mt-4`, children: /* @__PURE__ */ jsx("div", { className: `grid grid-cols-1 md:grid-cols-2 gap-12`, children: nearby !== null && (nearby == null ? void 0 : nearby.map((item, i) => {
+      let url = config.BASE_URL + "/" + ((item == null ? void 0 : item.username) || (item == null ? void 0 : item.gid));
+      let img = "";
+      if (item == null ? void 0 : item.bg_image_url_ext) {
+        img = item == null ? void 0 : item.bg_image_url_ext;
+      } else if (item == null ? void 0 : item.profile_image_url_ext) {
+        img = item == null ? void 0 : item.profile_image_url_ext;
+      } else {
+        img = "";
+      }
+      let imgPath = (config == null ? void 0 : config.IMG_BASE_URL) + img;
+      return /* @__PURE__ */ jsx("div", { children: /* @__PURE__ */ jsx(Link, { to: url, children: /* @__PURE__ */ jsxs("div", { className: `flex gap-x-4`, children: [
+        /* @__PURE__ */ jsx("div", { className: `w-[95px] min-w-[95px] h-[100px] relative rounded-2xl overflow-hidden`, children: img === "" ? /* @__PURE__ */ jsx(AlternateImage, { title: item == null ? void 0 : item.title }) : /* @__PURE__ */ jsx(
+          "img",
+          {
+            src: imgPath,
+            alt: "",
+            className: `object-cover w-full h-full`
+          }
+        ) }),
+        /* @__PURE__ */ jsxs("div", { children: [
+          /* @__PURE__ */ jsx("div", { className: `text-[15px] font-semibold leading-[1.2em]`, children: item.title }),
+          /* @__PURE__ */ jsxs("div", { className: `flex place-items-center gap-2 mt-2 text-[14px] text-gray-500`, children: [
+            /* @__PURE__ */ jsxs("div", { className: `flex place-items-center gap-1`, children: [
+              /* @__PURE__ */ jsx(RatingBoxInfoCard, { rating: Number(item.avg_rating) }),
+              (item == null ? void 0 : item.avg_rating) || 0
+            ] }),
+            /* @__PURE__ */ jsxs("div", { children: [
+              "(",
+              (item == null ? void 0 : item.count_of_rating) || 0,
+              ") reviews"
+            ] })
+          ] })
+        ] })
+      ] }) }) }, i);
+    })) }) })
+  ] });
+};
+const heroimgs = [
+  {
+    img: "https://r4.wallpaperflare.com/wallpaper/791/501/238/new-york-city-buildings-wallpaper-51351344a10dae2b3cd90e3cb71d503d.jpg"
+  },
+  {
+    img: "https://c0.wallpaperflare.com/path/494/492/40/signage-brand-cyan-yellow-5d1465fafe2d1f3e8deff1bbe07c71ce.jpg"
+  }
+];
+const HeroCarousel = ({ images, listing: listing2 }) => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const slideStep = useRef(0);
+  useRef(0);
+  const slider = useSliderContext();
+  const [slides, setSlides] = useState(heroimgs);
+  let timeoutId = useRef(null);
+  const handleNext = async () => {
+    if (timeoutId.current) {
+      clearTimeout(timeoutId.current);
+    }
+    next();
+    timeoutId.current = setTimeout(() => {
+    }, 15e3);
+  };
+  const handlePrev = async () => {
+    if (timeoutId.current) {
+      clearTimeout(timeoutId.current);
+    }
+    prev();
+    timeoutId.current = setTimeout(() => {
+    }, 15e3);
+  };
+  const handleTouchStart = (e) => {
+    slideStep.current = e.touches[0].clientX;
+  };
+  const handleTouchEnd = (e) => {
+    const endX = e.changedTouches[0].clientX;
+    const deltaX = slideStep.current - endX;
+    if (deltaX > 50) {
+      setCurrentSlide((i) => (i + 1) % slides.length);
+    } else if (deltaX < -50) {
+      setCurrentSlide((i) => (i - 1 + slides.length) % slides.length);
+    }
+  };
+  const showCarousel = (index2) => {
+    if (index2 < (slides == null ? void 0 : slides.length)) {
+      slider.setDialog(true);
+      slider.setSelectedSlide(index2 + 1);
+      slider.setGallery(slides);
+      slider.setListing(slides);
+    }
+  };
+  const prev = () => {
+    setCurrentSlide((currentSlide2) => {
+      return currentSlide2 === 0 ? slides.length - 1 : currentSlide2 - 1;
+    });
+  };
+  const next = () => {
+    setCurrentSlide((currentSlide2) => {
+      return currentSlide2 === slides.length - 1 ? 0 : currentSlide2 + 1;
+    });
+  };
+  useEffect(() => {
+    if (images) {
+      setSlides(images);
+    }
+  }, [images]);
+  return /* @__PURE__ */ jsxs("div", { className: `relative`, children: [
+    /* @__PURE__ */ jsx("div", { className: ` w-full h-[430px] md:h-[500px] flex overflow-hidden  `, children: slides == null ? void 0 : slides.map((slide, index2) => {
+      return /* @__PURE__ */ jsxs(
+        "div",
+        {
+          className: `h-full w-full relative block flex-shrink-0 flex-grow-0 transition-transform 
+                      ease-in-out duration-1000 cursor-pointer`,
+          style: { transform: `translateX(-${currentSlide * 100}%)` },
+          children: [
+            /* @__PURE__ */ jsx("div", { className: `absolute  left-0 right-0 bottom-0 h-[30%]  w-full bg-gradient-to-b from-transparent to-gray-800` }),
+            /* @__PURE__ */ jsxs("div", { className: `absolute bottom-5 w-full text-center text-white`, children: [
+              /* @__PURE__ */ jsxs("div", { children: [
+                index2 + 1,
+                " / ",
+                slides.length
+              ] }),
+              /* @__PURE__ */ jsx("div", { className: `max-w-[80%] mx-auto w-full line-clamp-1 text-center text-sm font-light mt-2`, children: slide == null ? void 0 : slide.image_title })
+            ] }),
+            /* @__PURE__ */ jsx(
+              "img",
+              {
+                onTouchStart: handleTouchStart,
+                onTouchEnd: handleTouchEnd,
+                onMouseDown: (e) => showCarousel(index2),
+                src: (slide == null ? void 0 : slide.default) ? slide == null ? void 0 : slide.image_url : config.IMG_BASE_URL + (slide == null ? void 0 : slide.image_url),
+                alt: "",
+                className: `object-cover w-full h-full `
+              },
+              index2
+            )
+          ]
+        },
+        index2
+      );
+    }) }),
+    /* @__PURE__ */ jsxs("div", { className: `z-[50]`, children: [
+      /* @__PURE__ */ jsx("button", { onMouseDown: handlePrev, className: `block absolute top-0 bottom-0 z-[5] p-[1rem] cursor-pointer left-0 group h-full transition duration-1000 ease-in-out`, children: /* @__PURE__ */ jsx("div", { className: `w-[50px] h-[50px] bg-white/60 rounded-full 
+                       flex place-content-center place-items-center group-hover:bg-white/30
+                        z-[300] transition duration-500 ease-in-out`, children: /* @__PURE__ */ jsx(BiChevronLeft, { className: " stroke-white fill-black w-[2rem] h-[2rem]" }) }) }),
+      /* @__PURE__ */ jsx("button", { onMouseDown: handleNext, className: `block absolute top-0 bottom-0 
+                                                                    z-[5]    p-[1rem] cursor-pointer right-0 group 
+                                                                         transition duration-1000 ease-in-out`, children: /* @__PURE__ */ jsx("div", { className: `w-[50px] h-[50px] bg-white/60 rounded-full 
+                        flex place-content-center place-items-center group-hover:bg-white/30
+                        z-[300]   transition duration-500 ease-in-out
+                        `, children: /* @__PURE__ */ jsx(BiChevronRight, { className: " stroke-white fill-black w-[2rem] h-[2rem]" }) }) })
+    ] })
+  ] });
+};
+const defaultImg = [{
+  image_url: "/images/abstract_placeholder.jpg",
+  default: true
+}];
+const MobileHeroWithTitle = ({ title, images, listing: listing2 }) => {
+  const [heroImages, setHeroImages] = useState(null);
+  useEffect(() => {
+    if (images === null || images.length === 0) {
+      setHeroImages(defaultImg);
+    } else {
+      setHeroImages(images);
+    }
+  }, [images]);
+  return /* @__PURE__ */ jsxs("div", { className: `block md:hidden`, children: [
+    /* @__PURE__ */ jsx("div", { className: `bg-black h-[450px] w-full z-[0]`, children: /* @__PURE__ */ jsx(HeroCarousel, { images: heroImages, listing: listing2 }) }),
+    /* @__PURE__ */ jsx("div", { className: `px-5 pt-8 pb-5 rounded-t-3xl overflow-hidden bg-white -mt-5 z-[3]`, children: /* @__PURE__ */ jsx("div", { className: `text-[25px] font-semibold text-center leading-[1.3em]`, children: title }) })
+  ] });
+};
+const VideoGalleryContext = createContext(null);
+function useVideoGalleryContext() {
+  const context = useContext(VideoGalleryContext);
+  if (!context) {
+    return null;
+  }
+  return context;
+}
+const VideoGalleryProvider = ({ children }) => {
+  const [show, setShow] = useState(false);
+  const [videoGallery, setVideoGallery] = useState(null);
+  const [listing2, setListing] = useState(null);
+  const [outVideo, setOutVideo] = useState(null);
+  const slider = useVideoSliderContext();
+  const showCarousel = (index2) => {
+    slider.setDialog(true);
+    slider.setSelectedSlide(index2 + 1);
+    slider.setGallery(videoGallery);
+    slider.setListing(listing2);
+  };
+  let vals = {
+    setShow,
+    setVideoGallery,
+    setListing,
+    setOutVideo
+  };
+  return /* @__PURE__ */ jsxs(VideoGalleryContext.Provider, { value: vals, children: [
+    show && /* @__PURE__ */ jsxs(
+      "div",
+      {
+        onMouseDown: (e) => setShow(false),
+        className: `flex w-screen h-screen bg-black/80 
+                                   z-[20000] fixed top-0 left-0 right-0 bottom-0
+                                   place-items-center place-content-center px-[15px]`,
+        children: [
+          /* @__PURE__ */ jsx(
+            "div",
+            {
+              onMouseDown: (e) => e.stopPropagation(),
+              className: `w-[95%] sm:w-[85%] md:w-[75%] lg:w-[70%] xl:w-[60%] h-[70%] max-h-[80%] 
+                                       mx-auto bg-white rounded-lg shadow-lg shadow-black/50 
+                                       space-y-6 z-[3100] overflow-hidden`,
+              children: /* @__PURE__ */ jsxs("div", { className: `w-full h-full`, children: [
+                /* @__PURE__ */ jsx("div", { className: `border-b py-3 px-3`, children: /* @__PURE__ */ jsxs("div", { className: `font-bold text-gray-700
+                                               text-xl w-[80%]  truncate`, children: [
+                  "Gallery for ",
+                  listing2 == null ? void 0 : listing2.title
+                ] }) }),
+                /* @__PURE__ */ jsx("div", { className: ` 
+                                           h-full overflow-y-auto pt-2 px-2 pb-2
+                                           bg-white `, children: /* @__PURE__ */ jsx("div", { className: `grid grid-cols-4 md:grid-cols-6 gap-2`, children: Array.isArray(outVideo) && (outVideo == null ? void 0 : outVideo.map((video, index2) => {
+                  return /* @__PURE__ */ jsxs(
+                    "div",
+                    {
+                      className: `mb-2`,
+                      onClick: () => {
+                        showCarousel(index2);
+                      },
+                      children: [
+                        /* @__PURE__ */ jsx(
+                          "div",
+                          {
+                            className: `relative hover:cursor-pointer
+                                                             h-[80px] md:h-[100px] lg:h-[120px] rounded-md bg-black
+                                                            overflow-hidden border-[5px] border-gray-200`,
+                            children: /* @__PURE__ */ jsx(
+                              "img",
+                              {
+                                className: `object-cover w-full h-full`,
+                                src: video == null ? void 0 : video.videoThumbnail,
+                                alt: ""
+                              }
+                            )
+                          }
+                        ),
+                        /* @__PURE__ */ jsx("div", { className: `mx-[2px] text-[13px] leading-[1.2em] line-clamp-2 mt-[3px]`, children: video == null ? void 0 : video.videoTitle })
+                      ]
+                    },
+                    index2
+                  );
+                })) }) })
+              ] })
+            }
+          ),
+          /* @__PURE__ */ jsx(
+            "div",
+            {
+              onMouseDown: () => setShow(false),
+              className: `w-[30px] h-[30px] z-[300] bg-white
+                                           flex place-content-center place-items-center
+                                           rounded-full absolute left-2 top-2 cursor-pointer
+                                           hover:bg-white/40 transition duration-1000 ease-in-out`,
+              children: /* @__PURE__ */ jsx(BiChevronLeft, { className: `text-[30px]` })
+            }
+          )
+        ]
+      }
+    ),
+    children
+  ] });
+};
+const videos = [
+  {
+    title: "Two More Beers London",
+    star: "4.9",
+    reviews: 169,
+    img: `https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2b/c9/bc/33/front-of-the-pub.jpg?w=800&h=-1&s=1`
+  },
+  {
+    title: "Two More Beers London",
+    star: "4.9",
+    reviews: 169,
+    img: `https://dynamic-media-cdn.tripadvisor.com/media/photo-o/31/24/f3/54/exterior.jpg?w=800&h=600&s=1`
+  },
+  {
+    title: "Two More Beers London",
+    star: "4.9",
+    reviews: 169,
+    img: `https://dynamic-media-cdn.tripadvisor.com/media/photo-o/28/54/66/f5/enjoy-a-delicious-drink.jpg?w=800&h=600&s=1`
+  },
+  {
+    title: "Two More Beers London",
+    star: "4.9",
+    reviews: 169,
+    img: `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9lJXEfx_-xLm-T_ZTYIERDH5ofKPB0YGXtQ&s`
+  },
+  {
+    title: "Two More Beers London",
+    star: "4.9",
+    reviews: 169,
+    img: `https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2e/53/cc/5c/main-room.jpg?w=800&h=600&s=1`
+  },
+  {
+    title: "Two More Beers London",
+    star: "4.9",
+    reviews: 169,
+    img: `https://dynamic-media-cdn.tripadvisor.com/media/photo-o/27/ab/49/bd/bow-bar.jpg?w=800&h=600&s=1`
+  },
+  {
+    title: "Two More Beers London",
+    star: "4.9",
+    reviews: 169,
+    img: `https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2e/0d/4d/76/outside-front-of-pub.jpg?w=800&h=600&s=1`
+  }
+];
+const Videos = ({ videoGallery, listing: listing2 }) => {
+  const scrollRef = useRef(null);
+  const [outVideo, setOutVideo] = useState(null);
+  const [rawVideos, setRawVideos] = useState(videos);
+  const [open, setOpen] = useState(false);
+  const [currentVideo, setCurrentVideo] = useState(null);
+  const slider = useVideoSliderContext();
+  const videoGalleryCtx = useVideoGalleryContext();
+  const [video20, setVideo20] = useState([]);
+  const scrollLeft = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: -300, behavior: "smooth" });
+    }
+  };
+  const scrollRight = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: 300, behavior: "smooth" });
+    }
+  };
+  useEffect(() => {
+    const remapVideos = async (videoGallery2) => {
+      let remappedVideo = [];
+      videoGallery2 == null ? void 0 : videoGallery2.map((video, index2) => {
+        const regex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/;
+        const match = video.video_url.match(regex);
+        let videoId = match ? match[1] : null;
+        let thumbnail = `https://img.youtube.com/vi/${videoId}/0.jpg`;
+        let videoObject = {
+          videoId,
+          videoUrl: video.video_url,
+          videoTitle: video.video_title,
+          videoThumbnail: thumbnail,
+          videoGuid: video.video_guid
+        };
+        remappedVideo.push(videoObject);
+      });
+      setOutVideo(remappedVideo);
+    };
+    remapVideos(videoGallery);
+  }, [videoGallery]);
+  const showCarousel = (index2) => {
+    console.log(videoGallery);
+    slider.setDialog(true);
+    slider.setSelectedSlide(index2 + 1);
+    slider.setGallery(videoGallery);
+    slider.setListing(listing2);
+  };
+  const showVideoGallery = () => {
+    videoGalleryCtx.setShow(true);
+    videoGalleryCtx.setOutVideo(outVideo);
+    videoGalleryCtx.setListing(listing2);
+    videoGalleryCtx.setVideoGallery(videoGallery);
+  };
+  return /* @__PURE__ */ jsx("div", { className: `border-t py-10`, children: /* @__PURE__ */ jsxs("div", { className: "", children: [
+    /* @__PURE__ */ jsxs("div", { className: `flex place-content-between place-items-baseline`, children: [
+      /* @__PURE__ */ jsx("div", { className: `text-[22px] md:text-[25px] font-semibold`, children: "Videos" }),
+      /* @__PURE__ */ jsx(
+        "div",
+        {
+          className: `underline text-base cursor-pointer w-fit`,
+          onClick: () => showVideoGallery(),
+          children: "Gallery"
+        }
+      )
+    ] }),
+    /* @__PURE__ */ jsxs("div", { className: `mt-6 relative`, children: [
+      /* @__PURE__ */ jsx("div", { ref: scrollRef, className: `flex place-items-start w-full overflow-x-hidden gap-4 rounded-xl`, children: outVideo == null ? void 0 : outVideo.map((item, i) => {
+        return /* @__PURE__ */ jsxs(
+          "div",
+          {
+            onClick: () => {
+              showCarousel(i);
+            },
+            className: `flex flex-col cursor-pointer w-[250px] min-w-[250px] `,
+            children: [
+              /* @__PURE__ */ jsx("div", { className: `relative w-full  h-[180px] min-h-[180px] rounded-xl overflow-hidden`, children: /* @__PURE__ */ jsx(
+                "img",
+                {
+                  src: item.videoThumbnail,
+                  alt: "",
+                  className: `object-cover h-full w-full`
+                }
+              ) }),
+              /* @__PURE__ */ jsx("div", { className: `mt-4 relative  `, children: /* @__PURE__ */ jsx("div", { className: `text-base leading-[1.2em] line-clamp-3`, children: item.videoTitle }) })
+            ]
+          },
+          i
+        );
+      }) }),
+      (outVideo == null ? void 0 : outVideo.length) > 0 && /* @__PURE__ */ jsxs("div", { children: [
+        /* @__PURE__ */ jsx(
+          "div",
+          {
+            className: `absolute text-black top-1/2 -translate-y-1/2 left-2 w-[40px] min-w-[40px] h-[40px] bg-white hover:bg-white/70 hover:text-black flex place-content-center place-items-center hover:cursor-pointer border-[1px] border-gray-400 rounded-full z-[5]`,
+            onClick: () => {
+              scrollLeft();
+            },
+            children: /* @__PURE__ */ jsx(FaChevronLeft, {})
+          }
+        ),
+        /* @__PURE__ */ jsx(
+          "div",
+          {
+            className: `absolute text-black top-1/2 -translate-y-1/2 right-2 w-[40px] min-w-[40px] h-[40px] bg-white hover:bg-white/70 hover:text-black flex place-content-center place-items-center hover:cursor-pointer border-[1px] border-gray-400 rounded-full z-[5] transition-all ease-in-out duration-1000`,
+            onClick: () => {
+              scrollRight();
+            },
+            children: /* @__PURE__ */ jsx(FaChevronRight, {})
+          }
+        )
+      ] })
+    ] })
+  ] }) });
+};
+const ProductGalleryContext = createContext(null);
+function useProductGalleryContext() {
+  const context = useContext(ProductGalleryContext);
+  if (!context) {
+    return null;
+  }
+  return context;
+}
+const ProductGalleryProvider = ({ children }) => {
+  const [show, setShow] = useState(false);
+  const [products, setProducts] = useState();
+  const [listing2, setListing] = useState();
+  const [galleryDaialog, setGalleryDialog] = useState(false);
+  const productSlider = useProductSliderContext();
+  const showProductSlider = (currentSlide) => {
+    productSlider.setDialog(true);
+    productSlider.setSelectedSlide(currentSlide + 1);
+    productSlider.setGallery(products);
+    productSlider.setListing(listing2);
+  };
+  let vals = {
+    setProducts,
+    setListing,
+    setShow
+  };
+  return /* @__PURE__ */ jsxs(ProductGalleryContext.Provider, { value: vals, children: [
+    show && /* @__PURE__ */ jsx("div", { children: /* @__PURE__ */ jsx("div", { className: `fixed bg-black/80 w-screen h-screen top-0 left-0 z-[3000]`, children: /* @__PURE__ */ jsxs(
+      "div",
+      {
+        className: ` w-full h-full flex place-content-center place-items-center`,
+        onMouseDown: (e) => setShow(false),
+        children: [
+          /* @__PURE__ */ jsxs(
+            "div",
+            {
+              className: `max-w-[90%] w-full mx-auto bg-white h-[80%] rounded-lg`,
+              onMouseDown: (e) => e.stopPropagation(),
+              children: [
+                /* @__PURE__ */ jsx("div", { className: ` border-b px-5 py-3`, children: /* @__PURE__ */ jsxs("div", { className: `flex place-content-between place-items-center`, children: [
+                  /* @__PURE__ */ jsxs("div", { className: `text-[17px] font-semibold`, children: [
+                    "Products for ",
+                    listing2 == null ? void 0 : listing2.title
+                  ] }),
+                  /* @__PURE__ */ jsx(
+                    "div",
+                    {
+                      className: ``
+                    }
+                  )
+                ] }) }),
+                /* @__PURE__ */ jsx("div", { className: ` w-full h-[90%] overflow-y-auto`, children: /* @__PURE__ */ jsx("div", { className: `w-full h-auto grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 2xl:grid-cols-8 gap-5 px-5 py-5 `, children: products == null ? void 0 : products.map((product, index2) => {
+                  return /* @__PURE__ */ jsxs(
+                    "div",
+                    {
+                      className: ` rounded-md block hover:shadow-md hover:cursor-pointer`,
+                      onClick: () => {
+                        showProductSlider(index2);
+                      },
+                      children: [
+                        /* @__PURE__ */ jsx("div", { className: ` w-full h-[150px] relative `, children: /* @__PURE__ */ jsx(
+                          "img",
+                          {
+                            src: config.IMG_BASE_URL + product.product_image_url,
+                            alt: "",
+                            className: ` object-cover w-full h-full`
+                          }
+                        ) }),
+                        /* @__PURE__ */ jsx("div", { className: `mt-3 text-center line-clamp-2 leading-[1.4em]`, children: product == null ? void 0 : product.product_title })
+                      ]
+                    },
+                    index2
+                  );
+                }) }) })
+              ]
+            }
+          ),
+          /* @__PURE__ */ jsx(
+            "div",
+            {
+              onMouseDown: () => setShow(false),
+              className: `w-[30px] h-[30px] z-[300] bg-white
+                                                                flex place-content-center place-items-center
+                                                                rounded-full absolute left-2 top-2 cursor-pointer
+                                                                hover:bg-white/40 transition duration-1000 ease-in-out`,
+              children: /* @__PURE__ */ jsx(BiChevronLeft, { className: `text-[30px]` })
+            }
+          )
+        ]
+      }
+    ) }) }),
+    children
+  ] });
+};
+const Products = ({ listing: listing2, products: products2 }) => {
+  const scrollRef = useRef(null);
+  const productSlider = useProductSliderContext();
+  const productCtx = useProductGalleryContext();
+  const scrollLeft = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: -300, behavior: "smooth" });
+    }
+  };
+  const scrollRight = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: 300, behavior: "smooth" });
+    }
+  };
+  const showCarousel = (currentSlide) => {
+    productSlider.setDialog(true);
+    productSlider.setSelectedSlide(currentSlide + 1);
+    productSlider.setGallery(products2);
+    productSlider.setListing(listing2);
+  };
+  const showProductGallery = () => {
+    productCtx.setShow(true);
+    productCtx.setListing(listing2);
+    productCtx.setProducts(products2);
+  };
+  return /* @__PURE__ */ jsx("div", { className: `border-t py-10`, children: /* @__PURE__ */ jsxs("div", { className: "", children: [
+    /* @__PURE__ */ jsxs("div", { className: `flex place-content-between place-items-baseline`, children: [
+      /* @__PURE__ */ jsx("div", { className: `text-[22px] md:text-[25px] font-semibold`, children: "Products" }),
+      /* @__PURE__ */ jsx(
+        "div",
+        {
+          className: `underline text-base cursor-pointer w-fit`,
+          onClick: () => showProductGallery(),
+          children: "Gallery"
+        }
+      )
+    ] }),
+    /* @__PURE__ */ jsxs("div", { className: `mt-6 relative`, children: [
+      /* @__PURE__ */ jsx("div", { ref: scrollRef, className: `flex place-items-center overflow-x-hidden gap-4 rounded-xl`, children: products2 == null ? void 0 : products2.map((item, i) => {
+        return /* @__PURE__ */ jsxs(
+          "div",
+          {
+            className: `w-[250px] min-w-[250px] cursor-pointer`,
+            onClick: () => {
+              showCarousel(i);
+            },
+            children: [
+              /* @__PURE__ */ jsx("div", { className: `relative w-full h-[180px] rounded-xl overflow-hidden bg-blue-200`, children: /* @__PURE__ */ jsx(
+                "img",
+                {
+                  src: config.IMG_BASE_URL + item.product_image_url,
+                  alt: "",
+                  className: `object-cover h-full w-full`
+                }
+              ) }),
+              /* @__PURE__ */ jsxs("div", { className: `mt-4 `, children: [
+                /* @__PURE__ */ jsx("div", { className: `text-[14px] leading-[1.2em]`, children: item.product_title }),
+                /* @__PURE__ */ jsxs("div", { className: `mt-2 relative`, children: [
+                  /* @__PURE__ */ jsxs("div", { className: `text-sm line-clamp-2`, children: [
+                    item.product_description,
+                    " reviews among one of the best increases of time."
+                  ] }),
+                  /* @__PURE__ */ jsx("div", {})
+                ] })
+              ] })
+            ]
+          },
+          i
+        );
+      }) }),
+      (products2 == null ? void 0 : products2.length) > 0 && /* @__PURE__ */ jsxs("div", { children: [
+        /* @__PURE__ */ jsx(
+          "div",
+          {
+            className: `absolute text-black top-1/2 -translate-y-1/2 left-2 w-[40px] min-w-[40px] h-[40px] bg-white hover:bg-white/70 hover:text-black flex place-content-center place-items-center hover:cursor-pointer border-[1px] border-gray-400 rounded-full z-[5]`,
+            onClick: () => {
+              scrollLeft();
+            },
+            children: /* @__PURE__ */ jsx(FaChevronLeft, {})
+          }
+        ),
+        /* @__PURE__ */ jsx(
+          "div",
+          {
+            className: `absolute text-black top-1/2 -translate-y-1/2 right-2 w-[40px] min-w-[40px] h-[40px] bg-white hover:bg-white/70 hover:text-black flex place-content-center place-items-center hover:cursor-pointer border-[1px] border-gray-400 rounded-full z-[5] transition-all ease-in-out duration-1000`,
+            onClick: () => {
+              scrollRight();
+            },
+            children: /* @__PURE__ */ jsx(FaChevronRight, {})
+          }
+        )
+      ] })
+    ] })
+  ] }) });
+};
+const SocialMedia = ({ listing: listing2 }) => {
+  const [img, setImg] = useState("");
+  const [social, setSocial] = useState(null);
+  useEffect(() => {
+    if (social !== null) {
+      console.log(social);
+    }
+  }, [social]);
+  useEffect(() => {
+    const getSocialMedia = async (listing22) => {
+      const socials2 = [];
+      const socialMedia = await getSocialMediaByBusinessGuid(listing22 == null ? void 0 : listing22.gid);
+      socialMedia == null ? void 0 : socialMedia.map((media, index2) => {
+        const handle = media == null ? void 0 : media.social_media_identifier;
+        const isValidURL = isValidUrl(handle);
+        let link = "";
+        if (isValidURL) {
+          link = handle;
+        } else {
+          link = `${media == null ? void 0 : media.base_url}${media == null ? void 0 : media.social_media_identifier}`;
+        }
+        socials2.push({
+          media: media == null ? void 0 : media.social_media_name,
+          icon: getIcon(media),
+          name: media == null ? void 0 : media.social_media_name,
+          link
+        });
+      });
+      if (listing22 == null ? void 0 : listing22.website) {
+        socials2.push({
+          media: listing22 == null ? void 0 : listing22.website,
+          icon: /* @__PURE__ */ jsx(CgWebsite, {}),
+          name: "Website",
+          link: `${listing22 == null ? void 0 : listing22.website}`
+        });
+      }
+      if (listing22 == null ? void 0 : listing22.email_address) {
+        socials2.push({
+          media: listing22 == null ? void 0 : listing22.email_address,
+          icon: /* @__PURE__ */ jsx(MdEmail, {}),
+          name: "Email Address",
+          link: `mailto:${listing22 == null ? void 0 : listing22.email_address}`
+        });
+      }
+      if (listing22 == null ? void 0 : listing22.phone) {
+        socials2.push({
+          media: listing22 == null ? void 0 : listing22.phone,
+          icon: /* @__PURE__ */ jsx(BiPhone, {}),
+          name: "Phone",
+          link: `tel:${listing22 == null ? void 0 : listing22.phone}`
+        });
+      }
+      setSocial(socials2);
+    };
+    if (listing2 !== null) {
+      getSocialMedia(listing2);
+    }
+  }, [listing2]);
+  return /* @__PURE__ */ jsxs("div", { className: `mt-12 border-t py-10`, children: [
+    /* @__PURE__ */ jsx("div", { className: `text-[22px] md:text-[25px] font-semibold `, children: "Social Media" }),
+    /* @__PURE__ */ jsx("div", { className: `mt-6`, children: /* @__PURE__ */ jsx("div", { className: `grid grid-cols-2 w-full gap-4`, children: social == null ? void 0 : social.map((item, i) => {
+      return /* @__PURE__ */ jsx("div", { children: /* @__PURE__ */ jsx(Link, { to: item.link, children: /* @__PURE__ */ jsxs("div", { className: `py-2.5 flex place-items-center gap-4 group cursor-pointer`, children: [
+        /* @__PURE__ */ jsx("div", { className: `text-[19px]`, children: item.icon }),
+        /* @__PURE__ */ jsx("div", { className: `text-[15px] cursor-pointer group-hover:underline w-full `, children: item.name })
+      ] }) }) }, i);
+    }) }) })
+  ] });
+};
+const ReadMoreWithUrlContext = createContext(null);
+const useReadMoreWithUrlContext = () => {
+  const ctx = useContext(ReadMoreWithUrlContext);
+  if (ctx) return ctx;
+  return null;
+};
+const ReadMoreWithUrlProvider = ({ children }) => {
+  const [show, setShow] = useState(false);
+  const [description, setDescription] = useState("");
+  const [title, setTitle] = useState("");
+  const [url, setUrl] = useState("");
+  let vals = {
+    setDescription,
+    setShow,
+    setTitle,
+    setUrl
+  };
+  return /* @__PURE__ */ jsxs(ReadMoreWithUrlContext.Provider, { value: vals, children: [
+    /* @__PURE__ */ jsx("div", { children: show && /* @__PURE__ */ jsxs(
+      "div",
+      {
+        className: `fixed top-0 left-0 w-full right-0 bg-black/40 z-[4000] h-full flex place-items-center place-content-center`,
+        onClick: () => setShow(false),
+        children: [
+          /* @__PURE__ */ jsx(CloseButton$5, { setShow }),
+          /* @__PURE__ */ jsxs(
+            "div",
+            {
+              className: `max-w-[660px] min-h-[50%] max-h-[80%]  mx-auto w-full bg-white rounded-[40px] px-[32px] pt-12 pb-20 relative`,
+              onClick: (e) => e.stopPropagation(),
+              children: [
+                /* @__PURE__ */ jsx(
+                  "div",
+                  {
+                    className: `absolute top-8 right-8 text-3xl border-[2px] rounded-xl border-gray-500/20 w-[40px] h-[40px] shadow-sm flex place-items-center place-content-center text-gray-500 cursor-pointer hover:bg-gray-100 hover:border-gray-200/50`,
+                    onClick: () => setShow(false),
+                    children: /* @__PURE__ */ jsx(CgClose, {})
+                  }
+                ),
+                /* @__PURE__ */ jsx("div", { className: `text-3xl`, children: "Service Description" }),
+                /* @__PURE__ */ jsx("div", { className: `text-xl mt-6 line-clamp-1`, children: title }),
+                /* @__PURE__ */ jsxs("div", { className: ` whitespace-pre-wrap mt-6 max-h-[280px] overflow-y-auto`, children: [
+                  description,
+                  /* @__PURE__ */ jsx("div", { className: `h-[30px]` }),
+                  url ? /* @__PURE__ */ jsxs("div", { children: [
+                    /* @__PURE__ */ jsx(
+                      Link,
+                      {
+                        to: url,
+                        className: `underline`,
+                        children: "Service Link"
+                      }
+                    ),
+                    /* @__PURE__ */ jsx("div", { className: `h-[60px]` })
+                  ] }) : /* @__PURE__ */ jsx("div", { className: `h-[30px]` })
+                ] })
+              ]
+            }
+          )
+        ]
+      }
+    ) }),
+    children
+  ] });
+};
+const CloseButton$5 = ({ setShow }) => {
+  return /* @__PURE__ */ jsx("div", { onClick: () => setShow(false), children: /* @__PURE__ */ jsx("div", { className: `w-[30px] h-[30px] flex place-items-center place-content-center rounded-full absolute top-2 left-2 bg-white text-[25px] font-bold transition-all ease-in-out duration-700 cursor-pointer hover:bg-white/40`, children: /* @__PURE__ */ jsx(BiChevronLeft, {}) }) });
+};
+const Services = ({ services: services2 }) => {
+  const readMoreCtx = useReadMoreWithUrlContext();
+  const handleShowService = (service) => {
+    readMoreCtx == null ? void 0 : readMoreCtx.setShow(true);
+    readMoreCtx == null ? void 0 : readMoreCtx.setDescription(service.service_description);
+    readMoreCtx == null ? void 0 : readMoreCtx.setTitle(service.service_name);
+    readMoreCtx == null ? void 0 : readMoreCtx.setUrl(service.service_url);
+  };
+  return /* @__PURE__ */ jsxs("div", { className: `mt-12 border-t py-10`, children: [
+    /* @__PURE__ */ jsx("div", { className: `text-[22px] md:text-[25px] font-semibold `, children: "Services" }),
+    /* @__PURE__ */ jsx("div", { className: `mt-6`, children: /* @__PURE__ */ jsx("div", { className: `grid grid-cols-2 w-full gap-4`, children: services2 == null ? void 0 : services2.map((item, i) => {
+      return /* @__PURE__ */ jsx(
+        "div",
+        {
+          onClick: () => handleShowService(item),
+          className: `cursor-pointer `,
+          children: /* @__PURE__ */ jsx("div", { className: `py-2.5 `, children: /* @__PURE__ */ jsxs("div", { className: `flex text-[15px] group place-items-center gap-1`, children: [
+            /* @__PURE__ */ jsx("div", { children: i + 1 }),
+            /* @__PURE__ */ jsx("div", { children: "-" }),
+            /* @__PURE__ */ jsx("div", { className: `text-[15px]  w-full group-hover:underline `, children: item == null ? void 0 : item.service_name })
+          ] }) })
+        },
+        i
+      );
+    }) }) })
+  ] });
+};
+const ClaimBusiness = () => {
+  return /* @__PURE__ */ jsx("div", { className: `w-full mt-12`, children: /* @__PURE__ */ jsxs("div", { className: `border border-gray-100 p-5 pt-7 rounded-xl  shadow-lg shadow-gray-200 pb-7`, children: [
+    /* @__PURE__ */ jsxs("div", { className: `flex place-content-between`, children: [
+      /* @__PURE__ */ jsx("div", { className: `text-[17px] font-semibold`, children: "Is this business yours?" }),
+      /* @__PURE__ */ jsx("div", { className: `flex place-items-center gap-1`, children: /* @__PURE__ */ jsx(BsTrophy, { className: `text-xl` }) })
+    ] }),
+    /* @__PURE__ */ jsx("div", { className: `flex place-items-center mt-6 text-[14px] font-light text-center w-[80%] place-content-center mx-auto leading-[1.3em]`, children: "Do you own this business? You can reach out and claim it for free!" }),
+    /* @__PURE__ */ jsxs("div", { className: `mt-6 flex place-content-center w-full flex-col place-items-center`, children: [
+      /* @__PURE__ */ jsx(Link, { to: "/web/contact", className: `w-[70%]`, children: /* @__PURE__ */ jsx("button", { className: `bg-[#A52A2A] w-full rounded-full py-4 text-white text-lg`, children: "Claim Business" }) }),
+      /* @__PURE__ */ jsx("div", { className: `mt-2 text-center`, children: "You woun't be charged" })
+    ] })
+  ] }) });
+};
+const RatingSummary = ({ ratings, listing: listing2, reviewContext, businessRating }) => {
+  const [ratingInfo, setRatingInfo] = useState();
+  const [averageRating, setAverageRating] = useState(0);
+  useEffect(() => {
+    var _a;
+    if (ratings) {
+      setRatingInfo(ratings);
+      const avgRating = parseFloat((_a = Number(ratings == null ? void 0 : ratings.rating_average)) == null ? void 0 : _a.toFixed(1));
+      setAverageRating(avgRating);
+    }
+  }, [ratings]);
+  return /* @__PURE__ */ jsx("div", { className: "mb-8 border-b border-solid md:border-none", children: /* @__PURE__ */ jsxs("div", { className: `grid grid-cols-3 border-none md:border md:border-solid rounded-3xl py-5 divide-x `, children: [
+    /* @__PURE__ */ jsx("div", { className: `text-lg flex flex-col  place-items-center place-content-center`, children: /* @__PURE__ */ jsxs("div", { className: `mx-[50%] text-center leading-[1.2em] text-[14px] md:text-[15px] font-semibold`, children: [
+      /* @__PURE__ */ jsx("div", { className: `md:hidden`, children: /* @__PURE__ */ jsx(
+        Reviews,
+        {
+          listing: listing2,
+          reviewContext
+        }
+      ) }),
+      /* @__PURE__ */ jsx("span", { className: `md:block hidden`, children: "User Reviews" })
+    ] }) }),
+    /* @__PURE__ */ jsxs("div", { className: `flex flex-col place-items-center gap-y-1`, children: [
+      /* @__PURE__ */ jsx("div", { className: `text-xl font-semibold md:text-2xl`, children: (businessRating == null ? void 0 : businessRating.avg_rating) || 0 }),
+      /* @__PURE__ */ jsx("div", { className: `text-lg`, children: /* @__PURE__ */ jsx(RatingBoxInfoCard, { rating: Number(businessRating == null ? void 0 : businessRating.avg_rating) || 0 }) })
+    ] }),
+    /* @__PURE__ */ jsxs("div", { className: `flex flex-col place-items-center gap-y-0`, children: [
+      /* @__PURE__ */ jsx("div", { className: `text-xl font-semibold md:text-2xl`, children: (businessRating == null ? void 0 : businessRating.count_of_rating) || 0 }),
+      /* @__PURE__ */ jsx("div", { className: `text-[12px]`, children: "Reviews" })
+    ] })
+  ] }) });
+};
+const loader$1n = async ({ request, params }) => {
+  const id = params.id || null;
+  let listing2;
+  let profileImageData, gallery, ratingData;
+  let reportTime, businessProfileBgData, fullPath;
+  let randomNumber;
+  let videoGallery = null;
+  let products = null;
+  let businessReviews;
+  let businessRating;
+  let related;
+  let nearby;
+  let services;
+  const url = new URL(request.url);
+  const pathname = url.pathname;
+  try {
+    listing2 = await getPage(id);
+    profileImageData = await getBusinessProfileImageData(listing2 == null ? void 0 : listing2.gid);
+    businessProfileBgData = await getBusinessProfileBgData(listing2 == null ? void 0 : listing2.gid);
+    gallery = await getBusinessGallery(listing2.gid);
+    ratingData = await getRatingsReviews(listing2.gid);
+    businessRating = await getBusinessRating(listing2 == null ? void 0 : listing2.gid);
+    businessReviews = await getBusinessReviews(listing2 == null ? void 0 : listing2.gid);
+    videoGallery = await getBusinessVideoGallery(listing2 == null ? void 0 : listing2.gid);
+    products = await getProductGallery(listing2 == null ? void 0 : listing2.gid, listing2 == null ? void 0 : listing2.owner);
+    reportTime = await ReportTime(listing2);
+    randomNumber = generateRandom10DigitNumber();
+    fullPath = config.BASE_URL + pathname;
+    related = await getRelatedByCategory(listing2 == null ? void 0 : listing2.category, 10);
+    nearby = await getNearbyBusinesses((listing2 == null ? void 0 : listing2.city_id) || "32", 10);
+    services = await getServicesByBusinessGuid(listing2 == null ? void 0 : listing2.gid);
+    console.log(services);
+    console.log("hal");
+    return {
+      listing: listing2,
+      gallery,
+      ratingsData: ratingData,
+      profileImageData,
+      businessProfileBgData,
+      videoGallery,
+      products,
+      reportTime,
+      randomNumber,
+      fullPath,
+      businessRating,
+      businessReviews,
+      related,
+      nearby,
+      services
+    };
+  } catch (err) {
+    logError(err);
+  }
+  return null;
+};
+const listing = () => {
+  var _a;
+  const reviewContext = useWriteReviewAltContext();
+  const data = useLoaderData();
+  const [operatingHoursStatus, setOperatingHoursStatus] = useState(void 0);
+  const [showShare, setShowShare] = useState(false);
+  const shareContext = useShareDialogContext();
+  const [profileImg, setProfileImg] = useState("");
+  let listing2;
+  let gallery;
+  let ratingsData;
+  let videoGallery;
+  let products;
+  let profileImageData;
+  let reportTime;
+  let businessRating;
+  let businessReviews;
+  let related;
+  let nearby;
+  let services;
+  listing2 = data.listing;
+  gallery = data.gallery;
+  ratingsData = data.ratingsData;
+  videoGallery = data.videoGallery;
+  products = data.products;
+  profileImageData = data.profileImageData;
+  data.businessProfileBgData;
+  reportTime = data.reportTime;
+  businessRating = data.businessRating;
+  businessReviews = data.businessReviews;
+  related = data.related;
+  nearby = data.nearby;
+  services = (_a = data.services) == null ? void 0 : _a.data;
+  console.log(profileImageData);
+  useEffect(() => {
+    if (listing2 && reportTime) {
+      setOperatingHoursStatus(reportTime);
+    }
+  }, [listing2, reportTime]);
+  useEffect(() => {
+    if (profileImageData) {
+      setProfileImg(config.IMG_BASE_URL + (profileImageData == null ? void 0 : profileImageData.image_url));
+    }
+  }, [profileImageData]);
+  return /* @__PURE__ */ jsx(RatingProvider, { children: /* @__PURE__ */ jsx(GalleryProvider, { children: /* @__PURE__ */ jsxs(SearchLayout, { children: [
+    /* @__PURE__ */ jsx(
+      MobileHeroWithTitle,
+      {
+        title: listing2 == null ? void 0 : listing2.title,
+        images: gallery,
+        listing: listing2
+      }
+    ),
+    /* @__PURE__ */ jsxs("div", { className: `px-[20px] bg-gray-50/20`, children: [
+      /* @__PURE__ */ jsxs("div", { className: `max-w-[1100px] mx-auto w-full mt-0 md:mt-12`, children: [
+        /* @__PURE__ */ jsxs("div", { className: `hidden md:block`, children: [
+          /* @__PURE__ */ jsx(
+            HeaderTitle,
+            {
+              listing: listing2,
+              ratingsData,
+              reviewContext,
+              showShare,
+              shareContext,
+              profileImg,
+              profileImageData
+            }
+          ),
+          gallery && listing2 && /* @__PURE__ */ jsx(Hero, { images: gallery, listing: listing2 })
+        ] }),
+        /* @__PURE__ */ jsxs("div", { className: `grid grid-cols-1 lg:grid-cols-12 lg:gap-x-24 mt-0 md:mt-12`, children: [
+          /* @__PURE__ */ jsxs("div", { className: ` md:col-span-7`, children: [
+            /* @__PURE__ */ jsx(WriteReviewAltProvider, { children: /* @__PURE__ */ jsx(
+              RatingSummary,
+              {
+                listing: listing2,
+                ratings: ratingsData,
+                reviewContext,
+                businessRating
+              }
+            ) }),
+            /* @__PURE__ */ jsx(
+              DropBy,
+              {
+                listing: listing2,
+                reportTime,
+                operatingHoursStatus
+              }
+            ),
+            /* @__PURE__ */ jsx(ReadMoreAboutProvider, { children: /* @__PURE__ */ jsx(About, { listing: listing2 }) }),
+            /* @__PURE__ */ jsxs("div", { className: `block lg:hidden mb-12`, children: [
+              /* @__PURE__ */ jsx(
+                WorkingHours,
+                {
+                  listing: listing2,
+                  operatingHoursStatus,
+                  workTimeStatusObject: reportTime.todayHoursOpenStatus
+                }
+              ),
+              /* @__PURE__ */ jsx(ClaimBusiness, {})
+            ] }),
+            /* @__PURE__ */ jsx(VideoGalleryProvider, { children: /* @__PURE__ */ jsx(
+              Videos,
+              {
+                listing: listing2,
+                videoGallery
+              }
+            ) }),
+            /* @__PURE__ */ jsx(SocialMedia, { listing: listing2 }),
+            /* @__PURE__ */ jsx(ReadMoreWithUrlProvider, { children: /* @__PURE__ */ jsx(Services, { services }) }),
+            /* @__PURE__ */ jsx(ProductSliderProvider, { children: /* @__PURE__ */ jsx(ProductGalleryProvider, { children: /* @__PURE__ */ jsx(
+              Products,
+              {
+                listing: listing2,
+                products
+              }
+            ) }) }),
+            /* @__PURE__ */ jsx(ReadMoreAboutProvider, { children: /* @__PURE__ */ jsx(Features, { listing: listing2 }) }),
+            /* @__PURE__ */ jsx(Location, { listing: listing2 })
+          ] }),
+          /* @__PURE__ */ jsx("div", { className: `hidden lg:block lg:col-span-5 relative w-full`, children: /* @__PURE__ */ jsxs("div", { className: `sticky top-[100px] w-full`, children: [
+            /* @__PURE__ */ jsx(
+              WorkingHours,
+              {
+                listing: listing2,
+                operatingHoursStatus,
+                workTimeStatusObject: reportTime.todayHoursOpenStatus
+              }
+            ),
+            /* @__PURE__ */ jsx(ClaimBusiness, {})
+          ] }) })
+        ] }),
+        /* @__PURE__ */ jsx(
+          ReviewReport,
+          {
+            businessRating,
+            listing: listing2
+          }
+        ),
+        /* @__PURE__ */ jsx(UserReviews, { businessReviews }),
+        /* @__PURE__ */ jsx(Related, { related })
+      ] }),
+      /* @__PURE__ */ jsx("div", { className: `max-w-[1100px] mx-auto w-full mt-12`, children: /* @__PURE__ */ jsx(NearbyBusinesses, { nearby }) })
+    ] })
+  ] }) }) });
+};
+const route14 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  default: listing,
+  loader: loader$1n
+}, Symbol.toStringTag, { value: "Module" }));
+const Address$1 = ({ listing: listing2 }) => {
+  return /* @__PURE__ */ jsxs("div", { children: [
+    listing2 == null ? void 0 : listing2.address_one,
+    (listing2 == null ? void 0 : listing2.address_two) ? `, ${listing2 == null ? void 0 : listing2.address_two}` : "",
+    (listing2 == null ? void 0 : listing2.city_name) ? `, ${listing2 == null ? void 0 : listing2.city_name}` : "",
+    (listing2 == null ? void 0 : listing2.state_name) ? `, ${listing2 == null ? void 0 : listing2.state_name}` : "",
+    (listing2 == null ? void 0 : listing2.country_name) ? `, ${listing2 == null ? void 0 : listing2.country_name}` : ""
   ] });
 };
 const RatingCount$2 = ({ averageRating }) => {
@@ -9894,7 +12797,7 @@ const Tooltip$1 = ({ tooltip, children }) => {
                     ` })
   ] }) });
 };
-const Card$1 = ({ listing }) => {
+const Card$1 = ({ listing: listing2 }) => {
   var _a;
   const [placeholder, setPlaceholder] = useState("/images/bycetplaceholder.png");
   const [imgscr, setImgsrc] = useState("");
@@ -9905,8 +12808,8 @@ const Card$1 = ({ listing }) => {
   const [facilityFeatures2, setFacilityFeatures] = useState(null);
   const [addressLink, setAddressLink] = useState("");
   useEffect(() => {
-    if (listing) {
-      const baseListing2 = listing;
+    if (listing2) {
+      const baseListing2 = listing2;
       setBaseListing(baseListing2);
       if (baseListing2 == null ? void 0 : baseListing2.image_url) {
         setImgsrc(config.IMG_BASE_URL + (baseListing2 == null ? void 0 : baseListing2.image_url));
@@ -9914,36 +12817,36 @@ const Card$1 = ({ listing }) => {
         setImgsrc(placeholder);
       }
     }
-  }, [listing]);
+  }, [listing2]);
   useEffect(() => {
-    if (listing == null ? void 0 : listing.website) {
-      setListingWebsite(listing == null ? void 0 : listing.website);
+    if (listing2 == null ? void 0 : listing2.website) {
+      setListingWebsite(listing2 == null ? void 0 : listing2.website);
     } else {
-      if ((listing == null ? void 0 : listing.username) === "" || (listing == null ? void 0 : listing.username) === null) {
-        setListingWebsite("/" + (listing == null ? void 0 : listing.gid));
+      if ((listing2 == null ? void 0 : listing2.username) === "" || (listing2 == null ? void 0 : listing2.username) === null) {
+        setListingWebsite("/" + (listing2 == null ? void 0 : listing2.gid));
       } else {
-        setListingWebsite("/" + (listing == null ? void 0 : listing.username));
+        setListingWebsite("/" + (listing2 == null ? void 0 : listing2.username));
       }
     }
-  }, [listing]);
+  }, [listing2]);
   useEffect(() => {
-    if (listing) {
-      if ((listing == null ? void 0 : listing.image_url) !== "" && (listing == null ? void 0 : listing.image_url) !== null && (listing == null ? void 0 : listing.image_url) !== void 0) {
-        setImgsrc(config.IMG_BASE_URL + (listing == null ? void 0 : listing.image_url));
+    if (listing2) {
+      if ((listing2 == null ? void 0 : listing2.image_url) !== "" && (listing2 == null ? void 0 : listing2.image_url) !== null && (listing2 == null ? void 0 : listing2.image_url) !== void 0) {
+        setImgsrc(config.IMG_BASE_URL + (listing2 == null ? void 0 : listing2.image_url));
       } else {
         setImgsrc(placeholder);
       }
-      if ((listing == null ? void 0 : listing.username) !== "" && (listing == null ? void 0 : listing.username) !== null && (listing == null ? void 0 : listing.username) !== void 0) {
-        setUserId(listing == null ? void 0 : listing.username);
+      if ((listing2 == null ? void 0 : listing2.username) !== "" && (listing2 == null ? void 0 : listing2.username) !== null && (listing2 == null ? void 0 : listing2.username) !== void 0) {
+        setUserId(listing2 == null ? void 0 : listing2.username);
       } else {
-        setUserId(listing == null ? void 0 : listing.gid);
+        setUserId(listing2 == null ? void 0 : listing2.gid);
       }
     }
-  }, [listing]);
+  }, [listing2]);
   useEffect(() => {
-    if (listing == null ? void 0 : listing.social_media) {
+    if (listing2 == null ? void 0 : listing2.social_media) {
       let socialMedia2 = [];
-      const separatedMedia = strToList(listing == null ? void 0 : listing.social_media, ",");
+      const separatedMedia = strToList(listing2 == null ? void 0 : listing2.social_media, ",");
       if (separatedMedia !== null) {
         separatedMedia == null ? void 0 : separatedMedia.map((mediaString, index2) => {
           const mediaInfo = strToList(mediaString, "$");
@@ -9958,7 +12861,7 @@ const Card$1 = ({ listing }) => {
       }
       setSocialMedia(socialMedia2);
     }
-  }, [listing]);
+  }, [listing2]);
   useEffect(() => {
   }, [socialMedia]);
   useEffect(() => {
@@ -9980,21 +12883,21 @@ const Card$1 = ({ listing }) => {
     }
   }, [baseListing]);
   useEffect(() => {
-    let getListingAddress = async (listing2) => {
-      let address = listing2 == null ? void 0 : listing2.title;
-      address += (listing2 == null ? void 0 : listing2.address_one) ? ", " + (listing2 == null ? void 0 : listing2.address_one) : "";
-      address += (listing2 == null ? void 0 : listing2.address_two) ? ", " + (listing2 == null ? void 0 : listing2.address_two) : "";
-      address += (listing2 == null ? void 0 : listing2.city_name) ? ", " + (listing2 == null ? void 0 : listing2.city_name) : "";
-      address += (listing2 == null ? void 0 : listing2.state_name) ? ", " + (listing2 == null ? void 0 : listing2.state_name) : "";
-      address += (listing2 == null ? void 0 : listing2.zipcode) ? ", " + (listing2 == null ? void 0 : listing2.zipcode) : "";
-      address += (listing2 == null ? void 0 : listing2.country_name) ? ", " + (listing2 == null ? void 0 : listing2.country_name) : "";
+    let getListingAddress = async (listing22) => {
+      let address = listing22 == null ? void 0 : listing22.title;
+      address += (listing22 == null ? void 0 : listing22.address_one) ? ", " + (listing22 == null ? void 0 : listing22.address_one) : "";
+      address += (listing22 == null ? void 0 : listing22.address_two) ? ", " + (listing22 == null ? void 0 : listing22.address_two) : "";
+      address += (listing22 == null ? void 0 : listing22.city_name) ? ", " + (listing22 == null ? void 0 : listing22.city_name) : "";
+      address += (listing22 == null ? void 0 : listing22.state_name) ? ", " + (listing22 == null ? void 0 : listing22.state_name) : "";
+      address += (listing22 == null ? void 0 : listing22.zipcode) ? ", " + (listing22 == null ? void 0 : listing22.zipcode) : "";
+      address += (listing22 == null ? void 0 : listing22.country_name) ? ", " + (listing22 == null ? void 0 : listing22.country_name) : "";
       let addLink = `https://www.google.com/maps/search/?api=1&query=${address}`;
       setAddressLink(addLink);
     };
-    if (listing !== null) {
-      getListingAddress(listing);
+    if (listing2 !== null) {
+      getListingAddress(listing2);
     }
-  }, [listing]);
+  }, [listing2]);
   return /* @__PURE__ */ jsxs("div", { className: `bg-white w-full h-auto  overflow-hidden border   hover:shadow-md hover:shadow-gray-200 md:rounded-xl`, children: [
     /* @__PURE__ */ jsx("div", { className: `bg-gray-50/30 py-3 px-4 border-b-0`, children: /* @__PURE__ */ jsxs("a", { href: `/${userId}`, children: [
       /* @__PURE__ */ jsxs("div", { className: `flex place-content-between gap-2`, children: [
@@ -10004,11 +12907,11 @@ const Card$1 = ({ listing }) => {
             {
               className: `max-w-[85px] h-[90px] min-w-[85px]   bg-gray-50  relative border flex place-items-center place-content-center  overflow-hidden shadow-xl shadow-gray-400/30`,
               children: [
-                ((listing == null ? void 0 : listing.image_url) === void 0 || (listing == null ? void 0 : listing.image_url) === null || (listing == null ? void 0 : listing.image_url) === "") && /* @__PURE__ */ jsxs("div", { className: `absolute top-0 h-full w-full flex -gap-y-2 place-content-center place-items-center font-bold z-[10] text-white bg-black/10 text-[7px] tracking-[3px] flex-col`, children: [
+                ((listing2 == null ? void 0 : listing2.image_url) === void 0 || (listing2 == null ? void 0 : listing2.image_url) === null || (listing2 == null ? void 0 : listing2.image_url) === "") && /* @__PURE__ */ jsxs("div", { className: `absolute top-0 h-full w-full flex -gap-y-2 place-content-center place-items-center font-bold z-[10] text-white bg-black/10 text-[7px] tracking-[3px] flex-col`, children: [
                   /* @__PURE__ */ jsx("div", { children: "AUTOMATIC" }),
                   /* @__PURE__ */ jsx("div", { children: "GENERATED" })
                 ] }),
-                (listing == null ? void 0 : listing.image_url) !== null ? /* @__PURE__ */ jsx(
+                (listing2 == null ? void 0 : listing2.image_url) !== null ? /* @__PURE__ */ jsx(
                   "img",
                   {
                     src: imgscr,
@@ -10028,8 +12931,8 @@ const Card$1 = ({ listing }) => {
             }
           ),
           /* @__PURE__ */ jsxs("div", { className: ` w-full`, children: [
-            /* @__PURE__ */ jsx("div", { className: `text-[18px] font-normal text-blue-800 line-clamp-1 w-full`, children: listing == null ? void 0 : listing.title }),
-            (listing == null ? void 0 : listing.category) && /* @__PURE__ */ jsx("div", { className: `text-[12px] text-gray-500  capitalize mt-[0px]`, children: (_a = searchCategories(listing == null ? void 0 : listing.category)) == null ? void 0 : _a.name }),
+            /* @__PURE__ */ jsx("div", { className: `text-[18px] font-normal text-blue-800 line-clamp-1 w-full`, children: listing2 == null ? void 0 : listing2.title }),
+            (listing2 == null ? void 0 : listing2.category) && /* @__PURE__ */ jsx("div", { className: `text-[12px] text-gray-500  capitalize mt-[0px]`, children: (_a = searchCategories(listing2 == null ? void 0 : listing2.category)) == null ? void 0 : _a.name }),
             /* @__PURE__ */ jsxs("div", { className: `flex place-items-center gap-x-1 mt-[5px] `, children: [
               /* @__PURE__ */ jsx("div", { children: (baseListing == null ? void 0 : baseListing.average_rating) !== null && (baseListing == null ? void 0 : baseListing.average_rating) !== "" && (baseListing == null ? void 0 : baseListing.average_rating) !== void 0 ? /* @__PURE__ */ jsxs("div", { className: ` flex gap-2 place-items-center`, children: [
                 /* @__PURE__ */ jsx(RatingBoxSquare, { rating: Number(baseListing == null ? void 0 : baseListing.average_rating) }),
@@ -10047,7 +12950,7 @@ const Card$1 = ({ listing }) => {
         ] }),
         /* @__PURE__ */ jsx("div", { className: `flex place-items-start`, children: /* @__PURE__ */ jsx("div", { className: `font-bold rounded-sm border px-3 py-[2px]`, children: "View" }) })
       ] }),
-      /* @__PURE__ */ jsx("div", { className: `mt-[8px] text-[14px] md:text-[13px] text-gray-800 leading-[1.3em] line-clamp-3`, children: listing == null ? void 0 : listing.short_description })
+      /* @__PURE__ */ jsx("div", { className: `mt-[8px] text-[14px] md:text-[13px] text-gray-800 leading-[1.3em] line-clamp-3`, children: listing2 == null ? void 0 : listing2.short_description })
     ] }) }),
     /* @__PURE__ */ jsx("div", { children: /* @__PURE__ */ jsxs("div", { className: ` h-auto flex place-content-between gap-2 `, children: [
       /* @__PURE__ */ jsxs("div", { className: `flex place-items-start w-[60%] flex-col  pl-4  pt-2 pb-4 `, children: [
@@ -10055,7 +12958,7 @@ const Card$1 = ({ listing }) => {
           /* @__PURE__ */ jsx(BsBank, {}),
           /* @__PURE__ */ jsxs("span", { className: `mt-[1px] text-gray-500 space-x-2`, children: [
             /* @__PURE__ */ jsx("span", { className: `font-bold`, children: "Founded:" }),
-            /* @__PURE__ */ jsx("span", { children: listing == null ? void 0 : listing.established })
+            /* @__PURE__ */ jsx("span", { children: listing2 == null ? void 0 : listing2.established })
           ] })
         ] }),
         facilityFeatures2 !== null && /* @__PURE__ */ jsxs("div", { className: `mt-2 flex place-items-start gap-2 w-full relative`, children: [
@@ -10073,14 +12976,14 @@ const Card$1 = ({ listing }) => {
         ] })
       ] }),
       /* @__PURE__ */ jsxs("div", { className: `flex place-items-end flex-col w-[40%] text-end pr-4 pt-2 pb-4`, children: [
-        /* @__PURE__ */ jsx("div", { className: `font-[600]`, children: listing == null ? void 0 : listing.phone }),
-        /* @__PURE__ */ jsx("div", { className: `text-[12px] leading-[1.2em] mt-1`, children: /* @__PURE__ */ jsx(Address$1, { listing }) })
+        /* @__PURE__ */ jsx("div", { className: `font-[600]`, children: listing2 == null ? void 0 : listing2.phone }),
+        /* @__PURE__ */ jsx("div", { className: `text-[12px] leading-[1.2em] mt-1`, children: /* @__PURE__ */ jsx(Address$1, { listing: listing2 }) })
       ] })
     ] }) }),
     /* @__PURE__ */ jsx("div", { className: `border-none`, children: /* @__PURE__ */ jsxs("div", { className: `flex place-content-between mx-4 my-1`, children: [
       /* @__PURE__ */ jsxs("div", { className: `flex place-items-center gap-4`, children: [
-        /* @__PURE__ */ jsx("a", { href: `mailto:${listing == null ? void 0 : listing.email_address}`, children: /* @__PURE__ */ jsx(MdEmail, { size: 20 }) }, 34),
-        (listing == null ? void 0 : listing.phone) && /* @__PURE__ */ jsx("a", { href: `tel:${listing == null ? void 0 : listing.phone}`, children: /* @__PURE__ */ jsx(BiPhone, { size: 20 }) }, 30),
+        /* @__PURE__ */ jsx("a", { href: `mailto:${listing2 == null ? void 0 : listing2.email_address}`, children: /* @__PURE__ */ jsx(MdEmail, { size: 20 }) }, 34),
+        (listing2 == null ? void 0 : listing2.phone) && /* @__PURE__ */ jsx("a", { href: `tel:${listing2 == null ? void 0 : listing2.phone}`, children: /* @__PURE__ */ jsx(BiPhone, { size: 20 }) }, 30),
         socialMedia !== null && (socialMedia == null ? void 0 : socialMedia.map((media, index2) => {
           return /* @__PURE__ */ jsx("a", { href: `${media == null ? void 0 : media.baseUrl}${media == null ? void 0 : media.mediaHandle}`, children: getCardIcon(media == null ? void 0 : media.mediaName) }, index2);
         }))
@@ -10221,7 +13124,7 @@ const Categories = () => {
     ] })
   ] });
 };
-function Pagination({ pagination }) {
+function Pagination$3({ pagination }) {
   var _a;
   const [searchParams] = useSearchParams();
   const currentPage = pagination.currentPage;
@@ -10262,17 +13165,16 @@ function Pagination({ pagination }) {
     params.set("page", page.toString());
     return `?${params.toString()}`;
   };
-  return /* @__PURE__ */ jsxs("div", { className: "flex flex-col sm:flex-row items-center justify-between gap-4", children: [
-    /* @__PURE__ */ jsxs("div", { className: "text-sm text-gray-600", children: [
-      "Showing ",
+  return /* @__PURE__ */ jsxs("div", { className: "flex flex-row items-center justify-between gap-4", children: [
+    /* @__PURE__ */ jsxs("div", { className: "text-[13px] text-gray-500", children: [
+      "Items ",
       (currentPage - 1) * pagination.itemsPerPage + 1,
       " to",
       " ",
       Math.min(currentPage * pagination.itemsPerPage, pagination.totalItems),
       " of",
       " ",
-      pagination.totalItems,
-      " items"
+      pagination.totalItems
     ] }),
     /* @__PURE__ */ jsxs("nav", { className: "flex items-center space-x-1", children: [
       /* @__PURE__ */ jsx(
@@ -10316,7 +13218,7 @@ function Pagination({ pagination }) {
     ] })
   ] });
 }
-const loader$11 = async ({ request, params }) => {
+const loader$1m = async ({ request, params }) => {
   const url = new URL(request.url);
   const query2 = (url == null ? void 0 : url.searchParams.get("q")) || "";
   const state = (url == null ? void 0 : url.searchParams.get("state")) || "";
@@ -10381,7 +13283,7 @@ const Index$4 = () => {
       /* @__PURE__ */ jsx("div", { className: `col-span-12 xl:col-span-9  overflow-y-auto w-full md:px-[15px]`, children: /* @__PURE__ */ jsxs("div", { className: `grid grid-cols-12 gap-5`, children: [
         /* @__PURE__ */ jsx("div", { className: `col-span-12 md:col-span-8  pt-3`, children: /* @__PURE__ */ jsxs("div", { className: `space-y-8`, children: [
           /* @__PURE__ */ jsx(
-            Pagination,
+            Pagination$3,
             {
               pagination
             }
@@ -10396,7 +13298,7 @@ const Index$4 = () => {
             );
           }),
           /* @__PURE__ */ jsx(
-            Pagination,
+            Pagination$3,
             {
               pagination
             }
@@ -10408,12 +13310,347 @@ const Index$4 = () => {
     ] }) })
   ] });
 };
-const route16 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route17 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: Index$4,
-  loader: loader$11
+  loader: loader$1m
 }, Symbol.toStringTag, { value: "Module" }));
-const Card = ({ listing }) => {
+const SearchAd = () => {
+  const [adsLoaded, setAdsLoaded] = useState(false);
+  const [env, setEnv] = useState("prod");
+  useEffect(() => {
+  }, []);
+  if ("test" !== env || !adsLoaded) {
+    return null;
+  }
+  return /* @__PURE__ */ jsxs(
+    "div",
+    {
+      className: `max-w-full overflow-hidden min-h-[90px] bg-blue-50
+                    mx-auto w-full mt-4 mb-4 flex place-items-center 
+                    place-content-center font-light text-[14px]
+                    `,
+      children: [
+        "Ads by google",
+        adInfo.adslot !== testAdInfo.adslot
+      ]
+    }
+  );
+};
+function formatInternationalPhone(phone) {
+  if (!phone) return "";
+  if (!phone.startsWith("+")) return phone;
+  const digits = phone.replace(/\D/g, "");
+  const countryCode = digits.slice(0, digits.length > 11 ? 3 : digits.length > 10 ? 2 : 1);
+  const nationalNumber = digits.slice(countryCode.length);
+  const groups = [];
+  let i = 0;
+  while (i < nationalNumber.length) {
+    const remaining = nationalNumber.length - i;
+    if (remaining > 4) {
+      groups.push(nationalNumber.slice(i, i + 3));
+      i += 3;
+    } else {
+      groups.push(nationalNumber.slice(i));
+      break;
+    }
+  }
+  return `+${countryCode} ${groups.join(" ")}`;
+}
+const InfoCard = ({ item, isFirst = false }) => {
+  const [data, setData] = useState(null);
+  const [imgPath, setImgPath] = useState("");
+  const [img, setImg] = useState("");
+  useEffect(() => {
+    if (item) {
+      setData(item);
+    }
+  }, [item]);
+  useEffect(() => {
+    if (data !== null) {
+      let img2 = "";
+      if ((data == null ? void 0 : data.bg_image_url_ext) !== void 0 && (data == null ? void 0 : data.bg_image_url_ext) !== null) {
+        img2 = data == null ? void 0 : data.bg_image_url_ext;
+      } else if ((data == null ? void 0 : data.profile_image_url_ext) !== void 0 && (data == null ? void 0 : data.profile_image_url_ext) !== null) {
+        img2 = data == null ? void 0 : data.profile_image_url_ext;
+      } else {
+        img2 = "";
+      }
+      setImg(img2);
+      let imgPath2 = (config == null ? void 0 : config.IMG_BASE_URL) + img2;
+      setImgPath(imgPath2);
+    }
+  }, [data]);
+  return /* @__PURE__ */ jsx("div", { children: /* @__PURE__ */ jsx(Link, { to: `${(item == null ? void 0 : item.username) !== null && (item == null ? void 0 : item.username) !== "" && (item == null ? void 0 : item.username) !== void 0 ? `/${item == null ? void 0 : item.username}` : `/${item == null ? void 0 : item.gid}`}`, children: /* @__PURE__ */ jsxs("div", { className: `flex py-4 border-b border-gray-200/80 cursor-pointer hover:opacity-80 transition duration-200 ease-out group ${isFirst ? "border-t" : ""} group`, children: [
+    /* @__PURE__ */ jsx("div", { className: `relative h-48 min-w-40 w-40 md:h-52 md:w-52 md:min-w-52 flex-shrink-0 rounded-3xl overflow-hidden shadow-md group-hover:shadow-lg group-hover:shadow-gray-300 border group-hover:border-none`, children: img === "" ? /* @__PURE__ */ jsx(AlternateImage, { title: item == null ? void 0 : item.title }) : /* @__PURE__ */ jsx(
+      "img",
+      {
+        src: imgPath,
+        alt: "",
+        className: `object-cover h-full w-full  `
+      }
+    ) }),
+    /* @__PURE__ */ jsxs("div", { className: `flex flex-col flex-grow pl-5 relative`, children: [
+      /* @__PURE__ */ jsxs("div", { className: `flex justify-between relative`, children: [
+        /* @__PURE__ */ jsx("p", { className: `text-base leading-[1.2em] capitalize`, children: convertDashToSpace(item.category) }),
+        /* @__PURE__ */ jsx("div", { children: /* @__PURE__ */ jsx("div", { className: `text-[12px] md:text-lg min-w-[100px] text-right`, children: formatInternationalPhone(item == null ? void 0 : item.phone) || `n/a` }) })
+      ] }),
+      /* @__PURE__ */ jsx("h4", { className: `text-[17px]  leading-[1.2em] text-blue-700 group-hover:underline`, children: item == null ? void 0 : item.title }),
+      /* @__PURE__ */ jsx("div", { className: `border-b w-10 pt-2` }),
+      /* @__PURE__ */ jsx("div", { className: `pt-2 flex-grow`, children: /* @__PURE__ */ jsx("div", { className: `text-[13px] text-black line-clamp-2 leading-[1.3em]`, children: truncateText(removeAllParagraphs(item == null ? void 0 : item.short_description), 230) }) }),
+      /* @__PURE__ */ jsxs("div", { className: `flex justify-between items-end pt-5`, children: [
+        /* @__PURE__ */ jsxs("div", { children: [
+          /* @__PURE__ */ jsxs("div", { className: `text-sm mb-2 flex flex-col -space-y-0.5 relative`, children: [
+            /* @__PURE__ */ jsx("p", { className: " line-clamp-1", children: item == null ? void 0 : item.address_one }),
+            /* @__PURE__ */ jsxs("p", { className: " line-clamp-1", children: [
+              item.address_two && `${item.address_two}, `,
+              " ",
+              item.city_name && `${item.city_name}, `,
+              " ",
+              item == null ? void 0 : item.country_name
+            ] })
+          ] }),
+          /* @__PURE__ */ jsxs("div", { className: `flex place-items-center relative`, children: [
+            /* @__PURE__ */ jsx(RatingBoxInfoCard, { rating: Number(item == null ? void 0 : item.avg_rating) || 0 }),
+            /* @__PURE__ */ jsx("span", { className: ` ml-1 relative left-0 top-[0px] text-[14px]`, children: (item == null ? void 0 : item.avg_rating) || 0 }),
+            /* @__PURE__ */ jsxs("span", { className: `ml-1 relative left-0 top-[0px] text-orange-700 text-[13px]`, children: [
+              "(",
+              (item == null ? void 0 : item.count_of_rating) || 0,
+              ") Reviews"
+            ] })
+          ] })
+        ] }),
+        /* @__PURE__ */ jsxs("div", { children: [
+          /* @__PURE__ */ jsxs("div", { children: [
+            /* @__PURE__ */ jsx("p", { className: `text-right -mb-1`, children: "Starting" }),
+            /* @__PURE__ */ jsxs("p", { className: `text-lg lg:text-xl font-semibold pb-1 text-right`, children: [
+              item.currency,
+              formatNumber(Number(item.minimum_amount || 0))
+            ] })
+          ] }),
+          /* @__PURE__ */ jsx("p", { className: ` text-right font-light hover:underline`, children: "Website" })
+        ] })
+      ] })
+    ] })
+  ] }) }) });
+};
+function Pagination$2({ pagination }) {
+  var _a;
+  const [searchParams] = useSearchParams();
+  const currentPage = pagination.currentPage;
+  const totalPages = pagination.totalPages;
+  const getPageNumbers = () => {
+    if (totalPages <= 7) {
+      return Array.from({ length: totalPages }, (_, i) => i + 1);
+    }
+    const pages = [];
+    pages.push(1);
+    switch (currentPage) {
+      case 1:
+        pages.push(2, 3, "...", totalPages);
+        break;
+      case 2:
+        pages.push(2, 3, 4, "...", totalPages);
+        break;
+      case 3:
+        pages.push(2, 3, 4, 5, "...", totalPages);
+        break;
+      case totalPages - 2:
+        pages.push("...", totalPages - 3, totalPages - 2, totalPages - 1, totalPages);
+        break;
+      case totalPages - 1:
+        pages.push("...", totalPages - 3, totalPages - 2, totalPages - 1, totalPages);
+        break;
+      case totalPages:
+        pages.push("...", totalPages - 2, totalPages - 1, totalPages);
+        break;
+      default:
+        pages.push("...", currentPage - 1, currentPage, currentPage + 1, "...", totalPages);
+        break;
+    }
+    return pages;
+  };
+  const createPageUrl = (page) => {
+    const params = new URLSearchParams(searchParams);
+    params.set("page", page.toString());
+    return `?${params.toString()}`;
+  };
+  return /* @__PURE__ */ jsxs("div", { className: "flex flex-row items-center justify-between gap-4", children: [
+    /* @__PURE__ */ jsxs("div", { className: "text-[13px] text-gray-500", children: [
+      "Results ",
+      (currentPage - 1) * pagination.itemsPerPage + 1,
+      " to",
+      " ",
+      Math.min(currentPage * pagination.itemsPerPage, pagination.totalItems),
+      " of",
+      " ",
+      pagination.totalItems
+    ] }),
+    /* @__PURE__ */ jsxs("nav", { className: "flex items-center space-x-1", children: [
+      /* @__PURE__ */ jsx(
+        "a",
+        {
+          href: pagination.hasPrev ? createPageUrl(currentPage - 1) : "#",
+          className: `px-3 py-2 border rounded-md text-sm font-medium ${!pagination.hasPrev ? "opacity-50 cursor-not-allowed text-gray-400" : "text-gray-700 hover:bg-gray-100"}`,
+          "aria-disabled": !pagination.hasPrev,
+          onClick: (e) => !pagination.hasPrev && e.preventDefault(),
+          children: "Prev"
+        }
+      ),
+      (_a = getPageNumbers()) == null ? void 0 : _a.map(
+        (page, index2) => {
+          return typeof page === "number" ? /* @__PURE__ */ jsx(
+            "a",
+            {
+              href: createPageUrl(page),
+              className: `px-3 py-2 border rounded-md text-sm font-medium ${page === currentPage ? "bg-blue-500 text-white border-blue-500" : "text-gray-700 hover:bg-gray-100"}`,
+              children: page
+            },
+            page
+          ) : /* @__PURE__ */ jsx(
+            "span",
+            {
+              className: "px-3 py-2 text-gray-500",
+              children: page
+            },
+            `ellipsis-${index2}`
+          );
+        }
+      ),
+      /* @__PURE__ */ jsx(
+        "a",
+        {
+          href: pagination.hasNext ? createPageUrl(currentPage + 1) : "#",
+          className: `px-3 py-2 border rounded-md text-sm font-medium ${!pagination.hasNext ? "opacity-50 cursor-not-allowed text-gray-400" : "text-gray-700 hover:bg-gray-100"}`,
+          "aria-disabled": !pagination.hasNext,
+          onClick: (e) => !pagination.hasNext && e.preventDefault(),
+          children: "Next"
+        }
+      )
+    ] })
+  ] });
+}
+const loader$1l = async ({ request, params }) => {
+  const url = new URL(request.url);
+  const query2 = (url == null ? void 0 : url.searchParams.get("q")) || "";
+  const state = (url == null ? void 0 : url.searchParams.get("state")) || "";
+  const city = (url == null ? void 0 : url.searchParams.get("city")) || "";
+  const country = (url == null ? void 0 : url.searchParams.get("country")) || "";
+  const category = (url == null ? void 0 : url.searchParams.get("category")) || "";
+  let page = 1;
+  let data = "";
+  let countries = null;
+  try {
+    page = parseInt((url == null ? void 0 : url.searchParams.get("page")) || "1");
+    data = await getSearch(query2, city, state, country, category, page);
+    countries = await getCountries();
+  } catch (error) {
+    logError(error);
+  }
+  console.log("boo");
+  let res = {
+    data,
+    query: query2,
+    countries,
+    state,
+    city,
+    country,
+    category
+  };
+  return res;
+};
+const index$t = () => {
+  const res = useLoaderData();
+  const [loading, setLoading] = useState(true);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const navigation = useNavigation();
+  const data = res.data.items || [];
+  const pagination = res.data.pagination;
+  const query2 = res == null ? void 0 : res.query;
+  res.countries;
+  const [queryParam, setQueryParam] = useState(null);
+  parseInt(searchParams.get("page") || "1");
+  navigation.state === "loading";
+  const state = res.state;
+  const city = res.city;
+  const country = res.country;
+  const category = res == null ? void 0 : res.category;
+  ({
+    q: searchParams.get("q") || "",
+    category: searchParams.get("category") || "",
+    country: searchParams.get("country") || "",
+    state: searchParams.get("state") || "",
+    city: searchParams.get("city") || ""
+  });
+  return /* @__PURE__ */ jsxs("div", { children: [
+    /* @__PURE__ */ jsx(MainNav, {}),
+    /* @__PURE__ */ jsx("div", { className: `h-[40px]` }),
+    /* @__PURE__ */ jsx("div", { className: `px-[15px]`, children: /* @__PURE__ */ jsxs("div", { className: `max-w-[1200px] mx-auto w-full`, children: [
+      /* @__PURE__ */ jsxs("div", { className: `mb-6 font-light text-2xl`, children: [
+        /* @__PURE__ */ jsxs("div", { className: `flex gap-2`, children: [
+          (query2 || category || country || state || city) && /* @__PURE__ */ jsx("span", { children: "Searching" }),
+          query2 && /* @__PURE__ */ jsx("span", { children: "for" }),
+          query2 && /* @__PURE__ */ jsxs("span", { children: [
+            "'",
+            query2,
+            "'"
+          ] }),
+          category && /* @__PURE__ */ jsx("span", { children: "in" }),
+          category && /* @__PURE__ */ jsx("span", { className: `capitalize font-semibold`, children: convertDashToSpace(category) }),
+          city && /* @__PURE__ */ jsx("span", { children: "in" }),
+          city && /* @__PURE__ */ jsx("span", { className: `font-semibold`, children: city }),
+          city && /* @__PURE__ */ jsx("span", { children: "city" })
+        ] }),
+        /* @__PURE__ */ jsxs("div", { className: `flex gap-2 mt-2 flex-wrap`, children: [
+          category !== "" && /* @__PURE__ */ jsx("div", { className: `w-fit px-[5px] py-[1px] border border-gray-300 text-[14px] font-normal`, children: "Hotels" }),
+          country !== "" && /* @__PURE__ */ jsx("div", { className: `w-fit px-[5px] py-[1px] border border-gray-300 text-[14px] font-normal`, children: "United Arab Emirates" }),
+          state !== "" && /* @__PURE__ */ jsx("div", { className: `w-fit px-[5px] py-[1px] border border-gray-300 text-[14px] font-normal`, children: "Dubai" }),
+          city !== "" && /* @__PURE__ */ jsx("div", { className: `w-fit px-[5px] py-[1px] border border-gray-300 text-[14px] font-normal`, children: "City: Dubai" })
+        ] })
+      ] }),
+      /* @__PURE__ */ jsx("div", { className: ``, children: /* @__PURE__ */ jsxs("div", { className: `grid grid-cols-1 lg:grid-cols-12 gap-12`, children: [
+        /* @__PURE__ */ jsxs("div", { className: ` lg:col-span-8`, children: [
+          data.map((item, index2) => {
+            const showAd = index2 % 4 === 3;
+            return /* @__PURE__ */ jsx("div", { children: showAd ? /* @__PURE__ */ jsxs(Fragment, { children: [
+              /* @__PURE__ */ jsx(
+                InfoCard,
+                {
+                  item,
+                  isFirst: index2 === 0
+                },
+                index2
+              ),
+              /* @__PURE__ */ jsx(SearchAd, {})
+            ] }) : /* @__PURE__ */ jsx(Fragment, { children: /* @__PURE__ */ jsx(
+              InfoCard,
+              {
+                item,
+                isFirst: index2 === 0
+              },
+              index2
+            ) }) }, index2);
+          }),
+          /* @__PURE__ */ jsx("div", { className: `mb-3 mt-6`, children: /* @__PURE__ */ jsx(
+            Pagination$2,
+            {
+              pagination
+            }
+          ) })
+        ] }),
+        /* @__PURE__ */ jsx("div", { className: `hidden lg:block col-span-4`, children: /* @__PURE__ */ jsx("div", { className: `sticky top-[80px] w-full`, children: /* @__PURE__ */ jsx(Featured, {}) }) })
+      ] }) })
+    ] }) }),
+    /* @__PURE__ */ jsx("div", { className: `h-[60px]` }),
+    /* @__PURE__ */ jsx(FooterAlt, {})
+  ] });
+};
+const route18 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  default: index$t,
+  loader: loader$1l
+}, Symbol.toStringTag, { value: "Module" }));
+const Card = ({ listing: listing2 }) => {
   var _a;
   const [placeholder, setPlaceholder] = useState("/images/bycetplaceholder.png");
   const [imgscr, setImgsrc] = useState("");
@@ -10424,8 +13661,8 @@ const Card = ({ listing }) => {
   const [facilityFeatures2, setFacilityFeatures] = useState(null);
   const [addressLink, setAddressLink] = useState("");
   useEffect(() => {
-    if (listing) {
-      const baseListing2 = listing;
+    if (listing2) {
+      const baseListing2 = listing2;
       setBaseListing(baseListing2);
       if (baseListing2 == null ? void 0 : baseListing2.image_url) {
         setImgsrc(config.IMG_BASE_URL + (baseListing2 == null ? void 0 : baseListing2.image_url));
@@ -10433,36 +13670,36 @@ const Card = ({ listing }) => {
         setImgsrc(placeholder);
       }
     }
-  }, [listing]);
+  }, [listing2]);
   useEffect(() => {
-    if (listing == null ? void 0 : listing.website) {
-      setListingWebsite(listing == null ? void 0 : listing.website);
+    if (listing2 == null ? void 0 : listing2.website) {
+      setListingWebsite(listing2 == null ? void 0 : listing2.website);
     } else {
-      if ((listing == null ? void 0 : listing.username) === "" || (listing == null ? void 0 : listing.username) === null) {
-        setListingWebsite("/" + (listing == null ? void 0 : listing.gid));
+      if ((listing2 == null ? void 0 : listing2.username) === "" || (listing2 == null ? void 0 : listing2.username) === null) {
+        setListingWebsite("/" + (listing2 == null ? void 0 : listing2.gid));
       } else {
-        setListingWebsite("/" + (listing == null ? void 0 : listing.username));
+        setListingWebsite("/" + (listing2 == null ? void 0 : listing2.username));
       }
     }
-  }, [listing]);
+  }, [listing2]);
   useEffect(() => {
-    if (listing) {
-      if ((listing == null ? void 0 : listing.image_url) !== "" && (listing == null ? void 0 : listing.image_url) !== null && (listing == null ? void 0 : listing.image_url) !== void 0) {
-        setImgsrc(config.IMG_BASE_URL + (listing == null ? void 0 : listing.image_url));
+    if (listing2) {
+      if ((listing2 == null ? void 0 : listing2.image_url) !== "" && (listing2 == null ? void 0 : listing2.image_url) !== null && (listing2 == null ? void 0 : listing2.image_url) !== void 0) {
+        setImgsrc(config.IMG_BASE_URL + (listing2 == null ? void 0 : listing2.image_url));
       } else {
         setImgsrc(appConfig.fallbackImg);
       }
-      if ((listing == null ? void 0 : listing.username) !== "" && (listing == null ? void 0 : listing.username) !== null && (listing == null ? void 0 : listing.username) !== void 0) {
-        setUserId(listing == null ? void 0 : listing.username);
+      if ((listing2 == null ? void 0 : listing2.username) !== "" && (listing2 == null ? void 0 : listing2.username) !== null && (listing2 == null ? void 0 : listing2.username) !== void 0) {
+        setUserId(listing2 == null ? void 0 : listing2.username);
       } else {
-        setUserId(listing == null ? void 0 : listing.gid);
+        setUserId(listing2 == null ? void 0 : listing2.gid);
       }
     }
-  }, [listing]);
+  }, [listing2]);
   useEffect(() => {
-    if (listing == null ? void 0 : listing.social_media) {
+    if (listing2 == null ? void 0 : listing2.social_media) {
       let socialMedia2 = [];
-      const separatedMedia = strToList(listing == null ? void 0 : listing.social_media, ",");
+      const separatedMedia = strToList(listing2 == null ? void 0 : listing2.social_media, ",");
       if (separatedMedia !== null) {
         separatedMedia == null ? void 0 : separatedMedia.map((mediaString, index2) => {
           const mediaInfo = strToList(mediaString, "$");
@@ -10477,7 +13714,7 @@ const Card = ({ listing }) => {
       }
       setSocialMedia(socialMedia2);
     }
-  }, [listing]);
+  }, [listing2]);
   useEffect(() => {
   }, [socialMedia]);
   useEffect(() => {
@@ -10499,21 +13736,21 @@ const Card = ({ listing }) => {
     }
   }, [baseListing]);
   useEffect(() => {
-    let getListingAddress = async (listing2) => {
-      let address = listing2 == null ? void 0 : listing2.title;
-      address += (listing2 == null ? void 0 : listing2.address_one) ? ", " + (listing2 == null ? void 0 : listing2.address_one) : "";
-      address += (listing2 == null ? void 0 : listing2.address_two) ? ", " + (listing2 == null ? void 0 : listing2.address_two) : "";
-      address += (listing2 == null ? void 0 : listing2.city_name) ? ", " + (listing2 == null ? void 0 : listing2.city_name) : "";
-      address += (listing2 == null ? void 0 : listing2.state_name) ? ", " + (listing2 == null ? void 0 : listing2.state_name) : "";
-      address += (listing2 == null ? void 0 : listing2.zipcode) ? ", " + (listing2 == null ? void 0 : listing2.zipcode) : "";
-      address += (listing2 == null ? void 0 : listing2.country_name) ? ", " + (listing2 == null ? void 0 : listing2.country_name) : "";
+    let getListingAddress = async (listing22) => {
+      let address = listing22 == null ? void 0 : listing22.title;
+      address += (listing22 == null ? void 0 : listing22.address_one) ? ", " + (listing22 == null ? void 0 : listing22.address_one) : "";
+      address += (listing22 == null ? void 0 : listing22.address_two) ? ", " + (listing22 == null ? void 0 : listing22.address_two) : "";
+      address += (listing22 == null ? void 0 : listing22.city_name) ? ", " + (listing22 == null ? void 0 : listing22.city_name) : "";
+      address += (listing22 == null ? void 0 : listing22.state_name) ? ", " + (listing22 == null ? void 0 : listing22.state_name) : "";
+      address += (listing22 == null ? void 0 : listing22.zipcode) ? ", " + (listing22 == null ? void 0 : listing22.zipcode) : "";
+      address += (listing22 == null ? void 0 : listing22.country_name) ? ", " + (listing22 == null ? void 0 : listing22.country_name) : "";
       let addLink = `https://www.google.com/maps/search/?api=1&query=${address}`;
       setAddressLink(addLink);
     };
-    if (listing !== null) {
-      getListingAddress(listing);
+    if (listing2 !== null) {
+      getListingAddress(listing2);
     }
-  }, [listing]);
+  }, [listing2]);
   return /* @__PURE__ */ jsxs("div", { className: `bg-white w-full h-auto  overflow-hidden border   hover:shadow-md hover:shadow-gray-200 md:rounded-xl`, children: [
     /* @__PURE__ */ jsx("div", { className: `bg-gray-50/30 py-3 px-4 border-b-0`, children: /* @__PURE__ */ jsxs("a", { href: `/${userId}`, children: [
       /* @__PURE__ */ jsxs("div", { className: `flex place-content-between gap-2`, children: [
@@ -10523,11 +13760,11 @@ const Card = ({ listing }) => {
             {
               className: `max-w-[85px] h-[90px] min-w-[85px]   bg-gray-50  relative border flex place-items-center place-content-center  overflow-hidden shadow-xl shadow-gray-400/30`,
               children: [
-                ((listing == null ? void 0 : listing.image_url) === void 0 || (listing == null ? void 0 : listing.image_url) === null || (listing == null ? void 0 : listing.image_url) === "") && /* @__PURE__ */ jsxs("div", { className: `absolute top-0 h-full w-full flex -gap-y-2 place-content-center place-items-center font-bold z-[10] text-white bg-black/10 text-[7px] tracking-[3px] flex-col`, children: [
+                ((listing2 == null ? void 0 : listing2.image_url) === void 0 || (listing2 == null ? void 0 : listing2.image_url) === null || (listing2 == null ? void 0 : listing2.image_url) === "") && /* @__PURE__ */ jsxs("div", { className: `absolute top-0 h-full w-full flex -gap-y-2 place-content-center place-items-center font-bold z-[10] text-white bg-black/10 text-[7px] tracking-[3px] flex-col`, children: [
                   /* @__PURE__ */ jsx("div", { children: "AUTOMATIC" }),
                   /* @__PURE__ */ jsx("div", { children: "GENERATED" })
                 ] }),
-                (listing == null ? void 0 : listing.image_url) !== null ? /* @__PURE__ */ jsx(
+                (listing2 == null ? void 0 : listing2.image_url) !== null ? /* @__PURE__ */ jsx(
                   "img",
                   {
                     src: imgscr,
@@ -10548,8 +13785,8 @@ const Card = ({ listing }) => {
             }
           ),
           /* @__PURE__ */ jsxs("div", { className: ` w-full`, children: [
-            /* @__PURE__ */ jsx("div", { className: `text-[18px] font-normal text-blue-800 line-clamp-1 w-full`, children: listing == null ? void 0 : listing.title }),
-            (listing == null ? void 0 : listing.category) && /* @__PURE__ */ jsx("div", { className: `text-[12px] text-gray-500  capitalize mt-[0px]`, children: (_a = searchCategories(listing == null ? void 0 : listing.category)) == null ? void 0 : _a.name }),
+            /* @__PURE__ */ jsx("div", { className: `text-[18px] font-normal text-blue-800 line-clamp-1 w-full`, children: listing2 == null ? void 0 : listing2.title }),
+            (listing2 == null ? void 0 : listing2.category) && /* @__PURE__ */ jsx("div", { className: `text-[12px] text-gray-500  capitalize mt-[0px]`, children: (_a = searchCategories(listing2 == null ? void 0 : listing2.category)) == null ? void 0 : _a.name }),
             /* @__PURE__ */ jsxs("div", { className: `flex place-items-center gap-x-1 mt-[5px] `, children: [
               /* @__PURE__ */ jsx("div", { children: (baseListing == null ? void 0 : baseListing.rating_average) !== null && (baseListing == null ? void 0 : baseListing.rating_average) !== "" && (baseListing == null ? void 0 : baseListing.rating_average) !== void 0 ? /* @__PURE__ */ jsxs("div", { className: ` flex gap-2 place-items-center`, children: [
                 /* @__PURE__ */ jsx(RatingBoxSquare, { rating: Number(baseListing == null ? void 0 : baseListing.rating_average) }),
@@ -10567,7 +13804,7 @@ const Card = ({ listing }) => {
         ] }),
         /* @__PURE__ */ jsx("div", { className: `flex place-items-start`, children: /* @__PURE__ */ jsx("div", { className: `font-bold rounded-sm border px-3 py-[2px]`, children: "View" }) })
       ] }),
-      /* @__PURE__ */ jsx("div", { className: `mt-[8px] text-[14px] md:text-[13px] text-gray-800 leading-[1.3em] line-clamp-3`, children: listing == null ? void 0 : listing.short_description })
+      /* @__PURE__ */ jsx("div", { className: `mt-[8px] text-[14px] md:text-[13px] text-gray-800 leading-[1.3em] line-clamp-3`, children: listing2 == null ? void 0 : listing2.short_description })
     ] }) }),
     /* @__PURE__ */ jsx("div", { children: /* @__PURE__ */ jsxs("div", { className: ` h-auto flex place-content-between gap-2 `, children: [
       /* @__PURE__ */ jsxs("div", { className: `flex place-items-start w-[60%] flex-col  pl-4  pt-2 pb-4 `, children: [
@@ -10575,7 +13812,7 @@ const Card = ({ listing }) => {
           /* @__PURE__ */ jsx(BsBank, {}),
           /* @__PURE__ */ jsxs("span", { className: `mt-[1px] text-gray-500 space-x-2`, children: [
             /* @__PURE__ */ jsx("span", { className: `font-bold`, children: "Founded:" }),
-            /* @__PURE__ */ jsx("span", { children: listing == null ? void 0 : listing.established })
+            /* @__PURE__ */ jsx("span", { children: listing2 == null ? void 0 : listing2.established })
           ] })
         ] }),
         facilityFeatures2 !== null && /* @__PURE__ */ jsxs("div", { className: `mt-2 flex place-items-start gap-2 w-full relative`, children: [
@@ -10593,14 +13830,14 @@ const Card = ({ listing }) => {
         ] })
       ] }),
       /* @__PURE__ */ jsxs("div", { className: `flex place-items-end flex-col w-[40%] text-end pr-4 pt-2 pb-4`, children: [
-        /* @__PURE__ */ jsx("div", { className: `font-[600]`, children: listing == null ? void 0 : listing.phone }),
-        /* @__PURE__ */ jsx("div", { className: `text-[12px] leading-[1.2em] mt-1`, children: /* @__PURE__ */ jsx(Address, { listing }) })
+        /* @__PURE__ */ jsx("div", { className: `font-[600]`, children: listing2 == null ? void 0 : listing2.phone }),
+        /* @__PURE__ */ jsx("div", { className: `text-[12px] leading-[1.2em] mt-1`, children: /* @__PURE__ */ jsx(Address, { listing: listing2 }) })
       ] })
     ] }) }),
     /* @__PURE__ */ jsx("div", { className: `border-none`, children: /* @__PURE__ */ jsxs("div", { className: `flex place-content-between mx-4 my-1`, children: [
       /* @__PURE__ */ jsxs("div", { className: `flex place-items-center gap-4`, children: [
-        /* @__PURE__ */ jsx("a", { href: `mailto:${listing == null ? void 0 : listing.email_address}`, children: /* @__PURE__ */ jsx(MdEmail, { size: 20 }) }, 34),
-        (listing == null ? void 0 : listing.phone) && /* @__PURE__ */ jsx("a", { href: `tel:${listing == null ? void 0 : listing.phone}`, children: /* @__PURE__ */ jsx(BiPhone, { size: 20 }) }, 30),
+        /* @__PURE__ */ jsx("a", { href: `mailto:${listing2 == null ? void 0 : listing2.email_address}`, children: /* @__PURE__ */ jsx(MdEmail, { size: 20 }) }, 34),
+        (listing2 == null ? void 0 : listing2.phone) && /* @__PURE__ */ jsx("a", { href: `tel:${listing2 == null ? void 0 : listing2.phone}`, children: /* @__PURE__ */ jsx(BiPhone, { size: 20 }) }, 30),
         socialMedia !== null && (socialMedia == null ? void 0 : socialMedia.map((media, index2) => {
           return /* @__PURE__ */ jsx("a", { href: `${media == null ? void 0 : media.baseUrl}${media == null ? void 0 : media.mediaHandle}`, children: getCardIcon(media == null ? void 0 : media.mediaName) }, index2);
         }))
@@ -10637,13 +13874,13 @@ const RatingCount$1 = ({ averageRating }) => {
     ")"
   ] });
 };
-const Address = ({ listing }) => {
+const Address = ({ listing: listing2 }) => {
   return /* @__PURE__ */ jsxs("div", { children: [
-    listing == null ? void 0 : listing.address_one,
-    (listing == null ? void 0 : listing.address_two) ? `, ${listing == null ? void 0 : listing.address_two}` : "",
-    (listing == null ? void 0 : listing.city_name) ? `, ${listing == null ? void 0 : listing.city_name}` : "",
-    (listing == null ? void 0 : listing.state_name) ? `, ${listing == null ? void 0 : listing.state_name}` : "",
-    (listing == null ? void 0 : listing.country_name) ? `, ${listing == null ? void 0 : listing.country_name}` : ""
+    listing2 == null ? void 0 : listing2.address_one,
+    (listing2 == null ? void 0 : listing2.address_two) ? `, ${listing2 == null ? void 0 : listing2.address_two}` : "",
+    (listing2 == null ? void 0 : listing2.city_name) ? `, ${listing2 == null ? void 0 : listing2.city_name}` : "",
+    (listing2 == null ? void 0 : listing2.state_name) ? `, ${listing2 == null ? void 0 : listing2.state_name}` : "",
+    (listing2 == null ? void 0 : listing2.country_name) ? `, ${listing2 == null ? void 0 : listing2.country_name}` : ""
   ] });
 };
 const Tooltip = ({ tooltip, children }) => {
@@ -10720,7 +13957,7 @@ const schemaMap$1 = {
 function getSchemaType$1(categoryId) {
   return schemaMap$1[categoryId] || "LocalBusiness";
 }
-const loader$10 = async ({ params, request }) => {
+const loader$1k = async ({ params, request }) => {
   const category = params.category;
   const city = params.city;
   const url = new URL(request.url);
@@ -10856,7 +14093,7 @@ const schemaData$1 = (object, fallbackImg) => {
     }
   };
 };
-const index$p = () => {
+const index$s = () => {
   const { category, city, businesses, currentPage } = useLoaderData();
   const location2 = useLocation();
   const navigate = useNavigate();
@@ -10988,17 +14225,187 @@ const index$p = () => {
     /* @__PURE__ */ jsx(FooterAlt, {})
   ] });
 };
-const route17 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route19 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: index$p,
+  default: index$s,
   getOperatingDays: getOperatingDays$1,
   getOperatingDays2: getOperatingDays2$1,
   getSchemaType: getSchemaType$1,
-  loader: loader$10,
+  loader: loader$1k,
   meta: meta$6,
   sanitizePhone: sanitizePhone$1,
   schemaData: schemaData$1,
   schemaMap: schemaMap$1
+}, Symbol.toStringTag, { value: "Module" }));
+function Pagination$1({ pagination }) {
+  var _a;
+  const [searchParams] = useSearchParams();
+  const currentPage = pagination.current_page;
+  const totalPages = pagination.total_pages;
+  const getPageNumbers = () => {
+    if (totalPages <= 7) {
+      return Array.from({ length: totalPages }, (_, i) => i + 1);
+    }
+    const pages = [];
+    pages.push(1);
+    switch (currentPage) {
+      case 1:
+        pages.push(2, 3, "...", totalPages);
+        break;
+      case 2:
+        pages.push(2, 3, 4, "...", totalPages);
+        break;
+      case 3:
+        pages.push(2, 3, 4, 5, "...", totalPages);
+        break;
+      case totalPages - 2:
+        pages.push("...", totalPages - 3, totalPages - 2, totalPages - 1, totalPages);
+        break;
+      case totalPages - 1:
+        pages.push("...", totalPages - 3, totalPages - 2, totalPages - 1, totalPages);
+        break;
+      case totalPages:
+        pages.push("...", totalPages - 2, totalPages - 1, totalPages);
+        break;
+      default:
+        pages.push("...", currentPage - 1, currentPage, currentPage + 1, "...", totalPages);
+        break;
+    }
+    return pages;
+  };
+  const createPageUrl = (page) => {
+    const params = new URLSearchParams(searchParams);
+    params.set("page", page.toString());
+    return `?${params.toString()}`;
+  };
+  return /* @__PURE__ */ jsxs("div", { className: "flex flex-row items-center justify-between gap-4", children: [
+    /* @__PURE__ */ jsxs("div", { className: "text-[13px] text-gray-500", children: [
+      "Results ",
+      (currentPage - 1) * pagination.items_per_page + 1,
+      " to",
+      " ",
+      Math.min(currentPage * pagination.items_per_page, pagination.total_items),
+      " of",
+      " ",
+      pagination.total_items
+    ] }),
+    /* @__PURE__ */ jsxs("nav", { className: "flex items-center space-x-1", children: [
+      /* @__PURE__ */ jsx(
+        "a",
+        {
+          href: pagination.has_prev_page ? createPageUrl(currentPage - 1) : "#",
+          className: `px-3 py-2 border rounded-md text-sm font-medium ${!pagination.has_prev_page ? "opacity-50 cursor-not-allowed text-gray-400" : "text-gray-700 hover:bg-gray-100"}`,
+          "aria-disabled": !pagination.has_prev_page,
+          onClick: (e) => !pagination.has_prev_page && e.preventDefault(),
+          children: "Prev"
+        }
+      ),
+      (_a = getPageNumbers()) == null ? void 0 : _a.map(
+        (page, index2) => {
+          return typeof page === "number" ? /* @__PURE__ */ jsx(
+            "a",
+            {
+              href: createPageUrl(page),
+              className: `px-3 py-2 border rounded-md text-sm font-medium ${page === currentPage ? "bg-blue-500 text-white border-blue-500" : "text-gray-700 hover:bg-gray-100"}`,
+              children: page
+            },
+            page
+          ) : /* @__PURE__ */ jsx(
+            "span",
+            {
+              className: "px-3 py-2 text-gray-500",
+              children: page
+            },
+            `ellipsis-${index2}`
+          );
+        }
+      ),
+      /* @__PURE__ */ jsx(
+        "a",
+        {
+          href: pagination.has_next_page ? createPageUrl(currentPage + 1) : "#",
+          className: `px-3 py-2 border rounded-md text-sm font-medium ${!pagination.has_next_page ? "opacity-50 cursor-not-allowed text-gray-400" : "text-gray-700 hover:bg-gray-100"}`,
+          "aria-disabled": !pagination.has_next_page,
+          onClick: (e) => !pagination.has_next_page && e.preventDefault(),
+          children: "Next"
+        }
+      )
+    ] })
+  ] });
+}
+const loader$1j = async ({ request, params }) => {
+  const category = params.category;
+  const city = params.city;
+  const url = new URL(request.url);
+  const page = Math.max(1, parseInt((url == null ? void 0 : url.searchParams.get("page")) || "1"));
+  let businesses = null;
+  try {
+    businesses = await getBusinessByCategoryAndCity(category, city, page);
+  } catch (error) {
+    console.error("Error loading businesses:", error);
+  }
+  return {
+    category,
+    city,
+    businesses: businesses || { items: [], pagination: null },
+    currentPage: page
+  };
+};
+const index$r = () => {
+  const { category, businesses, city } = useLoaderData();
+  useLocation();
+  useNavigate();
+  const data = (businesses == null ? void 0 : businesses.data) || [];
+  const pagination = (businesses == null ? void 0 : businesses.pagination) || null;
+  return /* @__PURE__ */ jsxs("div", { children: [
+    /* @__PURE__ */ jsx(MainNav, {}),
+    /* @__PURE__ */ jsx("div", { className: `h-[40px]` }),
+    /* @__PURE__ */ jsx("div", { className: `px-[15px]`, children: /* @__PURE__ */ jsxs("div", { className: `max-w-[1200px] mx-auto w-full`, children: [
+      /* @__PURE__ */ jsxs("div", { className: `mb-6 text-xl font-light`, children: [
+        /* @__PURE__ */ jsxs("div", { className: `flex flex-row gap-1.5 place-items-center text-2xl`, children: [
+          /* @__PURE__ */ jsx("b", { className: `text-2xl`, children: "Searching for" }),
+          /* @__PURE__ */ jsx("span", { className: `text-2xl font-semibold capitalize underline`, children: category }),
+          /* @__PURE__ */ jsx("span", { children: "in" }),
+          /* @__PURE__ */ jsx("span", { className: `capitalize underline`, children: city })
+        ] }),
+        /* @__PURE__ */ jsx("div", { className: `flex gap-2 mt-2 flex-wrap`, children: /* @__PURE__ */ jsxs("p", { className: "mt-2 text-gray-600 font-normal text-lg", children: [
+          "Explore verified ",
+          /* @__PURE__ */ jsx("b", { className: `font-bold`, children: category }),
+          " services. View contact info, working hours, and reviews."
+        ] }) })
+      ] }),
+      /* @__PURE__ */ jsx("div", { className: ``, children: /* @__PURE__ */ jsxs("div", { className: `grid grid-cols-1 lg:grid-cols-12 gap-12`, children: [
+        /* @__PURE__ */ jsxs("div", { className: ` lg:col-span-8`, children: [
+          (data == null ? void 0 : data.length) <= 0 && /* @__PURE__ */ jsx("div", { className: `text-lg`, children: "No results found." }),
+          data == null ? void 0 : data.map((item, index2) => {
+            const showAd = index2 % 4 === 3;
+            return /* @__PURE__ */ jsx("div", { children: showAd ? /* @__PURE__ */ jsx(Fragment, { children: /* @__PURE__ */ jsx(SearchAd, {}) }) : /* @__PURE__ */ jsx(Fragment, { children: /* @__PURE__ */ jsx(
+              InfoCard,
+              {
+                item,
+                isFirst: index2 === 0
+              },
+              index2
+            ) }) }, index2);
+          }),
+          (data == null ? void 0 : data.length) > 0 && /* @__PURE__ */ jsx("div", { className: `mb-3 mt-6`, children: /* @__PURE__ */ jsx(
+            Pagination$1,
+            {
+              pagination
+            }
+          ) })
+        ] }),
+        /* @__PURE__ */ jsx("div", { className: `hidden lg:block col-span-4`, children: /* @__PURE__ */ jsx("div", { className: `sticky top-[80px] w-full`, children: /* @__PURE__ */ jsx(Featured, {}) }) })
+      ] }) })
+    ] }) }),
+    /* @__PURE__ */ jsx("div", { className: `h-[60px]` }),
+    /* @__PURE__ */ jsx(FooterAlt, {})
+  ] });
+};
+const route20 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  default: index$r,
+  loader: loader$1j
 }, Symbol.toStringTag, { value: "Module" }));
 const schemaMap = {
   "business-services": "LocalBusiness",
@@ -11035,7 +14442,7 @@ const schemaMap = {
 function getSchemaType(categoryId) {
   return schemaMap[categoryId] || "LocalBusiness";
 }
-const loader$$ = async ({ params, request }) => {
+const loader$1i = async ({ params, request }) => {
   const category = params.category;
   const url = new URL(request.url);
   const page = Math.max(1, parseInt((url == null ? void 0 : url.searchParams.get("page")) || "1"));
@@ -11166,7 +14573,7 @@ const schemaData = (object, fallbackImg) => {
     }
   };
 };
-const index$o = () => {
+const index$q = () => {
   const { category, businesses } = useLoaderData();
   const fallbackImg = `/images/fallbackBusinessImg.png`;
   const location2 = useLocation();
@@ -11294,17 +14701,194 @@ const index$o = () => {
     /* @__PURE__ */ jsx(FooterAlt, {})
   ] });
 };
-const route18 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route21 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: index$o,
+  default: index$q,
   getOperatingDays,
   getOperatingDays2,
   getSchemaType,
-  loader: loader$$,
+  loader: loader$1i,
   meta: meta$5,
   sanitizePhone,
   schemaData,
   schemaMap
+}, Symbol.toStringTag, { value: "Module" }));
+function Pagination({ pagination }) {
+  var _a;
+  const [searchParams] = useSearchParams();
+  const currentPage = pagination.current_page;
+  const totalPages = pagination.total_pages;
+  const getPageNumbers = () => {
+    if (totalPages <= 7) {
+      return Array.from({ length: totalPages }, (_, i) => i + 1);
+    }
+    const pages = [];
+    pages.push(1);
+    switch (currentPage) {
+      case 1:
+        pages.push(2, 3, "...", totalPages);
+        break;
+      case 2:
+        pages.push(2, 3, 4, "...", totalPages);
+        break;
+      case 3:
+        pages.push(2, 3, 4, 5, "...", totalPages);
+        break;
+      case totalPages - 2:
+        pages.push("...", totalPages - 3, totalPages - 2, totalPages - 1, totalPages);
+        break;
+      case totalPages - 1:
+        pages.push("...", totalPages - 3, totalPages - 2, totalPages - 1, totalPages);
+        break;
+      case totalPages:
+        pages.push("...", totalPages - 2, totalPages - 1, totalPages);
+        break;
+      default:
+        pages.push("...", currentPage - 1, currentPage, currentPage + 1, "...", totalPages);
+        break;
+    }
+    return pages;
+  };
+  const createPageUrl = (page) => {
+    const params = new URLSearchParams(searchParams);
+    params.set("page", page.toString());
+    return `?${params.toString()}`;
+  };
+  return /* @__PURE__ */ jsxs("div", { className: "flex flex-row items-center justify-between gap-4", children: [
+    /* @__PURE__ */ jsxs("div", { className: "text-[13px] text-gray-500", children: [
+      "Results ",
+      (currentPage - 1) * pagination.items_per_page + 1,
+      " to",
+      " ",
+      Math.min(currentPage * pagination.items_per_page, pagination.total_items),
+      " of",
+      " ",
+      pagination.total_items
+    ] }),
+    /* @__PURE__ */ jsxs("nav", { className: "flex items-center space-x-1", children: [
+      /* @__PURE__ */ jsx(
+        "a",
+        {
+          href: pagination.has_prev_page ? createPageUrl(currentPage - 1) : "#",
+          className: `px-3 py-2 border rounded-md text-sm font-medium ${!pagination.has_prev_page ? "opacity-50 cursor-not-allowed text-gray-400" : "text-gray-700 hover:bg-gray-100"}`,
+          "aria-disabled": !pagination.has_prev_page,
+          onClick: (e) => !pagination.has_prev_page && e.preventDefault(),
+          children: "Prev"
+        }
+      ),
+      (_a = getPageNumbers()) == null ? void 0 : _a.map(
+        (page, index2) => {
+          return typeof page === "number" ? /* @__PURE__ */ jsx(
+            "a",
+            {
+              href: createPageUrl(page),
+              className: `px-3 py-2 border rounded-md text-sm font-medium ${page === currentPage ? "bg-blue-500 text-white border-blue-500" : "text-gray-700 hover:bg-gray-100"}`,
+              children: page
+            },
+            page
+          ) : /* @__PURE__ */ jsx(
+            "span",
+            {
+              className: "px-3 py-2 text-gray-500",
+              children: page
+            },
+            `ellipsis-${index2}`
+          );
+        }
+      ),
+      /* @__PURE__ */ jsx(
+        "a",
+        {
+          href: pagination.has_next_page ? createPageUrl(currentPage + 1) : "#",
+          className: `px-3 py-2 border rounded-md text-sm font-medium ${!pagination.has_next_page ? "opacity-50 cursor-not-allowed text-gray-400" : "text-gray-700 hover:bg-gray-100"}`,
+          "aria-disabled": !pagination.has_next_page,
+          onClick: (e) => !pagination.has_next_page && e.preventDefault(),
+          children: "Next"
+        }
+      )
+    ] })
+  ] });
+}
+const loader$1h = async ({ request, params }) => {
+  const category = params.category;
+  const url = new URL(request.url);
+  const page = Math.max(1, parseInt((url == null ? void 0 : url.searchParams.get("page")) || "1"));
+  let businesses = null;
+  try {
+    businesses = await getBusinessByCategory(category, page);
+  } catch (error) {
+    console.error("Error loading businesses:", error);
+  }
+  return {
+    category,
+    businesses: businesses || { data: [], pagination: null },
+    currentPage: page
+  };
+};
+const index$p = () => {
+  const { category, businesses } = useLoaderData();
+  useLocation();
+  useNavigate();
+  const data = (businesses == null ? void 0 : businesses.data) || [];
+  const pagination = (businesses == null ? void 0 : businesses.pagination) || null;
+  return /* @__PURE__ */ jsxs("div", { children: [
+    /* @__PURE__ */ jsx(MainNav, {}),
+    /* @__PURE__ */ jsx("div", { className: `h-[40px]` }),
+    /* @__PURE__ */ jsx("div", { className: `px-[15px]`, children: /* @__PURE__ */ jsxs("div", { className: `max-w-[1200px] mx-auto w-full`, children: [
+      /* @__PURE__ */ jsxs("div", { className: `mb-6 text-xl font-light`, children: [
+        /* @__PURE__ */ jsxs("div", { children: [
+          /* @__PURE__ */ jsx("b", { className: `text-2xl`, children: "Searching for" }),
+          " ",
+          /* @__PURE__ */ jsx("span", { className: `text-2xl font-semibold underline capitalize`, children: convertDashToSpace(category) })
+        ] }),
+        /* @__PURE__ */ jsx("div", { className: `flex gap-2 mt-2 flex-wrap`, children: /* @__PURE__ */ jsxs("p", { className: "mt-2 text-gray-600 font-normal text-lg", children: [
+          "Explore verified ",
+          /* @__PURE__ */ jsx("b", { className: `font-bold`, children: category }),
+          " services. View contact info, working hours, and reviews."
+        ] }) })
+      ] }),
+      /* @__PURE__ */ jsx("div", { className: ``, children: /* @__PURE__ */ jsxs("div", { className: `grid grid-cols-1 lg:grid-cols-12 gap-12`, children: [
+        /* @__PURE__ */ jsxs("div", { className: ` lg:col-span-8`, children: [
+          (data == null ? void 0 : data.length) <= 0 && /* @__PURE__ */ jsx("div", { className: `text-lg`, children: "No results found." }),
+          data == null ? void 0 : data.map((item, index2) => {
+            const showAd = index2 % 4 === 3;
+            return /* @__PURE__ */ jsx("div", { children: showAd ? /* @__PURE__ */ jsxs(Fragment, { children: [
+              /* @__PURE__ */ jsx(
+                InfoCard,
+                {
+                  item,
+                  isFirst: index2 === 0
+                },
+                index2
+              ),
+              /* @__PURE__ */ jsx(SearchAd, {})
+            ] }) : /* @__PURE__ */ jsx(Fragment, { children: /* @__PURE__ */ jsx(
+              InfoCard,
+              {
+                item,
+                isFirst: index2 === 0
+              },
+              index2
+            ) }) }, index2);
+          }),
+          (data == null ? void 0 : data.length) > 0 && /* @__PURE__ */ jsx("div", { className: `mb-3 mt-6`, children: /* @__PURE__ */ jsx(
+            Pagination,
+            {
+              pagination
+            }
+          ) })
+        ] }),
+        /* @__PURE__ */ jsx("div", { className: `hidden lg:block col-span-4`, children: /* @__PURE__ */ jsx("div", { className: `sticky top-[80px] w-full`, children: /* @__PURE__ */ jsx(Featured, {}) }) })
+      ] }) })
+    ] }) }),
+    /* @__PURE__ */ jsx("div", { className: `h-[60px]` }),
+    /* @__PURE__ */ jsx(FooterAlt, {})
+  ] });
+};
+const route22 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  default: index$p,
+  loader: loader$1h
 }, Symbol.toStringTag, { value: "Module" }));
 const Browse = () => {
   return /* @__PURE__ */ jsxs("div", { children: [
@@ -11316,7 +14900,7 @@ const Browse = () => {
     ] })
   ] });
 };
-const route19 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route23 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: Browse
 }, Symbol.toStringTag, { value: "Module" }));
@@ -11325,7 +14909,7 @@ const SigninSchema = z.object({
   username: z.string({ message: "Please enter an email" }).min(7, { message: "Email must be greater than 7 characters" }).email({ message: "Please enter a valid email" }),
   password: z.string({ message: "Please enter a password" }).min(8, "Password must be at least 8 characters").regex(password_regex$2, "Please enter a valid password")
 });
-function SigninFormAlt() {
+function SigninFormAlt({ referer }) {
   const [isVisible, setIsVisible] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -11369,6 +14953,7 @@ function SigninFormAlt() {
         await new Promise((resolve) => setTimeout(resolve, 1e3));
         completeOperation();
         navigator2("/");
+        return true;
       } else {
         showError("error", `${res.message}`);
         completeOperation();
@@ -11479,15 +15064,16 @@ function SigninFormAlt() {
 const AuthHeader = () => {
   return /* @__PURE__ */ jsx("div", { className: `absolute top-0 left-0 right-0 text-white bg-black/10 w-full p-4 flex place-content-center`, children: /* @__PURE__ */ jsx("div", { className: ``, children: /* @__PURE__ */ jsx("a", { href: "/", className: `underline text-white hover:text-white/50`, children: "Home" }) }) });
 };
-const SigninBody = () => {
+const SigninBody = ({ referer }) => {
   return /* @__PURE__ */ jsxs("div", { className: `bg-white w-full 
         bg-[url('/images/oiltanker.jpg')]
         bg-cover bg-center min-h-screen flex place-content-center`, children: [
     /* @__PURE__ */ jsx(AuthHeader, {}),
-    /* @__PURE__ */ jsx(SigninFormAlt, {})
+    /* @__PURE__ */ jsx(SigninFormAlt, { referer })
   ] });
 };
-const loader$_ = async ({ request, params }) => {
+const loader$1g = async ({ request, params }) => {
+  const referer = request.headers.get("Referer");
   try {
     let randomNumber;
     try {
@@ -11496,7 +15082,8 @@ const loader$_ = async ({ request, params }) => {
       console.log(error.message);
     }
     return {
-      randomNumber
+      randomNumber,
+      referer
     };
   } catch (err) {
     logError(err);
@@ -11533,13 +15120,15 @@ const meta$4 = ({ data }) => {
   }
   return [];
 };
-const index$n = () => {
-  return /* @__PURE__ */ jsx("div", { children: /* @__PURE__ */ jsx(OperationProvider, { children: /* @__PURE__ */ jsx(SigninBody, {}) }) });
+const index$o = () => {
+  const data = useLoaderData();
+  let referer = data == null ? void 0 : data.referer;
+  return /* @__PURE__ */ jsx("div", { children: /* @__PURE__ */ jsx(OperationProvider, { children: /* @__PURE__ */ jsx(SigninBody, { referer }) }) });
 };
-const route20 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route24 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: index$n,
-  loader: loader$_,
+  default: index$o,
+  loader: loader$1g,
   meta: meta$4
 }, Symbol.toStringTag, { value: "Module" }));
 const password_regex$1 = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).{8,}$/;
@@ -11579,7 +15168,7 @@ function SignupFormAlt() {
     setWorking(true);
     showOperation("processing");
     await new Promise((resolve) => setTimeout(resolve, 1e3));
-    const BASE_URL = "https://bycet.com";
+    const BASE_URL = "https://test.bycet.com";
     const endpoint = "/api/user";
     const url = BASE_URL + endpoint;
     try {
@@ -11761,7 +15350,7 @@ const SignupBody = () => {
     /* @__PURE__ */ jsx(SignupFormAlt, {})
   ] });
 };
-const loader$Z = async ({ request, params }) => {
+const loader$1f = async ({ request, params }) => {
   try {
     let randomNumber;
     try {
@@ -11807,13 +15396,13 @@ const meta$3 = ({ data }) => {
   }
   return [];
 };
-const index$m = () => {
+const index$n = () => {
   return /* @__PURE__ */ jsx("div", { children: /* @__PURE__ */ jsx(SignupBody, {}) });
 };
-const route21 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route25 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: index$m,
-  loader: loader$Z,
+  default: index$n,
+  loader: loader$1f,
   meta: meta$3
 }, Symbol.toStringTag, { value: "Module" }));
 const ResetPwSchema = z.object({
@@ -11943,12 +15532,12 @@ const ResetPasswordBody$2 = () => {
     /* @__PURE__ */ jsx(ResetPasswordForm$1, {})
   ] });
 };
-const index$l = () => {
+const index$m = () => {
   return /* @__PURE__ */ jsx("div", { children: /* @__PURE__ */ jsx(ResetPasswordBody$2, {}) });
 };
-const route22 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route26 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: index$l
+  default: index$m
 }, Symbol.toStringTag, { value: "Module" }));
 const AccountLayout = ({ children }) => {
   const [show, setShow] = useState(true);
@@ -12080,6 +15669,10 @@ const settingsLinks = [
     link: "/products"
   },
   {
+    title: "Services",
+    link: "/services"
+  },
+  {
     title: "Facilities",
     link: "/facilities"
   },
@@ -12164,7 +15757,7 @@ const ContentLayout = ({ children, businessGuid, data, businessProfile, title })
       /* @__PURE__ */ jsxs("div", { className: `px-[15px]  pt-4 `, children: [
         /* @__PURE__ */ jsxs("div", { className: `w-full flex place-content-between place-items-center`, children: [
           /* @__PURE__ */ jsx("div", { className: `text-lg font-[600] leading-[1.4em]`, children: businessProfile && businessProfile.title }),
-          /* @__PURE__ */ jsx("div", { children: businessGuid && data.userGuid && /* @__PURE__ */ jsx(BusinessMenu, { setIsOpen, guid: businessGuid, userGuid: data.userGuid }) })
+          /* @__PURE__ */ jsx("div", { children: businessGuid && (data == null ? void 0 : data.userGuid) && /* @__PURE__ */ jsx(BusinessMenu, { setIsOpen, guid: businessGuid, userGuid: data.userGuid }) })
         ] }),
         /* @__PURE__ */ jsx("div", { className: `h-[12px]` }),
         children,
@@ -12173,12 +15766,12 @@ const ContentLayout = ({ children, businessGuid, data, businessProfile, title })
     ] })
   ] });
 };
-const index$k = () => {
+const index$l = () => {
   return /* @__PURE__ */ jsx(AccountLayout, { children: /* @__PURE__ */ jsx(ContentLayout, { title: "Account Profile", children: "Account Profile" }) });
 };
-const route23 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route27 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: index$k
+  default: index$l
 }, Symbol.toStringTag, { value: "Module" }));
 const ImgComponentAlt$1 = ({ user, userProfileImageData }) => {
   useNotification();
@@ -12403,7 +15996,7 @@ const Select = ({
       /* @__PURE__ */ jsx("div", { className: `mb-0 text-xl`, children: controlTitle }),
       (controlInformation == null ? void 0 : controlInformation.length) > 1 && /* @__PURE__ */ jsx("div", { className: controlInformationClass, children: controlInformation })
     ] }),
-    /* @__PURE__ */ jsxs("div", { className: "w-[90%]", children: [
+    /* @__PURE__ */ jsxs("div", { className: "w-[100%]", children: [
       ready && /* @__PURE__ */ jsxs(
         "select",
         {
@@ -12418,8 +16011,16 @@ const Select = ({
           className: inputClass,
           children: [
             /* @__PURE__ */ jsx("option", { value: "", children: controlPlaceholder }),
-            selectJson.map((item, id) => {
-              return /* @__PURE__ */ jsx("option", { value: item.id, children: item.name }, id);
+            selectJson == null ? void 0 : selectJson.map((item, id) => {
+              return /* @__PURE__ */ jsx(
+                "option",
+                {
+                  value: item.id,
+                  className: `text-xl`,
+                  children: item.name
+                },
+                id
+              );
             })
           ]
         }
@@ -12431,7 +16032,7 @@ const Select = ({
     ] })
   ] }) });
 };
-const ProfileBg = ({ listing, user, userProfileBgData }) => {
+const ProfileBg = ({ listing: listing2, user, userProfileBgData }) => {
   const [working, setWorking] = useState(false);
   const [imgconst, setImgconst] = useState("");
   const fileInputRef = useRef(null);
@@ -12591,7 +16192,7 @@ const Profile = ({ loaderData, user, userProfileData, userProfileBgData }) => {
     setWorking(true);
     showOperation("processing");
     await new Promise((resolve) => setTimeout(resolve, 1e3));
-    const BASE_URL = "https://bycet.com";
+    const BASE_URL = "https://test.bycet.com";
     const endpoint = "/api/user/" + user.guid;
     const url = BASE_URL + endpoint;
     try {
@@ -12874,7 +16475,7 @@ const ProfileLayout = ({ children }) => {
     ] })
   ] });
 };
-const index$j = () => {
+const index$k = () => {
   const auth = useAuth();
   if (!auth) {
     return null;
@@ -12954,9 +16555,9 @@ const index$j = () => {
     }
   ) });
 };
-const route24 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route28 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: index$j
+  default: index$k
 }, Symbol.toStringTag, { value: "Module" }));
 const EmailSchema = z.object({
   email: z.string({ message: "Please enter an email." }).min(1, { message: "Email must not be empty" }).email({ message: "Please enter a valid email" })
@@ -13079,7 +16680,7 @@ const ProfileContentLayout = ({ children, businessGuid, data, businessProfile, t
     ] })
   ] }) });
 };
-const index$i = () => {
+const index$j = () => {
   useEffect(() => {
     IsAuthenticated(localStorage);
   }, []);
@@ -13128,9 +16729,9 @@ const index$i = () => {
     data && /* @__PURE__ */ jsx(EmailForm, { loaderData: data, user })
   ] }) });
 };
-const route25 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route29 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: index$i
+  default: index$j
 }, Symbol.toStringTag, { value: "Module" }));
 const passwordValidation$1 = new RegExp(
   /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!()£@$%^&*-]).{8,}$/
@@ -13270,7 +16871,7 @@ const ChangePasswordForm = ({ loaderData, user }) => {
     /* @__PURE__ */ jsx(Button, { working })
   ] }) }) });
 };
-const index$h = () => {
+const index$i = () => {
   useEffect(() => {
     IsAuthenticated(localStorage);
   }, []);
@@ -13327,9 +16928,9 @@ const index$h = () => {
     }
   ) });
 };
-const route26 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route30 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: index$h
+  default: index$i
 }, Symbol.toStringTag, { value: "Module" }));
 const ResetPasswordSchema$1 = z.object({
   email: z.string({ message: "Please enter an email." }).min(1, { message: "Email must not be empty" }).email({ message: "Please enter a valid email" })
@@ -13416,7 +17017,7 @@ const ResetPasswordForm = ({ loaderData, user }) => {
     /* @__PURE__ */ jsx(Button, { working, value: "Send Reset Email" })
   ] }) }) });
 };
-const index$g = () => {
+const index$h = () => {
   useEffect(() => {
     IsAuthenticated(localStorage);
   }, []);
@@ -13464,9 +17065,9 @@ const index$g = () => {
     data && /* @__PURE__ */ jsx(ResetPasswordForm, { loaderData: data, user })
   ] }) });
 };
-const route27 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route31 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: index$g
+  default: index$h
 }, Symbol.toStringTag, { value: "Module" }));
 const DeactivateProfilechema = z.object({
   email: z.string({ message: "Please enter an email." }).min(1, { message: "Email must not be empty" }).email({ message: "Please enter a valid email" })
@@ -13565,7 +17166,7 @@ const DeactivateProfileForm = ({ loaderData, user }) => {
     /* @__PURE__ */ jsx(Button, { working, value: `${((_c = loaderData.userProfile) == null ? void 0 : _c.active) ? "Deactivate" : "Activate"} Profile` })
   ] }) }) });
 };
-const index$f = () => {
+const index$g = () => {
   useEffect(() => {
     IsAuthenticated(localStorage);
   }, []);
@@ -13613,11 +17214,11 @@ const index$f = () => {
     data && /* @__PURE__ */ jsx(DeactivateProfileForm, { loaderData: data, user })
   ] }) });
 };
-const route28 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route32 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: index$f
+  default: index$g
 }, Symbol.toStringTag, { value: "Module" }));
-const index$e = () => {
+const index$f = () => {
   return /* @__PURE__ */ jsxs(SearchLayout, { children: [
     /* @__PURE__ */ jsx("div", { className: `max-w-[1100px] mx-auto w-full mt-[30px]`, children: /* @__PURE__ */ jsxs("div", { className: `grid md:grid-cols-12 gap-4 `, children: [
       /* @__PURE__ */ jsx("div", { className: ` md:col-span-7  px-[15px]`, children: /* @__PURE__ */ jsx(InfoTerms, {}) }),
@@ -13630,11 +17231,11 @@ const index$e = () => {
 const InfoTerms = () => {
   return /* @__PURE__ */ jsxs("div", { className: `markdown prose dark:prose-invert w-full break-words light space-y-4`, children: [
     /* @__PURE__ */ jsx("h2", { "data-start": "208", "data-end": "235", className: `text-xl`, children: /* @__PURE__ */ jsx(
-      "strong",
+      "span",
       {
         "data-start": "211",
         "data-end": "235",
-        className: `text-2xl`,
+        className: `text-3xl font-extrabold`,
         children: "Terms and Conditions"
       }
     ) }),
@@ -13644,7 +17245,7 @@ const InfoTerms = () => {
     ] }),
     /* @__PURE__ */ jsxs("p", { "data-start": "272", "data-end": "485", children: [
       "Welcome to ",
-      /* @__PURE__ */ jsx("strong", { "data-start": "283", "data-end": "302", children: "Garssete" }),
+      /* @__PURE__ */ jsx("strong", { "data-start": "283", "data-end": "302", children: config.SITENAME }),
       ". We're glad to have you here! To ensure a safe and positive experience for everyone, we kindly ask that you review the terms below. By using our platform, you agree to the following:"
     ] }),
     /* @__PURE__ */ jsx("hr", { "data-start": "487", "data-end": "490" }),
@@ -13671,13 +17272,21 @@ const InfoTerms = () => {
     ] }),
     /* @__PURE__ */ jsx("hr", { "data-start": "1636", "data-end": "1639" }),
     /* @__PURE__ */ jsx("h3", { "data-start": "1641", "data-end": "1673", children: /* @__PURE__ */ jsx("strong", { "data-start": "1645", "data-end": "1673", children: "5. Intellectual Property" }) }),
-    /* @__PURE__ */ jsx("p", { "data-start": "1674", "data-end": "1874", children: "All content, including our logo, platform design, and written materials, is the property of [Your Company Name] or its partners. Please don’t reproduce, copy, or use it without our written permission." }),
+    /* @__PURE__ */ jsxs("p", { "data-start": "1674", "data-end": "1874", children: [
+      "All content, including our logo, platform design, and written materials, is the property of ",
+      config.SITENAME,
+      " or its partners. Please don’t reproduce, copy, or use it without our written permission."
+    ] }),
     /* @__PURE__ */ jsx("hr", { "data-start": "1876", "data-end": "1879" }),
     /* @__PURE__ */ jsx("h3", { "data-start": "1881", "data-end": "1903", children: /* @__PURE__ */ jsx("strong", { "data-start": "1885", "data-end": "1903", children: "6. Disclaimers" }) }),
     /* @__PURE__ */ jsx("p", { "data-start": "1904", "data-end": "2120", children: "While we strive to provide accurate and helpful information, we cannot guarantee the completeness or reliability of every business listing. We encourage users to independently verify business details before engaging." }),
     /* @__PURE__ */ jsx("hr", { "data-start": "2122", "data-end": "2125" }),
     /* @__PURE__ */ jsx("h3", { "data-start": "2127", "data-end": "2153", children: /* @__PURE__ */ jsx("strong", { "data-start": "2131", "data-end": "2153", children: "7. Indemnification" }) }),
-    /* @__PURE__ */ jsx("p", { "data-start": "2154", "data-end": "2362", children: "By using our platform, you agree to kindly hold harmless and indemnify [Your Company Name], our team, and partners from any claims, damages, losses, or expenses (including reasonable legal fees) arising from:" }),
+    /* @__PURE__ */ jsxs("p", { "data-start": "2154", "data-end": "2362", children: [
+      "By using our platform, you agree to kindly hold harmless and indemnify ",
+      config == null ? void 0 : config.SITENAME,
+      ", our team, and partners from any claims, damages, losses, or expenses (including reasonable legal fees) arising from:"
+    ] }),
     /* @__PURE__ */ jsxs("ul", { "data-start": "2364", "data-end": "2490", children: [
       /* @__PURE__ */ jsx("li", { "data-start": "2364", "data-end": "2393", children: /* @__PURE__ */ jsx("p", { "data-start": "2366", "data-end": "2393", children: "Your use of the platform," }) }),
       /* @__PURE__ */ jsx("li", { "data-start": "2394", "data-end": "2427", children: /* @__PURE__ */ jsx("p", { "data-start": "2396", "data-end": "2427", children: "Any violation of these Terms," }) }),
@@ -13686,28 +17295,36 @@ const InfoTerms = () => {
     /* @__PURE__ */ jsx("p", { "data-start": "2492", "data-end": "2581", children: "We hope this clause never becomes relevant, but it's important for everyone’s protection." }),
     /* @__PURE__ */ jsx("hr", { "data-start": "2583", "data-end": "2586" }),
     /* @__PURE__ */ jsx("h3", { "data-start": "2588", "data-end": "2622", children: /* @__PURE__ */ jsx("strong", { "data-start": "2592", "data-end": "2622", children: "8. Limitation of Liability" }) }),
-    /* @__PURE__ */ jsx("p", { "data-start": "2623", "data-end": "2808", children: "While we do our best to provide a reliable service, [Your Company Name] cannot be held liable for any direct or indirect damages resulting from the use or inability to use our platform." }),
+    /* @__PURE__ */ jsxs("p", { "data-start": "2623", "data-end": "2808", children: [
+      "While we do our best to provide a reliable service, ",
+      config == null ? void 0 : config.SITENAME,
+      " cannot be held liable for any direct or indirect damages resulting from the use or inability to use our platform."
+    ] }),
     /* @__PURE__ */ jsx("hr", { "data-start": "2810", "data-end": "2813" }),
     /* @__PURE__ */ jsx("h3", { "data-start": "2815", "data-end": "2842", children: /* @__PURE__ */ jsx("strong", { "data-start": "2819", "data-end": "2842", children: "9. Updates to Terms" }) }),
     /* @__PURE__ */ jsx("p", { "data-start": "2843", "data-end": "3057", children: "From time to time, we may update these Terms to reflect changes to our services or policies. We'll do our best to communicate these changes clearly. Continued use of the platform means you accept the revised Terms." }),
     /* @__PURE__ */ jsx("hr", { "data-start": "3059", "data-end": "3062" }),
     /* @__PURE__ */ jsx("h3", { "data-start": "3064", "data-end": "3089", children: /* @__PURE__ */ jsx("strong", { "data-start": "3068", "data-end": "3089", children: "10. Governing Law" }) }),
-    /* @__PURE__ */ jsx("p", { "data-start": "3090", "data-end": "3181", children: "These Terms shall be governed by and interpreted under the laws of [Your Country or State]." }),
+    /* @__PURE__ */ jsxs("p", { "data-start": "3090", "data-end": "3181", children: [
+      "These Terms shall be governed by and interpreted under the laws of the country in which ",
+      config.SITENAME,
+      " is based."
+    ] }),
     /* @__PURE__ */ jsx("hr", { "data-start": "3183", "data-end": "3186" }),
     /* @__PURE__ */ jsxs("p", { "data-start": "3188", "data-end": "3318", children: [
       "If you have any questions or suggestions about these Terms, we’d love to hear from you at ",
-      /* @__PURE__ */ jsx("a", { href: "mailto:support@garssete.com", className: "text-blue-600", children: "support@garssete.com" }),
+      /* @__PURE__ */ jsx("a", { href: `mailto:${config.SITEMAIL}`, className: "text-blue-600", children: config.SITEMAIL }),
       ". Thank you for being part of our community!"
     ] }),
     /* @__PURE__ */ jsx("hr", { "data-start": "3320", "data-end": "3323" })
   ] });
 };
-const route29 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route33 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   InfoTerms,
-  default: index$e
+  default: index$f
 }, Symbol.toStringTag, { value: "Module" }));
-const index$d = () => {
+const index$e = () => {
   return /* @__PURE__ */ jsxs(SearchLayout, { children: [
     /* @__PURE__ */ jsx("div", { className: `max-w-[1100px] mx-auto w-full mt-[30px]`, children: /* @__PURE__ */ jsxs("div", { className: `grid md:grid-cols-12 gap-4 `, children: [
       /* @__PURE__ */ jsx("div", { className: ` md:col-span-7  px-[15px]`, children: /* @__PURE__ */ jsx(InfoPrivacy, {}) }),
@@ -13719,13 +17336,16 @@ const index$d = () => {
 };
 const InfoPrivacy = () => {
   return /* @__PURE__ */ jsxs("div", { className: `markdown prose dark:prose-invert w-full break-words light space-y-4`, children: [
-    /* @__PURE__ */ jsx("h2", { "data-start": "193", "data-end": "214", className: `text-xl`, children: /* @__PURE__ */ jsx(
-      "strong",
+    /* @__PURE__ */ jsx("h2", { "data-start": "193", "data-end": "214", className: `text-xl`, children: /* @__PURE__ */ jsxs(
+      "span",
       {
         "data-start": "196",
         "data-end": "214",
-        className: `text-2xl`,
-        children: "Privacy Policy"
+        className: `text-3xl font-extrabold`,
+        children: [
+          /* @__PURE__ */ jsx("i", { children: "P" }),
+          "rivacy Policy"
+        ]
       }
     ) }),
     /* @__PURE__ */ jsxs("p", { "data-start": "216", "data-end": "249", children: [
@@ -13734,7 +17354,7 @@ const InfoPrivacy = () => {
     ] }),
     /* @__PURE__ */ jsxs("p", { "data-start": "251", "data-end": "429", children: [
       "Thank you for trusting ",
-      /* @__PURE__ */ jsx("strong", { "data-start": "274", "data-end": "293", children: "Bycet" }),
+      /* @__PURE__ */ jsx("strong", { "data-start": "274", "data-end": "293", children: config == null ? void 0 : config.SITENAME }),
       " with your information. Your privacy is important to us, and we’re committed to handling your data with care, respect, and transparency."
     ] }),
     /* @__PURE__ */ jsx("hr", { "data-start": "431", "data-end": "434" }),
@@ -13807,7 +17427,7 @@ const InfoPrivacy = () => {
     ] }),
     /* @__PURE__ */ jsxs("p", { "data-start": "2328", "data-end": "2401", children: [
       "To make a request, please reach out to us at ",
-      /* @__PURE__ */ jsx("strong", { "data-start": "2373", "data-end": "2400", children: "info@bycet.com" }),
+      /* @__PURE__ */ jsx("strong", { "data-start": "2373", "data-end": "2400", children: config == null ? void 0 : config.SITEMAIL }),
       "."
     ] }),
     /* @__PURE__ */ jsx("hr", { "data-start": "2403", "data-end": "2406" }),
@@ -13825,12 +17445,15 @@ const InfoPrivacy = () => {
     /* @__PURE__ */ jsxs("p", { "data-start": "3296", "data-end": "3371", children: [
       /* @__PURE__ */ jsx("strong", { "data-start": "3299", "data-end": "3309", children: "Email:" }),
       " ",
-      /* @__PURE__ */ jsx("a", { href: "mailto:info@bycet.com", children: "info@bycet.com" }),
+      /* @__PURE__ */ jsx("a", { href: `mailto:${config == null ? void 0 : config.SITEMAIL}.com`, children: config == null ? void 0 : config.SITEMAIL }),
       /* @__PURE__ */ jsx("br", { "data-start": "3331", "data-end": "3334" }),
       "🌐 ",
       /* @__PURE__ */ jsx("strong", { "data-start": "3337", "data-end": "3349", children: "Website:" }),
       " ",
-      /* @__PURE__ */ jsx("a", { href: "bycet.com/contact", children: "bycet.com/contact" })
+      /* @__PURE__ */ jsxs("a", { href: `${config == null ? void 0 : config.BASE_URL}/contact`, children: [
+        config == null ? void 0 : config.BASE_URL,
+        "/contact"
+      ] })
     ] }),
     /* @__PURE__ */ jsx("hr", { "data-start": "3373", "data-end": "3376" }),
     /* @__PURE__ */ jsxs("p", { "data-start": "3378", "data-end": "3557", "data-is-last-node": "", "data-is-only-node": "", children: [
@@ -13842,12 +17465,12 @@ const InfoPrivacy = () => {
     ] })
   ] });
 };
-const route30 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route34 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   InfoPrivacy,
-  default: index$d
+  default: index$e
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$Y = async ({ request, params }) => {
+const loader$1e = async ({ request, params }) => {
   try {
     let randomNumber;
     try {
@@ -13893,7 +17516,7 @@ const meta$2 = ({ data }) => {
   }
   return [];
 };
-const index$c = () => {
+const index$d = () => {
   return /* @__PURE__ */ jsxs(SearchLayout, { children: [
     /* @__PURE__ */ jsx("div", { className: `max-w-[1100px] mx-auto w-full mt-[30px]`, children: /* @__PURE__ */ jsxs("div", { className: `grid md:grid-cols-12 gap-4 `, children: [
       /* @__PURE__ */ jsx("div", { className: ` md:col-span-7  px-[15px]`, children: /* @__PURE__ */ jsx(InfoContact, {}) }),
@@ -13901,8 +17524,7 @@ const index$c = () => {
     ] }) }),
     /* @__PURE__ */ jsx(VerticalHeight, {}),
     /* @__PURE__ */ jsx(VerticalHeight, {}),
-    /* @__PURE__ */ jsx(VerticalHeight, {}),
-    /* @__PURE__ */ jsx(FooterAlt, {})
+    /* @__PURE__ */ jsx(VerticalHeight, {})
   ] });
 };
 const InfoContact = () => {
@@ -13917,14 +17539,17 @@ const InfoContact = () => {
       }
     ) }),
     /* @__PURE__ */ jsxs("p", { "data-start": "272", "data-end": "485", children: [
-      /* @__PURE__ */ jsx("strong", { "data-start": "283", "data-end": "302", children: "Bycet.com" }),
+      /* @__PURE__ */ jsx("strong", { "data-start": "283", "data-end": "302", children: config.SITENAME }),
       " Support and Technical team are  available Monday to Sunday, 09:00 to 18:00 Central European Time."
     ] }),
     /* @__PURE__ */ jsx("hr", { "data-start": "487", "data-end": "490" }),
-    /* @__PURE__ */ jsx("p", { className: `text-lg underline`, children: "Bycet Support" }),
+    /* @__PURE__ */ jsxs("p", { className: `text-lg underline`, children: [
+      config.SITENAME,
+      " Support"
+    ] }),
     /* @__PURE__ */ jsx("ul", { children: /* @__PURE__ */ jsxs("li", { className: `flex gap-4`, children: [
       /* @__PURE__ */ jsx("span", { className: `font-bold`, children: "Email:" }),
-      /* @__PURE__ */ jsx("span", { children: "info@bycet.com" })
+      /* @__PURE__ */ jsx("span", { children: config.SITEMAIL })
     ] }) }),
     /* @__PURE__ */ jsx("hr", {}),
     /* @__PURE__ */ jsx("h3", { children: /* @__PURE__ */ jsx(
@@ -13936,31 +17561,23 @@ const InfoContact = () => {
     ) }),
     /* @__PURE__ */ jsxs("p", { className: ``, children: [
       "To claim your business, please sign up and then send an email to ",
-      /* @__PURE__ */ jsx("span", { children: "info@bycet.com" }),
+      /* @__PURE__ */ jsx("span", { children: config.SITEMAIL }),
       "."
     ] })
   ] });
 };
-const route31 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route35 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   InfoContact,
-  default: index$c,
-  loader: loader$Y,
+  default: index$d,
+  loader: loader$1e,
   meta: meta$2
 }, Symbol.toStringTag, { value: "Module" }));
-const SearchAd = () => {
-  const [adsLoaded, setAdsLoaded] = useState(false);
-  useEffect(() => {
-  }, []);
-  {
-    return null;
-  }
-};
-const FormattedAddress = ({ listing }) => {
+const FormattedAddress = ({ listing: listing2 }) => {
   return /* @__PURE__ */ jsxs("div", { className: `leading-[1.3em] `, children: [
-    (listing == null ? void 0 : listing.address_one) ? (listing == null ? void 0 : listing.address_one) + ", " : "",
-    (listing == null ? void 0 : listing.state_code) ? (listing == null ? void 0 : listing.state_name) + ", " : "",
-    (listing == null ? void 0 : listing.country_code) ? listing == null ? void 0 : listing.country_code : ""
+    (listing2 == null ? void 0 : listing2.address_one) ? (listing2 == null ? void 0 : listing2.address_one) + ", " : "",
+    (listing2 == null ? void 0 : listing2.state_code) ? (listing2 == null ? void 0 : listing2.state_name) + ", " : "",
+    (listing2 == null ? void 0 : listing2.country_code) ? listing2 == null ? void 0 : listing2.country_code : ""
   ] });
 };
 function RatingBoxRounded({ rating }) {
@@ -13984,7 +17601,7 @@ function RatingBoxRounded({ rating }) {
     );
   }) });
 }
-const CardexCopy = ({ listing, index: index2 }) => {
+const CardexCopy = ({ listing: listing2, index: index2 }) => {
   var _a;
   const [baseListing, setBaseListing] = useState(null);
   const [imgsrc, setImgsrc] = useState("");
@@ -14006,12 +17623,12 @@ const CardexCopy = ({ listing, index: index2 }) => {
     }
   }, [baseListing]);
   useEffect(() => {
-    if (listing) {
-      const baseListing2 = listing;
+    if (listing2) {
+      const baseListing2 = listing2;
       setBaseListing(baseListing2);
       setImgsrc(config.IMG_BASE_URL + (baseListing2 == null ? void 0 : baseListing2.image_url));
     }
-  }, [listing]);
+  }, [listing2]);
   useEffect(() => {
     if (baseListing == null ? void 0 : baseListing.facility_features) {
       let facilityFeatures22 = [];
@@ -14199,7 +17816,7 @@ const SearchPaginationCopy = ({
     ] })
   ] });
 };
-const loader$X = async ({ request, params }) => {
+const loader$1d = async ({ request, params }) => {
   const url = new URL(request.url);
   const query2 = (url == null ? void 0 : url.searchParams.get("q")) || "";
   let data = await getSearch(query2);
@@ -14258,14 +17875,14 @@ const db = () => {
     ] })
   ] });
 };
-const route32 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route36 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: db,
-  loader: loader$X
+  loader: loader$1d
 }, Symbol.toStringTag, { value: "Module" }));
 const CopyrightPolicy = () => {
   return /* @__PURE__ */ jsx("div", { className: "w-full  max-w-[1200px] mx-auto px-4 py-8", children: /* @__PURE__ */ jsxs("div", { className: `max-w-[700px]`, children: [
-    /* @__PURE__ */ jsx("h1", { className: "text-3xl tracking-tighter font-black text-gray-900 mb-6 first-letter:italic", children: "Copyright Policy" }),
+    /* @__PURE__ */ jsx("h1", { className: "text-3xl tracking-normal font-extrabold text-gray-900 mb-6 first-letter:italic", children: "Copyright Policy" }),
     /* @__PURE__ */ jsxs("p", { className: "text-gray-600 mb-8", children: [
       "Last Updated: ",
       (/* @__PURE__ */ new Date()).toLocaleDateString()
@@ -14356,7 +17973,7 @@ const meta$1 = ({ data }) => {
     { name: "description", content: "Welcome to React Router!" }
   ];
 };
-const loader$W = async ({ params, context }) => {
+const loader$1c = async ({ params, context }) => {
   return { message: context.VALUE_FROM_EXPRESS };
 };
 function Copyright() {
@@ -14366,15 +17983,15 @@ function Copyright() {
     /* @__PURE__ */ jsx(FooterAlt, {})
   ] });
 }
-const route33 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route37 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: Copyright,
-  loader: loader$W,
+  loader: loader$1c,
   meta: meta$1
 }, Symbol.toStringTag, { value: "Module" }));
 const ResponsibleDisclosurePolicy = () => {
   return /* @__PURE__ */ jsx("div", { className: "w-full  max-w-[1100px] mx-auto px-4 py-8", children: /* @__PURE__ */ jsxs("div", { className: `max-w-[700px]`, children: [
-    /* @__PURE__ */ jsx("h1", { className: "text-3xl tracking-tighter font-black text-gray-900 mb-6 first-letter:italic", children: "Responsible Disclosure Policy" }),
+    /* @__PURE__ */ jsx("h1", { className: "text-3xl tracking-normal font-extrabold text-gray-900 mb-6 first-letter:italic", children: "Responsible Disclosure Policy" }),
     /* @__PURE__ */ jsxs("p", { className: "text-gray-600 mb-8", children: [
       "Last Updated: ",
       (/* @__PURE__ */ new Date()).toLocaleDateString()
@@ -14382,7 +17999,11 @@ const ResponsibleDisclosurePolicy = () => {
     /* @__PURE__ */ jsxs("div", { className: "space-y-8", children: [
       /* @__PURE__ */ jsxs("section", { children: [
         /* @__PURE__ */ jsx("h2", { className: "text-xl font-semibold text-gray-800 mb-3", children: "Our Commitment to Security" }),
-        /* @__PURE__ */ jsx("p", { className: "text-gray-600", children: "At veycet, we consider the security of our systems and our clients' data a top priority. Despite our best efforts, vulnerabilities may still exist. We value the role that security researchers and the wider community play in helping to keep our systems secure." })
+        /* @__PURE__ */ jsxs("p", { className: "text-gray-600", children: [
+          "At ",
+          /* @__PURE__ */ jsx("b", { children: config.SITENAME }),
+          ", we consider the security of our systems and our clients' data a top priority. Despite our best efforts, vulnerabilities may still exist. We value the role that security researchers and the wider community play in helping to keep our systems secure."
+        ] })
       ] }),
       /* @__PURE__ */ jsx("hr", {}),
       /* @__PURE__ */ jsxs("section", { children: [
@@ -14391,7 +18012,7 @@ const ResponsibleDisclosurePolicy = () => {
         /* @__PURE__ */ jsxs("ul", { className: "list-disc list-inside text-gray-600 space-y-2 ml-4", children: [
           /* @__PURE__ */ jsxs("li", { children: [
             "Submit your findings to ",
-            /* @__PURE__ */ jsx("strong", { children: "info@bycet.com" })
+            /* @__PURE__ */ jsx("strong", { children: config.SITEMAIL })
           ] }),
           /* @__PURE__ */ jsx("li", { children: "Provide sufficient information to reproduce the vulnerability" }),
           /* @__PURE__ */ jsx("li", { children: "Do not exploit the vulnerability beyond what is necessary to demonstrate it" }),
@@ -14446,14 +18067,21 @@ const ResponsibleDisclosurePolicy = () => {
         /* @__PURE__ */ jsx("h2", { className: "text-xl font-semibold text-gray-800 mb-3", children: "Contact Information" }),
         /* @__PURE__ */ jsx("p", { className: "text-gray-600 mb-3", children: "Please send all vulnerability reports to:" }),
         /* @__PURE__ */ jsxs("div", { className: "bg-gray-50 p-4 rounded-lg", children: [
-          /* @__PURE__ */ jsx("p", { className: "text-gray-800 font-medium", children: "Email: info@bycet.com" }),
+          /* @__PURE__ */ jsxs("p", { className: "text-gray-800 font-medium", children: [
+            "Email: ",
+            config.SITEMAIL
+          ] }),
           /* @__PURE__ */ jsx("p", { className: "text-gray-600 text-sm mt-1", children: "We prefer encrypted communications. Please use our PGP key if possible." })
         ] })
       ] }),
       /* @__PURE__ */ jsx("hr", {}),
       /* @__PURE__ */ jsxs("section", { className: "bg-blue-50 p-6 rounded-lg", children: [
         /* @__PURE__ */ jsx("h2", { className: "text-lg font-semibold text-red-800 mb-3", children: "Thank You" }),
-        /* @__PURE__ */ jsx("p", { className: "text-gray-500", children: "We appreciate your efforts to make Veycet and the internet a safer place. Your expertise and ethical approach help us maintain the highest security standards for our clients and their users." })
+        /* @__PURE__ */ jsxs("p", { className: "text-gray-500", children: [
+          "We appreciate your efforts to make ",
+          config.SITENAME,
+          " and the internet a safer place. Your expertise and ethical approach help us maintain the highest security standards for our clients and their users."
+        ] })
       ] })
     ] })
   ] }) });
@@ -14464,35 +18092,37 @@ const meta = ({ data }) => {
     { name: "description", content: "Welcome to React Router!" }
   ];
 };
-const loader$V = async ({ params, context }) => {
+const loader$1b = async ({ params, context }) => {
   return { message: context.VALUE_FROM_EXPRESS };
 };
 function ResponsbileDisclosure() {
   return /* @__PURE__ */ jsxs("div", { children: [
     /* @__PURE__ */ jsx(MainNav, {}),
-    /* @__PURE__ */ jsx(ResponsibleDisclosurePolicy, {})
+    /* @__PURE__ */ jsx(ResponsibleDisclosurePolicy, {}),
+    /* @__PURE__ */ jsx("div", { className: `h-[60px]` }),
+    /* @__PURE__ */ jsx(FooterAlt, {})
   ] });
 }
-const route34 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route38 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: ResponsbileDisclosure,
-  loader: loader$V,
+  loader: loader$1b,
   meta
 }, Symbol.toStringTag, { value: "Module" }));
-const ResultItem = ({ listing, index: index2 }) => {
+const ResultItem = ({ listing: listing2, index: index2 }) => {
   const [placeholder, setPlaceholder] = useState("/images/bycetplaceholder.png");
   const [imgsrc, setImgsrc] = useState("");
   function isOdd(num) {
     return num % 2 !== 0;
   }
   useEffect(() => {
-    if (listing && (listing == null ? void 0 : listing.image_url) !== null) {
-      let imgsrc2 = config.IMG_BASE_URL + (listing == null ? void 0 : listing.image_url);
+    if (listing2 && (listing2 == null ? void 0 : listing2.image_url) !== null) {
+      let imgsrc2 = config.IMG_BASE_URL + (listing2 == null ? void 0 : listing2.image_url);
       setImgsrc(imgsrc2);
     } else {
       setImgsrc(placeholder);
     }
-  }, [listing]);
+  }, [listing2]);
   return /* @__PURE__ */ jsx("div", { className: ` cursor-pointer my-0`, children: /* @__PURE__ */ jsxs("div", { className: `flex rounded  gap-x-2 py-2 px-1
              hover:bg-blue-50  
              ${isOdd(index2) ? "" : ""}
@@ -14507,31 +18137,31 @@ const ResultItem = ({ listing, index: index2 }) => {
           "img",
           {
             src: imgsrc,
-            alt: listing.title,
+            alt: listing2.title,
             className: `object-cover w-full h-full text-sm bg-white
                              `
           }
         )
       }
     ),
-    /* @__PURE__ */ jsx("div", { className: " w-full", children: /* @__PURE__ */ jsx(Link, { to: `/web/account/portfolio/${listing.gid}`, children: /* @__PURE__ */ jsxs("div", { className: `md:flex md:place-content-between 
+    /* @__PURE__ */ jsx("div", { className: " w-full", children: /* @__PURE__ */ jsx(Link, { to: `/web/account/portfolio/${listing2.gid}`, children: /* @__PURE__ */ jsxs("div", { className: `md:flex md:place-content-between 
                 w-full md:gap-x-[4px]`, children: [
       /* @__PURE__ */ jsxs("div", { className: `w-full md:w-[60%] -space-y-1 block`, children: [
-        /* @__PURE__ */ jsx("div", { className: `font-semibold text-[14px] text-brown-800 line-clamp-1`, children: listing.title }),
-        /* @__PURE__ */ jsx("div", { className: ` text-lg flex place-items-center gap-1`, children: /* @__PURE__ */ jsx("div", { className: `capitalize flex place-items-center text-sm `, children: convertDashToSpace(listing.category) }) }),
+        /* @__PURE__ */ jsx("div", { className: `font-semibold text-[14px] text-brown-800 line-clamp-1`, children: listing2.title }),
+        /* @__PURE__ */ jsx("div", { className: ` text-lg flex place-items-center gap-1`, children: /* @__PURE__ */ jsx("div", { className: `capitalize flex place-items-center text-sm `, children: convertDashToSpace(listing2.category) }) }),
         /* @__PURE__ */ jsx("div", { className: `font-normal text-[11px] 
-                                    flex place-items-center gap-1 `, children: Boolean(listing == null ? void 0 : listing.active_status) ? "Active" : "Inactive" })
+                                    flex place-items-center gap-1 `, children: Boolean(listing2 == null ? void 0 : listing2.active_status) ? "Active" : "Inactive" })
       ] }),
       /* @__PURE__ */ jsxs("div", { className: `w-full lg:w-[40%] hidden 
                                 sm:block`, children: [
-        /* @__PURE__ */ jsx("div", { className: `flex flex-col place-items-end place-content-end text-black tracking-tighter`, children: listing.phone }),
+        /* @__PURE__ */ jsx("div", { className: `flex flex-col place-items-end place-content-end text-black tracking-tighter`, children: listing2.phone }),
         /* @__PURE__ */ jsxs("div", { className: `flex flex-col text-end text-[12px]
                                 leading-[1.2em]`, children: [
-          listing == null ? void 0 : listing.address_one,
-          (listing == null ? void 0 : listing.address_two) ? `, ${listing == null ? void 0 : listing.address_two}` : "",
-          (listing == null ? void 0 : listing.city_name) ? `, ${listing == null ? void 0 : listing.city_name}` : "",
-          (listing == null ? void 0 : listing.state_name) ? `, ${listing == null ? void 0 : listing.state_name}` : "",
-          (listing == null ? void 0 : listing.country_name) ? `, ${listing == null ? void 0 : listing.country_name}` : ""
+          listing2 == null ? void 0 : listing2.address_one,
+          (listing2 == null ? void 0 : listing2.address_two) ? `, ${listing2 == null ? void 0 : listing2.address_two}` : "",
+          (listing2 == null ? void 0 : listing2.city_name) ? `, ${listing2 == null ? void 0 : listing2.city_name}` : "",
+          (listing2 == null ? void 0 : listing2.state_name) ? `, ${listing2 == null ? void 0 : listing2.state_name}` : "",
+          (listing2 == null ? void 0 : listing2.country_name) ? `, ${listing2 == null ? void 0 : listing2.country_name}` : ""
         ] })
       ] })
     ] }) }) })
@@ -14717,8 +18347,10 @@ const PortfolioLayout = ({ children, businessGuid, data, businessProfile, title 
 };
 const Index$3 = () => {
   useEffect(() => {
-    IsAuthenticated(localStorage);
-  }, []);
+    if (localStorage) {
+      IsAuthenticated(localStorage);
+    }
+  }, [localStorage]);
   const auth = useAuth();
   if (!auth) {
     return null;
@@ -14781,7 +18413,7 @@ const Index$3 = () => {
     data !== null && /* @__PURE__ */ jsx(Portfolio, { user: data.userProfile, portfolio: data.portfolio })
   ] }) });
 };
-const route35 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route39 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: Index$3
 }, Symbol.toStringTag, { value: "Module" }));
@@ -14839,6 +18471,8 @@ const BusinessProfileSchema = z.object({
     (val) => !val || val.trim().length > 0,
     { message: "Phone must not be empty" }
   ),
+  minimum_amount_currency_code: z.any(),
+  minimum_amount: z.any(),
   intro: z.any(),
   category: z.string().min(2, { message: "Please select a business category" }),
   business_phrases: z.union([
@@ -14906,7 +18540,7 @@ const pageType = [
     icon: /* @__PURE__ */ jsx(RiCommunityFill, { size: 20 })
   }
 ];
-const BgComponent = ({ listing, user, businessProfileBgData }) => {
+const BgComponent = ({ listing: listing2, user, businessProfileBgData }) => {
   let imgconst = "";
   if (businessProfileBgData == null ? void 0 : businessProfileBgData.image_url) {
     imgconst = config.IMG_BASE_URL + businessProfileBgData.image_url;
@@ -14940,7 +18574,7 @@ const BgComponent = ({ listing, user, businessProfileBgData }) => {
     if (isImgSelected) {
       formData.append("file", selectedFile);
       formData.append("guid", user.user_guid);
-      formData.append("bid", listing.gid);
+      formData.append("bid", listing2.gid);
       const endpoint = "/business_profile_bg_upload";
       const url = config.IMG_BASE_URL + endpoint;
       try {
@@ -15021,10 +18655,10 @@ const BgComponent = ({ listing, user, businessProfileBgData }) => {
     ] })
   ] });
 };
-const ImgComponentAlt = ({ listing, user, businessProfileImageData }) => {
+const ImgComponentAlt = ({ listing: listing2, user, businessProfileImageData }) => {
   let imgconst = "";
-  if (businessProfileImageData.image_url) {
-    imgconst = config.IMG_BASE_URL + businessProfileImageData.image_url;
+  if (businessProfileImageData == null ? void 0 : businessProfileImageData.image_url) {
+    imgconst = config.IMG_BASE_URL + (businessProfileImageData == null ? void 0 : businessProfileImageData.image_url);
   }
   const [imgSrc, setImgSrc] = useState(imgconst);
   const [selectedFile, setSelectedFile] = useState(null);
@@ -15055,7 +18689,7 @@ const ImgComponentAlt = ({ listing, user, businessProfileImageData }) => {
     if (isImgSelected) {
       formData.append("file", selectedFile);
       formData.append("guid", user.user_guid);
-      formData.append("bid", listing.gid);
+      formData.append("bid", listing2.gid);
       const endpoint = "/business_profile_pic_upload";
       const url = config.IMG_BASE_URL + endpoint;
       try {
@@ -15216,22 +18850,641 @@ const TextareaWithWordLimit = ({
     ] })
   ] }) });
 };
+const COUNTRY_DATA = [
+  { code: "AF", dialCode: "+93", name: "Afghanistan", flag: "🇦🇫" },
+  { code: "AL", dialCode: "+355", name: "Albania", flag: "🇦🇱" },
+  { code: "DZ", dialCode: "+213", name: "Algeria", flag: "🇩🇿" },
+  { code: "AD", dialCode: "+376", name: "Andorra", flag: "🇦🇩" },
+  { code: "AO", dialCode: "+244", name: "Angola", flag: "🇦🇴" },
+  { code: "AG", dialCode: "+1-268", name: "Antigua and Barbuda", flag: "🇦🇬" },
+  { code: "AR", dialCode: "+54", name: "Argentina", flag: "🇦🇷" },
+  { code: "AM", dialCode: "+374", name: "Armenia", flag: "🇦🇲" },
+  { code: "AU", dialCode: "+61", name: "Australia", flag: "🇦🇺" },
+  { code: "AT", dialCode: "+43", name: "Austria", flag: "🇦🇹" },
+  { code: "AZ", dialCode: "+994", name: "Azerbaijan", flag: "🇦🇿" },
+  { code: "BS", dialCode: "+1-242", name: "Bahamas", flag: "🇧🇸" },
+  { code: "BH", dialCode: "+973", name: "Bahrain", flag: "🇧🇭" },
+  { code: "BD", dialCode: "+880", name: "Bangladesh", flag: "🇧🇩" },
+  { code: "BB", dialCode: "+1-246", name: "Barbados", flag: "🇧🇧" },
+  { code: "BY", dialCode: "+375", name: "Belarus", flag: "🇧🇾" },
+  { code: "BE", dialCode: "+32", name: "Belgium", flag: "🇧🇪" },
+  { code: "BZ", dialCode: "+501", name: "Belize", flag: "🇧🇿" },
+  { code: "BJ", dialCode: "+229", name: "Benin", flag: "🇧🇯" },
+  { code: "BT", dialCode: "+975", name: "Bhutan", flag: "🇧🇹" },
+  { code: "BO", dialCode: "+591", name: "Bolivia", flag: "🇧🇴" },
+  { code: "BA", dialCode: "+387", name: "Bosnia and Herzegovina", flag: "🇧🇦" },
+  { code: "BW", dialCode: "+267", name: "Botswana", flag: "🇧🇼" },
+  { code: "BR", dialCode: "+55", name: "Brazil", flag: "🇧🇷" },
+  { code: "BN", dialCode: "+673", name: "Brunei", flag: "🇧🇳" },
+  { code: "BG", dialCode: "+359", name: "Bulgaria", flag: "🇧🇬" },
+  { code: "BF", dialCode: "+226", name: "Burkina Faso", flag: "🇧🇫" },
+  { code: "BI", dialCode: "+257", name: "Burundi", flag: "🇧🇮" },
+  { code: "KH", dialCode: "+855", name: "Cambodia", flag: "🇰🇭" },
+  { code: "CM", dialCode: "+237", name: "Cameroon", flag: "🇨🇲" },
+  { code: "CA", dialCode: "+1", name: "Canada", flag: "🇨🇦" },
+  { code: "CV", dialCode: "+238", name: "Cabo Verde", flag: "🇨🇻" },
+  { code: "CF", dialCode: "+236", name: "Central African Republic", flag: "🇨🇫" },
+  { code: "TD", dialCode: "+235", name: "Chad", flag: "🇹🇩" },
+  { code: "CL", dialCode: "+56", name: "Chile", flag: "🇨🇱" },
+  { code: "CN", dialCode: "+86", name: "China", flag: "🇨🇳" },
+  { code: "CO", dialCode: "+57", name: "Colombia", flag: "🇨🇴" },
+  { code: "KM", dialCode: "+269", name: "Comoros", flag: "🇰🇲" },
+  { code: "CG", dialCode: "+242", name: "Congo", flag: "🇨🇬" },
+  { code: "CR", dialCode: "+506", name: "Costa Rica", flag: "🇨🇷" },
+  { code: "CI", dialCode: "+225", name: "Ivory Coast", flag: "🇨🇮" },
+  { code: "HR", dialCode: "+385", name: "Croatia", flag: "🇭🇷" },
+  { code: "CU", dialCode: "+53", name: "Cuba", flag: "🇨🇺" },
+  { code: "CY", dialCode: "+357", name: "Cyprus", flag: "🇨🇾" },
+  { code: "CZ", dialCode: "+420", name: "Czech Republic", flag: "🇨🇿" },
+  { code: "DK", dialCode: "+45", name: "Denmark", flag: "🇩🇰" },
+  { code: "DJ", dialCode: "+253", name: "Djibouti", flag: "🇩🇯" },
+  { code: "DM", dialCode: "+1-767", name: "Dominica", flag: "🇩🇲" },
+  { code: "DO", dialCode: "+1-809", name: "Dominican Republic", flag: "🇩🇴" },
+  { code: "EC", dialCode: "+593", name: "Ecuador", flag: "🇪🇨" },
+  { code: "EG", dialCode: "+20", name: "Egypt", flag: "🇪🇬" },
+  { code: "SV", dialCode: "+503", name: "El Salvador", flag: "🇸🇻" },
+  { code: "GQ", dialCode: "+240", name: "Equatorial Guinea", flag: "🇬🇶" },
+  { code: "ER", dialCode: "+291", name: "Eritrea", flag: "🇪🇷" },
+  { code: "EE", dialCode: "+372", name: "Estonia", flag: "🇪🇪" },
+  { code: "SZ", dialCode: "+268", name: "Eswatini", flag: "🇸🇿" },
+  { code: "ET", dialCode: "+251", name: "Ethiopia", flag: "🇪🇹" },
+  { code: "FJ", dialCode: "+679", name: "Fiji", flag: "🇫🇯" },
+  { code: "FI", dialCode: "+358", name: "Finland", flag: "🇫🇮" },
+  { code: "FR", dialCode: "+33", name: "France", flag: "🇫🇷" },
+  { code: "GA", dialCode: "+241", name: "Gabon", flag: "🇬🇦" },
+  { code: "GM", dialCode: "+220", name: "Gambia", flag: "🇬🇲" },
+  { code: "GE", dialCode: "+995", name: "Georgia", flag: "🇬🇪" },
+  { code: "DE", dialCode: "+49", name: "Germany", flag: "🇩🇪" },
+  { code: "GH", dialCode: "+233", name: "Ghana", flag: "🇬🇭" },
+  { code: "GR", dialCode: "+30", name: "Greece", flag: "🇬🇷" },
+  { code: "GD", dialCode: "+1-473", name: "Grenada", flag: "🇬🇩" },
+  { code: "GT", dialCode: "+502", name: "Guatemala", flag: "🇬🇹" },
+  { code: "GN", dialCode: "+224", name: "Guinea", flag: "🇬🇳" },
+  { code: "GW", dialCode: "+245", name: "Guinea-Bissau", flag: "🇬🇼" },
+  { code: "GY", dialCode: "+592", name: "Guyana", flag: "🇬🇾" },
+  { code: "HT", dialCode: "+509", name: "Haiti", flag: "🇭🇹" },
+  { code: "HN", dialCode: "+504", name: "Honduras", flag: "🇭🇳" },
+  { code: "HU", dialCode: "+36", name: "Hungary", flag: "🇭🇺" },
+  { code: "IS", dialCode: "+354", name: "Iceland", flag: "🇮🇸" },
+  { code: "IN", dialCode: "+91", name: "India", flag: "🇮🇳" },
+  { code: "ID", dialCode: "+62", name: "Indonesia", flag: "🇮🇩" },
+  { code: "IR", dialCode: "+98", name: "Iran", flag: "🇮🇷" },
+  { code: "IQ", dialCode: "+964", name: "Iraq", flag: "🇮🇶" },
+  { code: "IE", dialCode: "+353", name: "Ireland", flag: "🇮🇪" },
+  { code: "IL", dialCode: "+972", name: "Israel", flag: "🇮🇱" },
+  { code: "IT", dialCode: "+39", name: "Italy", flag: "🇮🇹" },
+  { code: "JM", dialCode: "+1-876", name: "Jamaica", flag: "🇯🇲" },
+  { code: "JP", dialCode: "+81", name: "Japan", flag: "🇯🇵" },
+  { code: "JO", dialCode: "+962", name: "Jordan", flag: "🇯🇴" },
+  { code: "KZ", dialCode: "+7", name: "Kazakhstan", flag: "🇰🇿" },
+  { code: "KE", dialCode: "+254", name: "Kenya", flag: "🇰🇪" },
+  { code: "KI", dialCode: "+686", name: "Kiribati", flag: "🇰🇮" },
+  { code: "XK", dialCode: "+383", name: "Kosovo", flag: "🇽🇰" },
+  { code: "KW", dialCode: "+965", name: "Kuwait", flag: "🇰🇼" },
+  { code: "KG", dialCode: "+996", name: "Kyrgyzstan", flag: "🇰🇬" },
+  { code: "LA", dialCode: "+856", name: "Laos", flag: "🇱🇦" },
+  { code: "LV", dialCode: "+371", name: "Latvia", flag: "🇱🇻" },
+  { code: "LB", dialCode: "+961", name: "Lebanon", flag: "🇱🇧" },
+  { code: "LS", dialCode: "+266", name: "Lesotho", flag: "🇱🇸" },
+  { code: "LR", dialCode: "+231", name: "Liberia", flag: "🇱🇷" },
+  { code: "LY", dialCode: "+218", name: "Libya", flag: "🇱🇾" },
+  { code: "LI", dialCode: "+423", name: "Liechtenstein", flag: "🇱🇮" },
+  { code: "LT", dialCode: "+370", name: "Lithuania", flag: "🇱🇹" },
+  { code: "LU", dialCode: "+352", name: "Luxembourg", flag: "🇱🇺" },
+  { code: "MG", dialCode: "+261", name: "Madagascar", flag: "🇲🇬" },
+  { code: "MW", dialCode: "+265", name: "Malawi", flag: "🇲🇼" },
+  { code: "MY", dialCode: "+60", name: "Malaysia", flag: "🇲🇾" },
+  { code: "MV", dialCode: "+960", name: "Maldives", flag: "🇲🇻" },
+  { code: "ML", dialCode: "+223", name: "Mali", flag: "🇲🇱" },
+  { code: "MT", dialCode: "+356", name: "Malta", flag: "🇲🇹" },
+  { code: "MH", dialCode: "+692", name: "Marshall Islands", flag: "🇲🇭" },
+  { code: "MR", dialCode: "+222", name: "Mauritania", flag: "🇲🇷" },
+  { code: "MU", dialCode: "+230", name: "Mauritius", flag: "🇲🇺" },
+  { code: "MX", dialCode: "+52", name: "Mexico", flag: "🇲🇽" },
+  { code: "FM", dialCode: "+691", name: "Micronesia", flag: "🇫🇲" },
+  { code: "MD", dialCode: "+373", name: "Moldova", flag: "🇲🇩" },
+  { code: "MC", dialCode: "+377", name: "Monaco", flag: "🇲🇨" },
+  { code: "MN", dialCode: "+976", name: "Mongolia", flag: "🇲🇳" },
+  { code: "ME", dialCode: "+382", name: "Montenegro", flag: "🇲🇪" },
+  { code: "MA", dialCode: "+212", name: "Morocco", flag: "🇲🇦" },
+  { code: "MZ", dialCode: "+258", name: "Mozambique", flag: "🇲🇿" },
+  { code: "MM", dialCode: "+95", name: "Myanmar", flag: "🇲🇲" },
+  { code: "NA", dialCode: "+264", name: "Namibia", flag: "🇳🇦" },
+  { code: "NR", dialCode: "+674", name: "Nauru", flag: "🇳🇷" },
+  { code: "NP", dialCode: "+977", name: "Nepal", flag: "🇳🇵" },
+  { code: "NL", dialCode: "+31", name: "Netherlands", flag: "🇳🇱" },
+  { code: "NZ", dialCode: "+64", name: "New Zealand", flag: "🇳🇿" },
+  { code: "NI", dialCode: "+505", name: "Nicaragua", flag: "🇳🇮" },
+  { code: "NE", dialCode: "+227", name: "Niger", flag: "🇳🇪" },
+  { code: "NG", dialCode: "+234", name: "Nigeria", flag: "🇳🇬" },
+  { code: "KP", dialCode: "+850", name: "North Korea", flag: "🇰🇵" },
+  { code: "MK", dialCode: "+389", name: "North Macedonia", flag: "🇲🇰" },
+  { code: "NO", dialCode: "+47", name: "Norway", flag: "🇳🇴" },
+  { code: "OM", dialCode: "+968", name: "Oman", flag: "🇴🇲" },
+  { code: "PK", dialCode: "+92", name: "Pakistan", flag: "🇵🇰" },
+  { code: "PW", dialCode: "+680", name: "Palau", flag: "🇵🇼" },
+  { code: "PS", dialCode: "+970", name: "Palestine", flag: "🇵🇸" },
+  { code: "PA", dialCode: "+507", name: "Panama", flag: "🇵🇦" },
+  { code: "PG", dialCode: "+675", name: "Papua New Guinea", flag: "🇵🇬" },
+  { code: "PY", dialCode: "+595", name: "Paraguay", flag: "🇵🇾" },
+  { code: "PE", dialCode: "+51", name: "Peru", flag: "🇵🇪" },
+  { code: "PH", dialCode: "+63", name: "Philippines", flag: "🇵🇭" },
+  { code: "PL", dialCode: "+48", name: "Poland", flag: "🇵🇱" },
+  { code: "PT", dialCode: "+351", name: "Portugal", flag: "🇵🇹" },
+  { code: "QA", dialCode: "+974", name: "Qatar", flag: "🇶🇦" },
+  { code: "RO", dialCode: "+40", name: "Romania", flag: "🇷🇴" },
+  { code: "RU", dialCode: "+7", name: "Russia", flag: "🇷🇺" },
+  { code: "RW", dialCode: "+250", name: "Rwanda", flag: "🇷🇼" },
+  { code: "SA", dialCode: "+966", name: "Saudi Arabia", flag: "🇸🇦" },
+  { code: "SN", dialCode: "+221", name: "Senegal", flag: "🇸🇳" },
+  { code: "RS", dialCode: "+381", name: "Serbia", flag: "🇷🇸" },
+  { code: "SC", dialCode: "+248", name: "Seychelles", flag: "🇸🇨" },
+  { code: "SL", dialCode: "+232", name: "Sierra Leone", flag: "🇸🇱" },
+  { code: "SG", dialCode: "+65", name: "Singapore", flag: "🇸🇬" },
+  { code: "SK", dialCode: "+421", name: "Slovakia", flag: "🇸🇰" },
+  { code: "SI", dialCode: "+386", name: "Slovenia", flag: "🇸🇮" },
+  { code: "SB", dialCode: "+677", name: "Solomon Islands", flag: "🇸🇧" },
+  { code: "SO", dialCode: "+252", name: "Somalia", flag: "🇸🇴" },
+  { code: "ZA", dialCode: "+27", name: "South Africa", flag: "🇿🇦" },
+  { code: "KR", dialCode: "+82", name: "South Korea", flag: "🇰🇷" },
+  { code: "SS", dialCode: "+211", name: "South Sudan", flag: "🇸🇸" },
+  { code: "ES", dialCode: "+34", name: "Spain", flag: "🇪🇸" },
+  { code: "LK", dialCode: "+94", name: "Sri Lanka", flag: "🇱🇰" },
+  { code: "SD", dialCode: "+249", name: "Sudan", flag: "🇸🇩" },
+  { code: "SR", dialCode: "+597", name: "Suriname", flag: "🇸🇷" },
+  { code: "SE", dialCode: "+46", name: "Sweden", flag: "🇸🇪" },
+  { code: "CH", dialCode: "+41", name: "Switzerland", flag: "🇨🇭" },
+  { code: "SY", dialCode: "+963", name: "Syria", flag: "🇸🇾" },
+  { code: "TW", dialCode: "+886", name: "Taiwan", flag: "🇹🇼" },
+  { code: "TJ", dialCode: "+992", name: "Tajikistan", flag: "🇹🇯" },
+  { code: "TZ", dialCode: "+255", name: "Tanzania", flag: "🇹🇿" },
+  { code: "TH", dialCode: "+66", name: "Thailand", flag: "🇹🇭" },
+  { code: "TL", dialCode: "+670", name: "Timor-Leste", flag: "🇹🇱" },
+  { code: "TG", dialCode: "+228", name: "Togo", flag: "🇹🇬" },
+  { code: "TO", dialCode: "+676", name: "Tonga", flag: "🇹🇴" },
+  { code: "TT", dialCode: "+1-868", name: "Trinidad and Tobago", flag: "🇹🇹" },
+  { code: "TN", dialCode: "+216", name: "Tunisia", flag: "🇹🇳" },
+  { code: "TR", dialCode: "+90", name: "Turkey", flag: "🇹🇷" },
+  { code: "TM", dialCode: "+993", name: "Turkmenistan", flag: "🇹🇲" },
+  { code: "TV", dialCode: "+688", name: "Tuvalu", flag: "🇹🇻" },
+  { code: "UG", dialCode: "+256", name: "Uganda", flag: "🇺🇬" },
+  { code: "UA", dialCode: "+380", name: "Ukraine", flag: "🇺🇦" },
+  { code: "AE", dialCode: "+971", name: "United Arab Emirates", flag: "🇦🇪" },
+  { code: "GB", dialCode: "+44", name: "United Kingdom", flag: "🇬🇧" },
+  { code: "US", dialCode: "+1", name: "United States", flag: "🇺🇸" },
+  { code: "UY", dialCode: "+598", name: "Uruguay", flag: "🇺🇾" },
+  { code: "UZ", dialCode: "+998", name: "Uzbekistan", flag: "🇺🇿" },
+  { code: "VA", dialCode: "+379", name: "Vatican City", flag: "🇻🇦" },
+  { code: "VE", dialCode: "+58", name: "Venezuela", flag: "🇻🇪" },
+  { code: "VN", dialCode: "+84", name: "Vietnam", flag: "🇻🇳" },
+  { code: "YE", dialCode: "+967", name: "Yemen", flag: "🇾🇪" },
+  { code: "ZM", dialCode: "+260", name: "Zambia", flag: "🇿🇲" },
+  { code: "ZW", dialCode: "+263", name: "Zimbabwe", flag: "🇿🇼" }
+];
+const findCountryByDialCode = (phoneNumber) => {
+  for (const country of COUNTRY_DATA) {
+    if (phoneNumber.startsWith(country.dialCode)) {
+      return country;
+    }
+  }
+  return COUNTRY_DATA[0];
+};
+function separatePhoneNumber(phoneText) {
+  const parts = phoneText == null ? void 0 : phoneText.split("-");
+  if ((parts == null ? void 0 : parts.length) === 2) {
+    return {
+      dialCode: parts[0],
+      // "+1"
+      number: parts[1],
+      // "17027325111"
+      fullNumber: phoneText
+    };
+  }
+  const cleanText = phoneText == null ? void 0 : phoneText.replace(/[^\d+]/g, "");
+  if (cleanText == null ? void 0 : cleanText.startsWith("+1")) {
+    return {
+      dialCode: "+1",
+      number: cleanText.substring(2),
+      fullNumber: phoneText
+    };
+  } else if (cleanText == null ? void 0 : cleanText.startsWith("+")) {
+    const match = cleanText.match(/^(\+\d{1,4})(\d+)/);
+    if (match) {
+      return {
+        dialCode: match[1],
+        number: match[2],
+        fullNumber: phoneText
+      };
+    }
+  }
+  return {
+    dialCode: "",
+    number: cleanText,
+    fullNumber: phoneText
+  };
+}
+const PhoneNoInput = ({
+  controlName,
+  controlType = "tel",
+  controlPlaceholder = "Enter phone number",
+  controlTitle,
+  controlInformation,
+  register,
+  changeHandler,
+  setValue,
+  getValues,
+  error,
+  width,
+  disabled = false,
+  defaultCountry = "US",
+  showCountrySelector = true
+}) => {
+  useEffect(() => {
+    if (getValues) {
+      const phone = getValues(controlName);
+      console.log(phone);
+      if (phone) {
+        const result = separatePhoneNumber(phone);
+        const dialCode = result.dialCode;
+        const localNumber = result.number;
+        console.log("Found:", { phone, dialCode, localNumber });
+        if (dialCode) {
+          const countryFromDialCode = COUNTRY_DATA.find(
+            (country) => country.dialCode === dialCode
+          ) || COUNTRY_DATA.find(
+            (country) => dialCode.startsWith(country.dialCode)
+          );
+          if (countryFromDialCode) {
+            console.log("Setting country:", countryFromDialCode.name);
+            setSelectedCountry(countryFromDialCode);
+          }
+        }
+        if (localNumber) {
+          console.log("Setting display value:", localNumber);
+          const digitsOnly = localNumber.replace(/\D/g, "");
+          const formattedLocal = formatPhoneNumber(digitsOnly);
+          setDisplayValue(formattedLocal);
+        }
+      }
+    }
+  }, [getValues, controlName]);
+  const [wrapperWidth, setWrapperWidth] = useState("");
+  const [inputWidth, setInputWidth] = useState(width);
+  const [displayValue, setDisplayValue] = useState("");
+  const [selectedCountry, setSelectedCountry] = useState(
+    () => COUNTRY_DATA.find((c) => c.code === defaultCountry) || COUNTRY_DATA[0]
+  );
+  const [showDropdown, setShowDropdown] = useState(false);
+  const dropdownRef = useRef(null);
+  const inputRef = useRef(null);
+  const [countrySearch, setCountrySearch] = useState("");
+  const filteredCountries = COUNTRY_DATA.filter((country) => {
+    const q = countrySearch.toLowerCase();
+    return country.name.toLowerCase().includes(q) || country.code.toLowerCase().includes(q) || country.dialCode.includes(q);
+  });
+  useEffect(() => {
+    if (inputWidth && inputWidth > 0) {
+      setWrapperWidth(inputWidth === 100 ? "xl:w-full" : `xl:w-[${inputWidth}%]`);
+    }
+  }, [inputWidth]);
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setShowDropdown(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+  const formatPhoneNumber = (value) => {
+    let numbers = value.replace(/\D/g, "");
+    if (numbers.length <= 3) return numbers;
+    switch (selectedCountry.code) {
+      case "US":
+      case "CA":
+        if (numbers.length <= 3) return numbers;
+        if (numbers.length <= 6) return `${numbers.slice(0, 3)}-${numbers.slice(3)}`;
+        return `${numbers.slice(0, 3)}-${numbers.slice(3, 6)}-${numbers.slice(6, 10)}`;
+      case "GB":
+        if (numbers.length <= 5) return numbers;
+        if (numbers.length <= 8) return `${numbers.slice(0, 5)} ${numbers.slice(5)}`;
+        return `${numbers.slice(0, 5)} ${numbers.slice(5, 8)} ${numbers.slice(8)}`;
+      case "NG":
+        if (numbers.length <= 4) return numbers;
+        if (numbers.length <= 7) return `${numbers.slice(0, 4)} ${numbers.slice(4)}`;
+        return `${numbers.slice(0, 4)} ${numbers.slice(4, 7)} ${numbers.slice(7, 11)}`;
+      case "IN":
+        if (numbers.length <= 5) return numbers;
+        return `${numbers.slice(0, 5)} ${numbers.slice(5, 10)}`;
+      default:
+        if (numbers.length <= 3) return numbers;
+        if (numbers.length <= 8) {
+          return `${numbers.slice(0, 3)} ${numbers.slice(3)}`;
+        }
+        return `${numbers.slice(0, 3)} ${numbers.slice(3, 6)} ${numbers.slice(6)}`;
+    }
+  };
+  const handleCountrySelect = (country) => {
+    console.log(country);
+    console.log(country.dialCode);
+    setSelectedCountry(country);
+    setShowDropdown(false);
+    if (displayValue && inputRef.current) {
+      inputRef.current.focus();
+      const digitsOnly = inputRef.current.value.replace(/\D/g, "");
+      const formattedLocal = formatPhoneNumber(digitsOnly);
+      setDisplayValue(formattedLocal);
+      const fullNumber = country.dialCode + "-" + digitsOnly;
+      console.log(fullNumber);
+      setValue(controlName, fullNumber, {
+        shouldDirty: true,
+        shouldTouch: true,
+        shouldValidate: true
+      });
+    }
+  };
+  const handleInputChange = (e) => {
+    const rawValue = e.target.value;
+    if (rawValue === "") {
+      setDisplayValue("");
+      if (changeHandler) {
+        changeHandler(e);
+      }
+      return;
+    }
+    const digitsOnly = rawValue.replace(/\D/g, "");
+    const formattedLocal = formatPhoneNumber(digitsOnly);
+    setDisplayValue(formattedLocal);
+    const fullNumber = selectedCountry.dialCode + "-" + digitsOnly;
+    setValue(controlName, fullNumber, {
+      shouldDirty: true,
+      shouldTouch: true,
+      shouldValidate: true
+    });
+  };
+  const handlePaste = (e) => {
+    e.preventDefault();
+    const pastedText = e.clipboardData.getData("text");
+    const countryFromPaste = findCountryByDialCode(pastedText);
+    if (countryFromPaste.code !== selectedCountry.code) {
+      setSelectedCountry(countryFromPaste);
+    }
+    let localNumber = pastedText;
+    if (pastedText.startsWith(countryFromPaste.dialCode)) {
+      localNumber = pastedText.substring(countryFromPaste.dialCode.length);
+    }
+    const cleanLocal = localNumber.replace(/\D/g, "");
+    const formatted = formatPhoneNumber(cleanLocal);
+    setDisplayValue(formatted);
+    const fullNumber = countryFromPaste.dialCode + "-" + cleanLocal;
+    setValue(controlName, fullNumber, {
+      shouldDirty: true,
+      shouldTouch: true,
+      shouldValidate: true
+    });
+  };
+  const getFullDisplayNumber = () => {
+    displayValue.replace(/\D/g, "");
+    return selectedCountry.dialCode + " " + displayValue;
+  };
+  return /* @__PURE__ */ jsxs("div", { className: inputControlWrapper, children: [
+    /* @__PURE__ */ jsxs("div", { className: inputHeadingClass, children: [
+      /* @__PURE__ */ jsx("div", { className: "mb-0 text-xl", children: controlTitle }),
+      controlInformation && controlInformation.length > 1 && /* @__PURE__ */ jsx("div", { className: controlInformationClass, children: controlInformation })
+    ] }),
+    /* @__PURE__ */ jsxs("div", { className: "w-[100%]", children: [
+      /* @__PURE__ */ jsxs("div", { className: "flex items-stretch rounded-md border border-gray-300 focus-within:border-blue-500 focus-within:ring-1 focus-within:ring-blue-500", children: [
+        showCountrySelector && /* @__PURE__ */ jsxs("div", { className: "relative", ref: dropdownRef, children: [
+          /* @__PURE__ */ jsxs(
+            "button",
+            {
+              type: "button",
+              className: "flex items-center justify-between px-3 py-2.5 border-r border-gray-300 bg-gray-50 hover:bg-gray-100 min-w-[120px]",
+              onClick: () => setShowDropdown(!showDropdown),
+              disabled,
+              children: [
+                /* @__PURE__ */ jsxs("div", { className: "flex items-center gap-2", children: [
+                  /* @__PURE__ */ jsx("span", { className: "text-lg", children: selectedCountry.flag }),
+                  /* @__PURE__ */ jsx("span", { className: "font-medium", children: selectedCountry.dialCode })
+                ] }),
+                /* @__PURE__ */ jsx(MdArrowDropDown, { className: `text-gray-500 transition-transform ${showDropdown ? "rotate-180" : ""}` })
+              ]
+            }
+          ),
+          showDropdown && /* @__PURE__ */ jsxs("div", { className: "absolute top-full left-0 mt-1 w-64 bg-white border border-gray-200 rounded-lg shadow-lg z-50 max-h-60 overflow-y-auto", children: [
+            /* @__PURE__ */ jsx("div", { className: "p-2 border-b", children: /* @__PURE__ */ jsx(
+              "input",
+              {
+                type: "text",
+                value: countrySearch,
+                onChange: (e) => setCountrySearch(e.target.value),
+                placeholder: "Search country or code",
+                className: "w-full px-2 py-1 border rounded text-sm focus:outline-none focus:ring-1 focus:ring-blue-500"
+              }
+            ) }),
+            /* @__PURE__ */ jsx("div", { className: "max-h-52 overflow-y-auto", children: filteredCountries.length > 0 ? filteredCountries.map((country) => /* @__PURE__ */ jsxs(
+              "button",
+              {
+                type: "button",
+                className: `flex items-center w-full px-3 py-2 text-left hover:bg-gray-50 ${selectedCountry.code === country.code ? "bg-blue-50" : ""}`,
+                onClick: () => {
+                  handleCountrySelect(country);
+                  setCountrySearch("");
+                },
+                children: [
+                  /* @__PURE__ */ jsx("span", { className: "text-lg mr-2", children: country.flag }),
+                  /* @__PURE__ */ jsx("span", { className: "font-medium mr-3", children: country.dialCode }),
+                  /* @__PURE__ */ jsx("span", { className: "text-gray-600 flex-1", children: country.name }),
+                  /* @__PURE__ */ jsx("span", { className: "text-sm text-gray-400", children: country.code })
+                ]
+              },
+              country.code
+            )) : /* @__PURE__ */ jsx("div", { className: "px-3 py-2 text-sm text-gray-500", children: "No results found" }) })
+          ] })
+        ] }),
+        /* @__PURE__ */ jsxs("div", { className: "flex relative place-items-center place-content-center", children: [
+          showCountrySelector && /* @__PURE__ */ jsx("div", { className: "absolute left-3 text-gray-500 pointer-events-none h-full  flex place-items-center font-bold", children: selectedCountry.dialCode }),
+          /* @__PURE__ */ jsx(
+            "input",
+            {
+              ...register(controlName, {
+                onChange: handleInputChange
+              }),
+              ref: inputRef,
+              type: controlType,
+              className: `${inputClass} border-0 focus:ring-0 pl-12 ml-3 ${disabled && "bg-gray-200/80"} outline-none`,
+              placeholder: controlPlaceholder,
+              disabled,
+              value: displayValue,
+              onPaste: handlePaste,
+              inputMode: "tel",
+              autoComplete: "tel"
+            }
+          )
+        ] })
+      ] }),
+      displayValue && /* @__PURE__ */ jsxs("div", { className: "mt-1 text-sm text-gray-500", children: [
+        "Full number: ",
+        getFullDisplayNumber()
+      ] }),
+      error && /* @__PURE__ */ jsxs("div", { className: inputClassError, children: [
+        /* @__PURE__ */ jsx(MdError, { className: "text-lg" }),
+        error.message
+      ] })
+    ] })
+  ] });
+};
+const formatWithCommas = (numStr) => {
+  if (!numStr) return "";
+  const clean = numStr.replace(/[^0-9]/g, "");
+  if (!clean) return "";
+  if (clean.length <= 3) return clean;
+  return clean.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+};
+const InputNumberOnly = ({
+  controlName,
+  controlType,
+  controlPlaceholder,
+  controlTitle,
+  controlInformation,
+  register,
+  changeHandler,
+  error,
+  width,
+  disabled = false
+}) => {
+  const [wrapperWidth, setWrapperWidth] = useState("");
+  const [inputWidth, setInputWidth] = useState(width);
+  useEffect(() => {
+    if (inputWidth > 0) {
+      if (inputWidth === 100) {
+        setWrapperWidth(`xl:w-full`);
+      } else {
+        setWrapperWidth(`xl:w-[${inputWidth}%]`);
+      }
+    }
+  }, [inputWidth]);
+  return /* @__PURE__ */ jsx(Fragment, { children: /* @__PURE__ */ jsxs("div", { className: inputControlWrapper, children: [
+    /* @__PURE__ */ jsxs("div", { className: inputHeadingClass, children: [
+      /* @__PURE__ */ jsx("div", { className: `mb-0 text-xl`, children: controlTitle }),
+      (controlInformation == null ? void 0 : controlInformation.length) > 1 && /* @__PURE__ */ jsx("div", { className: controlInformationClass, children: controlInformation })
+    ] }),
+    /* @__PURE__ */ jsxs("div", { className: `w-[100%]`, children: [
+      /* @__PURE__ */ jsx(
+        "input",
+        {
+          ...register(controlName, {
+            onChange: (e) => {
+              const value = e.target.value;
+              const raw = formatDecimalWithCommas(value);
+              e.target.value = raw;
+              changeHandler(e);
+            }
+          }),
+          type: controlType ? controlType : "text",
+          className: `${inputClass} ${disabled && "bg-gray-200/80"}`,
+          placeholder: controlPlaceholder,
+          disabled,
+          onLoad: (e) => {
+            const value = e.target.value;
+            alert(value);
+            const raw = formatDecimalWithCommas(value);
+            formatWithCommas(raw);
+            e.target.value = raw;
+          }
+        }
+      ),
+      error && /* @__PURE__ */ jsxs("div", { className: `${inputClassError}`, children: [
+        /* @__PURE__ */ jsx(MdError, { className: "text-lg" }),
+        error.message
+      ] })
+    ] })
+  ] }) });
+};
+const SelectCurrency = ({
+  controlName,
+  controlTitle,
+  controlPlaceholder,
+  selectJson,
+  register,
+  changeHandler,
+  error,
+  setCode,
+  controlInformation
+}) => {
+  const [ready, setReady] = useState(false);
+  useEffect(() => {
+    if (register && changeHandler && selectJson) {
+      setTimeout(() => {
+        setReady(true);
+      }, 1e3);
+    }
+  }, [register, changeHandler, selectJson]);
+  return /* @__PURE__ */ jsx(Fragment, { children: /* @__PURE__ */ jsxs("div", { className: inputControlWrapper, children: [
+    /* @__PURE__ */ jsxs("div", { className: inputHeadingClass, children: [
+      /* @__PURE__ */ jsx("div", { className: `mb-0 text-xl`, children: controlTitle }),
+      (controlInformation == null ? void 0 : controlInformation.length) > 1 && /* @__PURE__ */ jsx("div", { className: controlInformationClass, children: controlInformation })
+    ] }),
+    /* @__PURE__ */ jsxs("div", { className: "w-[90%]", children: [
+      ready && /* @__PURE__ */ jsxs(
+        "select",
+        {
+          ...register(controlName, {
+            onChange: (e) => {
+              changeHandler(e);
+              if (setCode) {
+                setCode(e.target.value);
+              }
+            }
+          }),
+          className: `${inputClass} text-lg`,
+          children: [
+            /* @__PURE__ */ jsx("option", { value: "", children: controlPlaceholder }),
+            selectJson.map((item, id) => {
+              return /* @__PURE__ */ jsxs("option", { value: item.id, className: ``, children: [
+                item.country,
+                " - ",
+                item.currency_name,
+                " ",
+                item.currency_symbol,
+                " ",
+                item.emoji
+              ] }, id);
+            })
+          ]
+        }
+      ),
+      error && /* @__PURE__ */ jsxs("div", { className: `input__class__error`, children: [
+        /* @__PURE__ */ jsx(MdError, { className: "text-lg" }),
+        error.message
+      ] })
+    ] })
+  ] }) });
+};
 const BusinessProfile = ({ data }) => {
-  var _a;
+  var _a, _b, _c, _d, _e, _f, _g, _h;
+  const [businessProfile, setBusinessProfile] = useState(data.businessProfile);
   const [formdata, setFormdata] = useState(null);
   const [working, setWorking] = useState(false);
   useNotification();
   const [errorMsg, setErrorMsg] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
+  useEffect(() => {
+    if (data.businessProfile) {
+      const minAmt = formatDecimalWithCommas(businessProfile.minimum_amount.toString());
+      setValue("minimum_amount", minAmt);
+    }
+  }, [data]);
   const { showOperation, showSuccess, showError, showWarning, showInfo, completeOperation } = useOperation();
-  const countries = data.countries;
+  const currencies = data == null ? void 0 : data.currencies;
+  const countries = data == null ? void 0 : data.countries;
   let [states, setStates] = useState(data.states);
   let [cities, setCities] = useState(data.cities);
   const categories2 = categories$2 == null ? void 0 : categories$2.sort(
     (a, b) => a.name.localeCompare(b.name)
   );
-  const [countryCode, setCountryCode] = useState(data.businessProfile.country_code);
-  const [stateCode, setStateCode] = useState(data.businessProfile.state_code);
+  const [countryCode, setCountryCode] = useState((_a = data == null ? void 0 : data.businessProfile) == null ? void 0 : _a.country_code);
+  const [stateCode, setStateCode] = useState((_b = data == null ? void 0 : data.businessProfile) == null ? void 0 : _b.state_code);
   const [newCountryCode, setNewCountryCode] = useState("");
   const [newStateCode, setNewStateCode] = useState("");
   const resetStates = async (countryCode2) => {
@@ -15258,10 +19511,12 @@ const BusinessProfile = ({ data }) => {
     });
   };
   const handleUpdateBusiness = async (datar) => {
+    var _a2;
     setWorking(true);
+    console.log(datar);
     showOperation("processing", "Updating page profile");
     await new Promise((resolve) => setTimeout(resolve, 1e3));
-    const endpoint = "/api/listing/" + data.businessProfile.gid;
+    const endpoint = "/api/listing/" + ((_a2 = data == null ? void 0 : data.businessProfile) == null ? void 0 : _a2.gid);
     const url = config.BASE_URL + endpoint;
     try {
       const response = await fetch(url, {
@@ -15293,7 +19548,7 @@ const BusinessProfile = ({ data }) => {
     setError,
     formState: { errors, isSubmitting }
   } = useForm({
-    defaultValues: data.businessProfile,
+    defaultValues: businessProfile,
     resolver: zodResolver(BusinessProfileSchema)
   });
   useEffect(() => {
@@ -15314,7 +19569,7 @@ const BusinessProfile = ({ data }) => {
     }
   }, [newStateCode]);
   return /* @__PURE__ */ jsxs("div", { children: [
-    /* @__PURE__ */ jsx(BusinessDrawer, { isOpen, businessGuid: data.businessProfile.gid, userGuid: (_a = data.businessProfile) == null ? void 0 : _a.owner }),
+    /* @__PURE__ */ jsx(BusinessDrawer, { isOpen, businessGuid: (_c = data.businessProfile) == null ? void 0 : _c.gid, userGuid: (_d = data.businessProfile) == null ? void 0 : _d.owner }),
     /* @__PURE__ */ jsx(
       BgComponent,
       {
@@ -15345,7 +19600,7 @@ const BusinessProfile = ({ data }) => {
         /* @__PURE__ */ jsx(
           "a",
           {
-            href: `/${data.businessProfile.gid}`,
+            href: `/${(_e = data.businessProfile) == null ? void 0 : _e.gid}`,
             className: ` py-[9px] px-[20px] rounded-full bg-blue-900 shadow-lg shadow-blue-400 text-white`,
             children: "Preview"
           }
@@ -15354,14 +19609,14 @@ const BusinessProfile = ({ data }) => {
           BusinessMenu,
           {
             setIsOpen,
-            guid: data == null ? void 0 : data.businessProfile.gid,
-            userGuid: data == null ? void 0 : data.businessProfile.owner
+            guid: (_f = data == null ? void 0 : data.businessProfile) == null ? void 0 : _f.gid,
+            userGuid: (_g = data == null ? void 0 : data.businessProfile) == null ? void 0 : _g.owner
           }
         )
       ] }),
       /* @__PURE__ */ jsx("form", { className: `w-full px-[10px]`, onSubmit: handleSubmit(handleUpdateBusiness), children: /* @__PURE__ */ jsxs("div", { className: `${formWrapperClass} mt-0  rounded-lg pt-4 md:max-w-[80%]
                                 lg:max-w-[60%] w-full mx-auto `, children: [
-        /* @__PURE__ */ jsx("div", { className: `text-2xl leading-[1.4em] px-[10px] text-gray-500 mb-[32px] font-bold text-center bg-gray-100 w-full p-3 border rounded`, children: data == null ? void 0 : data.businessProfile.title }),
+        /* @__PURE__ */ jsx("div", { className: `text-2xl leading-[1.4em] px-[10px] text-gray-500 mb-[32px] font-bold text-center bg-gray-100 w-full p-3 border rounded`, children: (_h = data == null ? void 0 : data.businessProfile) == null ? void 0 : _h.title }),
         /* @__PURE__ */ jsx(
           Input,
           {
@@ -15516,53 +19771,52 @@ const BusinessProfile = ({ data }) => {
           }
         ),
         /* @__PURE__ */ jsx(
-          Input,
+          PhoneNoInput,
           {
             controlTitle: "Phone number",
             controlPlaceholder: "Enter phone number",
             controlName: "phone",
             register,
+            setValue,
+            getValues,
             changeHandler,
             error: errors.phone,
             controlInformation: `Mobile number or phone number. `
           }
         ),
-        /* @__PURE__ */ jsx(
-          Input,
-          {
-            controlTitle: "Business Phrases",
-            controlPlaceholder: "E.g. Advocates, Software Developers, Architect",
-            controlName: "business_phrases",
-            register,
-            changeHandler,
-            error: errors.business_phrases,
-            controlInformation: `Enter business phrases like: Solicitor, Advocate, Plumber, Business Analyst, Mechanical Engineers.`
-          }
-        ),
-        /* @__PURE__ */ jsx(
-          Input,
-          {
-            controlTitle: "Products",
-            controlPlaceholder: "E.g.: Publications, Accessories, Shoes, Subscriptions, Magazines, Cars",
-            controlName: "products",
-            register,
-            changeHandler,
-            error: errors.products,
-            controlInformation: `Enter your products name like: Magazines, Generators, Accessories, Perfumes, Publications etc.`
-          }
-        ),
-        /* @__PURE__ */ jsx(
-          Input,
-          {
-            controlTitle: "Services",
-            controlPlaceholder: "E.g.: Consulting Services, Project Management, Outsourcing or BPO, Training and Development. etc.",
-            controlName: "services",
-            register,
-            changeHandler,
-            error: errors.services,
-            controlInformation: `Enter your services E.g.: Consulting Services, Project Management, Outsourcing or BPO, Training and Development. etc.`
-          }
-        ),
+        /* @__PURE__ */ jsxs("div", { className: `w-full mt-4 mb-12`, children: [
+          /* @__PURE__ */ jsx("div", { className: `text-2xl font-semibold`, children: "Minimum rate charged by this business." }),
+          /* @__PURE__ */ jsx("div", { className: `text-[14px] py-4 mb-0 leading-[1.3em]`, children: "Select the minimum amount customers or clients are charged to purchase goods/services from this business. This is optional." }),
+          /* @__PURE__ */ jsxs("div", { className: `p-4 border rounded-xl`, children: [
+            /* @__PURE__ */ jsx(
+              SelectCurrency,
+              {
+                controlTitle: "Currency",
+                controlName: "minimum_amount_currency_code",
+                controlPlaceholder: "Select currency",
+                selectJson: currencies,
+                register,
+                changeHandler,
+                error: errors.minimum_amount_currency_code,
+                setCode: resetStates,
+                controlInformation: `Default currency to receive funds.`
+              }
+            ),
+            /* @__PURE__ */ jsx("div", { className: `h-2` }),
+            /* @__PURE__ */ jsx(
+              InputNumberOnly,
+              {
+                controlTitle: "Minimum amount charged",
+                controlPlaceholder: "Starting amount. E.g. 10 or 30...",
+                controlName: "minimum_amount",
+                register,
+                changeHandler,
+                error: errors.minimum_amount,
+                controlInformation: `Enter the starting amount charged by this business`
+              }
+            )
+          ] })
+        ] }),
         /* @__PURE__ */ jsx(
           TextareaWithWordLimit,
           {
@@ -15612,7 +19866,7 @@ const BusinessProfile = ({ data }) => {
     ] })
   ] });
 };
-const loader$U = async ({ request, params }) => {
+const loader$1a = async ({ request, params }) => {
   const business_guid = params.business_guid;
   const data = {
     business_guid
@@ -15621,8 +19875,9 @@ const loader$U = async ({ request, params }) => {
 };
 const Index$2 = () => {
   var _a;
-  const tokens = localStorage == null ? void 0 : localStorage.getItem("authTokens");
-  IsAuthenticated(tokens);
+  useEffect(() => {
+    IsAuthenticated(localStorage);
+  }, []);
   const loaderData = useLoaderData();
   const auth = useAuth();
   if (!auth) {
@@ -15641,19 +19896,22 @@ const Index$2 = () => {
   const [businessProfileBgData, setBusinessProfileBgData] = useState(null);
   const [categories2, setCategories] = useState(null);
   const [data, setData] = useState(null);
+  const [currencies, setCurrencies] = useState(void 0);
   useNavigation();
   useEffect(() => {
     async function getAllData(userGuid2, businessGuid2) {
       const userProfile2 = await getUserProfile(userGuid2 || "");
       const businessProfile2 = await getBusinessProfile(businessGuid2 || "");
+      console.log(businessProfile2);
       const countries2 = await getCountries();
       const businessObject = businessProfile2;
       const states2 = await getStates(businessObject.country_code || "");
       const cities2 = await getCities(businessObject.country_code || "", businessObject.state_code || "");
       const categories22 = await getCategories();
       const userProfileImageData2 = await getUserProfileImageData(userGuid2 || "");
-      const businessProfileImageData2 = await getBusinessProfileImageData(businessGuid2 || "");
+      const businessProfileImageData2 = await getBusinessProfileImageData(businessGuid2 || null);
       const businessProfileBgData2 = await getBusinessProfileBgData(businessGuid2 || "");
+      const currencies2 = await getCurrencies();
       setUserProfile(userProfile2);
       setBusinessProfile(businessProfile2);
       setCountries(countries2);
@@ -15663,6 +19921,7 @@ const Index$2 = () => {
       setBusinessProfileImageData(businessProfileImageData2);
       setCategories(categories22);
       setBusinessProfileBgData(businessProfileBgData2);
+      setCurrencies(currencies2);
     }
     try {
       if (userGuid && businessGuid) {
@@ -15673,7 +19932,7 @@ const Index$2 = () => {
     }
   }, [userGuid, businessGuid]);
   useEffect(() => {
-    if (userProfile && businessProfile && countries && states && cities && userProfileImageData && categories2 && businessProfileImageData && businessProfileBgData) {
+    if (userProfile && businessProfile && countries && states && cities && userProfileImageData && categories2 && businessProfileBgData && currencies) {
       const data2 = {
         userProfile,
         businessProfile,
@@ -15683,7 +19942,8 @@ const Index$2 = () => {
         userProfileImageData,
         businessProfileImageData,
         businessProfileBgData,
-        categories: categories2
+        categories: categories2,
+        currencies
       };
       setData(data2);
     }
@@ -15696,7 +19956,8 @@ const Index$2 = () => {
     businessProfileImageData,
     userProfile,
     businessProfile,
-    businessProfileBgData
+    businessProfileBgData,
+    currencies
   ]);
   useEffect(() => {
     if (data) {
@@ -15713,10 +19974,10 @@ const Index$2 = () => {
     }
   ) }) });
 };
-const route36 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route40 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: Index$2,
-  loader: loader$U
+  loader: loader$1a
 }, Symbol.toStringTag, { value: "Module" }));
 const CreatePageSchema = z.object({
   title: z.string().min(1, { message: "Enter a business name" }).min(3, { message: "Busines Name must not be less than 3 characters" }).max(100, { message: "Business name must not be more than 100 characters." }),
@@ -15752,7 +20013,9 @@ const CreatePageSchema = z.object({
   established: z.string().optional().refine(
     (val) => !val || /^\d{1,4}$/.test(val),
     { message: "Must be only numbers and not more than 4 digits" }
-  )
+  ),
+  minimum_amount_currency_code: z.any(),
+  minimum_amount: z.any()
 }).superRefine((data, ctx) => {
   var _a, _b;
   if (((_a = data == null ? void 0 : data.address_two) == null ? void 0 : _a.length) !== 0) {
@@ -15771,6 +20034,7 @@ const CreatePageForm = ({ data, user }) => {
   useNotification();
   useNavigate();
   const { showOperation, showSuccess, showError, showWarning, showInfo, completeOperation } = useOperation();
+  const currencies = data.currencies;
   const countries = data.countries;
   let [states, setStates] = useState(data.states);
   let [cities, setCities] = useState(data.cities);
@@ -15805,6 +20069,7 @@ const CreatePageForm = ({ data, user }) => {
   const handleAddBusiness = async (datar) => {
     datar["first_name"] = user.first_name;
     datar["last_name"] = user.last_name;
+    console.log(datar);
     setWorking(true);
     showOperation("processing", "Creating a page");
     await new Promise((resolve) => setTimeout(resolve, 1e3));
@@ -15989,17 +20254,52 @@ const CreatePageForm = ({ data, user }) => {
       }
     ),
     /* @__PURE__ */ jsx(
-      Input,
+      PhoneNoInput,
       {
         controlTitle: "Phone number",
         controlPlaceholder: "Enter phone number",
         controlName: "phone",
         register,
+        setValue,
+        getValues,
         changeHandler,
         error: errors.phone,
         controlInformation: `Phone OR Mobile number. `
       }
     ),
+    /* @__PURE__ */ jsxs("div", { className: `w-full mt-4 mb-12`, children: [
+      /* @__PURE__ */ jsx("div", { className: `text-2xl font-semibold`, children: "Minimum rate charged by this business." }),
+      /* @__PURE__ */ jsx("div", { className: `text-[14px] py-4 mb-0 leading-[1.3em]`, children: "Select the minimum amount customers or clients are charged to purchase goods/services from this business. This is optional." }),
+      /* @__PURE__ */ jsxs("div", { className: `p-4 border rounded-xl`, children: [
+        /* @__PURE__ */ jsx(
+          SelectCurrency,
+          {
+            controlTitle: "Currency",
+            controlName: "minimum_amount_currency_code",
+            controlPlaceholder: "Select currency",
+            selectJson: currencies,
+            register,
+            changeHandler,
+            error: errors.country_code,
+            setCode: resetStates,
+            controlInformation: `Default currency to receive funds.`
+          }
+        ),
+        /* @__PURE__ */ jsx("div", { className: `h-2` }),
+        /* @__PURE__ */ jsx(
+          InputNumberOnly,
+          {
+            controlTitle: "Minimum amount charged",
+            controlPlaceholder: "Starting amount. E.g. 10 or 30...",
+            controlName: "minimum_amount",
+            register,
+            changeHandler,
+            error: errors.established,
+            controlInformation: `Enter the starting amount charged by this business`
+          }
+        )
+      ] })
+    ] }),
     /* @__PURE__ */ jsx(
       Input,
       {
@@ -16031,7 +20331,7 @@ const CreatePageForm = ({ data, user }) => {
     /* @__PURE__ */ jsx(Button, { working })
   ] }) });
 };
-const index$b = () => {
+const index$c = () => {
   const tokens = localStorage == null ? void 0 : localStorage.getItem("authTokens");
   IsAuthenticated(tokens);
   const auth = useAuth();
@@ -16046,12 +20346,14 @@ const index$b = () => {
   const [cities, setCities] = useState(null);
   const [categories2, setCategories] = useState(null);
   const [userProfile, setUserProfile] = useState(null);
+  const [currencies, setCurrencies] = useState(void 0);
   useEffect(() => {
     const getAllData = async (user2) => {
       const countries2 = await getCountries();
       const states2 = await getStates("");
       const cities2 = await getCities("", "");
       const categories22 = await getCategories();
+      const currencies2 = await getCurrencies();
       const userProfileData = await getUserProfile((user2 == null ? void 0 : user2.guid) || "");
       setUserProfile(userProfileData);
       setCountries(countries2);
@@ -16059,6 +20361,7 @@ const index$b = () => {
       setCities(cities2);
       setCategories(categories22);
       setUser(user2);
+      setCurrencies(currencies2);
     };
     try {
       if (auth == null ? void 0 : auth.user) {
@@ -16075,7 +20378,8 @@ const index$b = () => {
         countries,
         states,
         cities,
-        categories: categories2
+        categories: categories2,
+        currencies
       };
       setData(data2);
       setLoading(false);
@@ -16086,9 +20390,9 @@ const index$b = () => {
   }
   return /* @__PURE__ */ jsx(AccountLayout, { children: /* @__PURE__ */ jsx(ProfileContentLayout, { title: "Create Page", children: /* @__PURE__ */ jsx(OperationProvider, { children: data && /* @__PURE__ */ jsx("div", { children: /* @__PURE__ */ jsx(CreatePageForm, { data, user }) }) }) }) });
 };
-const route37 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route41 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: index$b
+  default: index$c
 }, Symbol.toStringTag, { value: "Module" }));
 const urlvalidator = /^(?!https?)(?!www\.?).*\..+$/g;
 const SettingsSchema = z.object({
@@ -16324,7 +20628,7 @@ const BusinessWorkingHours = ({
     ) })
   ] }) }) });
 };
-const index$a = () => {
+const index$b = () => {
   useEffect(() => {
     IsAuthenticated(localStorage);
   }, []);
@@ -16405,9 +20709,9 @@ const index$a = () => {
     }
   ) });
 };
-const route38 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route42 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: index$a
+  default: index$b
 }, Symbol.toStringTag, { value: "Module" }));
 const AddPhoto = ({ userGuid, businessGuid }) => {
   const fileInputRef = useRef(null);
@@ -16475,7 +20779,7 @@ const GalleryItemMenu$2 = ({
   const [imgSrc, setImgSrc] = useState(null);
   const editPhoto = useEditPhotoDialogContext();
   useNotification();
-  const IMG_BASE_URL2 = "https://pics.gasimg.com";
+  const IMG_BASE_URL2 = "https://tpics.gasimg.com";
   const handleOpenDialog = () => {
     editPhoto.setDialog(true);
     editPhoto.setImgSrc(IMG_BASE_URL2 + item.image_url);
@@ -16521,7 +20825,7 @@ const GalleryItem$2 = ({
   businessGuid
 }) => {
   const [menu, setMenu] = useState(false);
-  const IMG_BASE_URL2 = "https://pics.gasimg.com";
+  const IMG_BASE_URL2 = "https://tpics.gasimg.com";
   let imgconst = "";
   if (item.image_url) {
     imgconst = IMG_BASE_URL2 + item.image_url;
@@ -16676,7 +20980,7 @@ const Carousel$2 = ({
     }
   ) });
 };
-const Gallery$1 = ({ gallery, userGuid, businessGuid, listing }) => {
+const Gallery$1 = ({ gallery, userGuid, businessGuid, listing: listing2 }) => {
   const [overlay, setOverlay] = useState(false);
   const [selectedSlide, setSelectedSlide] = useState(0);
   const slider = useSliderContext();
@@ -16687,7 +20991,7 @@ const Gallery$1 = ({ gallery, userGuid, businessGuid, listing }) => {
     slider.setDialog(true);
     slider.setSelectedSlide(index2 + 1);
     slider.setGallery(gallery);
-    slider.setListing(listing);
+    slider.setListing(listing2);
   };
   return /* @__PURE__ */ jsxs("div", { className: ``, children: [
     /* @__PURE__ */ jsx("div", { className: ` border-[1px] p-3 rounded-[5px] 
@@ -16716,7 +21020,7 @@ const Gallery$1 = ({ gallery, userGuid, businessGuid, listing }) => {
     )
   ] });
 };
-const index$9 = () => {
+const index$a = () => {
   useEffect(() => {
     IsAuthenticated(localStorage);
   }, []);
@@ -16785,10 +21089,158 @@ const index$9 = () => {
     }
   ) });
 };
-const route39 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route43 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: index$9
+  default: index$a
 }, Symbol.toStringTag, { value: "Module" }));
+const CountryCurrencyInput = ({
+  countryCurrency,
+  setCountryCurrency,
+  setSelectedCountry,
+  selectedCountry
+}) => {
+  const [countries, setCountries] = useState(void 0);
+  const [filteredCountries, setFilteredCountries] = useState(void 0);
+  const [ctry, setCtry] = useState("");
+  const currencySearchRef = useRef(null);
+  useEffect(() => {
+    if (selectedCountry) {
+      setCtry(selectedCountry.country_name);
+    }
+  }, [selectedCountry]);
+  const [loading, setLoading] = useState(true);
+  const [showCurrencies, setShowCurrencies] = useState(false);
+  const [sigma, setSigma] = useState(null);
+  useEffect(() => {
+    if (showCurrencies && currencySearchRef.current) {
+      setTimeout(() => {
+        var _a;
+        (_a = currencySearchRef.current) == null ? void 0 : _a.focus();
+      }, 100);
+    }
+  }, [showCurrencies]);
+  useEffect(() => {
+    setFilteredCountries(countries);
+  }, [countries]);
+  useEffect(() => {
+    const fetchCountries = async () => {
+      try {
+        setLoading(true);
+        const countriesData = await getCountriesCurrencies();
+        setCountries(countriesData);
+      } catch (error) {
+        console.error("Failed to fetch countries:", error);
+        setCountries(void 0);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchCountries();
+  }, []);
+  document.getElementById("country_currency");
+  const countryCurrencyRef = useRef(null);
+  useEffect(() => {
+    if (selectedCountry && countryCurrencyRef.current) {
+      let val = selectedCountry.country_name + " - ";
+      val += selectedCountry.name + " ";
+      val += selectedCountry.currency_symbol;
+      val += " ";
+      val += selectedCountry.emoji;
+      countryCurrencyRef.current.value = val;
+    }
+  }, [selectedCountry]);
+  const handleSelectedCountry = (selectedCountry2) => {
+    if (countryCurrencyRef.current) {
+      let val = selectedCountry2.country_name + " - ";
+      val += selectedCountry2.name + " ";
+      val += selectedCountry2.currency_symbol;
+      val += " ";
+      val += selectedCountry2.emoji;
+      countryCurrencyRef.current.value = val;
+      setShowCurrencies(false);
+      setSelectedCountry(selectedCountry2);
+    }
+  };
+  const [currencyData, setCurrencyData] = useState("");
+  return /* @__PURE__ */ jsxs("div", { className: `relative`, children: [
+    /* @__PURE__ */ jsx(
+      "input",
+      {
+        id: "country_currency",
+        ref: countryCurrencyRef,
+        onClick: () => setShowCurrencies(true),
+        onChange: (e) => {
+          const inputString = e.target.value;
+          const filteredCountries2 = filterCountry(countries, inputString);
+          setFilteredCountries(filteredCountries2);
+          setCountryCurrency(e.target.value);
+        },
+        placeholder: `Select Currency`,
+        className: `w-full bg-gray-100 px-3  py-3 mb-1 rounded-lg border-[1px] border-gray-300`
+      }
+    ),
+    /* @__PURE__ */ jsx(
+      "div",
+      {
+        className: `fixed w-full top-0 left-0 h-full bg-black/25 z-3000 ${showCurrencies ? "block" : "hidden"} flex place-items-center place-content-center px-2`,
+        onClick: () => setShowCurrencies(false),
+        children: /* @__PURE__ */ jsx(
+          "div",
+          {
+            onClick: (e) => e.stopPropagation(),
+            className: `px-2 max-w-[600px] mx-auto w-full`,
+            children: /* @__PURE__ */ jsxs("div", { className: `overflow-hidden bg-white rounded-3xl relative`, children: [
+              /* @__PURE__ */ jsx("div", { className: `text-2xl pt-8 pb-8 px-4 border-b`, children: "Select Currency" }),
+              /* @__PURE__ */ jsx(
+                "div",
+                {
+                  className: `text-3xl absolute top-7 right-4 w-fit h-fit p-2 rounded-xl bg-gray-100 cursor-pointer`,
+                  onClick: () => setShowCurrencies(false),
+                  children: /* @__PURE__ */ jsx(CgClose, {})
+                }
+              ),
+              /* @__PURE__ */ jsx(
+                "input",
+                {
+                  ref: currencySearchRef,
+                  type: "text",
+                  className: ` w-full bg-gray-100 p-4 text-lg outline-none`,
+                  placeholder: `Type here...`,
+                  onChange: (e) => {
+                    const inputString = e.target.value;
+                    const filteredCountries2 = filterCountry(countries, inputString);
+                    setFilteredCountries(filteredCountries2);
+                    setCountryCurrency(e.target.value);
+                  }
+                }
+              ),
+              /* @__PURE__ */ jsx("div", { className: `max-h-[300px] overflow-y-auto`, children: filteredCountries == null ? void 0 : filteredCountries.map((country, index2) => {
+                return /* @__PURE__ */ jsx(
+                  "div",
+                  {
+                    className: `cursor-pointer`,
+                    onClick: () => {
+                      handleSelectedCountry(country);
+                    },
+                    children: /* @__PURE__ */ jsxs("div", { className: `text-lg p-2 border gap-1 first:border-t-0`, children: [
+                      country.country_name,
+                      " - ",
+                      country.name,
+                      " ",
+                      country.emoji
+                    ] })
+                  },
+                  index2
+                );
+              }) }),
+              /* @__PURE__ */ jsx("div", { className: `h-[30px]` })
+            ] })
+          }
+        )
+      }
+    )
+  ] });
+};
 const AddProductDialogContext = createContext(null);
 function useAddProductDialogContext() {
   const context = useContext(AddProductDialogContext);
@@ -16805,10 +21257,20 @@ function AddProductDialogProvider({ children }) {
   const [productTitle, setProductTitle] = useState(null);
   const [productLink, setProductLink] = useState(null);
   const [productDescription, setProductDescription] = useState(null);
+  const [fullView, setFullView] = useState(true);
+  const [productAmount, setProductAmount] = useState(null);
+  const [countryCurrency, setCountryCurrency] = useState(null);
+  const [selectedCountry, setSelectedCountry] = useState(void 0);
+  const [productCurrencyId, setProductCurrencyId] = useState("");
   const [formData, setFormdata] = useState(null);
   const fileInputRef = useRef(null);
   const notification = useNotification();
   const { showOperation, showError, completeOperation, showSuccess } = useOperation();
+  useEffect(() => {
+    if (selectedCountry) {
+      setProductCurrencyId(selectedCountry.id);
+    }
+  }, [selectedCountry, productCurrencyId]);
   const handleCloseDialog = () => {
     setDialog(false);
     setImgSrc(null);
@@ -16828,7 +21290,7 @@ function AddProductDialogProvider({ children }) {
       setIsImageSelected(true);
     }
   };
-  const handleUpdate = async () => {
+  const handleAdd = async () => {
     showOperation("processing");
     setWorking(true);
     await new Promise((resolve) => setTimeout(resolve, 1e3));
@@ -16844,6 +21306,9 @@ function AddProductDialogProvider({ children }) {
     formData2.append("product_title", productTitle2.value || "");
     formData2.append("product_description", productDescription2.value || "");
     formData2.append("product_link", productLink2.value || "");
+    formData2.append("product_amount", productAmount);
+    const countryId = productCurrencyId || "840";
+    formData2.append("product_currency_country_id", countryId);
     const endpoint = "/business_gallery_product_upload";
     const url = config.IMG_BASE_URL + endpoint;
     try {
@@ -16876,7 +21341,7 @@ function AddProductDialogProvider({ children }) {
     }
   };
   const deleteProduct = async (userGuid2, businessGuid2, imageGuid) => {
-    const IMG_BASE_URL2 = "https://pics.gasimg.com";
+    const IMG_BASE_URL2 = "https://tpics.gasimg.com";
     const endpoint = `/delete_business_gallery_pic`;
     const url = IMG_BASE_URL2 + endpoint;
     const data = {
@@ -16905,6 +21370,28 @@ function AddProductDialogProvider({ children }) {
       setWorking(false);
     }
   };
+  const handlePriceKeyDown = (e) => {
+    if ([46, 8, 9, 27, 13, 110, 190].indexOf(e.keyCode) !== -1 || // Allow: Ctrl+A, Ctrl+C, Ctrl+V, Ctrl+X
+    e.keyCode === 65 && e.ctrlKey === true || e.keyCode === 67 && e.ctrlKey === true || e.keyCode === 86 && e.ctrlKey === true || e.keyCode === 88 && e.ctrlKey === true || // Allow: home, end, left, right
+    e.keyCode >= 35 && e.keyCode <= 39) {
+      return;
+    }
+    if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+      e.preventDefault();
+    }
+  };
+  const handlePriceChangeFormatted = (e) => {
+    let value = e.target.value;
+    value = value.replace(/[^\d.]/g, "");
+    const parts = value.split(".");
+    if (parts.length > 2) {
+      value = parts[0] + "." + parts.slice(1).join("");
+    }
+    if (parts.length > 1) {
+      value = parts[0] + "." + parts[1].slice(0, 2);
+    }
+    setProductAmount(value);
+  };
   let vals = {
     dialog,
     setDialog,
@@ -16932,111 +21419,158 @@ function AddProductDialogProvider({ children }) {
       "div",
       {
         onMouseDown: (e) => setDialog(false),
-        className: `fixed w-screen h-screen z-[3100] 
+        className: `fixed flex w-screen h-screen z-[3100] 
                  top-0 left-0 right-0 bottom-0 bg-black/30
                 place-content-center place-items-center`,
-        children: /* @__PURE__ */ jsx(
+        children: /* @__PURE__ */ jsxs(
           "div",
           {
-            className: `relative max-w-[90%] w-[90%] h-[80%] bg-white 
-                        rounded-[8px] overflow-hidden z-[3100] mx-auto `,
+            className: `relative max-w-[600px] w-full h-fit bg-white mx-2
+                        rounded-[40px] overflow-hidden z-[3100] `,
             onMouseDown: (e) => e.stopPropagation(),
-            children: /* @__PURE__ */ jsxs("div", { className: `w-full h-full overflow-y-auto`, children: [
-              /* @__PURE__ */ jsxs("div", { className: `relative w-full h-[75%] bg-black`, children: [
-                /* @__PURE__ */ jsx(
-                  "img",
+            children: [
+              /* @__PURE__ */ jsx(CloseButton$4, { setShow: setDialog }),
+              /* @__PURE__ */ jsxs("div", { className: `pt-12 pb-6 px-6 flex place-items-baseline place-content-between gap-3`, children: [
+                /* @__PURE__ */ jsx("div", { className: `text-2xl font-semibold w-full `, children: "Add Product" }),
+                /* @__PURE__ */ jsx("div", { className: ` relative w-full`, children: /* @__PURE__ */ jsx("div", { className: `w-[70%] flex place-content-end hover:underline relative`, children: !fullView ? selectedFile && /* @__PURE__ */ jsx(
+                  PictureLabel$1,
                   {
-                    src: imgSrc,
-                    alt: "",
-                    className: `object-scale-down w-full h-full`
+                    title: "Normal View",
+                    setFullView,
+                    fullView: true
                   }
-                ),
-                /* @__PURE__ */ jsx(
-                  "input",
+                ) : /* @__PURE__ */ jsx(
+                  PictureLabel$1,
                   {
-                    type: "file",
-                    accept: "image/*",
-                    ref: fileInputRef,
-                    className: "hidden",
-                    onChange: handleFileChange
+                    title: "Full View",
+                    setFullView,
+                    fullView: false
                   }
-                ),
-                /* @__PURE__ */ jsx(
-                  "div",
-                  {
-                    className: `flex place-content-center place-items-center
-                                        bg-black/10 w-full h-full absolute z-0 top-0 object-cover
-                                        text-white/80 `,
-                    onMouseDown: handleImageClick,
-                    children: /* @__PURE__ */ jsx("div", { className: `w-[60px] h-[60px] flex flex-col
-                                        place-content-center place-items-center bg-white/50
-                                        hover:cursor-pointer hover:bg-white/50
-                                        rounded-full transition duration-300 ease-in-out`, children: /* @__PURE__ */ jsx(MdEditSquare, { className: " text-[30px]" }) })
-                  }
-                )
+                ) }) })
               ] }),
-              /* @__PURE__ */ jsxs("div", { className: `h-[25%] space-y-1`, children: [
-                /* @__PURE__ */ jsxs("div", { className: `flex mb-1 flex-col mx-3 `, children: [
-                  /* @__PURE__ */ jsx("div", { className: `text-[14px] font-semibold py-1`, children: "Enter product title" }),
+              /* @__PURE__ */ jsxs("div", { className: `w-full h-[400px] overflow-y-auto`, children: [
+                /* @__PURE__ */ jsxs("div", { className: `relative w-full h-[300px] bg-gray-300`, children: [
                   /* @__PURE__ */ jsx(
-                    "input",
+                    "img",
                     {
-                      onChange: (e) => setProductTitle(e.target.value),
-                      id: "product_title",
-                      value: productTitle || "",
-                      placeholder: `Enter product title.`,
-                      className: `w-full border-[1px] border-gray-700 bg-gray-100 px-3 py-4 outline-none rounded-lg`
-                    }
-                  )
-                ] }),
-                /* @__PURE__ */ jsxs("div", { className: `flex mb-1 flex-col mx-3 `, children: [
-                  /* @__PURE__ */ jsx("div", { className: `text-[14px] font-semibold py-1`, children: "Enter product description" }),
-                  /* @__PURE__ */ jsx(
-                    "textarea",
-                    {
-                      onChange: (e) => setProductDescription(e.target.value),
-                      id: "product_description",
-                      value: productDescription || "",
-                      placeholder: `Enter product description.`,
-                      className: `w-full border-[1px] border-gray-700 bg-gray-100 px-3 py-4 outline-none rounded-lg`
-                    }
-                  )
-                ] }),
-                /* @__PURE__ */ jsxs("div", { className: `flex mb-1 flex-col mx-3 `, children: [
-                  /* @__PURE__ */ jsx("div", { className: `text-[14px] font-semibold py-1`, children: "Enter product link" }),
-                  /* @__PURE__ */ jsx(
-                    "input",
-                    {
-                      onChange: (e) => setProductLink(e.target.value),
-                      id: "product_link",
-                      value: productLink || "",
-                      placeholder: `Enter product link.`,
-                      className: `w-full border-[1px] border-gray-700 bg-gray-100 px-3 py-4 outline-none rounded-lg`
-                    }
-                  )
-                ] }),
-                /* @__PURE__ */ jsxs("div", { className: `flex place-content-end px-3 gap-2`, children: [
-                  /* @__PURE__ */ jsx(
-                    "button",
-                    {
-                      onMouseDown: () => handleCloseDialog(),
-                      className: `bg-gray-800 text-white px-3 py-1.5 rounded-md
-                                    shadow-md mb-2 mt-4`,
-                      children: "Cancel"
+                      src: imgSrc,
+                      alt: "",
+                      className: `${fullView ? "object-scale-down" : "object-cover"} w-full h-full`
                     }
                   ),
                   /* @__PURE__ */ jsx(
-                    "button",
+                    "input",
                     {
-                      onClick: () => handleUpdate(),
-                      className: `bg-blue-800 text-white px-3 py-1.5 rounded-md
-                                    shadow-md mb-2 mt-4`,
-                      children: working ? "Working..." : "Submit"
+                      type: "file",
+                      accept: "image/*",
+                      ref: fileInputRef,
+                      className: "hidden",
+                      onChange: handleFileChange
+                    }
+                  ),
+                  /* @__PURE__ */ jsx(
+                    "div",
+                    {
+                      className: `flex place-content-center place-items-center
+                                        bg-black/10 w-full h-full absolute z-0 top-0 object-cover
+                                        text-white/80 `,
+                      onMouseDown: handleImageClick,
+                      children: /* @__PURE__ */ jsx("div", { className: `w-[60px] h-[60px] flex flex-col
+                                        place-content-center place-items-center bg-black/50
+                                        hover:cursor-pointer hover:bg-white/50
+                                        rounded-full transition duration-300 ease-in-out`, children: /* @__PURE__ */ jsx(MdEditSquare, { className: " text-[30px]" }) })
                     }
                   )
+                ] }),
+                /* @__PURE__ */ jsxs("div", { className: `h-fit space-y-1`, children: [
+                  /* @__PURE__ */ jsxs("div", { className: `flex mb-1 flex-col mx-6 `, children: [
+                    /* @__PURE__ */ jsx("div", { className: `text-[15px] pt-3 pb-1 text-gray-500`, children: "Enter product title" }),
+                    /* @__PURE__ */ jsx(
+                      "input",
+                      {
+                        onChange: (e) => setProductTitle(e.target.value),
+                        id: "product_title",
+                        value: productTitle || "",
+                        placeholder: `Enter product title.`,
+                        className: `w-full border-[1px] border-gray-300 bg-gray-100 px-3 py-4 outline-none rounded-lg text-xl`
+                      }
+                    )
+                  ] }),
+                  /* @__PURE__ */ jsxs("div", { className: `flex mb-1 flex-col mx-6 `, children: [
+                    /* @__PURE__ */ jsx("div", { className: `text-[15px] pt-3 pb-1 text-gray-500`, children: "Enter product description" }),
+                    /* @__PURE__ */ jsx(
+                      "textarea",
+                      {
+                        onChange: (e) => setProductDescription(e.target.value),
+                        id: "product_description",
+                        value: productDescription || "",
+                        placeholder: `Enter product description.`,
+                        className: `w-full border-[1px] border-gray-300 bg-gray-100 px-3 py-4 outline-none rounded-lg text-xl`
+                      }
+                    )
+                  ] }),
+                  /* @__PURE__ */ jsxs("div", { className: `flex mb-1 flex-col mx-6 `, children: [
+                    /* @__PURE__ */ jsx("div", { className: `text-[14px] pt-3 pb-1 text-gray-500`, children: "Enter product link" }),
+                    /* @__PURE__ */ jsx(
+                      "input",
+                      {
+                        onChange: (e) => setProductLink(e.target.value),
+                        id: "product_link",
+                        value: productLink || "",
+                        placeholder: `Enter product link.`,
+                        className: `w-full border-[1px] border-gray-300 bg-gray-100 px-3 py-4 outline-none rounded-lg`
+                      }
+                    )
+                  ] }),
+                  /* @__PURE__ */ jsxs("div", { className: `flex mb-1 flex-col mx-6 `, children: [
+                    /* @__PURE__ */ jsx("div", { className: `text-[15px] pt-3 pb-1 text-gray-500`, children: "Currency" }),
+                    /* @__PURE__ */ jsx("div", { className: ``, children: /* @__PURE__ */ jsx(
+                      CountryCurrencyInput,
+                      {
+                        countryCurrency,
+                        setCountryCurrency,
+                        setSelectedCountry,
+                        selectedCountry
+                      }
+                    ) })
+                  ] }),
+                  /* @__PURE__ */ jsxs("div", { className: `flex mb-1 flex-col mx-6 `, children: [
+                    /* @__PURE__ */ jsx("div", { className: `text-[15px] pt-3 pb-1 text-gray-500`, children: "Amount" }),
+                    /* @__PURE__ */ jsx("div", { className: ``, children: /* @__PURE__ */ jsx(
+                      "input",
+                      {
+                        onKeyDown: handlePriceKeyDown,
+                        onChange: handlePriceChangeFormatted,
+                        id: "product_amount",
+                        value: productAmount || "",
+                        placeholder: `Enter Amount. E.g.: 500.00`,
+                        className: `w-full bg-gray-100 px-3  py-3 mb-1 rounded-lg border-[1px] border-gray-300`
+                      }
+                    ) })
+                  ] }),
+                  /* @__PURE__ */ jsxs("div", { className: `flex place-content-end mx-6 gap-2 pt-4 pb-8`, children: [
+                    /* @__PURE__ */ jsx(
+                      "button",
+                      {
+                        onMouseDown: () => handleCloseDialog(),
+                        className: `bg-gray-800 text-white px-3 py-1.5 rounded-md
+                                    shadow-md `,
+                        children: "Cancel"
+                      }
+                    ),
+                    /* @__PURE__ */ jsx(
+                      "button",
+                      {
+                        onClick: () => handleAdd(),
+                        className: `bg-blue-800 text-white px-3 py-1.5 rounded-md
+                                    shadow-md `,
+                        children: working ? "Working..." : "Submit"
+                      }
+                    )
+                  ] })
                 ] })
               ] })
-            ] })
+            ]
           }
         )
       }
@@ -17044,6 +21578,26 @@ function AddProductDialogProvider({ children }) {
     children
   ] });
 }
+const CloseButton$4 = ({ setShow }) => {
+  return /* @__PURE__ */ jsx(
+    "div",
+    {
+      className: `absolute top-8 right-6 text-3xl  rounded-xl  w-[40px] h-[40px] shadow-sm flex place-items-center place-content-center cursor-pointer bg-gray-200/70 hover:border-gray-200/50 text-gray-400 hover:text-gray-500 z-10`,
+      onClick: () => setShow(false),
+      children: /* @__PURE__ */ jsx(CgClose, {})
+    }
+  );
+};
+const PictureLabel$1 = ({ title, setFullView, fullView }) => {
+  return /* @__PURE__ */ jsx(
+    "div",
+    {
+      className: `cursor-pointer text-lg underline`,
+      onClick: () => setFullView(fullView),
+      children: title
+    }
+  );
+};
 const AddProduct = ({ userGuid, businessGuid }) => {
   const addProduct = useAddProductDialogContext();
   const handleOpenDialog = () => {
@@ -17066,7 +21620,10 @@ const AddProduct = ({ userGuid, businessGuid }) => {
 const EditProductDialogContext = createContext(null);
 function useEditProductDialogContext() {
   const context = useContext(EditProductDialogContext);
-  return context;
+  if (context) {
+    return context;
+  }
+  return null;
 }
 function EditProductDialogProvider({ children }) {
   const [working, setWorking] = useState(false);
@@ -17079,12 +21636,44 @@ function EditProductDialogProvider({ children }) {
   const [productTitle, setProductTitle] = useState(null);
   const [productDescription, setProductDescription] = useState(null);
   const [productLink, setProductLink] = useState(null);
+  const [productAmount, setProductAmount] = useState(null);
+  const [countryCurrency, setCountryCurrency] = useState(null);
+  const [selectedCountry, setSelectedCountry] = useState(void 0);
   const [imageGuid, setImageGuid] = useState(null);
   const [productGuid, setProductGuid] = useState("null");
   const [formData, setFormdata] = useState(null);
+  const [fullView, setFullView] = useState(true);
   const fileInputRef = useRef(null);
   useNotification();
+  const [productCurrencyId, setProductCurrencyId] = useState("");
+  useEffect(() => {
+    if (selectedCountry) {
+      setProductCurrencyId(selectedCountry.id);
+    }
+  }, [selectedCountry, productCurrencyId]);
   const { showOperation, showError, completeOperation, showSuccess } = useOperation();
+  const handlePriceKeyDown = (e) => {
+    if ([46, 8, 9, 27, 13, 110, 190].indexOf(e.keyCode) !== -1 || // Allow: Ctrl+A, Ctrl+C, Ctrl+V, Ctrl+X
+    e.keyCode === 65 && e.ctrlKey === true || e.keyCode === 67 && e.ctrlKey === true || e.keyCode === 86 && e.ctrlKey === true || e.keyCode === 88 && e.ctrlKey === true || // Allow: home, end, left, right
+    e.keyCode >= 35 && e.keyCode <= 39) {
+      return;
+    }
+    if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+      e.preventDefault();
+    }
+  };
+  const handlePriceChangeFormatted = (e) => {
+    let value = e.target.value;
+    value = value.replace(/[^\d.]/g, "");
+    const parts = value.split(".");
+    if (parts.length > 2) {
+      value = parts[0] + "." + parts.slice(1).join("");
+    }
+    if (parts.length > 1) {
+      value = parts[0] + "." + parts[1].slice(0, 2);
+    }
+    setProductAmount(value);
+  };
   const handleCloseDialog = () => {
     setDialog(false);
     setImgSrc(null);
@@ -17121,7 +21710,10 @@ function EditProductDialogProvider({ children }) {
     formData2.append("product_description", productDescription2.value);
     formData2.append("product_link", productLink2.value);
     formData2.append("product_guid", productGuid);
-    const IMG_BASE_URL2 = "https://pics.gasimg.com";
+    formData2.append("product_amount", productAmount);
+    const countryId = productCurrencyId || "840";
+    formData2.append("product_currency_country_id", countryId);
+    const IMG_BASE_URL2 = "https://tpics.gasimg.com";
     const endpoint = "/business_gallery_product_update";
     const url = IMG_BASE_URL2 + endpoint;
     console.log(Object.fromEntries(formData2.entries()));
@@ -17151,7 +21743,7 @@ function EditProductDialogProvider({ children }) {
     }
   };
   const deleteProduct = async (userGuid2, businessGuid2, productGuid2) => {
-    const IMG_BASE_URL2 = "https://pics.gasimg.com";
+    const IMG_BASE_URL2 = "https://tpics.gasimg.com";
     const endpoint = `/delete_business_product`;
     const url = IMG_BASE_URL2 + endpoint;
     const data = {
@@ -17212,117 +21804,197 @@ function EditProductDialogProvider({ children }) {
     setProductLink,
     productGuid,
     setProductGuid,
-    deleteProduct
+    deleteProduct,
+    setSelectedCountry,
+    setProductCurrencyId,
+    setProductAmount
   };
   return /* @__PURE__ */ jsxs(EditProductDialogContext.Provider, { value: vals, children: [
-    dialog && /* @__PURE__ */ jsx("div", { className: `fixed w-screen h-screen bg-black/30 z-[3000]`, children: /* @__PURE__ */ jsx("div", { className: `fixed w-screen h-screen z-[3000] 
-                 top-0 left-0 right-0 bottom-0 bg-black/30
-                place-content-center place-items-center`, children: /* @__PURE__ */ jsx(
+    dialog && /* @__PURE__ */ jsx(
       "div",
       {
-        className: `relative max-w-[90%] w-[90%] h-[80%] bg-white 
-                        rounded-[8px] overflow-hidden z-[3100] mx-auto `,
-        children: /* @__PURE__ */ jsxs("div", { className: `w-full h-full overflow-y-auto`, children: [
-          /* @__PURE__ */ jsxs("div", { className: `relative w-full h-[75%] bg-black`, children: [
-            /* @__PURE__ */ jsx(
-              "img",
+        className: `fixed w-screen h-screen bg-black/30 z-[3000]`,
+        children: /* @__PURE__ */ jsx("div", { className: `fixed flex w-screen h-screen z-[3000] 
+                 top-0 left-0 right-0 bottom-0 bg-black/30
+                place-content-center place-items-center`, children: /* @__PURE__ */ jsxs("div", { className: `relative max-w-[600px] w-full h-fit bg-white 
+                        rounded-[40px] overflow-hidden z-[3100] mx-2 `, children: [
+          /* @__PURE__ */ jsx(CloseButton$3, { setShow: setDialog }),
+          /* @__PURE__ */ jsxs("div", { className: `pt-12 pb-6 px-6 flex place-items-baseline place-content-between gap-3`, children: [
+            /* @__PURE__ */ jsx("div", { className: `text-2xl font-semibold w-full `, children: "Edit Product" }),
+            /* @__PURE__ */ jsx("div", { className: ` relative w-full`, children: /* @__PURE__ */ jsx("div", { className: `w-[70%] flex place-content-end hover:underline relative`, children: !fullView ? /* @__PURE__ */ jsx(
+              PictureLabel,
               {
-                src: imgSrc,
-                alt: "",
-                className: `object-scale-down w-full h-full`
+                title: "Normal View",
+                setFullView,
+                fullView: true
               }
-            ),
-            /* @__PURE__ */ jsx(
-              "input",
+            ) : /* @__PURE__ */ jsx(
+              PictureLabel,
               {
-                type: "file",
-                accept: "image/*",
-                ref: fileInputRef,
-                className: "hidden",
-                onChange: handleFileChange
+                title: "Full View",
+                setFullView,
+                fullView: false
               }
-            ),
-            /* @__PURE__ */ jsx(
-              "div",
-              {
-                className: `flex place-content-center place-items-center
+            ) }) })
+          ] }),
+          /* @__PURE__ */ jsxs("div", { className: `w-full h-[400px] overflow-y-auto`, children: [
+            /* @__PURE__ */ jsxs("div", { className: `relative w-full h-[300px] bg-white`, children: [
+              /* @__PURE__ */ jsx(
+                "img",
+                {
+                  src: imgSrc,
+                  alt: "",
+                  className: `${fullView ? "object-scale-down" : "object-cover"} w-full h-full`
+                }
+              ),
+              /* @__PURE__ */ jsx(
+                "input",
+                {
+                  type: "file",
+                  accept: "image/*",
+                  ref: fileInputRef,
+                  className: "hidden",
+                  onChange: handleFileChange
+                }
+              ),
+              /* @__PURE__ */ jsx(
+                "div",
+                {
+                  className: `flex place-content-center place-items-center
                                         bg-black/10 w-full h-full absolute z-0 top-0 object-cover
                                         text-white/80 `,
-                onMouseDown: handleImageClick,
-                children: /* @__PURE__ */ jsx("div", { className: `w-[60px] h-[60px] flex flex-col
+                  onMouseDown: handleImageClick,
+                  children: /* @__PURE__ */ jsx("div", { className: `w-[60px] h-[60px] flex flex-col
                                         place-content-center place-items-center bg-white/50
                                         hover:cursor-pointer hover:bg-white/50
                                         rounded-full transition duration-300 ease-in-out`, children: /* @__PURE__ */ jsx(MdEditSquare, { className: " text-[30px]" }) })
-              }
-            )
-          ] }),
-          /* @__PURE__ */ jsxs("div", { className: `h-[25%]`, children: [
-            /* @__PURE__ */ jsx(
-              "input",
-              {
-                onChange: (e) => setProductTitle(e.target.value),
-                id: "product_title",
-                value: productTitle || "",
-                placeholder: `Enter product title.`,
-                className: `w-full bg-gray-100 px-3  py-3 mb-1`
-              }
-            ),
-            /* @__PURE__ */ jsx(
-              "textarea",
-              {
-                onChange: (e) => setProductDescription(e.target.value),
-                id: "product_description",
-                value: productDescription || "",
-                placeholder: `Enter product description.`,
-                className: `w-full bg-gray-100 px-3  h-[60px] py-3`
-              }
-            ),
-            /* @__PURE__ */ jsx(
-              "input",
-              {
-                onChange: (e) => setProductLink(e.target.value),
-                id: "product_link",
-                value: productLink || "",
-                placeholder: `Enter product link.`,
-                className: `w-full bg-gray-100 px-3 py-3`
-              }
-            ),
-            /* @__PURE__ */ jsxs("div", { className: `flex place-content-end px-3 gap-2`, children: [
-              /* @__PURE__ */ jsx(
-                "button",
-                {
-                  onMouseDown: () => window.location.reload(),
-                  className: `bg-gray-800 text-white px-3 py-1.5 rounded-md
-                                    shadow-md mb-2 mt-4`,
-                  children: "Reload"
-                }
-              ),
-              /* @__PURE__ */ jsx(
-                "button",
-                {
-                  onMouseDown: () => handleCloseDialog(),
-                  className: `bg-gray-800 text-white px-3 py-1.5 rounded-md
-                                    shadow-md mb-2 mt-4`,
-                  children: "Close"
-                }
-              ),
-              /* @__PURE__ */ jsx(
-                "button",
-                {
-                  onClick: () => handleUpdate(),
-                  className: `bg-blue-800 text-white px-3 py-1.5 rounded-md
-                                    shadow-md mb-2 mt-4`,
-                  children: working ? "Working..." : "Submit"
                 }
               )
+            ] }),
+            /* @__PURE__ */ jsxs("div", { className: `h-fit space-y-1`, children: [
+              /* @__PURE__ */ jsxs("div", { className: `flex mb-1 flex-col mx-6 `, children: [
+                /* @__PURE__ */ jsx(CloseButton$3, { setShow: setDialog }),
+                /* @__PURE__ */ jsx("div", { className: `text-[15px] pt-3 pb-1 text-gray-500`, children: "Product title" }),
+                /* @__PURE__ */ jsx(
+                  "input",
+                  {
+                    onChange: (e) => setProductTitle(e.target.value),
+                    id: "product_title",
+                    value: productTitle || "",
+                    placeholder: `Enter product title.`,
+                    className: `w-full bg-gray-100 px-3  py-3 mb-1 rounded-lg border-[1px] border-gray-300`
+                  }
+                )
+              ] }),
+              /* @__PURE__ */ jsxs("div", { className: `flex mb-1 flex-col mx-6 `, children: [
+                /* @__PURE__ */ jsx("div", { className: `text-[15px] pt-3 pb-1 text-gray-500`, children: "Description" }),
+                /* @__PURE__ */ jsx(
+                  "textarea",
+                  {
+                    onChange: (e) => setProductDescription(e.target.value),
+                    id: "product_description",
+                    value: productDescription || "",
+                    placeholder: `Enter product description.`,
+                    className: `w-full bg-gray-100 px-3  h-[60px] py-3 rounded-lg border-[1px] border-gray-300`
+                  }
+                )
+              ] }),
+              /* @__PURE__ */ jsxs("div", { className: `flex mb-1 flex-col mx-6 `, children: [
+                /* @__PURE__ */ jsx("div", { className: `text-[14px] pt-3 pb-1 text-gray-500`, children: "Product link" }),
+                /* @__PURE__ */ jsx(
+                  "input",
+                  {
+                    onChange: (e) => setProductLink(e.target.value),
+                    id: "product_link",
+                    value: productLink || "",
+                    placeholder: `Enter product link.`,
+                    className: `w-full bg-gray-100 px-3 py-3 rounded-lg border-[1px] border-gray-300 `
+                  }
+                )
+              ] }),
+              /* @__PURE__ */ jsxs("div", { className: `flex mb-1 flex-col mx-6 `, children: [
+                /* @__PURE__ */ jsx("div", { className: `text-[15px] pt-3 pb-1 text-gray-500`, children: "Currency" }),
+                /* @__PURE__ */ jsx("div", { className: ``, children: /* @__PURE__ */ jsx(
+                  CountryCurrencyInput,
+                  {
+                    countryCurrency,
+                    setCountryCurrency,
+                    setSelectedCountry,
+                    selectedCountry
+                  }
+                ) })
+              ] }),
+              /* @__PURE__ */ jsxs("div", { className: `flex mb-1 flex-col mx-6 `, children: [
+                /* @__PURE__ */ jsx("div", { className: `text-[15px] pt-3 pb-1 text-gray-500`, children: "Amount" }),
+                /* @__PURE__ */ jsx("div", { className: ``, children: /* @__PURE__ */ jsx(
+                  "input",
+                  {
+                    onKeyDown: handlePriceKeyDown,
+                    onChange: handlePriceChangeFormatted,
+                    id: "product_amount",
+                    value: productAmount || "",
+                    placeholder: `Enter Amount. E.g.: 500.00`,
+                    className: `w-full bg-gray-100 px-3  py-3 mb-1 rounded-lg border-[1px] border-gray-300`
+                  }
+                ) })
+              ] }),
+              /* @__PURE__ */ jsxs("div", { className: `flex place-content-end mx-6 gap-2 pt-4 pb-6`, children: [
+                /* @__PURE__ */ jsx(
+                  "button",
+                  {
+                    onMouseDown: () => window.location.reload(),
+                    className: `bg-gray-800 text-white px-3 py-1.5 rounded-md
+                                    shadow-md`,
+                    children: "Reload"
+                  }
+                ),
+                /* @__PURE__ */ jsx(
+                  "button",
+                  {
+                    onMouseDown: () => handleCloseDialog(),
+                    className: `bg-gray-800 text-white px-3 py-1.5 rounded-md
+                                    shadow-md `,
+                    children: "Close"
+                  }
+                ),
+                /* @__PURE__ */ jsx(
+                  "button",
+                  {
+                    onClick: () => handleUpdate(),
+                    className: `bg-blue-800 text-white px-3 py-1.5 rounded-md
+                                    shadow-md `,
+                    children: working ? "Working..." : "Submit"
+                  }
+                )
+              ] })
             ] })
           ] })
-        ] })
+        ] }) })
       }
-    ) }) }),
+    ),
     children
   ] });
 }
+const CloseButton$3 = ({ setShow }) => {
+  return /* @__PURE__ */ jsx(
+    "div",
+    {
+      className: `absolute top-8 right-8 text-3xl  rounded-xl  w-[40px] h-[40px] shadow-sm flex place-items-center place-content-center cursor-pointer bg-gray-200/70 hover:border-gray-200/50 text-gray-400 hover:text-gray-500`,
+      onClick: () => setShow(false),
+      children: /* @__PURE__ */ jsx(CgClose, {})
+    }
+  );
+};
+const PictureLabel = ({ title, setFullView, fullView }) => {
+  return /* @__PURE__ */ jsx(
+    "div",
+    {
+      className: ` cursor-pointer text-lg underline`,
+      onClick: () => setFullView(fullView),
+      children: title
+    }
+  );
+};
 const GalleryItemMenu$1 = ({
   product,
   menu,
@@ -17333,15 +22005,24 @@ const GalleryItemMenu$1 = ({
   const [videoSrc, setVideoSrc] = useState(null);
   const editProduct = useEditProductDialogContext();
   useNotification();
-  const handleOpenDialog = () => {
+  const handleOpenDialog = async () => {
     editProduct.setDialog(true);
     editProduct.setImgSrc(config.IMG_BASE_URL + product.product_image_url);
     editProduct.setProductTitle(product.product_title);
     editProduct.setProductDescription(product.product_description);
     editProduct.setProductLink(product.product_link);
     editProduct.setProductGuid(product.product_guid);
+    editProduct.setProductAmount(product.product_amount);
+    editProduct.setProductCurrencyId(product.product_currency_country_id);
     editProduct.setUserGuid(userGuid);
     editProduct.setBusinessGuid(businessGuid);
+    const countriesData = await getCountriesCurrencies();
+    const filteredCountry = filterCountry(countriesData, product.product_currency_country_id);
+    let ctry = void 0;
+    if (filteredCountry && filteredCountry.length > 0) {
+      ctry = filteredCountry[0];
+    }
+    editProduct.setSelectedCountry(ctry);
   };
   const handleDelete = async () => {
     editProduct.deleteProduct(userGuid, businessGuid, product.product_guid);
@@ -17380,7 +22061,7 @@ const GalleryItem$1 = ({
 }) => {
   const [menu, setMenu] = useState(false);
   const [videoId, setVideoId] = useState(null);
-  const IMG_BASE_URL2 = "https://pics.gasimg.com";
+  const IMG_BASE_URL2 = "https://tpics.gasimg.com";
   let imgconst = "";
   if (product.product_image_url) {
     imgconst = IMG_BASE_URL2 + product.product_image_url;
@@ -17541,7 +22222,7 @@ const Carousel$1 = ({
     }
   ) });
 };
-const ProductGallery = ({ productGallery, userGuid, businessGuid, listing }) => {
+const ProductGallery = ({ productGallery, userGuid, businessGuid, listing: listing2 }) => {
   const [overlay, setOverlay] = useState(false);
   const [selectedSlide, setSelectedSlide] = useState(0);
   const slider = useProductSliderContext();
@@ -17552,7 +22233,7 @@ const ProductGallery = ({ productGallery, userGuid, businessGuid, listing }) => 
     slider.setDialog(true);
     slider.setSelectedSlide(index2 + 1);
     slider.setGallery(productGallery);
-    slider.setListing(listing);
+    slider.setListing(listing2);
   };
   return /* @__PURE__ */ jsxs("div", { className: ``, children: [
     /* @__PURE__ */ jsx("div", { className: ` border-[1px] p-3 rounded-[5px] 
@@ -17581,7 +22262,7 @@ const ProductGallery = ({ productGallery, userGuid, businessGuid, listing }) => 
     )
   ] });
 };
-const index$8 = () => {
+const index$9 = () => {
   useEffect(() => {
     IsAuthenticated(localStorage);
   }, []);
@@ -17650,8 +22331,411 @@ const index$8 = () => {
     }
   ) }) }) }) });
 };
-const route40 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route44 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
+  default: index$9
+}, Symbol.toStringTag, { value: "Module" }));
+const AddServiceContext = createContext(null);
+const useAddServiceContext = () => {
+  const ctx = useContext(AddServiceContext);
+  if (ctx) {
+    return ctx;
+  }
+  return null;
+};
+const AddServiceProvider = ({ children }) => {
+  const [dialog, setDialog] = useState(false);
+  const [userGuid, setUserGuid] = useState("");
+  const [businessGuid, setBusinessGuid] = useState("");
+  const [serviceProfile, setServiceProfile] = useState(null);
+  const [formdata, setFormdata] = useState(null);
+  const [working, setWorking] = useState(false);
+  useEffect(() => {
+    if (serviceProfile !== null) {
+      reset(serviceProfile);
+    }
+    if (serviceProfile === null) {
+      setValue("service_name", "");
+      setValue("service_description", "");
+      setValue("service_url", "");
+    }
+  }, [serviceProfile]);
+  const { showOperation, showSuccess, showError, showWarning, showInfo, completeOperation } = useOperation();
+  const AddService2 = async (data) => {
+    const endpoint = "/api/listing/services";
+    const url = config.BASE_URL + endpoint;
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: headers$1,
+        body: JSON.stringify(data)
+      });
+      if (!response.ok) {
+        const errorData = await response.text();
+        const errorObject = JSON.parse(errorData);
+        throw new Error(`${errorObject.error}`);
+      } else {
+        showSuccess("Success", "Service added successfully.");
+        await new Promise((resolve) => setTimeout(resolve, 2e3));
+        showOperation("processing", "Reloading...");
+        await new Promise((resolve) => setTimeout(resolve, 3e3));
+        window.location.reload();
+        await new Promise((resolve) => setTimeout(resolve, 3e3));
+        completeOperation();
+      }
+    } catch (error) {
+      showError("error", `${error.message}`);
+      completeOperation();
+    } finally {
+      setWorking(false);
+    }
+  };
+  const UpdateService = async (data) => {
+    const endpoint = "/api/listing/services/" + (serviceProfile == null ? void 0 : serviceProfile.service_guid);
+    const url = config.BASE_URL + endpoint;
+    try {
+      const response = await fetch(url, {
+        method: "PUT",
+        headers: headers$1,
+        body: JSON.stringify(data)
+      });
+      if (!response.ok) {
+        const errorData = await response.text();
+        const errorObject = JSON.parse(errorData);
+        throw new Error(`${errorObject.error}`);
+      } else {
+        showSuccess("Success", "Service UPDATED successfully.");
+        await new Promise((resolve) => setTimeout(resolve, 2e3));
+        showOperation("processing", "Reloading...");
+        await new Promise((resolve) => setTimeout(resolve, 3e3));
+        window.location.reload();
+        await new Promise((resolve) => setTimeout(resolve, 3e3));
+        completeOperation();
+      }
+    } catch (error) {
+      showError("error", `${error.message}`);
+      completeOperation();
+    } finally {
+      setWorking(false);
+    }
+  };
+  const handleAddService = async (data) => {
+    setWorking(true);
+    if (serviceProfile === null) {
+      showOperation("processing", "Adding service...");
+    } else {
+      showOperation("processing", "Updating service...");
+    }
+    await new Promise((resolve) => setTimeout(resolve, 1e3));
+    if (serviceProfile === null) {
+      data["user_guid"] = userGuid;
+      data["business_guid"] = businessGuid;
+      JSON.parse(JSON.stringify(data));
+      AddService2(data);
+    } else {
+      UpdateService(data);
+    }
+  };
+  const changeHandler = (e) => {
+    let value = e.target.value;
+    let name = e.target.name;
+    setFormdata((previousValue) => {
+      return {
+        ...previousValue,
+        [name]: value
+      };
+    });
+  };
+  const {
+    register,
+    handleSubmit,
+    getValues,
+    setValue,
+    watch,
+    reset,
+    setError,
+    formState: { errors, isSubmitting }
+  } = useForm({
+    defaultValues: serviceProfile,
+    resolver: zodResolver(ServiceProfileSchema)
+  });
+  let vals = {
+    setDialog,
+    setUserGuid,
+    setBusinessGuid,
+    setServiceProfile
+  };
+  const handleDelete = async (serviceGuid) => {
+    const result = confirm("Do you wish to delete this service. Once deleted, you cannot recover it?");
+    if (result === true) {
+      showOperation("processing", "Deleting service...");
+      await new Promise((resolve) => setTimeout(resolve, 2e3));
+      const endpoint = "/api/listing/services/" + (serviceProfile == null ? void 0 : serviceProfile.service_guid);
+      const url = config.BASE_URL + endpoint;
+      try {
+        const response = await fetch(url, {
+          method: "DELETE",
+          headers: headers$1
+        });
+        if (!response.ok) {
+          const errorData = await response.text();
+          const errorObject = JSON.parse(errorData);
+          throw new Error(`${errorObject.error}`);
+        } else {
+          showSuccess("Success", "Service DELETED successfully.");
+          await new Promise((resolve) => setTimeout(resolve, 2e3));
+          showOperation("processing", "Reloading...");
+          await new Promise((resolve) => setTimeout(resolve, 3e3));
+          window.location.reload();
+          await new Promise((resolve) => setTimeout(resolve, 3e3));
+          completeOperation();
+        }
+      } catch (error) {
+        showError("error", `${error.message}`);
+        completeOperation();
+      } finally {
+        setWorking(false);
+      }
+    }
+  };
+  return /* @__PURE__ */ jsxs(AddServiceContext.Provider, { value: vals, children: [
+    /* @__PURE__ */ jsx("div", { children: dialog && /* @__PURE__ */ jsxs(
+      "div",
+      {
+        className: `fixed top-0 left-0 w-full right-0 bg-black/40 z-[4000] h-full flex place-items-center place-content-center`,
+        onClick: () => setDialog(false),
+        children: [
+          /* @__PURE__ */ jsx(CloseButton$2, { setDialog }),
+          /* @__PURE__ */ jsx("div", { className: `mx-3 w-full`, children: /* @__PURE__ */ jsxs(
+            "div",
+            {
+              className: `max-w-[600px] mx-auto w-full bg-white rounded-[40px] px-[24px] pt-16 relative pb-12`,
+              onClick: (e) => e.stopPropagation(),
+              children: [
+                /* @__PURE__ */ jsx(
+                  "div",
+                  {
+                    className: `absolute top-8 right-8 text-3xl border-[2px] rounded-xl border-gray-500/20 w-[40px] h-[40px] shadow-sm flex place-items-center place-content-center text-gray-500 cursor-pointer hover:bg-gray-100 hover:border-gray-200/50`,
+                    onClick: () => setDialog(false),
+                    children: /* @__PURE__ */ jsx(CgClose, {})
+                  }
+                ),
+                /* @__PURE__ */ jsxs("div", { className: `text-3xl font-semibold`, children: [
+                  serviceProfile === null ? "Add" : "Edit",
+                  " Service"
+                ] }),
+                /* @__PURE__ */ jsx("div", { className: `border rounded-2xl overflow-hidden pl-3 pt-3 mt-4`, children: /* @__PURE__ */ jsx("div", { className: `mt-0  h-[430px] overflow-x-hidden overflow-y-scroll pr-3`, children: /* @__PURE__ */ jsxs("form", { className: `w-full `, onSubmit: handleSubmit(handleAddService), children: [
+                  /* @__PURE__ */ jsx(
+                    Input,
+                    {
+                      controlTitle: "Service name",
+                      controlPlaceholder: "Enter service name",
+                      controlName: "service_name",
+                      register,
+                      changeHandler,
+                      error: errors.service_name,
+                      controlInformation: `Enter a service name. `
+                    }
+                  ),
+                  /* @__PURE__ */ jsx(
+                    TextareaWithWordLimit,
+                    {
+                      controlTitle: "Service Description",
+                      controlPlaceholder: "Service description",
+                      controlName: "service_description",
+                      register,
+                      changeHandler,
+                      error: errors.service_description,
+                      setValue,
+                      getValues,
+                      watch,
+                      controlInformationClass,
+                      controlInformation: `Service description for this business activities`
+                    }
+                  ),
+                  /* @__PURE__ */ jsx(
+                    Input,
+                    {
+                      controlTitle: "Service URL",
+                      controlPlaceholder: "Enter a valid url",
+                      controlName: "service_url",
+                      register,
+                      changeHandler,
+                      error: errors.service_url,
+                      controlInformation: `Your url should start like this: http://example.com `
+                    }
+                  ),
+                  /* @__PURE__ */ jsx(Button, { working })
+                ] }) }) }),
+                serviceProfile !== null && /* @__PURE__ */ jsx("div", { className: `flex flex-col`, onClick: () => handleDelete(serviceProfile == null ? void 0 : serviceProfile.service_guid), children: /* @__PURE__ */ jsx("div", { className: `py-4 underline text-xl  cursor-pointer`, children: "Delete Service" }) })
+              ]
+            }
+          ) })
+        ]
+      }
+    ) }),
+    children
+  ] });
+};
+const CloseButton$2 = ({ setDialog }) => {
+  return /* @__PURE__ */ jsx("div", { onClick: () => setDialog(false), children: /* @__PURE__ */ jsx("div", { className: `w-[30px] h-[30px] flex place-items-center place-content-center rounded-full absolute top-2 left-2 bg-white text-[25px] font-bold transition-all ease-in-out duration-700 cursor-pointer hover:bg-white/40`, children: /* @__PURE__ */ jsx(BiChevronLeft, {}) }) });
+};
+const ServiceProfileSchema = z.object({
+  service_name: z.string({ message: "Please enter a service name" }).min(1, { message: "Please enter a service name" }),
+  service_description: z.string({ message: "Please enter a service description" }).min(1, { message: "Please enter a service description" }),
+  service_url: z.string().nullable().optional().refine(
+    (val) => {
+      if (!val || val === "" || val === void 0) return true;
+      try {
+        new URL(val);
+        return true;
+      } catch {
+        return false;
+      }
+    },
+    { message: "Please enter a valid URL. Example: http://example.com/service-link" }
+  )
+});
+const index$8 = () => {
+  useEffect(() => {
+    IsAuthenticated(localStorage);
+  }, []);
+  const [businessGuid, setBusinessGuid] = useState("");
+  const [userGuid, setUserGuid] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [serviceList, setServiceList] = useState(null);
+  const { business_guid, user_guid } = useParams();
+  const [businessProfile, setBusinessProfile] = useState(null);
+  const [data, setData] = useState(null);
+  const [pagination, setPagination] = useState(null);
+  useAuth();
+  const [searchParams, setSearchParams] = useSearchParams();
+  useEffect(() => {
+    const getAllData = async (businessGuid2, userGuid2, page) => {
+      setBusinessGuid(businessGuid2);
+      setUserGuid(userGuid2);
+      const businessProfile2 = await getBusinessProfile(businessGuid2 || "");
+      const res = await getServiceList(businessGuid2, userGuid2, page);
+      const serviceList2 = res.data || [];
+      setPagination(res.pagination);
+      console.log(res);
+      setBusinessProfile(businessProfile2);
+      setServiceList(serviceList2);
+    };
+    try {
+      if (business_guid && user_guid) {
+        const page = parseInt(searchParams.get("page") || "1");
+        const limit = parseInt(searchParams.get("limit") || "10");
+        getAllData(business_guid, user_guid, page);
+      }
+    } catch (e) {
+      console.log(e.message);
+    }
+  }, [user_guid, business_guid]);
+  useEffect(() => {
+    if (businessGuid && userGuid && serviceList && businessProfile) {
+      const data2 = {
+        businessGuid,
+        userGuid,
+        serviceList,
+        businessProfile
+      };
+      setData(data2);
+      setLoading(false);
+    }
+  }, [businessGuid, userGuid, serviceList, businessProfile]);
+  return /* @__PURE__ */ jsx(AccountLayout, { children: /* @__PURE__ */ jsx(
+    ContentLayout,
+    {
+      title: "Services Settings",
+      businessGuid,
+      data,
+      businessProfile,
+      children: /* @__PURE__ */ jsxs(AddServiceProvider, { children: [
+        businessGuid && userGuid && /* @__PURE__ */ jsx(AddService, { userGuid, businessGuid }),
+        pagination && serviceList && businessGuid && userGuid && /* @__PURE__ */ jsx(
+          DisplayService,
+          {
+            pagination,
+            serviceList,
+            businessGuid,
+            userGuid
+          }
+        )
+      ] })
+    }
+  ) });
+};
+const AddService = ({ userGuid, businessGuid }) => {
+  const addService = useAddServiceContext();
+  const handleOpenDialog = () => {
+    addService == null ? void 0 : addService.setDialog(true);
+    addService == null ? void 0 : addService.setUserGuid(userGuid);
+    addService == null ? void 0 : addService.setBusinessGuid(businessGuid);
+    addService == null ? void 0 : addService.setServiceProfile(null);
+  };
+  return /* @__PURE__ */ jsx("div", { className: `mb-2`, children: /* @__PURE__ */ jsx(
+    "button",
+    {
+      onMouseDown: handleOpenDialog,
+      className: ` bg-blue-800 rounded-md px-3 py-1
+                text-white hover:bg-blue-700 transition
+                duration-500 ease-in-out hover:shadow-md
+                 shadow-gray-900 hover:shadow-black/50`,
+      children: "Add Service"
+    }
+  ) });
+};
+const DisplayService = ({ pagination, serviceList, businessGuid, userGuid }) => {
+  const addServiceCtx = useAddServiceContext();
+  const [isClicked, setIsClicked] = useState(false);
+  const handleUpdateService = async (serviceGuid) => {
+    addServiceCtx == null ? void 0 : addServiceCtx.setDialog(true);
+    addServiceCtx == null ? void 0 : addServiceCtx.setBusinessGuid(businessGuid);
+    addServiceCtx == null ? void 0 : addServiceCtx.setUserGuid(userGuid);
+    const serviceProfile = await getServiceProfile(serviceGuid);
+    addServiceCtx == null ? void 0 : addServiceCtx.setServiceProfile(serviceProfile);
+    setIsClicked(true);
+  };
+  useEffect(() => {
+    if (serviceList) {
+      console.log(serviceList);
+    }
+  }, [serviceList]);
+  return /* @__PURE__ */ jsxs("div", { children: [
+    /* @__PURE__ */ jsxs("div", { className: `mt-6 flex flex-col border rounded-xl overflow-hidden relative`, children: [
+      /* @__PURE__ */ jsxs("div", { className: `flex flex-row gap-0 p-3 text-lg font-bold gap-x-2`, children: [
+        /* @__PURE__ */ jsx("div", { className: `min-w-[200px] w-[200px]`, children: "Service Name" }),
+        /* @__PURE__ */ jsx("div", { className: `grow `, children: "Service Description" })
+      ] }),
+      serviceList == null ? void 0 : serviceList.map((service, index2) => {
+        const isOdd = index2 % 2 === 0 ? true : false;
+        return /* @__PURE__ */ jsxs(
+          "div",
+          {
+            onClick: () => handleUpdateService(service == null ? void 0 : service.service_guid),
+            className: ` flex flex-row place-items-center relative ${isOdd && "bg-gray-100"} border-t py-2 px-3 cursor-pointer gap-x-2`,
+            children: [
+              /* @__PURE__ */ jsx("div", { className: `min-w-[200px] w-[200px] text-base first:border-none line-clamp-1`, children: service == null ? void 0 : service.service_name }),
+              /* @__PURE__ */ jsx("div", { className: `grow w-full line-clamp-1 text-base`, children: removeAllParagraphs(service == null ? void 0 : service.service_description) })
+            ]
+          },
+          index2
+        );
+      })
+    ] }),
+    /* @__PURE__ */ jsx("div", { className: `mt-6`, children: pagination && /* @__PURE__ */ jsx(
+      Pagination$2,
+      {
+        pagination
+      }
+    ) })
+  ] });
+};
+const route45 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  AddService,
+  DisplayService,
   default: index$8
 }, Symbol.toStringTag, { value: "Module" }));
 const GalleryItemMenu = ({
@@ -17672,6 +22756,7 @@ const GalleryItemMenu = ({
     editVideo.setBusinessGuid(businessGuid);
     editVideo.setVideoGuid(item.video_guid);
     editVideo.setVideoDescription(item.video_description);
+    editVideo.setVideoVerified(false);
   };
   const handleDelete = async () => {
     notification.notify();
@@ -17712,7 +22797,7 @@ const GalleryItem = ({
 }) => {
   const [menu, setMenu] = useState(false);
   const [videoId, setVideoId] = useState(null);
-  const IMG_BASE_URL2 = "https://pics.gasimg.com";
+  const IMG_BASE_URL2 = "https://tpics.gasimg.com";
   let imgconst = "";
   if (item.video_url) {
     imgconst = IMG_BASE_URL2 + item.video_url;
@@ -17873,7 +22958,7 @@ const Carousel = ({
     }
   ) });
 };
-const Gallery = ({ videoGallery, userGuid, businessGuid, listing }) => {
+const Gallery = ({ videoGallery, userGuid, businessGuid, listing: listing2 }) => {
   const [overlay, setOverlay] = useState(false);
   const [selectedSlide, setSelectedSlide] = useState(0);
   const slider = useVideoSliderContext();
@@ -17884,7 +22969,7 @@ const Gallery = ({ videoGallery, userGuid, businessGuid, listing }) => {
     slider.setDialog(true);
     slider.setSelectedSlide(index2 + 1);
     slider.setGallery(videoGallery);
-    slider.setListing(listing);
+    slider.setListing(listing2);
   };
   return /* @__PURE__ */ jsxs("div", { className: ``, children: [
     /* @__PURE__ */ jsx("div", { className: ` border-[1px] p-3 rounded-[5px] 
@@ -18039,234 +23124,420 @@ const index$7 = () => {
     }
   ) });
 };
-const route41 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route46 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: index$7
 }, Symbol.toStringTag, { value: "Module" }));
-const FacilityFeatures = ({
-  businessGuid,
-  userGuid,
-  facilityFeatures: facilityFeatures2,
-  selectedFacilityFeatures
-}) => {
+const AddFacilitiesContext = createContext(null);
+const useAddFacilitiesContext = () => {
+  const ctx = useContext(AddFacilitiesContext);
+  if (ctx) {
+    return ctx;
+  }
+  return null;
+};
+const AddFacilitiesProvider = ({ children }) => {
+  const [dialog, setDialog] = useState(false);
+  const [userGuid, setUserGuid] = useState("");
+  const [businessGuid, setBusinessGuid] = useState("");
+  const [facilityProfile, setFacilityProfile] = useState(null);
+  const [sysFacilities, setSysFacilities] = useState(null);
+  const [formdata, setFormdata] = useState(null);
   const [working, setWorking] = useState(false);
-  useNotification();
-  const [features, setFeatures] = useState(null);
-  const [selectedFeatures, setSelectedFeatures] = useState(null);
-  const [mergedFeatures, setMergedFeatures] = useState(null);
-  const { showOperation, showError, completeOperation, showSuccess } = useOperation();
   useEffect(() => {
-    if (facilityFeatures2 && selectedFacilityFeatures) {
-      setFeatures(facilityFeatures2);
-      setSelectedFeatures(selectedFacilityFeatures);
+    if (facilityProfile !== null) {
+      reset(facilityProfile);
     }
-  }, [facilityFeatures2, selectedFacilityFeatures]);
-  useEffect(() => {
-    if (features && selectedFeatures) {
-      const mergedFeatures2 = features.map((feature) => {
-        const selected = selectedFeatures.find(
-          (selected2) => selected2.feature_id === feature.feature_id
-        );
-        return {
-          ...feature,
-          active: selected ? true : false,
-          user_description: selected ? selected.user_description : void 0
-        };
-      });
-      setMergedFeatures(mergedFeatures2);
+    if (facilityProfile === null) {
+      setValue("facility_id", "");
+      setValue("facility_description", "");
     }
-  }, [features, selectedFeatures]);
-  const handleToggle = (id) => {
-    setMergedFeatures(
-      (prev) => prev.map(
-        (feature) => feature.feature_id === id ? {
-          ...feature,
-          active: !feature.active,
-          user_description: feature.user_description ? feature.user_description : ""
-        } : feature
-      )
-    );
-  };
-  const handleDescriptionChange = (id, value) => {
-    setMergedFeatures(
-      (prev) => prev.map(
-        (feature) => feature.feature_id === id ? { ...feature, user_description: value } : feature
-      )
-    );
-  };
-  const handleSave = async () => {
-    const BASE_URL = "https://bycet.com";
-    const endpoint = `/api/listing/selected_facility_features`;
-    const url = BASE_URL + endpoint;
-    setWorking(true);
-    showOperation("processing");
-    await new Promise((resolve) => setTimeout(resolve, 1e3));
+  }, [facilityProfile]);
+  const { showOperation, showSuccess, showError, showWarning, showInfo, completeOperation } = useOperation();
+  const AddFacility2 = async (data) => {
+    const endpoint = "/api/listing/facilities";
+    const url = config.BASE_URL + endpoint;
     try {
-      const selected = mergedFeatures.filter((f) => f.active).map((f) => {
-        return {
-          feature_id: f.feature_id,
-          user_description: f.user_description
-        };
-      });
-      let data = {
-        user_guid: userGuid,
-        business_guid: businessGuid,
-        selected
-      };
       const response = await fetch(url, {
         method: "POST",
         headers: headers$1,
         body: JSON.stringify(data)
       });
-      if (response.ok) {
-        showSuccess("Success", "Features saved.");
-        completeOperation();
+      if (!response.ok) {
+        const errorData = await response.text();
+        const errorObject = JSON.parse(errorData);
+        throw new Error(`${errorObject.error}`);
       } else {
-        showError("Error", "Save failed.");
+        showSuccess("Success", "Service added successfully.");
+        await new Promise((resolve) => setTimeout(resolve, 2e3));
+        showOperation("processing", "Reloading...");
+        await new Promise((resolve) => setTimeout(resolve, 3e3));
+        window.location.reload();
+        await new Promise((resolve) => setTimeout(resolve, 3e3));
         completeOperation();
       }
     } catch (error) {
-      console.log(error.message);
-      showError("Error", `Save failed.`);
+      showError("error", `${error.message}`);
+      completeOperation();
     } finally {
       setWorking(false);
     }
   };
-  return /* @__PURE__ */ jsxs("div", { children: [
-    /* @__PURE__ */ jsx("h2", { className: "text-lg font-semibold mb-3", children: "Select Facility Features" }),
-    facilityFeatures2.length > 0 && /* @__PURE__ */ jsxs("div", { children: [
-      /* @__PURE__ */ jsx("div", { className: "grid grid-cols-1 md:grid-cols-2 gap-4", children: mergedFeatures == null ? void 0 : mergedFeatures.map((feature) => /* @__PURE__ */ jsxs(
-        "label",
-        {
-          className: "flex items-center space-x-3 p-3 border rounded cursor-pointer",
-          children: [
-            /* @__PURE__ */ jsxs("div", { children: [
-              /* @__PURE__ */ jsx(
-                "input",
-                {
-                  onChange: () => handleToggle(feature.feature_id),
-                  type: "checkbox",
-                  checked: feature.active,
-                  className: "hidden"
-                }
-              ),
-              /* @__PURE__ */ jsx(
-                "div",
-                {
-                  className: `w-5 h-5 border-2 rounded ${feature.active ? "bg-blue-700" : "bg-white"}`
-                }
-              )
-            ] }),
-            /* @__PURE__ */ jsxs("div", { className: " w-full", children: [
-              /* @__PURE__ */ jsxs("p", { className: `font-medium flex place-items-center gap-2 text-lg`, children: [
-                /* @__PURE__ */ jsx("span", { className: `text-lg`, children: feature.icon }),
-                /* @__PURE__ */ jsx("span", { children: feature.name })
-              ] }),
-              /* @__PURE__ */ jsx("p", { className: "text-xs ", children: feature.description }),
-              /* @__PURE__ */ jsx("div", { className: " w-full h-[100px] mt-1 rounded overflow-hidden", children: /* @__PURE__ */ jsx(
-                "textarea",
-                {
-                  onClick: () => handleToggle(feature.feature_id),
-                  onChange: (e) => handleDescriptionChange(feature.feature_id, e.target.value),
-                  className: `w-full h-full bg-gray-100
-                                            border p-3 text-sm rounded-md`,
-                  value: feature.user_description
-                }
-              ) })
-            ] })
-          ]
-        },
-        feature.feature_id
-      )) }),
-      /* @__PURE__ */ jsx(
-        "button",
-        {
-          onClick: handleSave,
-          className: "mt-5 px-4 py-2 bg-blue-600 text-white rounded",
-          children: "Save Selected Features"
+  const UpdateFacility = async (data) => {
+    const endpoint = "/api/listing/facilities/" + (facilityProfile == null ? void 0 : facilityProfile.facility_guid);
+    const url = config.BASE_URL + endpoint;
+    try {
+      const response = await fetch(url, {
+        method: "PUT",
+        headers: headers$1,
+        body: JSON.stringify(data)
+      });
+      if (!response.ok) {
+        const errorData = await response.text();
+        const errorObject = JSON.parse(errorData);
+        throw new Error(`${errorObject.error}`);
+      } else {
+        showSuccess("Success", "Facility UPDATED successfully.");
+        await new Promise((resolve) => setTimeout(resolve, 2e3));
+        showOperation("processing", "Reloading...");
+        await new Promise((resolve) => setTimeout(resolve, 3e3));
+        window.location.reload();
+        await new Promise((resolve) => setTimeout(resolve, 3e3));
+        completeOperation();
+      }
+    } catch (error) {
+      showError("error", `${error.message}`);
+      completeOperation();
+    } finally {
+      setWorking(false);
+    }
+  };
+  const handleAddFacility = async (data) => {
+    setWorking(true);
+    if (facilityProfile === null) {
+      showOperation("processing", "Adding service...");
+    } else {
+      showOperation("processing", "Updating service...");
+    }
+    await new Promise((resolve) => setTimeout(resolve, 1e3));
+    if (facilityProfile === null) {
+      data["user_guid"] = userGuid;
+      data["business_guid"] = businessGuid;
+      JSON.parse(JSON.stringify(data));
+      AddFacility2(data);
+    } else {
+      UpdateFacility(data);
+    }
+  };
+  const changeHandler = (e) => {
+    let value = e.target.value;
+    let name = e.target.name;
+    setFormdata((previousValue) => {
+      return {
+        ...previousValue,
+        [name]: value
+      };
+    });
+  };
+  const {
+    register,
+    handleSubmit,
+    getValues,
+    setValue,
+    watch,
+    reset,
+    setError,
+    formState: { errors, isSubmitting }
+  } = useForm({
+    defaultValues: facilityProfile,
+    resolver: zodResolver(FacilityProfileSchema)
+  });
+  let vals = {
+    setDialog,
+    setUserGuid,
+    setBusinessGuid,
+    setFacilityProfile,
+    setSysFacilities
+  };
+  const handleDelete = async (serviceGuid) => {
+    const result = confirm("Do you wish to delete this service. Once deleted, you cannot recover it?");
+    if (result === true) {
+      showOperation("processing", "Deleting service...");
+      await new Promise((resolve) => setTimeout(resolve, 2e3));
+      const endpoint = "/api/listing/services/" + (facilityProfile == null ? void 0 : facilityProfile.facility_guid);
+      const url = config.BASE_URL + endpoint;
+      try {
+        const response = await fetch(url, {
+          method: "DELETE",
+          headers: headers$1
+        });
+        if (!response.ok) {
+          const errorData = await response.text();
+          const errorObject = JSON.parse(errorData);
+          throw new Error(`${errorObject.error}`);
+        } else {
+          showSuccess("Success", "Service DELETED successfully.");
+          await new Promise((resolve) => setTimeout(resolve, 2e3));
+          showOperation("processing", "Reloading...");
+          await new Promise((resolve) => setTimeout(resolve, 3e3));
+          window.location.reload();
+          await new Promise((resolve) => setTimeout(resolve, 3e3));
+          completeOperation();
         }
-      )
-    ] })
+      } catch (error) {
+        showError("error", `${error.message}`);
+        completeOperation();
+      } finally {
+        setWorking(false);
+      }
+    }
+  };
+  return /* @__PURE__ */ jsxs(AddFacilitiesContext.Provider, { value: vals, children: [
+    /* @__PURE__ */ jsx("div", { children: dialog && /* @__PURE__ */ jsxs(
+      "div",
+      {
+        className: `fixed top-0 left-0 w-full right-0 bg-black/40 z-[4000] h-full flex place-items-center place-content-center`,
+        onClick: () => setDialog(false),
+        children: [
+          /* @__PURE__ */ jsx(CloseButton$1, { setDialog }),
+          /* @__PURE__ */ jsx("div", { className: `mx-3 w-full`, children: /* @__PURE__ */ jsxs(
+            "div",
+            {
+              className: `max-w-[600px] mx-auto w-full bg-white rounded-[40px] px-[24px] pt-16 relative pb-12`,
+              onClick: (e) => e.stopPropagation(),
+              children: [
+                /* @__PURE__ */ jsx(
+                  "div",
+                  {
+                    className: `absolute top-8 right-8 text-3xl border-[2px] rounded-xl border-gray-500/20 w-[40px] h-[40px] shadow-sm flex place-items-center place-content-center text-gray-500 cursor-pointer hover:bg-gray-100 hover:border-gray-200/50`,
+                    onClick: () => setDialog(false),
+                    children: /* @__PURE__ */ jsx(CgClose, {})
+                  }
+                ),
+                /* @__PURE__ */ jsxs("div", { className: `text-3xl font-semibold`, children: [
+                  facilityProfile === null ? "Add" : "Edit",
+                  " Facility"
+                ] }),
+                /* @__PURE__ */ jsx("div", { className: `border rounded-2xl overflow-hidden pl-3 pt-3 mt-4`, children: /* @__PURE__ */ jsx("div", { className: `mt-0  h-[330px] overflow-x-hidden overflow-y-scroll pr-3`, children: /* @__PURE__ */ jsxs("form", { className: `w-full `, onSubmit: handleSubmit(handleAddFacility), children: [
+                  /* @__PURE__ */ jsx(
+                    Select,
+                    {
+                      controlTitle: "Facility Name",
+                      controlName: "facility_id",
+                      controlPlaceholder: "Select Facility",
+                      selectJson: sysFacilities,
+                      register,
+                      changeHandler,
+                      error: errors.category,
+                      controlInformation: `Select facility to add to the business.`
+                    }
+                  ),
+                  /* @__PURE__ */ jsx(
+                    TextareaWithWordLimit,
+                    {
+                      controlTitle: "Facility Description",
+                      controlPlaceholder: "Facility description",
+                      controlName: "facility_description",
+                      register,
+                      changeHandler,
+                      error: errors.facility_description,
+                      setValue,
+                      getValues,
+                      watch,
+                      controlInformationClass,
+                      controlInformation: `Service description for this business activities`
+                    }
+                  ),
+                  /* @__PURE__ */ jsx(Button, { working })
+                ] }) }) }),
+                facilityProfile !== null && /* @__PURE__ */ jsx("div", { className: `flex flex-col`, onClick: () => handleDelete(facilityProfile == null ? void 0 : facilityProfile.facility_guid), children: /* @__PURE__ */ jsx("div", { className: `py-4 underline text-xl  cursor-pointer`, children: "Delete Facility" }) })
+              ]
+            }
+          ) })
+        ]
+      }
+    ) }),
+    children
   ] });
 };
+const CloseButton$1 = ({ setDialog }) => {
+  return /* @__PURE__ */ jsx("div", { onClick: () => setDialog(false), children: /* @__PURE__ */ jsx("div", { className: `w-[30px] h-[30px] flex place-items-center place-content-center rounded-full absolute top-2 left-2 bg-white text-[25px] font-bold transition-all ease-in-out duration-700 cursor-pointer hover:bg-white/40`, children: /* @__PURE__ */ jsx(BiChevronLeft, {}) }) });
+};
+const FacilityProfileSchema = z.object({
+  facility_id: z.string({ message: "Please enter a service name" }).min(1, { message: "Please enter a service name" }),
+  facility_description: z.string({ message: "Please enter a facility description" }).min(1, { message: "Please enter a service description" })
+});
 const index$6 = () => {
   useEffect(() => {
     IsAuthenticated(localStorage);
   }, []);
   const [businessGuid, setBusinessGuid] = useState("");
   const [userGuid, setUserGuid] = useState("");
-  const [facilityFeatures$1, setFacilityFeatures] = useState(null);
-  const [selectedFacilityFeatures, setSelectedFacilityFeatures] = useState(null);
-  const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [facilityList, setFacilityList] = useState(null);
+  const [sysFacilities, setSysFacilities] = useState(null);
   const { business_guid, user_guid } = useParams();
   const [businessProfile, setBusinessProfile] = useState(null);
-  const auth = useAuth();
-  if (!auth) {
-    return null;
-  }
+  const [data, setData] = useState(null);
+  const [pagination, setPagination] = useState(null);
+  useAuth();
+  const [searchParams, setSearchParams] = useSearchParams();
   useEffect(() => {
-    const getAllData = async (businessGuid2, userGuid2) => {
+    const getAllData = async (businessGuid2, userGuid2, page) => {
       setBusinessGuid(businessGuid2);
       setUserGuid(userGuid2);
-      await getSysFacilityFeatures();
-      setFacilityFeatures(facilityFeatures);
-      const selectedFacilityFeatures2 = await getSelectedFacilityFeatures(userGuid2, businessGuid2);
-      setSelectedFacilityFeatures(selectedFacilityFeatures2);
       const businessProfile2 = await getBusinessProfile(businessGuid2 || "");
+      const sysFacilities2 = await getSysFacilities();
+      const res = await getFacilityList(businessGuid2, userGuid2, page);
+      const facilityList2 = res.data || [];
+      setPagination(res.pagination);
+      console.log(res);
       setBusinessProfile(businessProfile2);
+      setFacilityList(facilityList2);
+      setSysFacilities(sysFacilities2);
     };
     try {
       if (business_guid && user_guid) {
-        getAllData(business_guid, user_guid);
+        const page = parseInt(searchParams.get("page") || "1");
+        const limit = parseInt(searchParams.get("limit") || "10");
+        getAllData(business_guid, user_guid, page);
       }
     } catch (e) {
-      logError(e);
+      console.log(e.message);
     }
-  }, [business_guid, user_guid, facilityFeatures]);
+  }, [user_guid, business_guid]);
   useEffect(() => {
-    if (businessGuid && userGuid && facilityFeatures$1 && selectedFacilityFeatures && businessProfile) {
+    if (businessGuid && userGuid && facilityList && businessProfile) {
       const data2 = {
         businessGuid,
         userGuid,
-        facilityFeatures: facilityFeatures$1,
-        selectedFacilityFeatures,
+        facilityList,
         businessProfile
       };
       setData(data2);
       setLoading(false);
     }
-  }, [
-    businessGuid,
-    userGuid,
-    facilityFeatures$1,
-    selectedFacilityFeatures,
-    businessProfile
-  ]);
-  if (loading) {
-    return /* @__PURE__ */ jsx(LoadingMessage, {});
-  }
+  }, [businessGuid, userGuid, facilityList, businessProfile]);
   return /* @__PURE__ */ jsx(AccountLayout, { children: /* @__PURE__ */ jsx(
     ContentLayout,
     {
+      title: "Facilities Settings",
       businessGuid,
       data,
       businessProfile,
-      title: "Facility Features",
-      children: data && /* @__PURE__ */ jsx(
-        FacilityFeatures,
-        {
-          userGuid,
-          businessGuid,
-          facilityFeatures: facilityFeatures$1,
-          selectedFacilityFeatures
-        }
-      )
+      children: /* @__PURE__ */ jsxs(AddFacilitiesProvider, { children: [
+        businessGuid && userGuid && /* @__PURE__ */ jsx(
+          AddFacility,
+          {
+            userGuid,
+            businessGuid,
+            facilityList,
+            sysFacilities
+          }
+        ),
+        pagination && facilityList && businessGuid && userGuid && /* @__PURE__ */ jsx(
+          DisplayFacilities,
+          {
+            pagination,
+            facilityList,
+            businessGuid,
+            userGuid,
+            sysFacilities
+          }
+        )
+      ] })
     }
   ) });
 };
-const route42 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const AddFacility = ({
+  userGuid,
+  businessGuid,
+  facilityList,
+  sysFacilities
+}) => {
+  const addFacility = useAddFacilitiesContext();
+  async function getAvailableSysSocialMedia(userFacilityList, sysFacilities2) {
+    const usedCodes = new Set(userFacilityList == null ? void 0 : userFacilityList.map((item) => item.facility_id));
+    return sysFacilities2 == null ? void 0 : sysFacilities2.filter((platform) => !usedCodes.has(platform.id));
+  }
+  const handleOpenDialog = async () => {
+    addFacility == null ? void 0 : addFacility.setDialog(true);
+    addFacility == null ? void 0 : addFacility.setUserGuid(userGuid);
+    addFacility == null ? void 0 : addFacility.setBusinessGuid(businessGuid);
+    addFacility == null ? void 0 : addFacility.setFacilityProfile(null);
+    const availableSysFacilities = await getAvailableSysSocialMedia(facilityList, sysFacilities);
+    addFacility == null ? void 0 : addFacility.setSysFacilities(availableSysFacilities);
+  };
+  return /* @__PURE__ */ jsx("div", { className: `mb-2`, children: /* @__PURE__ */ jsx(
+    "button",
+    {
+      onMouseDown: handleOpenDialog,
+      className: ` bg-blue-800 rounded-md px-3 py-1
+                text-white hover:bg-blue-700 transition
+                duration-500 ease-in-out hover:shadow-md
+                 shadow-gray-900 hover:shadow-black/50`,
+      children: "Add Facility"
+    }
+  ) });
+};
+const DisplayFacilities = ({
+  pagination,
+  facilityList,
+  businessGuid,
+  userGuid,
+  sysFacilities
+}) => {
+  const addFacilityCtx = useAddFacilitiesContext();
+  const [isClicked, setIsClicked] = useState(false);
+  const handleUpdateFacility = async (facilityGuid) => {
+    addFacilityCtx == null ? void 0 : addFacilityCtx.setDialog(true);
+    addFacilityCtx == null ? void 0 : addFacilityCtx.setBusinessGuid(businessGuid);
+    addFacilityCtx == null ? void 0 : addFacilityCtx.setUserGuid(userGuid);
+    const facilityProfile = await getFacilityProfile(facilityGuid);
+    addFacilityCtx == null ? void 0 : addFacilityCtx.setFacilityProfile(facilityProfile);
+    addFacilityCtx == null ? void 0 : addFacilityCtx.setSysFacilities(sysFacilities);
+    setIsClicked(true);
+  };
+  useEffect(() => {
+    if (facilityList) {
+      console.log(facilityList);
+    }
+  }, [facilityList]);
+  return /* @__PURE__ */ jsxs("div", { children: [
+    /* @__PURE__ */ jsxs("div", { className: `mt-6 flex flex-col border rounded-xl overflow-hidden relative`, children: [
+      /* @__PURE__ */ jsxs("div", { className: `flex flex-row gap-0 p-3 text-lg font-bold gap-x-2`, children: [
+        /* @__PURE__ */ jsx("div", { className: `min-w-[200px] w-[200px]`, children: "Facility Name" }),
+        /* @__PURE__ */ jsx("div", { className: `grow `, children: "Facility Description" })
+      ] }),
+      facilityList == null ? void 0 : facilityList.map((facility, index2) => {
+        const isOdd = index2 % 2 === 0 ? true : false;
+        const facilityObject = sysFacilities == null ? void 0 : sysFacilities.find((platform) => platform.id === (facility == null ? void 0 : facility.facility_id));
+        return /* @__PURE__ */ jsxs(
+          "div",
+          {
+            onClick: () => handleUpdateFacility(facility == null ? void 0 : facility.facility_guid),
+            className: ` flex flex-row place-items-center relative ${isOdd && "bg-gray-100"} border-t py-2 px-3 cursor-pointer gap-x-2`,
+            children: [
+              /* @__PURE__ */ jsx("div", { className: `min-w-[200px] w-[200px] text-base first:border-none line-clamp-1`, children: facilityObject == null ? void 0 : facilityObject.name }),
+              /* @__PURE__ */ jsx("div", { className: `grow w-full line-clamp-1 text-base`, children: removeAllParagraphs(facility == null ? void 0 : facility.facility_description) })
+            ]
+          },
+          index2
+        );
+      })
+    ] }),
+    /* @__PURE__ */ jsx("div", { className: `mt-6`, children: pagination && /* @__PURE__ */ jsx(
+      Pagination$2,
+      {
+        pagination
+      }
+    ) })
+  ] });
+};
+const route47 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
+  AddFacility,
+  DisplayFacilities,
   default: index$6
 }, Symbol.toStringTag, { value: "Module" }));
 const Activate = ({
@@ -18413,232 +23684,430 @@ const index$5 = () => {
     }
   ) });
 };
-const route43 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route48 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: index$5
 }, Symbol.toStringTag, { value: "Module" }));
-const SocialMedia = ({
-  businessGuid,
-  userGuid,
-  allSocialMedia,
-  allSelectedSocialMedia
-}) => {
+const AddSocialMediaContext = createContext(null);
+const useAddSocialMediaContext = () => {
+  const ctx = useContext(AddSocialMediaContext);
+  if (ctx) {
+    return ctx;
+  }
+  return null;
+};
+const AddSocialMediaProvider = ({ children }) => {
+  const [dialog, setDialog] = useState(false);
+  const [userGuid, setUserGuid] = useState("");
+  const [businessGuid, setBusinessGuid] = useState("");
+  const [socialMediaProfile, setSocialMediaProfile] = useState(null);
+  const [sysSocialMedia, setSysSocialMedia] = useState(null);
+  const [formdata, setFormdata] = useState(null);
   const [working, setWorking] = useState(false);
-  const { showOperation, showError, completeOperation, showSuccess } = useOperation();
-  const [socialMedia, setSocialMedia] = useState(null);
-  const [selectedSocialMedia, setSelectedSocialMedia] = useState(null);
-  const [mergedSocialMedia, setMergedSocialMedia] = useState(null);
   useEffect(() => {
-    if (allSocialMedia && allSelectedSocialMedia) {
-      setSocialMedia(allSocialMedia);
-      setSelectedSocialMedia(allSelectedSocialMedia);
+    if (socialMediaProfile !== null) {
+      reset(socialMediaProfile);
     }
-  }, [allSocialMedia, allSelectedSocialMedia]);
-  useEffect(() => {
-    if (socialMedia && selectedSocialMedia) {
-      const mergedSocialMedia2 = socialMedia.map((media) => {
-        const selected = selectedSocialMedia.find(
-          (selected2) => selected2.media_id === media.media_id
-        );
-        return {
-          ...media,
-          active: selected ? true : false,
-          user_description: selected ? selected.user_description : void 0
-        };
-      });
-      setMergedSocialMedia(mergedSocialMedia2);
+    if (socialMediaProfile === null) {
+      setValue("social_media_code", "");
+      setValue("social_media_identifier", "");
     }
-  }, [socialMedia, selectedSocialMedia]);
-  const handleToggle = (id) => {
-    setMergedSocialMedia(
-      (prev) => prev.map(
-        (socialMedia2) => socialMedia2.media_id === id ? {
-          ...socialMedia2,
-          active: !socialMedia2.active,
-          user_description: socialMedia2.user_description ? socialMedia2.user_description : ""
-        } : socialMedia2
-      )
-    );
-  };
-  const handleDescriptionChange = (id, value) => {
-    setMergedSocialMedia(
-      (prev) => prev.map(
-        (media) => media.media_id === id ? { ...media, user_description: value } : media
-      )
-    );
-  };
-  const handleSave = async () => {
-    const BASE_URL = "https://bycet.com";
-    const endpoint = `/api/listing/selected_social_media`;
-    const url = BASE_URL + endpoint;
-    setWorking(true);
-    showOperation("processing");
-    await new Promise((resolve) => setTimeout(resolve, 1e3));
+  }, [socialMediaProfile]);
+  const { showOperation, showSuccess, showError, showWarning, showInfo, completeOperation } = useOperation();
+  const AddSocialMedia2 = async (data) => {
+    const endpoint = "/api/listing/social_media";
+    const url = config.BASE_URL + endpoint;
     try {
-      const selected = mergedSocialMedia.filter((f) => f.active).map((f) => {
-        return {
-          media_id: f.media_id,
-          user_description: f.user_description
-        };
-      });
-      let data = {
-        user_guid: userGuid,
-        business_guid: businessGuid,
-        selected
-      };
       const response = await fetch(url, {
         method: "POST",
         headers: headers$1,
         body: JSON.stringify(data)
       });
-      if (response.ok) {
-        showSuccess("Success", "Social media saved.");
-        completeOperation();
+      if (!response.ok) {
+        const errorData = await response.text();
+        const errorObject = JSON.parse(errorData);
+        throw new Error(`${errorObject.error}`);
       } else {
-        showError("Error", "Save failed.");
+        showSuccess("Success", "Social Media added successfully.");
+        await new Promise((resolve) => setTimeout(resolve, 2e3));
+        showOperation("processing", "Reloading...");
+        await new Promise((resolve) => setTimeout(resolve, 3e3));
+        window.location.reload();
+        await new Promise((resolve) => setTimeout(resolve, 3e3));
         completeOperation();
       }
     } catch (error) {
-      console.log(error.message);
-      showError("Error", "Save failed.");
+      showError("error", `${error.message}`);
       completeOperation();
     } finally {
       setWorking(false);
     }
   };
-  return /* @__PURE__ */ jsxs("div", { children: [
-    /* @__PURE__ */ jsx("h2", { className: "text-lg font-semibold mb-3", children: "Select Social Media" }),
-    allSocialMedia.length > 0 && /* @__PURE__ */ jsxs("div", { children: [
-      /* @__PURE__ */ jsx("div", { className: "grid grid-cols-1 md:grid-cols-2 gap-4", children: mergedSocialMedia == null ? void 0 : mergedSocialMedia.map((socialMedia2) => /* @__PURE__ */ jsxs(
-        "label",
-        {
-          className: "flex items-center space-x-3 p-3 border rounded cursor-pointer",
-          children: [
-            /* @__PURE__ */ jsxs("div", { children: [
-              /* @__PURE__ */ jsx(
-                "input",
-                {
-                  onChange: () => handleToggle(socialMedia2.media_id),
-                  type: "checkbox",
-                  checked: socialMedia2.active,
-                  className: "hidden"
-                }
-              ),
-              /* @__PURE__ */ jsx(
-                "div",
-                {
-                  className: `w-5 h-5 border-[1px] border-black  rounded-none 
-                                            ${socialMedia2.active ? "bg-blue-400" : "bg-white"}`
-                }
-              )
-            ] }),
-            /* @__PURE__ */ jsxs("div", { className: " w-full", children: [
-              /* @__PURE__ */ jsx("p", { className: "font-medium ", children: socialMedia2.name }),
-              /* @__PURE__ */ jsx("div", { className: " w-full h-[50px] mt-1 rounded overflow-hidden", children: /* @__PURE__ */ jsx(
-                "textarea",
-                {
-                  onClick: (e) => handleToggle(socialMedia2.media_id),
-                  onChange: (e) => handleDescriptionChange(socialMedia2.media_id, e.target.value),
-                  className: `w-full h-full bg-gray-100
-                                            border p-3 text-sm`,
-                  value: socialMedia2.user_description,
-                  onBlur: (e) => {
-                    if (e.currentTarget.value.length <= 0) {
-                      handleToggle(socialMedia2.media_id);
-                    }
-                  }
-                }
-              ) })
-            ] })
-          ]
-        },
-        socialMedia2.media_id
-      )) }),
-      /* @__PURE__ */ jsx(
-        "button",
-        {
-          onClick: handleSave,
-          className: "mt-5 px-4 py-2 bg-blue-600 text-white rounded",
-          children: "Save Selected Social Media"
+  const UpdateSocialMedia = async (data) => {
+    const endpoint = "/api/listing/social_media/" + (socialMediaProfile == null ? void 0 : socialMediaProfile.social_media_guid);
+    const url = config.BASE_URL + endpoint;
+    try {
+      const response = await fetch(url, {
+        method: "PUT",
+        headers: headers$1,
+        body: JSON.stringify(data)
+      });
+      if (!response.ok) {
+        const errorData = await response.text();
+        const errorObject = JSON.parse(errorData);
+        throw new Error(`${errorObject.error}`);
+      } else {
+        showSuccess("Success", "Social Media UPDATED successfully.");
+        await new Promise((resolve) => setTimeout(resolve, 2e3));
+        showOperation("processing", "Reloading...");
+        await new Promise((resolve) => setTimeout(resolve, 3e3));
+        window.location.reload();
+        await new Promise((resolve) => setTimeout(resolve, 3e3));
+        completeOperation();
+      }
+    } catch (error) {
+      showError("error", `${error.message}`);
+      completeOperation();
+    } finally {
+      setWorking(false);
+    }
+  };
+  const handleAddSocialMedia = async (data) => {
+    setWorking(true);
+    if (socialMediaProfile === null) {
+      showOperation("processing", "Adding service...");
+    } else {
+      showOperation("processing", "Updating service...");
+    }
+    await new Promise((resolve) => setTimeout(resolve, 1e3));
+    if (socialMediaProfile === null) {
+      data["user_guid"] = userGuid;
+      data["business_guid"] = businessGuid;
+      JSON.parse(JSON.stringify(data));
+      AddSocialMedia2(data);
+    } else {
+      UpdateSocialMedia(data);
+    }
+  };
+  const changeHandler = (e) => {
+    let value = e.target.value;
+    let name = e.target.name;
+    setFormdata((previousValue) => {
+      return {
+        ...previousValue,
+        [name]: value
+      };
+    });
+  };
+  const {
+    register,
+    handleSubmit,
+    getValues,
+    setValue,
+    watch,
+    reset,
+    setError,
+    formState: { errors, isSubmitting }
+  } = useForm({
+    defaultValues: socialMediaProfile,
+    resolver: zodResolver(SocialMediaProfileSchema)
+  });
+  let vals = {
+    setDialog,
+    setUserGuid,
+    setBusinessGuid,
+    setSocialMediaProfile,
+    setSysSocialMedia
+  };
+  const handleDelete = async (serviceGuid) => {
+    const result = confirm("Do you wish to delete this social media. Once deleted, you cannot recover it?");
+    if (result === true) {
+      showOperation("processing", "Deleting social media...");
+      await new Promise((resolve) => setTimeout(resolve, 2e3));
+      const endpoint = "/api/listing/social_media/" + (socialMediaProfile == null ? void 0 : socialMediaProfile.social_media_guid);
+      const url = config.BASE_URL + endpoint;
+      try {
+        const response = await fetch(url, {
+          method: "DELETE",
+          headers: headers$1
+        });
+        if (!response.ok) {
+          const errorData = await response.text();
+          const errorObject = JSON.parse(errorData);
+          throw new Error(`${errorObject.error}`);
+        } else {
+          showSuccess("Success", "Service DELETED successfully.");
+          await new Promise((resolve) => setTimeout(resolve, 2e3));
+          showOperation("processing", "Reloading...");
+          await new Promise((resolve) => setTimeout(resolve, 3e3));
+          window.location.reload();
+          await new Promise((resolve) => setTimeout(resolve, 3e3));
+          completeOperation();
         }
-      )
-    ] })
+      } catch (error) {
+        showError("error", `${error.message}`);
+        completeOperation();
+      } finally {
+        setWorking(false);
+      }
+    }
+  };
+  return /* @__PURE__ */ jsxs(AddSocialMediaContext.Provider, { value: vals, children: [
+    /* @__PURE__ */ jsx("div", { children: dialog && /* @__PURE__ */ jsxs(
+      "div",
+      {
+        className: `fixed top-0 left-0 w-full right-0 bg-black/40 z-[4000] h-full flex place-items-center place-content-center`,
+        onClick: () => setDialog(false),
+        children: [
+          /* @__PURE__ */ jsx(CloseButton, { setDialog }),
+          /* @__PURE__ */ jsx("div", { className: `mx-3 w-full`, children: /* @__PURE__ */ jsxs(
+            "div",
+            {
+              className: `max-w-[600px] mx-auto w-full bg-white rounded-[40px] px-[24px] pt-16 relative pb-12`,
+              onClick: (e) => e.stopPropagation(),
+              children: [
+                /* @__PURE__ */ jsx(
+                  "div",
+                  {
+                    className: `absolute top-8 right-8 text-3xl border-[2px] rounded-xl border-gray-500/20 w-[40px] h-[40px] shadow-sm flex place-items-center place-content-center text-gray-500 cursor-pointer hover:bg-gray-100 hover:border-gray-200/50`,
+                    onClick: () => setDialog(false),
+                    children: /* @__PURE__ */ jsx(CgClose, {})
+                  }
+                ),
+                /* @__PURE__ */ jsxs("div", { className: `text-3xl font-semibold`, children: [
+                  socialMediaProfile === null ? "Add" : "Edit",
+                  " Social Media"
+                ] }),
+                /* @__PURE__ */ jsx("div", { className: `border rounded-2xl overflow-hidden pl-3 pt-3 mt-4`, children: /* @__PURE__ */ jsx("div", { className: `mt-0  h-[330px] overflow-x-hidden overflow-y-auto pr-3`, children: /* @__PURE__ */ jsxs("form", { className: `w-full `, onSubmit: handleSubmit(handleAddSocialMedia), children: [
+                  /* @__PURE__ */ jsx(
+                    Select,
+                    {
+                      controlTitle: "Social Media Name",
+                      controlName: "social_media_code",
+                      controlPlaceholder: "Select Social Media",
+                      selectJson: sysSocialMedia,
+                      register,
+                      changeHandler,
+                      error: errors.category,
+                      controlInformation: `Select social media to add to the business.`
+                    }
+                  ),
+                  /* @__PURE__ */ jsx(
+                    Input,
+                    {
+                      controlTitle: "Social Media Identifier",
+                      controlPlaceholder: "Enter a valid url",
+                      controlName: "social_media_identifier",
+                      register,
+                      changeHandler,
+                      error: errors.social_media_identifier,
+                      controlInformation: `Your url should start like this: http://example.com `
+                    }
+                  ),
+                  /* @__PURE__ */ jsx(Button, { working })
+                ] }) }) }),
+                socialMediaProfile !== null && /* @__PURE__ */ jsx("div", { className: `flex flex-col`, onClick: () => handleDelete(socialMediaProfile == null ? void 0 : socialMediaProfile.social_media_guid), children: /* @__PURE__ */ jsx("div", { className: `py-4 underline text-xl  cursor-pointer`, children: "Delete Social Media" }) })
+              ]
+            }
+          ) })
+        ]
+      }
+    ) }),
+    children
   ] });
 };
+const CloseButton = ({ setDialog }) => {
+  return /* @__PURE__ */ jsx("div", { onClick: () => setDialog(false), children: /* @__PURE__ */ jsx("div", { className: `w-[30px] h-[30px] flex place-items-center place-content-center rounded-full absolute top-2 left-2 bg-white text-[25px] font-bold transition-all ease-in-out duration-700 cursor-pointer hover:bg-white/40`, children: /* @__PURE__ */ jsx(BiChevronLeft, {}) }) });
+};
+const SocialMediaProfileSchema = z.object({
+  social_media_code: z.string({ message: "Please enter a service name" }).min(1, { message: "Please enter a service name" }),
+  social_media_identifier: z.string().nullable().optional().refine(
+    (val) => {
+      if (!val || val.trim() === "") return true;
+      const trimmedVal = val.trim();
+      try {
+        new URL(trimmedVal);
+        return false;
+      } catch {
+      }
+      const urlPattern = /^(https?:\/\/|www\.)/i;
+      if (urlPattern.test(trimmedVal)) {
+        return false;
+      }
+      const handlePattern = /^[a-zA-Z0-9._-]+$/;
+      return handlePattern.test(trimmedVal);
+    },
+    {
+      message: "Please enter only the username/handle (e.g., 'oracle'), not a full URL."
+    }
+  )
+});
 const index$4 = () => {
   useEffect(() => {
     IsAuthenticated(localStorage);
   }, []);
   const [businessGuid, setBusinessGuid] = useState("");
   const [userGuid, setUserGuid] = useState("");
-  const [socialMedia, setSocialMedia] = useState(null);
-  const [selectedSocialMedia, setSelectedSocialMedia] = useState(null);
-  const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [socialMediaList, setSocialMediaList] = useState(null);
   const { business_guid, user_guid } = useParams();
   const [businessProfile, setBusinessProfile] = useState(null);
+  const [data, setData] = useState(null);
+  const [pagination, setPagination] = useState(null);
+  const [sysSocialMedia, setSysSocialMedia] = useState(null);
+  useAuth();
+  const [searchParams, setSearchParams] = useSearchParams();
   useEffect(() => {
-    const getAllData = async (businessGuid2, userGuid2) => {
+    const getAllData = async (businessGuid2, userGuid2, page) => {
       setBusinessGuid(businessGuid2);
       setUserGuid(userGuid2);
-      const socialMedia2 = await getSysSocialMedia();
-      setSocialMedia(socialMedia2);
-      const selectedSocialMedia2 = await getSelectedSocialMedia(userGuid2, businessGuid2);
-      setSelectedSocialMedia(selectedSocialMedia2);
       const businessProfile2 = await getBusinessProfile(businessGuid2 || "");
+      const sysSocialMedia2 = await getSysSocialMedia();
+      const res = await getSocialMediaList(businessGuid2, userGuid2, page);
+      const socialMediaList2 = res.data || [];
+      setPagination(res.pagination);
+      console.log(res);
       setBusinessProfile(businessProfile2);
+      setSocialMediaList(socialMediaList2);
+      setSysSocialMedia(sysSocialMedia2);
     };
     try {
       if (business_guid && user_guid) {
-        getAllData(business_guid, user_guid);
+        const page = parseInt(searchParams.get("page") || "1");
+        const limit = parseInt(searchParams.get("limit") || "10");
+        getAllData(business_guid, user_guid, page);
       }
     } catch (e) {
-      logError(e);
+      console.log(e.message);
     }
-  }, [business_guid, user_guid]);
+  }, [user_guid, business_guid]);
   useEffect(() => {
-    if (businessGuid && userGuid && socialMedia && selectedSocialMedia && businessProfile) {
+    if (businessGuid && userGuid && socialMediaList && businessProfile) {
       const data2 = {
         businessGuid,
         userGuid,
-        facilityFeatures: socialMedia,
-        selectedFacilityFeatures: selectedSocialMedia,
+        socialMediaList,
         businessProfile
       };
       setData(data2);
       setLoading(false);
     }
-  }, [
-    businessGuid,
-    userGuid,
-    socialMedia,
-    selectedSocialMedia,
-    businessProfile
-  ]);
-  if (loading) {
-    return /* @__PURE__ */ jsx(LoadingMessage, {});
-  }
+  }, [businessGuid, userGuid, socialMediaList, businessProfile]);
   return /* @__PURE__ */ jsx(AccountLayout, { children: /* @__PURE__ */ jsx(
     ContentLayout,
     {
-      title: "Social Media",
+      title: "Social Media Settings",
       businessGuid,
       data,
       businessProfile,
-      children: data && /* @__PURE__ */ jsx(
-        SocialMedia,
-        {
-          userGuid,
-          businessGuid,
-          allSocialMedia: socialMedia,
-          allSelectedSocialMedia: selectedSocialMedia
-        }
-      )
+      children: /* @__PURE__ */ jsxs(AddSocialMediaProvider, { children: [
+        businessGuid && userGuid && /* @__PURE__ */ jsx(
+          AddSocialMedia,
+          {
+            userGuid,
+            businessGuid,
+            sysSocialMedia,
+            socialMediaList
+          }
+        ),
+        pagination && socialMediaList && businessGuid && userGuid && sysSocialMedia && /* @__PURE__ */ jsx(
+          DisplaySocialMedia,
+          {
+            pagination,
+            socialMediaList,
+            businessGuid,
+            userGuid,
+            sysSocialMedia
+          }
+        )
+      ] })
     }
   ) });
 };
-const route44 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const AddSocialMedia = ({ userGuid, businessGuid, sysSocialMedia, socialMediaList }) => {
+  const addSocialMedia = useAddSocialMediaContext();
+  async function getAvailableSysSocialMedia(userSocialMediaList, sysSocialMedia2) {
+    const usedCodes = new Set(userSocialMediaList == null ? void 0 : userSocialMediaList.map((item) => item.social_media_code));
+    return sysSocialMedia2 == null ? void 0 : sysSocialMedia2.filter((platform) => !usedCodes.has(platform.id));
+  }
+  const handleOpenDialog = async () => {
+    addSocialMedia == null ? void 0 : addSocialMedia.setDialog(true);
+    addSocialMedia == null ? void 0 : addSocialMedia.setUserGuid(userGuid);
+    addSocialMedia == null ? void 0 : addSocialMedia.setBusinessGuid(businessGuid);
+    addSocialMedia == null ? void 0 : addSocialMedia.setSocialMediaProfile(null);
+    const availableSysSocialMedia = await getAvailableSysSocialMedia(socialMediaList, sysSocialMedia);
+    addSocialMedia == null ? void 0 : addSocialMedia.setSysSocialMedia(availableSysSocialMedia);
+  };
+  return /* @__PURE__ */ jsx("div", { className: `mb-2`, children: /* @__PURE__ */ jsx(
+    "button",
+    {
+      onMouseDown: handleOpenDialog,
+      className: ` bg-blue-800 rounded-md px-3 py-1
+                text-white hover:bg-blue-700 transition
+                duration-500 ease-in-out hover:shadow-md
+                 shadow-gray-900 hover:shadow-black/50`,
+      children: "Add Social Media"
+    }
+  ) });
+};
+const DisplaySocialMedia = ({ pagination, socialMediaList, businessGuid, userGuid, sysSocialMedia }) => {
+  const addSocialMediaCtx = useAddSocialMediaContext();
+  const [isClicked, setIsClicked] = useState(false);
+  const handleUpdateService = async (socialMediaGuid) => {
+    addSocialMediaCtx == null ? void 0 : addSocialMediaCtx.setDialog(true);
+    addSocialMediaCtx == null ? void 0 : addSocialMediaCtx.setBusinessGuid(businessGuid);
+    addSocialMediaCtx == null ? void 0 : addSocialMediaCtx.setUserGuid(userGuid);
+    const socialMediaProfile = await getSocialMediaProfile(socialMediaGuid);
+    addSocialMediaCtx == null ? void 0 : addSocialMediaCtx.setSocialMediaProfile(socialMediaProfile);
+    addSocialMediaCtx == null ? void 0 : addSocialMediaCtx.setSysSocialMedia(sysSocialMedia);
+    setIsClicked(true);
+  };
+  useEffect(() => {
+    if (socialMediaList) {
+      console.log(socialMediaList);
+    }
+    if (sysSocialMedia) {
+      console.log(sysSocialMedia);
+    }
+  }, [socialMediaList, sysSocialMedia]);
+  return /* @__PURE__ */ jsxs("div", { children: [
+    /* @__PURE__ */ jsxs("div", { className: `mt-6 flex flex-col border rounded-xl overflow-hidden relative`, children: [
+      /* @__PURE__ */ jsxs("div", { className: `flex flex-row gap-0 p-3 text-lg font-bold gap-x-2`, children: [
+        /* @__PURE__ */ jsx("div", { className: `min-w-[200px] w-[200px]`, children: "Social Media Name" }),
+        /* @__PURE__ */ jsx("div", { className: `grow `, children: "Social Media Identifier" })
+      ] }),
+      socialMediaList == null ? void 0 : socialMediaList.map((socialMedia, index2) => {
+        const isOdd = index2 % 2 === 0 ? true : false;
+        const socialMediaObject = sysSocialMedia == null ? void 0 : sysSocialMedia.find((platform) => platform.id === (socialMedia == null ? void 0 : socialMedia.social_media_code));
+        return /* @__PURE__ */ jsxs(
+          "div",
+          {
+            onClick: () => handleUpdateService(socialMedia == null ? void 0 : socialMedia.social_media_guid),
+            className: ` flex flex-row place-items-center relative ${isOdd && "bg-gray-100"} border-t py-2 px-3 cursor-pointer gap-x-2`,
+            children: [
+              /* @__PURE__ */ jsx("div", { className: `min-w-[200px] w-[200px] text-base first:border-none line-clamp-1`, children: socialMediaObject == null ? void 0 : socialMediaObject.name }),
+              /* @__PURE__ */ jsxs("div", { className: `md:grow w-full line-clamp-1 text-base`, children: [
+                socialMediaObject == null ? void 0 : socialMediaObject.base_url,
+                removeAllParagraphs(socialMedia == null ? void 0 : socialMedia.social_media_identifier)
+              ] })
+            ]
+          },
+          index2
+        );
+      })
+    ] }),
+    /* @__PURE__ */ jsx("div", { className: `mt-6`, children: pagination && /* @__PURE__ */ jsx(
+      Pagination$2,
+      {
+        pagination
+      }
+    ) })
+  ] });
+};
+const route49 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
+  AddSocialMedia,
+  DisplaySocialMedia,
   default: index$4
 }, Symbol.toStringTag, { value: "Module" }));
 const password_regex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).{8,}$/;
@@ -18830,7 +24299,7 @@ const Index$1 = () => {
     }
   ) });
 };
-const route45 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route50 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: Index$1
 }, Symbol.toStringTag, { value: "Module" }));
@@ -18899,7 +24368,7 @@ function BusinessUserSelector({ userGuid }) {
     }
   };
   return /* @__PURE__ */ jsxs("div", { className: "space-y-6 p-4 max-w-lg", children: [
-    /* @__PURE__ */ jsxs("div", { children: [
+    /* @__PURE__ */ jsxs("div", { className: `relative`, children: [
       /* @__PURE__ */ jsx("label", { className: "block text-sm font-medium mb-1", children: "Search Business" }),
       /* @__PURE__ */ jsx(
         "input",
@@ -18912,22 +24381,25 @@ function BusinessUserSelector({ userGuid }) {
           placeholder: "Type business name..."
         }
       ),
-      businessResults.length > 0 && /* @__PURE__ */ jsx("ul", { className: "border mt-2 rounded bg-white shadow divide-y", children: businessResults.map((biz, index2) => /* @__PURE__ */ jsx(
-        "li",
-        {
-          onClick: () => {
-            setSelectedBusiness(biz);
-            setBusinessResults([]);
-            setBusinessQuery(biz.title);
+      businessResults.length > 0 && /* @__PURE__ */ jsx("ul", { className: `border mt-2 rounded bg-white shadow divide-y`, children: businessResults == null ? void 0 : businessResults.map((biz, index2) => {
+        const isEven = index2 % 2 === 0 ? true : false;
+        return /* @__PURE__ */ jsx(
+          "li",
+          {
+            onClick: () => {
+              setSelectedBusiness(biz);
+              setBusinessResults([]);
+              setBusinessQuery(biz.title);
+            },
+            className: `${isEven ? "bg-gray-50" : "bg-white"} p-2 cursor-pointer hover:bg-gray-100`,
+            children: biz.title
           },
-          className: "p-2 cursor-pointer hover:bg-gray-100",
-          children: biz.title
-        },
-        biz.id
-      )) }),
+          biz.id
+        );
+      }) }),
       selectedBusiness && /* @__PURE__ */ jsx("input", { type: "hidden", name: "businessId", value: selectedBusiness.id })
     ] }),
-    /* @__PURE__ */ jsxs("div", { children: [
+    /* @__PURE__ */ jsxs("div", { className: `relative w-full`, children: [
       /* @__PURE__ */ jsx("label", { className: "block text-sm font-medium mb-1", children: "Search User" }),
       /* @__PURE__ */ jsx(
         "input",
@@ -18940,23 +24412,26 @@ function BusinessUserSelector({ userGuid }) {
           placeholder: "Type user name..."
         }
       ),
-      userResults.length > 0 && /* @__PURE__ */ jsx("ul", { className: "border mt-2 rounded bg-white shadow divide-y", children: userResults.map((u) => /* @__PURE__ */ jsxs(
-        "li",
-        {
-          onClick: () => {
-            setSelectedUser(u);
-            setUserResults([]);
-            setUserQuery(`${u.first_name}, ${u.lastname}`);
+      userResults.length > 0 && /* @__PURE__ */ jsx("ul", { className: `absolute border mt-2 rounded bg-white shadow divide-y w-full max-h-[200px] overflow-y-auto`, children: userResults.map((u, index2) => {
+        const isEven = index2 % 2 === 0 ? true : false;
+        return /* @__PURE__ */ jsxs(
+          "li",
+          {
+            onClick: () => {
+              setSelectedUser(u);
+              setUserResults([]);
+              setUserQuery(`${u.first_name}, ${u.lastname}`);
+            },
+            className: `${isEven ? "bg-gray-50" : "bg-white"} p-2 cursor-pointer hover:bg-gray-100`,
+            children: [
+              u.first_name,
+              ", ",
+              u.lastname
+            ]
           },
-          className: "p-2 cursor-pointer hover:bg-gray-100",
-          children: [
-            u.first_name,
-            ", ",
-            u.lastname
-          ]
-        },
-        u.id
-      )) }),
+          u.id
+        );
+      }) }),
       selectedUser && /* @__PURE__ */ jsx("input", { type: "hidden", name: "userId", value: selectedUser.id })
     ] }),
     /* @__PURE__ */ jsx(
@@ -19028,7 +24503,7 @@ const Index = () => {
     }
   ) });
 };
-const route46 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route51 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: Index
 }, Symbol.toStringTag, { value: "Module" }));
@@ -19264,7 +24739,7 @@ const EventForm = () => {
 const index$3 = () => {
   return /* @__PURE__ */ jsx(AccountLayout, { children: /* @__PURE__ */ jsx(ProfileContentLayout, { title: "Create Event", children: /* @__PURE__ */ jsx(EventForm, {}) }) });
 };
-const route47 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route52 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: index$3
 }, Symbol.toStringTag, { value: "Module" }));
@@ -19333,7 +24808,7 @@ const ChangeEmailBody = ({ userGuid, email, response }) => {
     }
   ) });
 };
-const loader$T = async ({ request, params }) => {
+const loader$19 = async ({ request, params }) => {
   const url = new URL(request.url);
   let userGuid = url.searchParams.get("guid");
   let email = url.searchParams.get("email");
@@ -19366,10 +24841,10 @@ const index$2 = () => {
     }
   ) }) });
 };
-const route48 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route53 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: index$2,
-  loader: loader$T
+  loader: loader$19
 }, Symbol.toStringTag, { value: "Module" }));
 const passwordValidation = new RegExp(
   /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!()£@$%^&*-]).{8,}$/
@@ -19411,7 +24886,7 @@ function ResetPasswordFormAlt({ guid }) {
     showOperation("processing");
     await new Promise((resolve) => setTimeout(resolve, 1e3));
     data.password;
-    const BASE_URL = "https://bycet.com";
+    const BASE_URL = "https://test.bycet.com";
     const endpoint = `/api/user/reset_password/${guid}`;
     const url = BASE_URL + endpoint;
     try {
@@ -19567,7 +25042,7 @@ const ResetPasswordBody$1 = ({ userGuid }) => {
         md:bg-[url('https://images.pexels.com/photos/290386/pexels-photo-290386.jpeg?auto=compress&cs=tinysrgb&w=1200')]
         bg-cover bg-center min-h-screen flex place-content-center`, children: /* @__PURE__ */ jsx(ResetPasswordFormAlt, { guid: userGuid }) });
 };
-const loader$S = async ({ request, params }) => {
+const loader$18 = async ({ request, params }) => {
   new URL(request.url);
   let userGuid = params.guid;
   const data = {
@@ -19580,10 +25055,10 @@ const index$1 = () => {
   const userGuid = loaderData.guid;
   return /* @__PURE__ */ jsx("div", { children: /* @__PURE__ */ jsx(ResetPasswordBody$1, { userGuid }) });
 };
-const route49 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route54 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: index$1,
-  loader: loader$S
+  loader: loader$18
 }, Symbol.toStringTag, { value: "Module" }));
 function CompleteSignup({ guid }) {
   const [isVisible, setIsVisible] = useState(false);
@@ -19650,7 +25125,7 @@ const ResetPasswordBody = ({ userGuid }) => {
         md:bg-[url('https://images.pexels.com/photos/290386/pexels-photo-290386.jpeg?auto=compress&cs=tinysrgb&w=1200')]
         bg-cover bg-center min-h-screen flex place-content-center`, children: /* @__PURE__ */ jsx(CompleteSignup, { guid: userGuid }) });
 };
-const loader$R = async ({ request, params }) => {
+const loader$17 = async ({ request, params }) => {
   new URL(request.url);
   let userGuid = params.guid;
   const data = {
@@ -19663,17 +25138,17 @@ const index = () => {
   const userGuid = loaderData.guid;
   return /* @__PURE__ */ jsx("div", { children: /* @__PURE__ */ jsx(ResetPasswordBody, { userGuid }) });
 };
-const route50 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route55 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: index,
-  loader: loader$R
+  loader: loader$17
 }, Symbol.toStringTag, { value: "Module" }));
 let cachedPool = global.mysqlPool || null;
 const DATABASE_HOST = "localhost";
 const DATABASE_PORT = "3306";
-const DATABASE_NAME = "garssete";
+const DATABASE_NAME = "garssete_test";
 const DATABASE_PASS = "Querty123$$$$";
-const DATABASE_USER = "garssete_user";
+const DATABASE_USER = "garssete_test_user";
 if (!cachedPool) {
   cachedPool = global.mysqlPool = mysql.createPool({
     host: DATABASE_HOST,
@@ -19780,7 +25255,7 @@ const getResetPasswordEmailCompleted = (first_name) => {
 
         ${formattedSitename} Support`;
 };
-async function loader$Q() {
+async function loader$16() {
   let users = null;
   try {
     users = await query(`SELECT * FROM tbl_user ORDER BY date_created DESC`);
@@ -19793,7 +25268,7 @@ async function loader$Q() {
     headers: { "Content-Type": "application/json" }
   });
 }
-async function action$n({ request }) {
+async function action$y({ request }) {
   if (request.method === "POST") {
     try {
       const contentType = request.headers.get("Content-Type");
@@ -19857,10 +25332,10 @@ async function action$n({ request }) {
   }
   return DoResponse({ message: "method not allowed" }, 200);
 }
-const route51 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route56 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  action: action$n,
-  loader: loader$Q
+  action: action$y,
+  loader: loader$16
 }, Symbol.toStringTag, { value: "Module" }));
 const VerifiedStatus = {
   OK: true,
@@ -19876,13 +25351,13 @@ const RequestStatus = {
   CLOSED: "closed"
 };
 const JWT_SECRET$1 = "2454522643636363463643565346346";
-const loader$P = async ({ request, params }) => {
+const loader$15 = async ({ request, params }) => {
   return DoResponse({
     success: false,
     message: "method not allowed"
   }, 405);
 };
-const action$m = async ({ request }) => {
+const action$x = async ({ request }) => {
   const contentType = request.headers.get("Content-Type");
   if (contentType !== "application/json") {
     return DoResponse({ error: "Invalid content type. Expected JSON." }, 405);
@@ -19949,13 +25424,13 @@ const action$m = async ({ request }) => {
     return DoResponse({ message: error.message }, 500);
   }
 };
-const route52 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route57 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  action: action$m,
-  loader: loader$P
+  action: action$x,
+  loader: loader$15
 }, Symbol.toStringTag, { value: "Module" }));
 const JWT_SECRET = "2454522643636363463643565346346";
-async function action$l({ request, params }) {
+async function action$w({ request, params }) {
   const contentType = request.headers.get("Content-Type");
   if (contentType !== "application/json") {
     return DoResponse({ error: "Invalid content type. Expected JSON." }, 405);
@@ -19972,11 +25447,11 @@ async function action$l({ request, params }) {
   }
   return DoResponse({ success: false, message: "method not allowed" }, 405);
 }
-const route53 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route58 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  action: action$l
+  action: action$w
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$O = async ({ request, params }) => {
+const loader$14 = async ({ request, params }) => {
   const contentType = request.headers.get("Content-Type");
   if (contentType !== "application/json") {
     return DoResponse(
@@ -20003,7 +25478,7 @@ const loader$O = async ({ request, params }) => {
     return DoResponse(rows[0], 200);
   }
 };
-const action$k = async ({ request, params }) => {
+const action$v = async ({ request, params }) => {
   const contentType = request.headers.get("Content-Type");
   if (contentType !== "application/json") {
     return DoResponse(
@@ -20102,12 +25577,12 @@ const action$k = async ({ request, params }) => {
     message: "method not allowed"
   }, 405);
 };
-const route54 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route59 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  action: action$k,
-  loader: loader$O
+  action: action$v,
+  loader: loader$14
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$N = async ({ request, params }) => {
+const loader$13 = async ({ request, params }) => {
   const contentType = request.headers.get("Content-Type");
   if (contentType !== "application/json") {
     return DoResponse(
@@ -20115,7 +25590,7 @@ const loader$N = async ({ request, params }) => {
     );
   }
 };
-async function action$j({ request, params }) {
+async function action$u({ request, params }) {
   const contentType = request.headers.get("Content-Type");
   if (contentType !== "application/json") {
     return DoResponse({ error: "Invalid content type. Expected JSON." }, 500);
@@ -20172,12 +25647,12 @@ async function action$j({ request, params }) {
   }
   return DoResponse({ error: "method not allowed" }, 200);
 }
-const route55 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route60 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  action: action$j,
-  loader: loader$N
+  action: action$u,
+  loader: loader$13
 }, Symbol.toStringTag, { value: "Module" }));
-async function action$i({ request }) {
+async function action$t({ request }) {
   const contentType = request.headers.get("Content-Type");
   if (contentType !== "application/json") {
     return DoResponse({ error: "Invalid content type. Expected JSON." }, 500);
@@ -20280,11 +25755,11 @@ async function action$i({ request }) {
   }
   return DoResponse({ message: "method not allowed" }, 200);
 }
-const route56 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route61 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  action: action$i
+  action: action$t
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$M = async ({ request, params }) => {
+const loader$12 = async ({ request, params }) => {
   const contentType = request.headers.get("Content-Type");
   if (contentType !== "application/json") {
     return DoResponse(
@@ -20292,7 +25767,7 @@ const loader$M = async ({ request, params }) => {
     );
   }
 };
-async function action$h({ request, params }) {
+async function action$s({ request, params }) {
   const contentType = request.headers.get("Content-Type");
   if (contentType !== "application/json") {
     return DoResponse({ error: "Invalid content type. Expected JSON." }, 500);
@@ -20385,12 +25860,12 @@ async function action$h({ request, params }) {
   }
   return DoResponse({ error: "method not allowed" }, 200);
 }
-const route57 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route62 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  action: action$h,
-  loader: loader$M
+  action: action$s,
+  loader: loader$12
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$L = async ({ request, params }) => {
+const loader$11 = async ({ request, params }) => {
   const contentType = request.headers.get("Content-Type");
   if (contentType !== "application/json") {
     return DoResponse(
@@ -20402,7 +25877,7 @@ const loader$L = async ({ request, params }) => {
     message: "method not allowed"
   }, 405);
 };
-const action$g = async ({ request, params }) => {
+const action$r = async ({ request, params }) => {
   const contentType = request.headers.get("Content-Type");
   if (contentType !== "application/json") {
     return DoResponse(
@@ -20477,12 +25952,12 @@ const action$g = async ({ request, params }) => {
     message: "method not allowed"
   }, 405);
 };
-const route58 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route63 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  action: action$g,
-  loader: loader$L
+  action: action$r,
+  loader: loader$11
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$K = async ({ request, params }) => {
+const loader$10 = async ({ request, params }) => {
   const contentType = request.headers.get("Content-Type");
   if (contentType !== "application/json") {
     return DoResponse(
@@ -20498,11 +25973,11 @@ const loader$K = async ({ request, params }) => {
     return DoResponse(rows[0], 200);
   }
 };
-const route59 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route64 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  loader: loader$K
+  loader: loader$10
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$J = async ({ request, params }) => {
+const loader$$ = async ({ request, params }) => {
   const contentType = request.headers.get("Content-Type");
   if (contentType !== "application/json") {
     return DoResponse(
@@ -20518,11 +25993,11 @@ const loader$J = async ({ request, params }) => {
     return DoResponse(rows[0], 200);
   }
 };
-const route60 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route65 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  loader: loader$J
+  loader: loader$$
 }, Symbol.toStringTag, { value: "Module" }));
-async function action$f({ request }) {
+async function action$q({ request }) {
   const contentType = request.headers.get("Content-Type");
   if (contentType !== "application/json") {
     return DoResponse({ error: "Invalid content type. Expected JSON." }, 500);
@@ -20623,11 +26098,11 @@ async function action$f({ request }) {
   }
   return DoResponse({ error: "method not allowed" }, 200);
 }
-const route61 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route66 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  action: action$f
+  action: action$q
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$I = async ({ request, params }) => {
+const loader$_ = async ({ request, params }) => {
   const contentType = request.headers.get("Content-Type");
   if (contentType !== "application/json") {
     return DoResponse(
@@ -20635,7 +26110,7 @@ const loader$I = async ({ request, params }) => {
     );
   }
 };
-async function action$e({ request, params }) {
+async function action$p({ request, params }) {
   const contentType = request.headers.get("Content-Type");
   if (contentType !== "application/json") {
     return DoResponse({ error: "Invalid content type. Expected JSON." }, 500);
@@ -20712,12 +26187,12 @@ async function action$e({ request, params }) {
   }
   return DoResponse({ error: "method not allowed" }, 200);
 }
-const route62 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route67 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  action: action$e,
-  loader: loader$I
+  action: action$p,
+  loader: loader$_
 }, Symbol.toStringTag, { value: "Module" }));
-async function action$d({ request, params }) {
+async function action$o({ request, params }) {
   const contentType = request.headers.get("Content-Type");
   if (contentType !== "application/json") {
     return DoResponse({ error: "Invalid content type. Expected JSON." }, 500);
@@ -20780,28 +26255,28 @@ async function action$d({ request, params }) {
   }
   return DoResponse({ message: "method not allowed" }, 500);
 }
-const route63 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route68 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  action: action$d
+  action: action$o
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$H = async ({ request, params }) => {
+const loader$Z = async ({ request, params }) => {
   const contentType = request.headers.get("Content-Type");
   if (contentType !== "application/json") {
     return new Response(JSON.stringify({ error: "Invalid content type. Expected JSON." }));
   }
   try {
     const rawdata = await query(`SELECT * FROM tbl_dir ORDER BY date_created DESC`);
-    const listings = rawdata.map((listing) => {
-      delete listing.date_created;
-      delete listing.last_updated;
-      return listing;
+    const listings = rawdata.map((listing2) => {
+      delete listing2.date_created;
+      delete listing2.last_updated;
+      return listing2;
     });
     return DoResponse(listings, 200);
   } catch (error) {
     return DoResponse({ "error": error.message }, 500);
   }
 };
-async function action$c({ request, params }) {
+async function action$n({ request, params }) {
   if (request.method === "POST") {
     try {
       const contentType = request.headers.get("Content-Type");
@@ -20863,6 +26338,7 @@ async function action$c({ request, params }) {
       }
       const gid = crypto.randomUUID();
       const listingHash = GenerateRandomHash();
+      const minimumAmt = removeCommas(body == null ? void 0 : body.minimum_amount);
       const result = await query(
         `INSERT INTO tbl_dir SET 
                 title = ?, 
@@ -20883,7 +26359,9 @@ async function action$c({ request, params }) {
                 gid = ?, 
                 owner = ?,
                 established = ?,
-                listing_hash = ?`,
+                listing_hash = ?,
+                minimum_amount = ?,
+                minimum_amount_currency_code = ?`,
         [
           body.title || null,
           body.pagetype,
@@ -20903,7 +26381,9 @@ async function action$c({ request, params }) {
           gid,
           body.owner || null,
           body.established || null,
-          listingHash || null
+          listingHash || null,
+          minimumAmt || null,
+          body.minimum_amount_currency_code || null
         ]
       );
       const rating = 3;
@@ -20925,12 +26405,12 @@ async function action$c({ request, params }) {
     }
   }
 }
-const route64 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route69 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  action: action$c,
-  loader: loader$H
+  action: action$n,
+  loader: loader$Z
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$G = async ({ request, params }) => {
+const loader$Y = async ({ request, params }) => {
   try {
     const id = params.guid_or_username;
     const rows = await query(`SELECT 
@@ -20949,15 +26429,15 @@ const loader$G = async ({ request, params }) => {
     if (rows.length <= 0) {
       return DoResponse({}, 200);
     }
-    const listings = rows.map((listing) => {
-      return listing;
+    const listings = rows.map((listing2) => {
+      return listing2;
     });
     return DoResponse(listings[0], 200);
   } catch (error) {
     return DoResponse({ "error": error.message }, 500);
   }
 };
-const action$b = async ({ request, params }) => {
+const action$m = async ({ request, params }) => {
   const contentType = request.headers.get("Content-Type");
   if (contentType !== "application/json") {
     return DoResponse(
@@ -20973,7 +26453,7 @@ const action$b = async ({ request, params }) => {
       {
       }
       const rawlisting = await query(`SELECT * FROM tbl_dir WHERE gid = ?`, [guid]);
-      const listing = rawlisting[0];
+      const listing2 = rawlisting[0];
       if (rawlisting.length <= 0) {
         return new Response(
           JSON.stringify({
@@ -20985,46 +26465,48 @@ const action$b = async ({ request, params }) => {
       }
       {
       }
-      let email_address = body.email_address === void 0 ? listing.email_address : body.email_address;
-      let title = body.title === void 0 ? listing.title : body.title;
-      let branch = body.branch === void 0 ? Boolean(listing.branch) : Boolean(body.branch);
-      let branch_location = body.branch_location === void 0 ? listing.branch_location : body.branch_location;
-      let category = body.category === void 0 ? listing.category : body.category;
-      let pagetype = body.pagetype === void 0 ? listing.pagetype : body.pagetype;
-      let short_description = body.short_description === void 0 ? listing.short_description : body.short_description;
-      let long_description = body.long_description === void 0 ? listing.long_description : body.long_description;
-      let phone = body.phone === void 0 ? listing.phone : body.phone;
-      let address_one = body.address_one === void 0 ? listing.address_one : body.address_one;
-      let address_two = body.address_two === void 0 ? listing.address_two : body.address_two;
-      let img = body.img === void 0 ? listing.img : body.img;
-      let owner = body.owner === void 0 ? listing.owner : body.owner;
-      let username = body.username === void 0 ? listing.username : body.username;
-      let zipcode = body.zipcode === void 0 ? listing.zipcode : body.zipcode;
-      let products = body.products === void 0 ? listing.products : body.products;
-      let services = body.services === void 0 ? listing.services : body.services;
-      let business_phrases = body.business_phrases === void 0 ? listing.business_phrases : body.business_phrases;
-      let established = body.established === void 0 ? listing.established : body.established;
-      let xsocial = body.xsocial === void 0 ? listing.xsocial : body.xsocial;
-      let fbsocial = body.fbsocial === void 0 ? listing.fbsocial : body.fbsocial;
-      let linksocial = body.linksocial === void 0 ? listing.linksocial : body.linksocial;
-      let country_code = body.country_code === void 0 ? listing.country_code : body.country_code;
-      let state_code = body.state_code === void 0 ? listing.state_code : body.state_code;
-      let city_id = body.city_id === void 0 ? listing.city_id : body.city_id;
-      let website = body.website === void 0 ? listing.website : body.website;
+      let email_address = body.email_address === void 0 ? listing2.email_address : body.email_address;
+      let title = body.title === void 0 ? listing2.title : body.title;
+      let branch = body.branch === void 0 ? Boolean(listing2.branch) : Boolean(body.branch);
+      let branch_location = body.branch_location === void 0 ? listing2.branch_location : body.branch_location;
+      let category = body.category === void 0 ? listing2.category : body.category;
+      let pagetype = body.pagetype === void 0 ? listing2.pagetype : body.pagetype;
+      let short_description = body.short_description === void 0 ? listing2.short_description : body.short_description;
+      let long_description = body.long_description === void 0 ? listing2.long_description : body.long_description;
+      let phone = body.phone === void 0 ? listing2.phone : body.phone;
+      let address_one = body.address_one === void 0 ? listing2.address_one : body.address_one;
+      let address_two = body.address_two === void 0 ? listing2.address_two : body.address_two;
+      let img = body.img === void 0 ? listing2.img : body.img;
+      let owner = body.owner === void 0 ? listing2.owner : body.owner;
+      let username = body.username === void 0 ? listing2.username : body.username;
+      let zipcode = body.zipcode === void 0 ? listing2.zipcode : body.zipcode;
+      let products = body.products === void 0 ? listing2.products : body.products;
+      let services = body.services === void 0 ? listing2.services : body.services;
+      let business_phrases = body.business_phrases === void 0 ? listing2.business_phrases : body.business_phrases;
+      let established = body.established === void 0 ? listing2.established : body.established;
+      let xsocial = body.xsocial === void 0 ? listing2.xsocial : body.xsocial;
+      let fbsocial = body.fbsocial === void 0 ? listing2.fbsocial : body.fbsocial;
+      let linksocial = body.linksocial === void 0 ? listing2.linksocial : body.linksocial;
+      let country_code = body.country_code === void 0 ? listing2.country_code : body.country_code;
+      let state_code = body.state_code === void 0 ? listing2.state_code : body.state_code;
+      let city_id = body.city_id === void 0 ? listing2.city_id : body.city_id;
+      let website = body.website === void 0 ? listing2.website : body.website;
+      let minimum_amount_currency_code = body.minimum_amount_currency_code === void 0 ? listing2.minimum_amount_currency_code : body.minimum_amount_currency_code;
+      let minimum_amount = body.minimum_amount === void 0 ? listing2.minimum_amount : body.minimum_amount;
       {
       }
       if (username !== "" && username !== null) {
-        if (username === (listing == null ? void 0 : listing.username)) {
+        if (username === (listing2 == null ? void 0 : listing2.username)) {
         }
         {
         }
-        if (username !== (listing == null ? void 0 : listing.username)) {
+        if (username !== (listing2 == null ? void 0 : listing2.username)) {
           {
           }
           let checkSql = `SELECT * FROM tbl_dir d 
                         WHERE d.username = '${username}'
                         AND
-                        d.gid != '${listing == null ? void 0 : listing.gid}'`;
+                        d.gid != '${listing2 == null ? void 0 : listing2.gid}'`;
           const checkUsernameResult = await query(checkSql);
           if (checkUsernameResult.length > 0) {
             return DoResponse({
@@ -21089,7 +26571,9 @@ const action$b = async ({ request, params }) => {
                 country_code = ?,
                 state_code = ?,
                 city_id = ?,
-                website = ?
+                website = ?,
+                minimum_amount_currency_code = ?,
+                minimum_amount = ? 
                 WHERE
                 gid = ?`,
         [
@@ -21119,6 +26603,8 @@ const action$b = async ({ request, params }) => {
           state_code,
           city_id,
           website,
+          minimum_amount_currency_code,
+          minimum_amount,
           guid
         ]
       );
@@ -21147,7 +26633,7 @@ const action$b = async ({ request, params }) => {
       {
       }
       const rawlisting = await query(`SELECT * FROM tbl_dir WHERE gid = ?`, [guid]);
-      const listing = rawlisting[0];
+      const listing2 = rawlisting[0];
       if (rawlisting.length <= 0) {
         return new Response(
           JSON.stringify({ error: "Listing does not exist" }),
@@ -21175,12 +26661,12 @@ const action$b = async ({ request, params }) => {
     message: "method not allowed"
   }, 405);
 };
-const route65 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route70 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  action: action$b,
-  loader: loader$G
+  action: action$m,
+  loader: loader$Y
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$F = async ({ request, params }) => {
+const loader$X = async ({ request, params }) => {
   try {
     const url = new URL(request.url);
     let criteria = url.searchParams.get("q");
@@ -21372,10 +26858,10 @@ const loader$F = async ({ request, params }) => {
                 LIMIT 50;
 `, [criteria, criteria, criteria, criteria, criteria, criteria, criteria, criteria, category, country, state, city]);
     }
-    const listings = rawdata.map((listing) => {
-      delete listing.date_created;
-      delete listing.last_updated;
-      return listing;
+    const listings = rawdata.map((listing2) => {
+      delete listing2.date_created;
+      delete listing2.last_updated;
+      return listing2;
     });
     console.log(listings);
     return DoResponse(listings, 200);
@@ -21384,11 +26870,11 @@ const loader$F = async ({ request, params }) => {
     return DoResponse({ "error": error.message }, 500);
   }
 };
-const route66 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route71 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  loader: loader$F
+  loader: loader$X
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$E = async ({ request, params }) => {
+const loader$W = async ({ request, params }) => {
   var _a;
   const ITEMS_PER_PAGE = 20;
   try {
@@ -21460,8 +26946,8 @@ function buildSearchQuery(params) {
             d.category, d.established, d.address_one, d.address_two, d.website,
             d.date_created, co.name AS country_name, co.iso2 AS country_code,
             st.name AS state_name, st.iso2 AS state_code, ci.name AS city_name,
-            b.image_url, bg.image_url AS bg_image_url,
-            r.average_rating, r.total_reviews,
+            b.image_url, bg.image_url AS bg_image_url, bg.image_url AS bg_image_url_ext, b.image_url AS profile_image_url_ext,
+            r.avg_rating, r.count_of_rating, d.currency, d.minimum_amount,
             (
                 SELECT GROUP_CONCAT(
                     CONCAT(sm.media_id, '$', sm.user_description, '$', sysm.base_url) 
@@ -21477,15 +26963,10 @@ function buildSearchQuery(params) {
         LEFT JOIN tbl_city ci ON ci.id = d.city_id
         LEFT JOIN tbl_business_profile_image b ON d.gid = b.business_guid
         LEFT JOIN tbl_business_profile_bg bg ON d.gid = bg.business_guid
-        LEFT JOIN (
-            SELECT business_guid, 
-                   ROUND(AVG(rating), 1) AS average_rating,
-                   COUNT(*) AS total_reviews
-            FROM tbl_rating
-            GROUP BY business_guid
-        ) r ON d.gid = r.business_guid
+        LEFT JOIN tbl_business_rating_summary r ON d.gid = r.business_guid
         ${whereClause}
     `;
+  console.log(baseQuery);
   const countQuery = `
         SELECT COUNT(*) as total
         FROM tbl_dir d
@@ -21496,11 +26977,11 @@ function buildSearchQuery(params) {
     `;
   return { baseQuery, countQuery, params: queryParams };
 }
-const route67 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route72 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  loader: loader$E
+  loader: loader$W
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$D = async ({ request, params }) => {
+const loader$V = async ({ request, params }) => {
   try {
     const id = params.guid_or_username;
     const isFeatured = true;
@@ -21550,30 +27031,38 @@ const loader$D = async ({ request, params }) => {
     if (rows.length <= 0) {
       return DoResponse({}, 200);
     }
-    const listings = rows.map((listing) => {
-      return listing;
+    const listings = rows.map((listing2) => {
+      return listing2;
     });
     return DoResponse(listings, 200);
   } catch (error) {
     return DoResponse({ "error": error.message }, 500);
   }
 };
-const route68 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route73 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  loader: loader$D
+  loader: loader$V
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$C = async ({ request, params }) => {
+const loader$U = async ({ request, params }) => {
   request.headers.get("Content-Type");
   const businessGuid = params.business_guid;
-  const selectedFeatureQuery = `SELECT
-        a.feature_id, a.user_description, a.business_guid
+  const facilitiesQuery = `SELECT 
+        f.*,  
+        sf.name AS facility_name,
+        sf.description AS facility_definition,
+        sf.active AS facility_active_status
         FROM 
-        tbl_selected_facility_features a 
+            tbl_facilities f 
+        INNER JOIN 
+            tbl_sys_facilities sf 
+            ON f.facility_id = sf.facility_id
         WHERE 
-        a.business_guid = ?`;
+            f.business_guid = 'bc28e31d-f128-4f7e-84ab-44c74bef86bb'
+        ORDER BY 
+            f.created_at DESC;`;
   try {
     const rawdata = await query(
-      selectedFeatureQuery,
+      facilitiesQuery,
       [
         businessGuid
       ]
@@ -21584,11 +27073,87 @@ const loader$C = async ({ request, params }) => {
     return DoResponse({ "error": error.message }, 500);
   }
 };
-const route69 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route74 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  loader: loader$C
+  loader: loader$U
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$B = async ({ params }) => {
+const loader$T = async ({ params }) => {
+  try {
+    const category = params.category;
+    const limitRaw = params.limit;
+    const limit = Math.max(parseInt(limitRaw ?? "5", 10), 1);
+    const rows = await query(`
+                SELECT 
+                d.*, 
+                COALESCE(b.avg_rating, 0) as avg_rating,
+                COALESCE(b.count_of_rating, 0) as count_of_rating,
+                COALESCE(b.sum_of_rating, 0) as sum_of_rating,
+                b.*,
+                im.image_url,
+                bg.image_url AS bg_image_url_ext,
+                bpi.image_url AS profile_image_url_ext
+            FROM tbl_dir d
+            LEFT JOIN tbl_business_rating_summary b 
+                ON d.gid = b.business_guid
+            LEFT JOIN tbl_business_profile_image im ON im.business_guid = d.gid
+             LEFT JOIN tbl_business_profile_bg bg 
+            	ON d.gid = bg.business_guid
+            LEFT JOIN tbl_business_profile_image bpi
+            	ON d.gid = bpi.business_guid
+            WHERE d.category RLIKE ?
+            ORDER BY d.title
+            LIMIT ?;
+    `, [category, limit]);
+    if (rows.length === 0) {
+      return DoResponse([], 200);
+    }
+    return DoResponse(rows, 200);
+  } catch (error) {
+    return DoResponse({ error: error.message }, 500);
+  }
+};
+const route75 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  loader: loader$T
+}, Symbol.toStringTag, { value: "Module" }));
+const loader$S = async ({ params }) => {
+  try {
+    const cityId = params.city_id || "32";
+    const limitRaw = params.limit;
+    const limit = Math.max(parseInt(limitRaw ?? "5", 10), 1);
+    const rows = await query(`
+                SELECT 
+                d.*, 
+               bg.image_url as bg_image_url_ext, bpi.image_url as profile_image_url_ext,
+                COALESCE(b.avg_rating, 0) as avg_rating,
+                COALESCE(b.count_of_rating, 0) as count_of_rating,
+                COALESCE(b.sum_of_rating, 0) as sum_of_rating,
+                b.*
+            FROM tbl_dir d
+            LEFT JOIN tbl_business_rating_summary b 
+                ON d.gid = b.business_guid
+            LEFT JOIN tbl_business_profile_bg bg 
+            	ON d.gid = bg.business_guid
+            LEFT JOIN tbl_business_profile_image bpi
+            	ON d.gid = bpi.business_guid
+            WHERE d.city_id RLIKE ?
+            ORDER BY d.title
+            LIMIT ?;
+    `, [cityId, limit]);
+    console.log("me");
+    if (rows.length === 0) {
+      return DoResponse(rows, 200);
+    }
+    return DoResponse(rows, 200);
+  } catch (error) {
+    return DoResponse({ error: error.message }, 500);
+  }
+};
+const route76 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  loader: loader$S
+}, Symbol.toStringTag, { value: "Module" }));
+const loader$R = async ({ params }) => {
   try {
     const category = params.category;
     const limitRaw = params.limit;
@@ -21618,11 +27183,11 @@ const loader$B = async ({ params }) => {
     return DoResponse({ error: error.message }, 500);
   }
 };
-const route70 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route77 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  loader: loader$B
+  loader: loader$R
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$A = async ({ params }) => {
+const loader$Q = async ({ params }) => {
   try {
     const category = params.category;
     const limitRaw = params.limit;
@@ -21716,11 +27281,11 @@ const loader$A = async ({ params }) => {
     return DoResponse({ error: error.message }, 500);
   }
 };
-const route71 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route78 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  loader: loader$A
+  loader: loader$Q
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$z = async ({ params }) => {
+const loader$P = async ({ params }) => {
   try {
     const category = params.category;
     const limitRaw = params.limit;
@@ -21812,11 +27377,11 @@ const loader$z = async ({ params }) => {
     return DoResponse({ error: error.message }, 500);
   }
 };
-const route72 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route79 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  loader: loader$z
+  loader: loader$P
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$y = async ({ request, params }) => {
+const loader$O = async ({ request, params }) => {
   const businessGuid = params.business_guid;
   try {
     const rawdata = await query(`SELECT * FROM tbl_business_gallery_image 
@@ -21828,11 +27393,11 @@ const loader$y = async ({ request, params }) => {
     return DoResponse({ "error": error.message }, 500);
   }
 };
-const route73 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route80 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  loader: loader$y
+  loader: loader$O
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$x = async ({ request, params }) => {
+const loader$N = async ({ request, params }) => {
   if (request.method === "GET") {
     const guid = params.guid;
     const rows = await query(
@@ -21842,16 +27407,16 @@ const loader$x = async ({ request, params }) => {
       [guid]
     );
     if (rows.length <= 0) {
-      return DoResponse([{}], 200);
+      return DoResponse(null, 200);
     }
     return DoResponse(rows[0], 200);
   }
 };
-const route74 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route81 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  loader: loader$x
+  loader: loader$N
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$w = async ({ request, params }) => {
+const loader$M = async ({ request, params }) => {
   if (request.method === "GET") {
     const guid = params.guid;
     const rows = await query(
@@ -21866,11 +27431,11 @@ const loader$w = async ({ request, params }) => {
     return DoResponse(rows[0], 200);
   }
 };
-const route75 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route82 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  loader: loader$w
+  loader: loader$M
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$v = async ({ request, params }) => {
+const loader$L = async ({ request, params }) => {
   try {
     const url = new URL(request.url);
     let criteria = url.searchParams.get("q");
@@ -21982,10 +27547,10 @@ const loader$v = async ({ request, params }) => {
                 LIMIT 50;
 `, [criteria, criteria, criteria, criteria, criteria, criteria, criteria, criteria, owner]);
     }
-    const listings = rawdata.map((listing) => {
-      delete listing.date_created;
-      delete listing.last_updated;
-      return listing;
+    const listings = rawdata.map((listing2) => {
+      delete listing2.date_created;
+      delete listing2.last_updated;
+      return listing2;
     });
     return DoResponse(listings, 200);
   } catch (error) {
@@ -21993,17 +27558,17 @@ const loader$v = async ({ request, params }) => {
     return DoResponse({ "error": error.message }, 500);
   }
 };
-const route76 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route83 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  loader: loader$v
+  loader: loader$L
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$u = async ({ request, params }) => {
+const loader$K = async ({ request, params }) => {
   return DoResponse({
     success: false,
     message: "method not allowed"
   }, 405);
 };
-const action$a = async ({ request, params }) => {
+const action$l = async ({ request, params }) => {
   const contentType = request.headers.get("Content-Type");
   if (contentType !== "application/json") {
     return DoResponse({ error: "Invalid content type. Expected JSON." }, 405);
@@ -22058,12 +27623,12 @@ const action$a = async ({ request, params }) => {
     }
   }
 };
-const route77 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route84 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  action: action$a,
-  loader: loader$u
+  action: action$l,
+  loader: loader$K
 }, Symbol.toStringTag, { value: "Module" }));
-async function action$9({ request, params }) {
+async function action$k({ request, params }) {
   if (request.method === "POST") {
     try {
       const contentType = request.headers.get("Content-Type");
@@ -22105,11 +27670,11 @@ async function action$9({ request, params }) {
     }
   }
 }
-const route78 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route85 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  action: action$9
+  action: action$k
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$t = async ({ request, params }) => {
+const loader$J = async ({ request, params }) => {
   try {
     const url = new URL(request.url);
     let criteria = url.searchParams.get("q");
@@ -22121,10 +27686,10 @@ const loader$t = async ({ request, params }) => {
     }
     let rawdata = null;
     rawdata = await query(`SELECT * FROM tbl_dir WHERE title RLIKE ? AND owner = ?`, [criteria, userGuid]);
-    const listings = rawdata.map((listing) => {
-      delete listing.date_created;
-      delete listing.last_updated;
-      return listing;
+    const listings = rawdata.map((listing2) => {
+      delete listing2.date_created;
+      delete listing2.last_updated;
+      return listing2;
     });
     return DoResponse(listings, 200);
   } catch (error) {
@@ -22132,11 +27697,11 @@ const loader$t = async ({ request, params }) => {
     return DoResponse({ "error": error.message }, 500);
   }
 };
-const route79 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route86 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  loader: loader$t
+  loader: loader$J
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$s = async ({ request, params }) => {
+const loader$I = async ({ request, params }) => {
   try {
     const url = new URL(request.url);
     let criteria = url.searchParams.get("q");
@@ -22147,10 +27712,10 @@ const loader$s = async ({ request, params }) => {
     }
     let rawdata = null;
     rawdata = await query(`SELECT * FROM tbl_user WHERE email RLIKE ?`, [criteria]);
-    const listings = rawdata.map((listing) => {
-      delete listing.date_created;
-      delete listing.last_updated;
-      return listing;
+    const listings = rawdata.map((listing2) => {
+      delete listing2.date_created;
+      delete listing2.last_updated;
+      return listing2;
     });
     return DoResponse(listings, 200);
   } catch (error) {
@@ -22158,11 +27723,11 @@ const loader$s = async ({ request, params }) => {
     return DoResponse({ "error": error.message }, 500);
   }
 };
-const route80 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route87 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  loader: loader$s
+  loader: loader$I
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$r = async ({ request, params }) => {
+const loader$H = async ({ request, params }) => {
   const contentType = request.headers.get("Content-Type");
   if (contentType !== "application/json") {
     return new Response(JSON.stringify({ error: "Invalid content type. Expected JSON." }));
@@ -22192,14 +27757,13 @@ const loader$r = async ({ request, params }) => {
             business_guid = ?
             `, [userGuid, businessGuid]);
     }
-    console.log(rows[0]);
     return DoResponse(rows[0], 200);
   } catch (error) {
     console.log(error.message);
     return DoResponse({ "error": error.message }, 500);
   }
 };
-const action$8 = async ({ request, params }) => {
+const action$j = async ({ request, params }) => {
   const contentType = request.headers.get("Content-Type");
   if (contentType !== "application/json") {
     return DoResponse(
@@ -22345,12 +27909,12 @@ const action$8 = async ({ request, params }) => {
     message: "method not allowed"
   }, 405);
 };
-const route81 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route88 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  action: action$8,
-  loader: loader$r
+  action: action$j,
+  loader: loader$H
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$q = async ({ request, params }) => {
+const loader$G = async ({ request, params }) => {
   request.headers.get("Content-Type");
   const buid = params.business_guid;
   const user_guid = params.user_guid;
@@ -22368,11 +27932,223 @@ const loader$q = async ({ request, params }) => {
     return DoResponse({ "error": error.message }, 500);
   }
 };
-const route82 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route89 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  loader: loader$q
+  loader: loader$G
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$p = async ({ request, params }) => {
+const loader$F = async ({ request, params }) => {
+  try {
+    const services = await query(`SELECT * FROM tbl_facilities 
+                `, []);
+    return DoResponse(services, 200);
+  } catch (error) {
+    return DoResponse({ "error": error.message }, 500);
+  }
+};
+async function action$i({ request, params }) {
+  if (request.method === "POST") {
+    const body = await request.json();
+    try {
+      if (!body.facility_id) {
+        return new Response(JSON.stringify({ message: "Missing Facility ID" }), { status: 400 });
+      }
+      if (!body.facility_description) {
+        return new Response(JSON.stringify({ message: "Missing Facility Description" }), { status: 400 });
+      }
+      const facility_guid = crypto.randomUUID();
+      const facility_hash = GenerateRandomHash();
+      const result = await query(
+        `INSERT INTO tbl_facilities SET 
+                        facility_id = ?, 
+                        facility_description = ?,
+                        facility_guid = ?, 
+                        user_guid = ?, 
+                        business_guid = ?, 
+                        facility_hash = ?
+                        `,
+        [
+          body.facility_id,
+          body.facility_description,
+          facility_guid,
+          body.user_guid,
+          body.business_guid,
+          facility_hash
+        ]
+      );
+      const data = {
+        message: "Facility created successfully",
+        data: body,
+        facility_guid,
+        facility_hash
+      };
+      return new Response(JSON.stringify(data), { status: 201 });
+    } catch (error) {
+      console.log(error.message);
+      return new Response(JSON.stringify({ message: error.message }), { status: 500 });
+    }
+  }
+}
+const route90 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  action: action$i,
+  loader: loader$F
+}, Symbol.toStringTag, { value: "Module" }));
+const loader$E = async ({ request, params }) => {
+  try {
+    let facility_guid = params.facility_guid;
+    const rawlisting = await query(`SELECT * FROM tbl_facilities WHERE facility_guid = ?`, [facility_guid]);
+    const facility = rawlisting[0];
+    return DoResponse(facility, 200);
+  } catch (error) {
+    console.log(error.message);
+    return DoResponse({ error: error.message }, 500);
+  }
+};
+async function action$h({ request, params }) {
+  if (request.method === "PUT") {
+    try {
+      {
+      }
+      const body = await request.json();
+      let facility_guid = params.facility_guid;
+      console.log(facility_guid);
+      {
+      }
+      const rawlisting = await query(`SELECT * FROM tbl_facilities WHERE facility_guid = ?`, [facility_guid]);
+      const facility = rawlisting[0];
+      if (rawlisting.length <= 0) {
+        return DoResponse({
+          success: false,
+          error: "Facility does not exist"
+        }, 400);
+      }
+      {
+      }
+      let facility_id = body.facility_id === void 0 ? facility.facility_id : body.facility_id;
+      let facility_description = body.facility_description === void 0 ? facility.facility_description : body.facility_description;
+      let sql = `UPDATE tbl_facilities SET
+                facility_id = '${facility_id}',
+                facility_description = '${facility_description}'
+                WHERE
+                facility_guid = '${facility_guid}'`;
+      const result = await query(
+        `UPDATE tbl_facilities SET
+                facility_id = ?,
+                facility_description = ?
+                WHERE
+                facility_guid = ?`,
+        [
+          facility_id,
+          facility_description,
+          facility_guid
+        ]
+      );
+      {
+      }
+      {
+      }
+      const _updatedFacility = await query(`SELECT * FROM tbl_facilities WHERE facility_guid = ?`, [facility_guid]);
+      const updatedFacility = _updatedFacility[0];
+      const data = {
+        success: true,
+        message: "Facility updated successfully",
+        data: updatedFacility
+      };
+      return DoResponse(data, 200);
+    } catch (error) {
+      console.log(error.message);
+      return DoResponse({ error: error.message }, 500);
+    }
+  }
+  if (request.method === "DELETE") {
+    let facility_guid = params.facility_guid;
+    await query(`DELETE FROM tbl_facilities WHERE facility_guid = ?`, [facility_guid]);
+    const data = {
+      success: true,
+      message: "Facility DELETED successfully",
+      id: facility_guid
+    };
+    return DoResponse(data, 200);
+  }
+}
+const route91 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  action: action$h,
+  loader: loader$E
+}, Symbol.toStringTag, { value: "Module" }));
+const loader$D = async ({ request, params }) => {
+  var _a;
+  try {
+    const business_guid = params.business_guid;
+    const user_guid = params.user_guid;
+    const url = new URL(request.url);
+    const page = parseInt(url.searchParams.get("page") || "1");
+    const limit = parseInt(url.searchParams.get("limit") || "10");
+    const offset = (page - 1) * limit;
+    if (page < 1) return DoResponse({ error: "Page must be greater than 0" }, 400);
+    if (limit < 1 || limit > 100) return DoResponse({ error: "Limit must be between 1 and 100" }, 400);
+    const countResult = await query(
+      `SELECT COUNT(*) as total FROM tbl_facilities 
+             WHERE business_guid = ? AND user_guid = ?`,
+      [business_guid, user_guid]
+    );
+    const total = ((_a = countResult[0]) == null ? void 0 : _a.total) || 0;
+    const totalPages = Math.ceil(total / limit);
+    const rawlisting = await query(
+      `SELECT * FROM tbl_facilities 
+             WHERE business_guid = ? AND user_guid = ?
+             ORDER BY created_at DESC
+             LIMIT ? OFFSET ?`,
+      [business_guid, user_guid, limit, offset]
+    );
+    const facilities = rawlisting;
+    return DoResponse({
+      data: facilities,
+      pagination: {
+        currentPage: page,
+        limit,
+        totalItems: total,
+        itemsPerPage: limit,
+        totalPages,
+        hasNext: page < totalPages,
+        hasPrev: page > 1,
+        offset
+      }
+    }, 200);
+  } catch (error) {
+    console.error("Loader Error:", error.message);
+    return DoResponse({ error: error.message }, 500);
+  }
+};
+async function action$g({ request, params }) {
+  return DoResponse({ "error": "method not allowed" }, 405);
+}
+const route92 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  action: action$g,
+  loader: loader$D
+}, Symbol.toStringTag, { value: "Module" }));
+const loader$C = async ({ request, params }) => {
+  request.headers.get("Content-Type");
+  try {
+    const rawdata = await query(`SELECT * FROM tbl_sys_facilities`);
+    const data = rawdata == null ? void 0 : rawdata.map((item, i) => {
+      return {
+        name: item.name,
+        id: item.facility_id,
+        description: item.description
+      };
+    });
+    return DoResponse(data, 200);
+  } catch (error) {
+    return DoResponse({ "error": error.message }, 500);
+  }
+};
+const route93 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  loader: loader$C
+}, Symbol.toStringTag, { value: "Module" }));
+const loader$B = async ({ request, params }) => {
   request.headers.get("Content-Type");
   params.buid;
   params.user_guid;
@@ -22384,11 +28160,11 @@ const loader$p = async ({ request, params }) => {
     return DoResponse({ "error": error.message }, 500);
   }
 };
-const route83 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route94 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  loader: loader$p
+  loader: loader$B
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$o = async ({ request, params }) => {
+const loader$A = async ({ request, params }) => {
   request.headers.get("Content-Type");
   const businessGuid = params.business_guid;
   const userGuid = params.user_guid;
@@ -22409,11 +28185,11 @@ const loader$o = async ({ request, params }) => {
     return DoResponse({ "error": error.message }, 500);
   }
 };
-const route84 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route95 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  loader: loader$o
+  loader: loader$A
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$n = async ({ request, params }) => {
+const loader$z = async ({ request, params }) => {
   request.headers.get("Content-Type");
   params.buid;
   params.user_guid;
@@ -22424,7 +28200,7 @@ const loader$n = async ({ request, params }) => {
     return DoResponse({ "error": error.message }, 500);
   }
 };
-async function action$7({ request, params }) {
+async function action$f({ request, params }) {
   const contentType = request.headers.get("Content-Type");
   if (contentType !== "application/json") {
     return new Response(JSON.stringify({ error: "Invalid content type. Expected JSON." }));
@@ -22470,28 +28246,228 @@ async function action$7({ request, params }) {
     }
   }
 }
-const route85 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route96 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  action: action$7,
-  loader: loader$n
+  action: action$f,
+  loader: loader$z
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$m = async ({ request, params }) => {
+const loader$y = async ({ request, params }) => {
+  try {
+    const services = await query(`SELECT * FROM tbl_social_media 
+                `, []);
+    return DoResponse(services, 200);
+  } catch (error) {
+    return DoResponse({ "error": error.message }, 500);
+  }
+};
+async function action$e({ request, params }) {
+  if (request.method === "POST") {
+    const body = await request.json();
+    try {
+      if (!body.social_media_code) {
+        return new Response(JSON.stringify({ message: "Missing Social Media Code" }), { status: 400 });
+      }
+      if (!body.social_media_identifier) {
+        return new Response(JSON.stringify({ message: "Missing Social Media Identifier" }), { status: 400 });
+      }
+      const social_media_guid = crypto.randomUUID();
+      const hash = GenerateRandomHash();
+      const result = await query(
+        `INSERT INTO tbl_social_media SET 
+                        social_media_code = ?, 
+                        social_media_identifier = ?,
+                        social_media_guid = ?, 
+                        user_guid = ?, 
+                        business_guid = ?, 
+                        social_media_hash = ?
+                        `,
+        [
+          body.social_media_code,
+          body.social_media_identifier,
+          social_media_guid,
+          body.user_guid,
+          body.business_guid,
+          hash
+        ]
+      );
+      const data = {
+        message: "Service created successfully",
+        data: body,
+        social_media_guid,
+        service_hash: hash
+      };
+      return new Response(JSON.stringify(data), { status: 201 });
+    } catch (error) {
+      console.log(error.message);
+      return new Response(JSON.stringify({ message: error.message }), { status: 500 });
+    }
+  }
+}
+const route97 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  action: action$e,
+  loader: loader$y
+}, Symbol.toStringTag, { value: "Module" }));
+const loader$x = async ({ request, params }) => {
+  try {
+    let social_media_guid = params.social_media_guid;
+    const rawlisting = await query(`SELECT * FROM tbl_social_media WHERE 
+            social_media_guid = ?`, [social_media_guid]);
+    const social_medium = rawlisting[0];
+    return DoResponse(social_medium, 200);
+  } catch (error) {
+    console.log(error.message);
+    return DoResponse({ error: error.message }, 500);
+  }
+};
+async function action$d({ request, params }) {
+  if (request.method === "PUT") {
+    try {
+      {
+      }
+      const body = await request.json();
+      let social_media_guid = params.social_media_guid;
+      {
+      }
+      const rawlisting = await query(`SELECT * FROM tbl_social_media WHERE social_media_guid = ?`, [social_media_guid]);
+      const social_medium = rawlisting[0];
+      if (rawlisting.length <= 0) {
+        return DoResponse({
+          success: false,
+          error: "Social media entry does not exist"
+        }, 400);
+      }
+      {
+      }
+      let social_media_code = body.social_media_code === void 0 ? social_medium.social_media_code : body.social_media_code;
+      let social_media_identifier = body.social_media_identifier === void 0 ? social_medium.social_media_identifier : body.social_media_identifier;
+      let sql = `UPDATE tbl_social_media SET
+                social_media_code = '${social_media_code}',
+                social_media_identifier = '${social_media_identifier}',
+                WHERE
+                social_media_guid = '${social_media_guid}'`;
+      const result = await query(
+        `UPDATE tbl_social_media SET
+                social_media_code = ?,
+                social_media_identifier = ?
+                WHERE
+                social_media_guid = ?`,
+        [
+          social_media_code,
+          social_media_identifier,
+          social_media_guid
+        ]
+      );
+      {
+      }
+      {
+      }
+      const _updatedSocialMedium = await query(`SELECT * FROM tbl_social_media WHERE social_media_guid = ?`, [social_media_guid]);
+      const updatedSocialMedium = _updatedSocialMedium[0];
+      const data = {
+        success: true,
+        message: "Service updated successfully",
+        data: updatedSocialMedium
+      };
+      return DoResponse(data, 200);
+    } catch (error) {
+      console.log(error.message);
+      return DoResponse({ error: error.message }, 500);
+    }
+  }
+  if (request.method === "DELETE") {
+    let social_media_guid = params.social_media_guid;
+    await query(`DELETE FROM tbl_social_media WHERE social_media_guid = ?`, [social_media_guid]);
+    const data = {
+      success: true,
+      message: "Social Media DELETED successfully",
+      id: social_media_guid
+    };
+    return DoResponse(data, 200);
+  }
+}
+const route98 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  action: action$d,
+  loader: loader$x
+}, Symbol.toStringTag, { value: "Module" }));
+const loader$w = async ({ request, params }) => {
+  var _a;
+  try {
+    const business_guid = params.business_guid;
+    const user_guid = params.user_guid;
+    const url = new URL(request.url);
+    const page = parseInt(url.searchParams.get("page") || "1");
+    const limit = parseInt(url.searchParams.get("limit") || "10");
+    const offset = (page - 1) * limit;
+    if (page < 1) return DoResponse({ error: "Page must be greater than 0" }, 400);
+    if (limit < 1 || limit > 100) return DoResponse({ error: "Limit must be between 1 and 100" }, 400);
+    const countResult = await query(
+      `SELECT COUNT(*) as total FROM tbl_social_media 
+             WHERE business_guid = ? AND user_guid = ?`,
+      [business_guid, user_guid]
+    );
+    const total = ((_a = countResult[0]) == null ? void 0 : _a.total) || 0;
+    const totalPages = Math.ceil(total / limit);
+    const rawlisting = await query(
+      `SELECT * FROM tbl_social_media 
+             WHERE business_guid = ? AND user_guid = ?
+             ORDER BY created_at DESC
+             LIMIT ? OFFSET ?`,
+      [business_guid, user_guid, limit, offset]
+    );
+    const social_media = rawlisting;
+    return DoResponse({
+      data: social_media,
+      pagination: {
+        currentPage: page,
+        limit,
+        totalItems: total,
+        itemsPerPage: limit,
+        totalPages,
+        hasNext: page < totalPages,
+        hasPrev: page > 1,
+        offset
+      }
+    }, 200);
+  } catch (error) {
+    console.error("Loader Error:", error.message);
+    return DoResponse({ error: error.message }, 500);
+  }
+};
+async function action$c({ request, params }) {
+  return DoResponse({ "error": "method not allowed" }, 405);
+}
+const route99 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  action: action$c,
+  loader: loader$w
+}, Symbol.toStringTag, { value: "Module" }));
+const loader$v = async ({ request, params }) => {
   request.headers.get("Content-Type");
   params.buid;
   params.user_guid;
   try {
     const rawdata = await query(`SELECT * FROM tbl_sys_social_media`);
     console.log(rawdata);
-    return DoResponse(rawdata, 200);
+    const data = rawdata == null ? void 0 : rawdata.map((item, i) => {
+      return {
+        name: item.name,
+        id: item.media_id,
+        base_url: item.base_url
+      };
+    });
+    console.log(data);
+    return DoResponse(data, 200);
   } catch (error) {
     return DoResponse({ "error": error.message }, 500);
   }
 };
-const route86 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route100 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  loader: loader$m
+  loader: loader$v
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$l = async ({ request, params }) => {
+const loader$u = async ({ request, params }) => {
   request.headers.get("Content-Type");
   const businessGuid = params.business_guid;
   const userGuid = params.user_guid;
@@ -22512,11 +28488,11 @@ const loader$l = async ({ request, params }) => {
     return DoResponse({ "error": error.message }, 500);
   }
 };
-const route87 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route101 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  loader: loader$l
+  loader: loader$u
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$k = async ({ request, params }) => {
+const loader$t = async ({ request, params }) => {
   request.headers.get("Content-Type");
   params.buid;
   params.user_guid;
@@ -22527,7 +28503,7 @@ const loader$k = async ({ request, params }) => {
     return DoResponse({ "error": error.message }, 500);
   }
 };
-async function action$6({ request, params }) {
+async function action$b({ request, params }) {
   const contentType = request.headers.get("Content-Type");
   if (contentType !== "application/json") {
     return new Response(JSON.stringify({ error: "Invalid content type. Expected JSON." }));
@@ -22573,23 +28549,29 @@ async function action$6({ request, params }) {
     }
   }
 }
-const route88 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route102 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  action: action$6,
-  loader: loader$k
+  action: action$b,
+  loader: loader$t
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$j = async ({ request, params }) => {
+const loader$s = async ({ request, params }) => {
   request.headers.get("Content-Type");
   const businessGuid = params.business_guid;
   try {
     const rawdata = await query(
       `SELECT 
-            a.media_id, b.description, a.user_description, 
-            a.business_guid, b.name, b.base_url, b.media_icon
+            a.social_media_guid, 
+            a.social_media_code,
+            a.social_media_identifier, 
+            a.business_guid,
+            b.base_url, 
+            b.name as social_media_name, 
+            b.base_url
             FROM 
-            tbl_selected_social_media a, tbl_sys_social_media b 
-            WHERE a.media_id = b.media_id 
-            AND
+            tbl_social_media a 
+            INNER JOIN 
+                tbl_sys_social_media b ON a.social_media_code = b.media_id 
+            WHERE
             a.business_guid = ?`,
       [
         businessGuid
@@ -22600,11 +28582,11 @@ const loader$j = async ({ request, params }) => {
     return DoResponse({ "error": error.message }, 500);
   }
 };
-const route89 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route103 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  loader: loader$j
+  loader: loader$s
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$i = async ({ request, params }) => {
+const loader$r = async ({ request, params }) => {
   request.headers.get("Content-Type");
   const businessGuid = params.business_guid;
   const userGuid = params.user_guid;
@@ -22620,7 +28602,7 @@ const loader$i = async ({ request, params }) => {
     return DoResponse({ "error": error.message }, 500);
   }
 };
-const action$5 = async ({ request, params }) => {
+const action$a = async ({ request, params }) => {
   const contentType = request.headers.get("Content-Type");
   if (contentType !== "application/json") {
     return DoResponse(
@@ -22641,13 +28623,13 @@ const action$5 = async ({ request, params }) => {
                 owner = ?
                 AND
                 gid = ?`, [userGuid, businessGuid]);
-      const listing = listings[0];
+      const listing2 = listings[0];
       if (listings.length <= 0) {
         return DoResponse({ error: "Business does not exist" }, 400);
       }
       {
       }
-      let active = body.active === void 0 ? listing.active : body.active;
+      let active = body.active === void 0 ? listing2.active : body.active;
       const result = await query(
         `UPDATE tbl_dir SET
                 active_status = ? 
@@ -22675,12 +28657,12 @@ const action$5 = async ({ request, params }) => {
     message: "method not allowed"
   }, 405);
 };
-const route90 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route104 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  action: action$5,
-  loader: loader$i
+  action: action$a,
+  loader: loader$r
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$h = async ({ request, params }) => {
+const loader$q = async ({ request, params }) => {
   try {
     const rows = await query(`SELECT 
             d.*, 
@@ -22701,26 +28683,26 @@ const loader$h = async ({ request, params }) => {
     if (rows.length <= 0) {
       return DoResponse({}, 200);
     }
-    const listings = rows.map((listing) => {
-      return listing;
+    const listings = rows.map((listing2) => {
+      return listing2;
     });
     return DoResponse(listings, 200);
   } catch (error) {
     return DoResponse({ "error": error.message }, 500);
   }
 };
-const action$4 = async ({ request, params }) => {
+const action$9 = async ({ request, params }) => {
   return DoResponse({
     success: false,
     message: "method not allowed"
   }, 405);
 };
-const route91 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route105 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  action: action$4,
-  loader: loader$h
+  action: action$9,
+  loader: loader$q
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$g = async ({ request, params }) => {
+const loader$p = async ({ request, params }) => {
   const businessGuid = params.business_guid;
   const userGuid = params.user_guid;
   try {
@@ -22739,7 +28721,7 @@ const loader$g = async ({ request, params }) => {
     return DoResponse({ "error": error.message }, 500);
   }
 };
-async function action$3({ request }) {
+async function action$8({ request }) {
   if (request.method === "POST") {
     try {
       const body = await request.json();
@@ -22881,12 +28863,12 @@ async function action$3({ request }) {
   }
   return DoResponse({ message: "method not allowed" }, 200);
 }
-const route92 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route106 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  action: action$3,
-  loader: loader$g
+  action: action$8,
+  loader: loader$p
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$f = async ({ request, params }) => {
+const loader$o = async ({ request, params }) => {
   const businessGuid = params.business_guid;
   const userGuid = params.user_guid;
   try {
@@ -22905,7 +28887,7 @@ const loader$f = async ({ request, params }) => {
     return DoResponse({ "error": error.message }, 500);
   }
 };
-async function action$2({ request }) {
+async function action$7({ request }) {
   if (request.method === "POST") {
     try {
       const body = await request.json();
@@ -22949,12 +28931,12 @@ async function action$2({ request }) {
   }
   return DoResponse({ message: "method not allowed" }, 200);
 }
-const route93 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route107 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  action: action$2,
-  loader: loader$f
+  action: action$7,
+  loader: loader$o
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$e = async ({ request, params }) => {
+const loader$n = async ({ request, params }) => {
   const businessGuid = params.business_guid;
   try {
     const rawdata = await query(`SELECT * FROM tbl_business_gallery_video 
@@ -22970,11 +28952,11 @@ const loader$e = async ({ request, params }) => {
     return DoResponse({ "error": error.message }, 500);
   }
 };
-const route94 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route108 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  loader: loader$e
+  loader: loader$n
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$d = async ({ request, params }) => {
+const loader$m = async ({ request, params }) => {
   const userGuid = params.user_guid;
   const businessGuid = params.business_guid;
   try {
@@ -22989,15 +28971,268 @@ const loader$d = async ({ request, params }) => {
     return DoResponse({ "error": error.message }, 500);
   }
 };
-async function action$1({ request }) {
+async function action$6({ request }) {
   return DoResponse({ message: "method not allowed" }, 200);
 }
-const route95 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route109 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  action: action$1,
-  loader: loader$d
+  action: action$6,
+  loader: loader$m
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$c = async ({ request, params }) => {
+const loader$l = async ({ request, params }) => {
+  var _a;
+  try {
+    const business_guid = params.business_guid;
+    const user_guid = params.user_guid;
+    const url = new URL(request.url);
+    const page = parseInt(url.searchParams.get("page") || "1");
+    const limit = parseInt(url.searchParams.get("limit") || "10");
+    const offset = (page - 1) * limit;
+    if (page < 1) return DoResponse({ error: "Page must be greater than 0" }, 400);
+    if (limit < 1 || limit > 100) return DoResponse({ error: "Limit must be between 1 and 100" }, 400);
+    const countResult = await query(
+      `SELECT COUNT(*) as total FROM tbl_services 
+             WHERE business_guid = ? AND user_guid = ?`,
+      [business_guid, user_guid]
+    );
+    const total = ((_a = countResult[0]) == null ? void 0 : _a.total) || 0;
+    const totalPages = Math.ceil(total / limit);
+    const rawlisting = await query(
+      `SELECT * FROM tbl_services 
+             WHERE business_guid = ? AND user_guid = ?
+             ORDER BY created_at DESC
+             LIMIT ? OFFSET ?`,
+      [business_guid, user_guid, limit, offset]
+    );
+    const services = rawlisting;
+    return DoResponse({
+      data: services,
+      pagination: {
+        currentPage: page,
+        limit,
+        totalItems: total,
+        itemsPerPage: limit,
+        totalPages,
+        hasNext: page < totalPages,
+        hasPrev: page > 1,
+        offset
+      }
+    }, 200);
+  } catch (error) {
+    console.error("Loader Error:", error.message);
+    return DoResponse({ error: error.message }, 500);
+  }
+};
+async function action$5({ request, params }) {
+  return DoResponse({ "error": "method not allowed" }, 405);
+}
+const route110 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  action: action$5,
+  loader: loader$l
+}, Symbol.toStringTag, { value: "Module" }));
+const loader$k = async ({ request, params }) => {
+  try {
+    const services = await query(`SELECT * FROM tbl_services 
+                `, []);
+    return DoResponse(services, 200);
+  } catch (error) {
+    return DoResponse({ "error": error.message }, 500);
+  }
+};
+async function action$4({ request, params }) {
+  if (request.method === "POST") {
+    const body = await request.json();
+    try {
+      if (!body.service_name) {
+        return new Response(JSON.stringify({ message: "Missing Service Name" }), { status: 400 });
+      }
+      if (!body.service_description) {
+        return new Response(JSON.stringify({ message: "Missing Service Description" }), { status: 400 });
+      }
+      const service_guid = crypto.randomUUID();
+      const hash = GenerateRandomHash();
+      console.log(body.service_url);
+      const result = await query(
+        `INSERT INTO tbl_services SET 
+                        service_name = ?, 
+                        service_description = ?,
+                        service_url = ?,
+                        service_guid = ?, 
+                        user_guid = ?, 
+                        business_guid = ?, 
+                        service_hash = ?
+                        `,
+        [
+          body.service_name,
+          body.service_description,
+          body.service_url,
+          service_guid,
+          body.user_guid,
+          body.business_guid,
+          hash
+        ]
+      );
+      const data = {
+        message: "Service created successfully",
+        data: body,
+        service_guid,
+        service_hash: hash
+      };
+      return new Response(JSON.stringify(data), { status: 201 });
+    } catch (error) {
+      console.log(error.message);
+      return new Response(JSON.stringify({ message: error.message }), { status: 500 });
+    }
+  }
+}
+const route111 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  action: action$4,
+  loader: loader$k
+}, Symbol.toStringTag, { value: "Module" }));
+const loader$j = async ({ request, params }) => {
+  try {
+    let service_guid = params.service_guid;
+    const rawlisting = await query(`SELECT * FROM tbl_services WHERE service_guid = ?`, [service_guid]);
+    const service = rawlisting[0];
+    return DoResponse(service, 200);
+  } catch (error) {
+    console.log(error.message);
+    return DoResponse({ error: error.message }, 500);
+  }
+};
+async function action$3({ request, params }) {
+  if (request.method === "PUT") {
+    try {
+      {
+      }
+      const body = await request.json();
+      let service_guid = params.service_guid;
+      console.log(service_guid);
+      {
+      }
+      const rawlisting = await query(`SELECT * FROM tbl_services WHERE service_guid = ?`, [service_guid]);
+      const service = rawlisting[0];
+      if (rawlisting.length <= 0) {
+        return new Response(
+          JSON.stringify({
+            success: false,
+            error: "Service does not exist"
+          }),
+          { status: 400 }
+        );
+      }
+      {
+      }
+      let service_name = body.service_name === void 0 ? service.service_name : body.service_name;
+      let service_description = body.service_description === void 0 ? service.service_description : body.service_description;
+      let service_url = body.service_url === void 0 ? service.service_url : body.service_url;
+      let sql = `UPDATE tbl_services SET
+                service_name = '${service_name}',
+                service_description = '${service_description}',
+                service_url = '${service_url}',
+                WHERE
+                service_guid = '${service_guid}'`;
+      const result = await query(
+        `UPDATE tbl_services SET
+                service_name = ?,
+                service_description = ?,
+                service_url = ?
+                WHERE
+                service_guid = ?`,
+        [
+          service_name,
+          service_description,
+          service_url,
+          service_guid
+        ]
+      );
+      {
+      }
+      {
+      }
+      const _updatedService = await query(`SELECT * FROM tbl_services WHERE service_guid = ?`, [service_guid]);
+      const updatedService = _updatedService[0];
+      const data = {
+        success: true,
+        message: "Service updated successfully",
+        data: updatedService
+      };
+      return DoResponse(data, 200);
+    } catch (error) {
+      console.log(error.message);
+      return DoResponse({ error: error.message }, 500);
+    }
+  }
+  if (request.method === "DELETE") {
+    let service_guid = params.service_guid;
+    await query(`DELETE FROM tbl_services WHERE service_guid = ?`, [service_guid]);
+    const data = {
+      success: true,
+      message: "Service DELETED successfully",
+      id: service_guid
+    };
+    return DoResponse(data, 200);
+  }
+}
+const route112 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  action: action$3,
+  loader: loader$j
+}, Symbol.toStringTag, { value: "Module" }));
+const loader$i = async ({ request, params }) => {
+  var _a;
+  try {
+    const business_guid = params.business_guid;
+    const url = new URL(request.url);
+    const page = parseInt(url.searchParams.get("page") || "1");
+    const limit = parseInt(url.searchParams.get("limit") || "10");
+    const offset = (page - 1) * limit;
+    if (page < 1) return DoResponse({ error: "Page must be greater than 0" }, 400);
+    if (limit < 1 || limit > 100) return DoResponse({ error: "Limit must be between 1 and 100" }, 400);
+    const countResult = await query(
+      `SELECT COUNT(*) as total FROM tbl_services 
+             WHERE business_guid = ?`,
+      [business_guid]
+    );
+    const total = ((_a = countResult[0]) == null ? void 0 : _a.total) || 0;
+    const totalPages = Math.ceil(total / limit);
+    const rawlisting = await query(
+      `SELECT * FROM tbl_services 
+             WHERE business_guid = ?
+             ORDER BY created_at DESC
+             LIMIT ? OFFSET ?`,
+      [business_guid, limit, offset]
+    );
+    const services = rawlisting;
+    return DoResponse({
+      data: services,
+      pagination: {
+        currentPage: page,
+        limit,
+        totalItems: total,
+        itemsPerPage: limit,
+        totalPages,
+        hasNext: page < totalPages,
+        hasPrev: page > 1,
+        offset
+      }
+    }, 200);
+  } catch (error) {
+    console.error("Loader Error:", error.message);
+    return DoResponse({ error: error.message }, 500);
+  }
+};
+async function action$2({ request, params }) {
+  return DoResponse({ "error": "method not allowed" }, 405);
+}
+const route113 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  action: action$2,
+  loader: loader$i
+}, Symbol.toStringTag, { value: "Module" }));
+const loader$h = async ({ request, params }) => {
   var _a;
   const ITEMS_PER_PAGE = 20;
   try {
@@ -23066,7 +29301,21 @@ const loader$c = async ({ request, params }) => {
                     FROM tbl_selected_social_media sm
                     JOIN tbl_sys_social_media sysm ON sm.media_id = sysm.media_id
                     WHERE d.gid = sm.business_guid
-                ) AS social_media   
+                ) AS social_media,
+                (
+                    SELECT bpi3.image_url 
+                    FROM tbl_business_profile_image bpi3
+                    WHERE bpi3.business_guid = d.gid 
+                    ORDER BY bpi3.date_created DESC 
+                    LIMIT 1
+                ) AS profile_image_url_ext,
+                (
+                    SELECT bbg.image_url 
+                    FROM tbl_business_profile_bg bbg
+                    WHERE bbg.business_guid = d.gid 
+                    ORDER BY bbg.date_created DESC 
+                    LIMIT 1
+                ) AS bg_image_url_ext
                 
             FROM tbl_dir d
             LEFT JOIN tbl_country c ON d.country_code = c.iso2
@@ -23074,8 +29323,7 @@ const loader$c = async ({ request, params }) => {
             LEFT JOIN tbl_city ci ON d.city_id = ci.id
             WHERE d.category = ?
             ${searchParams.criteria ? `AND (d.title LIKE ? OR d.short_description LIKE ?)` : ""}
-            AND 
-            d.active_status = true
+            AND d.active_status = true
             ORDER BY ${sortColumn} ${sortOrder}
             LIMIT ? OFFSET ?
         `, [
@@ -23084,7 +29332,6 @@ const loader$c = async ({ request, params }) => {
       ITEMS_PER_PAGE,
       offset
     ]);
-    console.log(rawdata);
     const businessIds = rawdata.map((b) => b.gid);
     let operatingHours = {};
     if (businessIds.length > 0) {
@@ -23153,11 +29400,11 @@ const loader$c = async ({ request, params }) => {
     }, 500);
   }
 };
-const route96 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route114 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  loader: loader$c
+  loader: loader$h
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$b = async ({ request, params }) => {
+const loader$g = async ({ request, params }) => {
   var _a;
   const ITEMS_PER_PAGE = 20;
   request.headers.get("Content-Type");
@@ -23186,76 +29433,143 @@ const loader$b = async ({ request, params }) => {
     const totalCount = ((_a = countResult[0]) == null ? void 0 : _a.total_count) || 0;
     const totalPages = Math.ceil(totalCount / ITEMS_PER_PAGE);
     const rawdata = await query(`
-                SELECT
-                    d.rating_count,
-                    d.rating_average,
-                    d.username,
-                    d.gid,
-                    d.title,
-                    d.address_one,
-                    d.address_two,
-                    c.latitude,
-                    c.longitude,
-                    d.phone,
-                    d.email_address AS email_address,
-                    d.website,
-                    d.short_description AS short_description,
-                    d.category,
-                    d.country_code,
-                    d.state_code,
-                    d.city_id,
-                    d.date_created AS created_at,
-                    d.last_updated AS updated_at,
-                    ci.name AS city_name,
-                    s.name AS state_name,
-                    c.name AS country_name,
-                    (
-                        SELECT bpi2.image_url
-                        FROM tbl_business_profile_image bpi2
-                        WHERE bpi2.business_guid = d.gid
-                        ORDER BY bpi2.date_created DESC
-                        LIMIT 1
-                    ) AS image_url,
-                    (
-                        SELECT GROUP_CONCAT(
-                        CONCAT(sm.media_id, '$', sm.user_description, '$', sysm.base_url)
-                        SEPARATOR ', '
-                        )
-                        FROM tbl_selected_social_media sm
-                        JOIN tbl_sys_social_media sysm ON sm.media_id = sysm.media_id
-                        WHERE d.gid = sm.business_guid
-                    ) AS social_media,
-                    -- Use subquery for operating hours instead of JOIN
-                    (
-                        SELECT open_status FROM tbl_operating_hours
-                        WHERE business_guid = d.gid ORDER BY id DESC LIMIT 1
-                    ) as open_status,
-                    (
-                        SELECT no_hours_available FROM tbl_operating_hours
-                        WHERE business_guid = d.gid ORDER BY id DESC LIMIT 1
-                    ) as no_hours_available
-                    -- ... repeat for other oh columns or use JSON/concatenation
-                FROM tbl_dir d
-                LEFT JOIN tbl_country c ON d.country_code = c.iso2
-                LEFT JOIN tbl_state s ON d.state_code = s.iso2 AND d.country_code = s.country_code
-                LEFT JOIN tbl_city ci ON d.city_id = ci.id
-                WHERE d.category = ?
-                AND ci.name = ?
-                ${searchParams.criteria ? `AND (d.title LIKE ? OR d.short_description LIKE ?)` : ""}
-                AND d.active_status = true
-                -- NO GROUP BY NEEDED!
-                ORDER BY d.date_created DESC
-                LIMIT ? OFFSET ?
-            `, [
+            SELECT
+                d.id,
+                d.rating_total,
+                d.established,
+                d.rating_count,
+                d.rating_average,
+                d.username,
+                d.gid,
+                d.title,
+                d.address_one,
+                d.address_two,
+                c.latitude,
+                c.longitude,
+                d.phone,
+                d.email_address AS email_address,
+                d.website,
+                d.short_description AS short_description,
+                d.category,
+                d.country_code,
+                d.state_code,
+                d.city_id,
+                d.date_created AS created_at,
+                d.last_updated AS updated_at,
+                ci.name AS city_name,
+                s.name AS state_name,
+                c.name AS country_name,
+                (
+                    SELECT bpi2.image_url
+                    FROM tbl_business_profile_image bpi2
+                    WHERE bpi2.business_guid = d.gid
+                    ORDER BY bpi2.date_created DESC
+                    LIMIT 1
+                ) AS image_url,
+                (
+                    SELECT GROUP_CONCAT(
+                    CONCAT(sm.media_id, '$', sm.user_description, '$', sysm.base_url)
+                    SEPARATOR ', '
+                    )
+                    FROM tbl_selected_social_media sm
+                    JOIN tbl_sys_social_media sysm ON sm.media_id = sysm.media_id
+                    WHERE d.gid = sm.business_guid
+                ) AS social_media,
+                -- Use subquery for operating hours instead of JOIN
+                (
+                    SELECT open_status FROM tbl_operating_hours
+                    WHERE business_guid = d.gid ORDER BY id DESC LIMIT 1
+                ) as open_status,
+                (
+                    SELECT no_hours_available FROM tbl_operating_hours
+                    WHERE business_guid = d.gid ORDER BY id DESC LIMIT 1
+                ) as no_hours_available,
+                -- ADDED: Profile image
+                (
+                    SELECT bpi3.image_url 
+                    FROM tbl_business_profile_image bpi3
+                    WHERE bpi3.business_guid = d.gid 
+                    ORDER BY bpi3.date_created DESC 
+                    LIMIT 1
+                ) AS profile_image_url_ext,
+                -- ADDED: Background image
+                (
+                    SELECT bbg.image_url 
+                    FROM tbl_business_profile_bg bbg
+                    WHERE bbg.business_guid = d.gid 
+                    ORDER BY bbg.date_created DESC 
+                    LIMIT 1
+                ) AS bg_image_url_ext,
+                -- ADDED: More operating hours fields
+                (
+                    SELECT always_open FROM tbl_operating_hours
+                    WHERE business_guid = d.gid ORDER BY id DESC LIMIT 1
+                ) as always_open,
+                (
+                    SELECT permanently_closed FROM tbl_operating_hours
+                    WHERE business_guid = d.gid ORDER BY id DESC LIMIT 1
+                ) as permanently_closed,
+                (
+                    SELECT temporarily_closed FROM tbl_operating_hours
+                    WHERE business_guid = d.gid ORDER BY id DESC LIMIT 1
+                ) as temporarily_closed,
+                (
+                    SELECT open_selected_hours FROM tbl_operating_hours
+                    WHERE business_guid = d.gid ORDER BY id DESC LIMIT 1
+                ) as open_selected_hours
+            FROM tbl_dir d
+            LEFT JOIN tbl_country c ON d.country_code = c.iso2
+            LEFT JOIN tbl_state s ON d.state_code = s.iso2 AND d.country_code = s.country_code
+            LEFT JOIN tbl_city ci ON d.city_id = ci.id
+            WHERE d.category = ?
+            AND ci.name = ?
+            ${searchParams.criteria ? `AND (d.title LIKE ? OR d.short_description LIKE ?)` : ""}
+            AND d.active_status = true
+            ORDER BY d.date_created DESC
+            LIMIT ? OFFSET ?
+        `, [
       category,
       city,
       ...searchParams.criteria ? [`%${searchParams.criteria}%`, `%${searchParams.criteria}%`] : [],
       ITEMS_PER_PAGE,
       offset
     ]);
+    const businessIds = rawdata.map((b) => b.gid);
+    let operatingHours = {};
+    if (businessIds.length > 0) {
+      const ohResult = await query(`
+                SELECT 
+                    business_guid,
+                    MAX(monday_from) as monday_from,
+                    MAX(monday_to) as monday_to,
+                    MAX(tuesday_from) as tuesday_from,
+                    MAX(tuesday_to) as tuesday_to,
+                    MAX(wednesday_from) as wednesday_from,
+                    MAX(wednesday_to) as wednesday_to,
+                    MAX(thursday_from) as thursday_from,
+                    MAX(thursday_to) as thursday_to,
+                    MAX(friday_from) as friday_from,
+                    MAX(friday_to) as friday_to,
+                    MAX(saturday_from) as saturday_from,
+                    MAX(saturday_to) as saturday_to,
+                    MAX(sunday_from) as sunday_from,
+                    MAX(sunday_to) as sunday_to
+                FROM tbl_operating_hours
+                WHERE business_guid IN (?)
+                GROUP BY business_guid
+            `, [businessIds]);
+      operatingHours = ohResult.reduce((acc, oh) => {
+        acc[oh.business_guid] = oh;
+        return acc;
+      }, {});
+    }
+    const combinedData = rawdata.map((business) => ({
+      ...business,
+      ...operatingHours[business.gid] || {}
+    }));
     return DoResponse({
       success: true,
-      data: rawdata,
+      data: combinedData,
       pagination: {
         current_page: searchParams.page,
         items_per_page: ITEMS_PER_PAGE,
@@ -23274,14 +29588,18 @@ const loader$b = async ({ request, params }) => {
     }, 200);
   } catch (error) {
     console.error("Search error:", error.message);
-    return DoResponse({ error: "Internal server error" }, 500);
+    return DoResponse({
+      success: false,
+      error: "Internal server error",
+      message: process.env.NODE_ENV === "development" ? error.message : void 0
+    }, 500);
   }
 };
-const route97 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route115 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  loader: loader$b
+  loader: loader$g
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$a = async ({}) => {
+const loader$f = async ({}) => {
   try {
     const rawdata = await query(`SELECT DISTINCT 
             d.category,
@@ -23294,11 +29612,11 @@ const loader$a = async ({}) => {
     return DoResponse({ "error": error.message }, 500);
   }
 };
-const route98 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route116 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  loader: loader$a
+  loader: loader$f
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$9 = async ({}) => {
+const loader$e = async ({}) => {
   try {
     const rawdata = await query(`SELECT DISTINCT 
             d.category
@@ -23308,17 +29626,17 @@ const loader$9 = async ({}) => {
     return DoResponse({ "error": error.message }, 500);
   }
 };
-const route99 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route117 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  loader: loader$9
+  loader: loader$e
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$8 = async ({ request, params }) => {
+const loader$d = async ({ request, params }) => {
   return DoResponse({
     success: false,
     message: "method not allowed"
   }, 405);
 };
-async function action({ request }) {
+async function action$1({ request }) {
   const contentType = request.headers.get("Content-Type");
   if (contentType !== "application/json") {
     return DoResponse({ error: "Invalid content type. Expected JSON." }, 500);
@@ -23371,7 +29689,6 @@ async function action({ request }) {
       if (rows.length > 0) {
         {
         }
-        console.log("here");
         const result = await query(
           `UPDATE tbl_rating 
                     SET 
@@ -23500,12 +29817,12 @@ async function action({ request }) {
   }
   return DoResponse({ error: "method not allowed" }, 200);
 }
-const route100 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route118 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  action,
-  loader: loader$8
+  action: action$1,
+  loader: loader$d
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$7 = async ({ request, params }) => {
+const loader$c = async ({ request, params }) => {
   const contentType = request.headers.get("Content-Type");
   if (contentType !== "application/json") {
     return new Response(JSON.stringify({ error: "Invalid content type. Expected JSON." }));
@@ -23527,11 +29844,11 @@ const loader$7 = async ({ request, params }) => {
     return DoResponse({ "error": error.message }, 500);
   }
 };
-const route101 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route119 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  loader: loader$7
+  loader: loader$c
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$6 = async ({ request, params }) => {
+const loader$b = async ({ request, params }) => {
   try {
     const businessGuid = params.business_guid;
     const rows = await query(`
@@ -23563,11 +29880,11 @@ const loader$6 = async ({ request, params }) => {
     return DoResponse({ "error": error.message }, 500);
   }
 };
-const route102 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route120 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  loader: loader$6
+  loader: loader$b
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$5 = async ({ request, params }) => {
+const loader$a = async ({ request, params }) => {
   try {
     const businessGuid = params.business_guid;
     const rows = await query(
@@ -23586,11 +29903,457 @@ const loader$5 = async ({ request, params }) => {
     return DoResponse({ "error": error.message }, 500);
   }
 };
-const route103 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route121 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  loader: loader$5
+  loader: loader$a
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$4 = async ({ request, params }) => {
+const loader$9 = async ({ request, params }) => {
+  return DoResponse({
+    success: false,
+    message: "method not allowed"
+  }, 405);
+};
+const computeRatings = (rate, received) => {
+  let business_avg_rating = (rate == null ? void 0 : rate.avg_rating) || 0;
+  let business_sum_of_rating = (rate == null ? void 0 : rate.sum_of_rating) || 0;
+  let old_count = (rate == null ? void 0 : rate.count_of_rating) || 0;
+  let new_count = old_count + 1;
+  console.log(`here ${new_count} = ${old_count}`);
+  let new_sum_of_rating = Number(business_sum_of_rating) + Number(received.avg_rating);
+  console.log(new_sum_of_rating);
+  let new_business_avg_rating = new_sum_of_rating / new_count;
+  let business_avg_communication = (rate == null ? void 0 : rate.avg_communication) || 0;
+  let business_sum_of_communication = (rate == null ? void 0 : rate.sum_of_communication) || 0;
+  let new_sum_of_communication = Number(business_sum_of_communication) + Number(received.communication);
+  let new_communication_avg = new_sum_of_communication / new_count;
+  let business_avg_customer_service = (rate == null ? void 0 : rate.avg_customer_service) || 0;
+  let business_sum_of_customer_service = (rate == null ? void 0 : rate.sum_of_customer_service) || 0;
+  let new_sum_of_customer_service = Number(business_sum_of_customer_service) + Number(received.customer_service);
+  let new_customer_service_avg = new_sum_of_customer_service / new_count;
+  let business_avg_overall_satisfaction = (rate == null ? void 0 : rate.avg_overall_satisfaction) || 0;
+  let business_sum_of_overall_satisfaction = (rate == null ? void 0 : rate.sum_of_overall_satisfaction) || 0;
+  let new_sum_of_overall_satisfaction = Number(business_sum_of_overall_satisfaction) + Number(received.overall_satisfaction);
+  let new_overall_satisfaction_avg = new_sum_of_overall_satisfaction / new_count;
+  let business_avg_quality = (rate == null ? void 0 : rate.avg_quality) || 0;
+  let business_sum_of_quality = (rate == null ? void 0 : rate.sum_of_quality) || 0;
+  let new_sum_of_quality = Number(business_sum_of_quality) + Number(received.quality);
+  let new_quality_avg = new_sum_of_quality / new_count;
+  let business_avg_value = (rate == null ? void 0 : rate.avg_value) || 0;
+  let business_sum_of_value = (rate == null ? void 0 : rate.sum_of_value) || 0;
+  let new_sum_of_value = Number(business_sum_of_value) + Number(received.value);
+  let new_value_avg = new_sum_of_value / new_count;
+  const _existingSummaryInfo = {
+    business_avg_rating,
+    business_sum_of_rating,
+    old_count,
+    business_avg_quality,
+    business_sum_of_quality,
+    business_avg_communication,
+    business_sum_of_communication,
+    business_avg_customer_service,
+    business_sum_of_customer_service,
+    business_avg_value,
+    business_sum_of_value,
+    business_avg_overall_satisfaction,
+    business_sum_of_overall_satisfaction
+  };
+  const _newSummaryInfo = {
+    new_business_avg_rating,
+    new_sum_of_rating,
+    new_count,
+    new_quality_avg,
+    new_sum_of_quality,
+    new_communication_avg,
+    new_sum_of_communication,
+    new_customer_service_avg,
+    new_sum_of_customer_service,
+    new_value_avg,
+    new_sum_of_value,
+    new_overall_satisfaction_avg,
+    new_sum_of_overall_satisfaction
+  };
+  return {
+    _existingSummaryInfo,
+    _newSummaryInfo
+  };
+};
+const computeUpdateRatings = (rate, received, existingUserRating) => {
+  const existing_avg_rating = existingUserRating.avg_rating;
+  const existing_quality = existingUserRating.quality;
+  const existing_customer_service = existingUserRating.customer_service;
+  const existing_communication = existingUserRating.communication;
+  const existing_overall_satisfaction = existingUserRating.overall_satisfaction;
+  const existing_value = existingUserRating.value;
+  let business_avg_rating = (rate == null ? void 0 : rate.avg_rating) || 0;
+  let business_sum_of_rating = (rate == null ? void 0 : rate.sum_of_rating) || 0;
+  let old_count = (rate == null ? void 0 : rate.count_of_rating) || 0;
+  let new_count = old_count;
+  let new_sum_of_rating = Number(business_sum_of_rating) - Number(existing_avg_rating) + Number(received.avg_rating);
+  let new_business_avg_rating = new_sum_of_rating / new_count;
+  let business_avg_communication = (rate == null ? void 0 : rate.avg_communication) || 0;
+  let business_sum_of_communication = (rate == null ? void 0 : rate.sum_of_communication) || 0;
+  let new_sum_of_communication = Number(business_sum_of_communication) - Number(existing_communication) + Number(received.communication);
+  let new_communication_avg = new_sum_of_communication / new_count;
+  let business_avg_customer_service = (rate == null ? void 0 : rate.avg_customer_service) || 0;
+  let business_sum_of_customer_service = (rate == null ? void 0 : rate.sum_of_customer_service) || 0;
+  let new_sum_of_customer_service = Number(business_sum_of_customer_service) - Number(existing_customer_service) + Number(received.customer_service);
+  let new_customer_service_avg = new_sum_of_customer_service / new_count;
+  let business_avg_overall_satisfaction = (rate == null ? void 0 : rate.avg_overall_satisfaction) || 0;
+  let business_sum_of_overall_satisfaction = (rate == null ? void 0 : rate.sum_of_overall_satisfaction) || 0;
+  let new_sum_of_overall_satisfaction = Number(business_sum_of_overall_satisfaction) - Number(existing_overall_satisfaction) + Number(received.overall_satisfaction);
+  let new_overall_satisfaction_avg = new_sum_of_overall_satisfaction / new_count;
+  let business_avg_quality = (rate == null ? void 0 : rate.avg_quality) || 0;
+  let business_sum_of_quality = (rate == null ? void 0 : rate.sum_of_quality) || 0;
+  let new_sum_of_quality = Number(business_sum_of_quality) - Number(existing_quality) + Number(received.quality);
+  let new_quality_avg = new_sum_of_quality / new_count;
+  let business_avg_value = (rate == null ? void 0 : rate.avg_value) || 0;
+  let business_sum_of_value = (rate == null ? void 0 : rate.sum_of_value) || 0;
+  let new_sum_of_value = Number(business_sum_of_value) - Number(existing_value) + Number(received.value);
+  let new_value_avg = new_sum_of_value / new_count;
+  const _existingSummaryInfo = {
+    business_avg_rating,
+    business_sum_of_rating,
+    old_count,
+    business_avg_quality,
+    business_sum_of_quality,
+    business_avg_communication,
+    business_sum_of_communication,
+    business_avg_customer_service,
+    business_sum_of_customer_service,
+    business_avg_value,
+    business_sum_of_value,
+    business_avg_overall_satisfaction,
+    business_sum_of_overall_satisfaction
+  };
+  const _newSummaryInfo = {
+    new_business_avg_rating,
+    new_sum_of_rating,
+    new_count,
+    new_quality_avg,
+    new_sum_of_quality,
+    new_communication_avg,
+    new_sum_of_communication,
+    new_customer_service_avg,
+    new_sum_of_customer_service,
+    new_value_avg,
+    new_sum_of_value,
+    new_overall_satisfaction_avg,
+    new_sum_of_overall_satisfaction
+  };
+  return {
+    _existingSummaryInfo,
+    _newSummaryInfo
+  };
+};
+async function action({ request }) {
+  if (request.method === "POST") {
+    try {
+      const body = await request.json();
+      const user_guid = body.user_guid;
+      const business_guid = body.business_guid;
+      const communication = body.communication;
+      const customer_service = body.customer_service;
+      const experience = body.experience;
+      const overall_satisfaction = body.overall_satisfaction;
+      const quality = body.quality;
+      const title = body.title;
+      const value = body.value;
+      const avg_rating = (Number(quality) + Number(customer_service) + Number(communication) + Number(value) + Number(overall_satisfaction)) / 5;
+      const rating_guid = crypto.randomUUID();
+      const ratingExists = false;
+      const received = {
+        avg_rating,
+        business_guid,
+        communication,
+        customer_service,
+        experience,
+        overall_satisfaction,
+        quality,
+        title,
+        user_guid,
+        value,
+        rating_guid,
+        ratingExists
+      };
+      let esi;
+      let nsi;
+      {
+      }
+      const ratingInDB = await query(
+        `SELECT * FROM tbl_business_rating
+                    WHERE
+                    business_guid = ?
+                    AND
+                    user_guid = ?`,
+        [
+          received.business_guid,
+          received.user_guid
+        ]
+      );
+      if (ratingInDB.length > 0) {
+        received.ratingExists = true;
+        received.rating_guid = ratingInDB[0].rating_guid;
+      }
+      if (received.ratingExists === false) {
+        const result = await query(
+          `INSERT INTO tbl_business_rating 
+                    (business_guid, user_guid, communication, 
+                    customer_service, experience, overall_satisfaction, 
+                    quality, title, value, avg_rating, rating_guid)
+                    VALUES
+                    (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+          [
+            received.business_guid,
+            received.user_guid,
+            received.communication,
+            received.customer_service,
+            received.experience,
+            received.overall_satisfaction,
+            received.quality,
+            received.title,
+            received.value,
+            received.avg_rating,
+            received.rating_guid
+          ]
+        );
+        const existingSummary = await query(
+          `SELECT * FROM tbl_business_rating_summary
+                    WHERE
+                    business_guid = ?`,
+          [
+            received.business_guid
+          ]
+        );
+        let existsInSummary = false;
+        let ratingSummaryGuid;
+        if (existingSummary.length > 0) {
+          existsInSummary = true;
+          ratingSummaryGuid = existingSummary[0].rating_summary_guid;
+        }
+        const ratingSummary = existingSummary[0];
+        const { _existingSummaryInfo, _newSummaryInfo } = computeRatings(ratingSummary, received);
+        esi = _existingSummaryInfo;
+        nsi = _newSummaryInfo;
+        if (existsInSummary) {
+          const updateRatingSummary = await query(`UPDATE tbl_business_rating_summary 
+                        SET
+                        avg_rating = ?, 
+                        sum_of_rating = ?, 
+                        count_of_rating = ?,
+                        avg_communication = ?, 
+                        sum_of_communication = ?,
+                        avg_customer_service = ?, 
+                        sum_of_customer_service = ?, 
+                        avg_overall_satisfaction = ?, 
+                        sum_of_overall_satisfaction = ?,  
+                        avg_quality = ?, 
+                        sum_of_quality = ?,
+                        avg_value = ?, 
+                        sum_of_value = ? 
+                        WHERE 
+                        rating_summary_guid = ?
+                        `, [
+            nsi.new_business_avg_rating,
+            nsi.new_sum_of_rating,
+            nsi.new_count,
+            nsi.new_communication_avg,
+            nsi.new_sum_of_communication,
+            nsi.new_customer_service_avg,
+            nsi.new_sum_of_customer_service,
+            nsi.new_overall_satisfaction_avg,
+            nsi.new_sum_of_overall_satisfaction,
+            nsi.new_quality_avg,
+            nsi.new_sum_of_quality,
+            nsi.new_value_avg,
+            nsi.new_sum_of_value,
+            ratingSummaryGuid
+          ]);
+        } else {
+          const rating_summary_guid = crypto.randomUUID();
+          const newRateSummary = await query(
+            `INSERT INTO tbl_business_rating_summary
+                    (avg_rating, sum_of_rating, count_of_rating,
+                    avg_communication, sum_of_communication,
+                    avg_customer_service, sum_of_customer_service, 
+                    avg_overall_satisfaction, sum_of_overall_satisfaction,  
+                    avg_quality, sum_of_quality,
+                    avg_value, sum_of_value,
+                    business_guid, rating_summary_guid)
+                    VALUES
+                    (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+            [
+              nsi.new_business_avg_rating,
+              nsi.new_sum_of_rating,
+              nsi.new_count,
+              nsi.new_communication_avg,
+              nsi.new_sum_of_communication,
+              nsi.new_customer_service_avg,
+              nsi.new_sum_of_customer_service,
+              nsi.new_overall_satisfaction_avg,
+              nsi.new_sum_of_overall_satisfaction,
+              nsi.new_quality_avg,
+              nsi.new_sum_of_quality,
+              nsi.new_value_avg,
+              nsi.new_sum_of_value,
+              received.business_guid,
+              rating_summary_guid
+            ]
+          );
+        }
+      }
+      if (received.ratingExists === true) {
+        const existingUserRating = ratingInDB[0];
+        const updatedRating = await query(
+          `UPDATE tbl_business_rating 
+                        SET 
+                        communication = ?, 
+                        customer_service = ?, 
+                        experience = ?, 
+                        overall_satisfaction = ?, 
+                        quality = ?, 
+                        title = ?, 
+                        value = ?, 
+                        avg_rating = ? 
+                        WHERE 
+                        business_guid = ?
+                        AND
+                        user_guid = ?
+                        AND 
+                        rating_guid = ?
+                        `,
+          [
+            received.communication,
+            customer_service,
+            received.experience,
+            received.overall_satisfaction,
+            received.quality,
+            received.title,
+            received.value,
+            received.avg_rating,
+            received.business_guid,
+            received.user_guid,
+            received.rating_guid
+          ]
+        );
+        const existingSummary = await query(
+          `SELECT * FROM tbl_business_rating_summary
+                    WHERE
+                    business_guid = ?`,
+          [
+            received.business_guid
+          ]
+        );
+        const ratingSummary = existingSummary[0];
+        const ratingSummaryGuid = ratingSummary.rating_summary_guid;
+        const { _existingSummaryInfo, _newSummaryInfo } = computeUpdateRatings(ratingSummary, received, existingUserRating);
+        esi = _existingSummaryInfo;
+        nsi = _newSummaryInfo;
+        const updateRatingSummary = await query(`UPDATE tbl_business_rating_summary 
+                        SET
+                        avg_rating = ?, 
+                        sum_of_rating = ?, 
+                        count_of_rating = ?,
+                        avg_communication = ?, 
+                        sum_of_communication = ?,
+                        avg_customer_service = ?, 
+                        sum_of_customer_service = ?, 
+                        avg_overall_satisfaction = ?, 
+                        sum_of_overall_satisfaction = ?,  
+                        avg_quality = ?, 
+                        sum_of_quality = ?,
+                        avg_value = ?, 
+                        sum_of_value = ? 
+                        WHERE 
+                        rating_summary_guid = ?
+                        `, [
+          nsi.new_business_avg_rating,
+          nsi.new_sum_of_rating,
+          nsi.new_count,
+          nsi.new_communication_avg,
+          nsi.new_sum_of_communication,
+          nsi.new_customer_service_avg,
+          nsi.new_sum_of_customer_service,
+          nsi.new_overall_satisfaction_avg,
+          nsi.new_sum_of_overall_satisfaction,
+          nsi.new_quality_avg,
+          nsi.new_sum_of_quality,
+          nsi.new_value_avg,
+          nsi.new_sum_of_value,
+          ratingSummaryGuid
+        ]);
+      }
+      return DoResponse({
+        ...received,
+        ...esi,
+        ...nsi
+      }, 200);
+    } catch (e) {
+      console.log(e.message);
+      return DoResponse({ error: e.message }, 500);
+    }
+  }
+  return DoResponse({ error: "method not allowed" }, 200);
+}
+const route122 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  action,
+  loader: loader$9
+}, Symbol.toStringTag, { value: "Module" }));
+const loader$8 = async ({ request, params }) => {
+  try {
+    const businessGuid = params == null ? void 0 : params.business_guid;
+    console.log(`business guid: ${businessGuid}`);
+    if (!businessGuid || businessGuid.trim() === "") {
+      throw new Response("Business GUID is required", { status: 400 });
+    }
+    const rows = await query(
+      `SELECT * FROM tbl_business_rating_summary bs 
+            WHERE
+            bs.business_guid = ?`,
+      [businessGuid]
+    );
+    if (rows.length > 0) {
+      return DoResponse(rows[0], 200);
+    }
+    return DoResponse(null, 200);
+  } catch (error) {
+    console.log(error.message);
+    return DoResponse({ "error": error.message }, 500);
+  }
+};
+const route123 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  loader: loader$8
+}, Symbol.toStringTag, { value: "Module" }));
+const loader$7 = async ({ request, params }) => {
+  try {
+    const businessGuid = params == null ? void 0 : params.business_guid;
+    console.log(`business guid: ${businessGuid}`);
+    if (!businessGuid || businessGuid.trim() === "") {
+      throw new Response("Business GUID is required", { status: 400 });
+    }
+    const rows = await query(
+      `SELECT b.*, u.first_name as firstname, u.lastname as lastname, u.img 
+            FROM tbl_business_rating b
+            LEFT JOIN tbl_user u 
+                ON b.user_guid = u.user_guid
+            WHERE b.business_guid = ?;`,
+      [businessGuid]
+    );
+    if (rows.length > 0) {
+      return DoResponse(rows, 200);
+    }
+    return DoResponse(null, 200);
+  } catch (error) {
+    console.log(error.message);
+    return DoResponse({ "error": error.message }, 500);
+  }
+};
+const route124 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  loader: loader$7
+}, Symbol.toStringTag, { value: "Module" }));
+const loader$6 = async ({ request, params }) => {
   request.headers.get("Content-Type");
   if (request.method === "GET") {
     const url = new URL(request.url);
@@ -23610,11 +30373,11 @@ const loader$4 = async ({ request, params }) => {
     return DoResponse(states, 200);
   }
 };
-const route104 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route125 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  loader: loader$4
+  loader: loader$6
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$3 = async ({ request, params }) => {
+const loader$5 = async ({ request, params }) => {
   if (request.method === "GET") {
     const rows = await query(`SELECT * FROM tbl_country`);
     if (rows.length <= 0) {
@@ -23629,15 +30392,15 @@ const loader$3 = async ({ request, params }) => {
     return DoResponse(countries, 200);
   }
 };
-const route105 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route126 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  loader: loader$3
+  loader: loader$5
 }, Symbol.toStringTag, { value: "Module" }));
 const getZoneData = (zone) => {
   const obj = JSON.parse(zone);
   return obj;
 };
-const loader$2 = async ({ request, params }) => {
+const loader$4 = async ({ request, params }) => {
   if (request.method === "GET") {
     const rows = await query(`SELECT * FROM tbl_country`);
     if (rows.length <= 0) {
@@ -23664,11 +30427,11 @@ const loader$2 = async ({ request, params }) => {
     return DoResponse(countries, 200);
   }
 };
-const route106 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route127 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  loader: loader$2
+  loader: loader$4
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$1 = async ({ request, params }) => {
+const loader$3 = async ({ request, params }) => {
   const contentType = request.headers.get("Content-Type");
   if (contentType !== "application/json") {
     return DoResponse(
@@ -23702,11 +30465,11 @@ const loader$1 = async ({ request, params }) => {
     return DoResponse(cities, 200);
   }
 };
-const route107 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route128 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  loader: loader$1
+  loader: loader$3
 }, Symbol.toStringTag, { value: "Module" }));
-const loader = async ({ request, params }) => {
+const loader$2 = async ({ request, params }) => {
   const contentType = request.headers.get("Content-Type");
   if (contentType !== "application/json") {
     return DoResponse(
@@ -23721,11 +30484,71 @@ const loader = async ({ request, params }) => {
     return GetResponse(rows, true, 200);
   }
 };
-const route108 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route129 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  loader: loader$2
+}, Symbol.toStringTag, { value: "Module" }));
+const loader$1 = async ({ request, params }) => {
+  request.headers.get("Content-Type");
+  if (request.method === "GET") {
+    const rows = await query(`SELECT name, currency, currency_name, currency_symbol, id, iso2, emoji FROM tbl_country
+           `, []);
+    if (rows.length <= 0) {
+      return DoResponse([{}], 200);
+    }
+    const countries = rows.map((country, index2) => {
+      return {
+        id: country.id,
+        country: country.name,
+        currency: country.currency,
+        currency_name: country.currency_name,
+        currency_symbol: country.currency_symbol,
+        currency_code: country.iso2,
+        emoji: country.emoji
+      };
+    });
+    return DoResponse(countries, 200);
+  }
+};
+const route130 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  loader: loader$1
+}, Symbol.toStringTag, { value: "Module" }));
+const loader = async ({ request, params }) => {
+  request.headers.get("Content-Type");
+  if (request.method === "GET") {
+    const rows = await query(`SELECT 
+            name AS country_name, 
+            currency, 
+            currency_name AS name, 
+            currency_symbol, 
+            phonecode AS phone_code,
+            id AS sn,
+            numeric_code AS id,
+            iso2 AS country_code, 
+            emoji,
+            latitude AS lat,
+            longitude AS lng 
+            FROM tbl_country
+           `, []);
+    if (rows.length <= 0) {
+      return DoResponse([{}], 200);
+    }
+    const countries = rows.map((country, index2) => {
+      const item = country;
+      return {
+        id: item.numeric_code,
+        ...item
+      };
+    });
+    return DoResponse(countries, 200);
+  }
+};
+const route131 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   loader
 }, Symbol.toStringTag, { value: "Module" }));
-const serverManifest = { "entry": { "module": "/assets/entry.client-B6fU8gXN.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-C1WRcSP2.js"], "css": [] }, "routes": { "root": { "id": "root", "parentId": void 0, "path": "", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/root-CZIVZX_S.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-C1WRcSP2.js", "/assets/NotificationContext-Cp8-V6es.js", "/assets/AuthContext-B4NbHobO.js", "/assets/SliderContext-B9QipN8C.js", "/assets/EditPhotoDialogContext-ZF-0EIVf.js", "/assets/EditVideoDialogContext-CfuCKtyS.js", "/assets/VideoSliderContext-K_9P8z5b.js", "/assets/OperationContext-S2E0zlUA.js", "/assets/lib-Bu0gq4yq.js", "/assets/LoadingMessage-BwEE7ojk.js", "/assets/index-DKq2BHTc.js", "/assets/types-DBTFAyTi.js"], "css": ["/assets/root-pWWqQfvx.css"] }, "routes/sitemap-categories-cities.xml": { "id": "routes/sitemap-categories-cities.xml", "parentId": "root", "path": "/sitemap-categories-cities.xml", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/sitemap-categories-cities.xml-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/sitemap-categories.xml": { "id": "routes/sitemap-categories.xml", "parentId": "root", "path": "/sitemap-categories.xml", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/sitemap-categories.xml-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/_index_second_backup": { "id": "routes/_index_second_backup", "parentId": "root", "path": void 0, "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/_index_second_backup-Di2MifKJ.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/HomeNav-Ca5Nqroc.js", "/assets/components-C1WRcSP2.js", "/assets/lib-Bu0gq4yq.js", "/assets/Footer-D6lSmjgz.js", "/assets/UserMenu-CCnKsYgk.js", "/assets/TopAd-DJsb8CtH.js", "/assets/LeftNav-DL901WSY.js", "/assets/AuthContext-B4NbHobO.js", "/assets/css-CVxtJxAn.js", "/assets/index-DKq2BHTc.js", "/assets/json-CpUbNIRD.js"], "css": [] }, "routes/_index_third_backup": { "id": "routes/_index_third_backup", "parentId": "root", "path": void 0, "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/_index_third_backup-BPtQEs_k.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/SrchNavbar-Bi2tpRBO.js", "/assets/lib-Bu0gq4yq.js", "/assets/components-C1WRcSP2.js", "/assets/FooterSection-DlPTR5ww.js", "/assets/UserMenu-CCnKsYgk.js", "/assets/LeftNav-DL901WSY.js", "/assets/AuthContext-B4NbHobO.js", "/assets/css-CVxtJxAn.js", "/assets/index-DKq2BHTc.js", "/assets/json-CpUbNIRD.js"], "css": [] }, "routes/sitemap-main.xml": { "id": "routes/sitemap-main.xml", "parentId": "root", "path": "/sitemap-main.xml", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/sitemap-main.xml-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/_index_backup": { "id": "routes/_index_backup", "parentId": "root", "path": void 0, "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/_index_backup-B49LBYgD.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/Footer-D6lSmjgz.js", "/assets/lib-Bu0gq4yq.js", "/assets/components-C1WRcSP2.js", "/assets/UserMenu-CCnKsYgk.js", "/assets/LeftNav-DL901WSY.js", "/assets/AuthContext-B4NbHobO.js", "/assets/css-CVxtJxAn.js", "/assets/index-DKq2BHTc.js"], "css": [] }, "routes/sitemap.xml": { "id": "routes/sitemap.xml", "parentId": "root", "path": "/sitemap.xml", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/sitemap.xml-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/homepage": { "id": "routes/homepage", "parentId": "root", "path": "homepage", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/homepage-D_d_oN_S.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/YourGuide-423ad4eO.js", "/assets/components-C1WRcSP2.js", "/assets/lib-Bu0gq4yq.js", "/assets/FooterAlt-DOfNv2_o.js", "/assets/MainNav-Rx7bjBT9.js", "/assets/index-DKq2BHTc.js", "/assets/LeftNav-DL901WSY.js", "/assets/AuthContext-B4NbHobO.js"], "css": [] }, "routes/landing": { "id": "routes/landing", "parentId": "root", "path": "landing", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-BspaleB3.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js"], "css": [] }, "routes/listing": { "id": "routes/listing", "parentId": "root", "path": "listing", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-BuUInmBl.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-C1WRcSP2.js", "/assets/index-DKq2BHTc.js", "/assets/SliderContext-B9QipN8C.js", "/assets/AuthContext-B4NbHobO.js", "/assets/zod-Ctzy-QJu.js", "/assets/NotificationContext-Cp8-V6es.js", "/assets/OperationContext-S2E0zlUA.js", "/assets/types-DBTFAyTi.js", "/assets/lib-Bu0gq4yq.js", "/assets/RatingBoxSquare-C9szhh3k.js", "/assets/VideoSliderContext-K_9P8z5b.js", "/assets/ProductSliderContext-DvY3fnx_.js", "/assets/TopAd-DJsb8CtH.js", "/assets/SearchLayout-DNZBeXps.js", "/assets/VerticalHeight-CjKseacd.js", "/assets/FooterAlt-DOfNv2_o.js", "/assets/json-CpUbNIRD.js", "/assets/MainNav-Rx7bjBT9.js", "/assets/LeftNav-DL901WSY.js"], "css": [] }, "routes/_index": { "id": "routes/_index", "parentId": "root", "path": void 0, "index": true, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/_index-D_6eTGsH.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/YourGuide-423ad4eO.js", "/assets/FooterAlt-DOfNv2_o.js", "/assets/lib-Bu0gq4yq.js", "/assets/OperationContext-S2E0zlUA.js", "/assets/components-C1WRcSP2.js", "/assets/MainNav-Rx7bjBT9.js", "/assets/index-DKq2BHTc.js", "/assets/LeftNav-DL901WSY.js", "/assets/AuthContext-B4NbHobO.js"], "css": [] }, "routes/_404": { "id": "routes/_404", "parentId": "root", "path": "*", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/_404-CZ3O5GWd.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/MainNav-Rx7bjBT9.js", "/assets/components-C1WRcSP2.js", "/assets/lib-Bu0gq4yq.js", "/assets/index-DKq2BHTc.js", "/assets/LeftNav-DL901WSY.js", "/assets/AuthContext-B4NbHobO.js"], "css": [] }, "routes/web": { "id": "routes/web", "parentId": "root", "path": "web", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-Cmlstfnz.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js"], "css": [] }, "routes/listing/index": { "id": "routes/listing/index", "parentId": "root", "path": "/:id", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-BuUInmBl.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-C1WRcSP2.js", "/assets/index-DKq2BHTc.js", "/assets/SliderContext-B9QipN8C.js", "/assets/AuthContext-B4NbHobO.js", "/assets/zod-Ctzy-QJu.js", "/assets/NotificationContext-Cp8-V6es.js", "/assets/OperationContext-S2E0zlUA.js", "/assets/types-DBTFAyTi.js", "/assets/lib-Bu0gq4yq.js", "/assets/RatingBoxSquare-C9szhh3k.js", "/assets/VideoSliderContext-K_9P8z5b.js", "/assets/ProductSliderContext-DvY3fnx_.js", "/assets/TopAd-DJsb8CtH.js", "/assets/SearchLayout-DNZBeXps.js", "/assets/VerticalHeight-CjKseacd.js", "/assets/FooterAlt-DOfNv2_o.js", "/assets/json-CpUbNIRD.js", "/assets/MainNav-Rx7bjBT9.js", "/assets/LeftNav-DL901WSY.js"], "css": [] }, "routes/landing/index": { "id": "routes/landing/index", "parentId": "root", "path": "/landing", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-BspaleB3.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js"], "css": [] }, "routes/web/browse/index": { "id": "routes/web/browse/index", "parentId": "root", "path": "/web/search", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-BVSZac0h.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-C1WRcSP2.js", "/assets/lib-Bu0gq4yq.js", "/assets/Categories-Cm8S5MzT.js", "/assets/RatingBoxSquare-C9szhh3k.js", "/assets/MainNav-Rx7bjBT9.js", "/assets/index-DKq2BHTc.js", "/assets/LeftNav-DL901WSY.js", "/assets/AuthContext-B4NbHobO.js"], "css": [] }, "routes/web/categorycity/index": { "id": "routes/web/categorycity/index", "parentId": "root", "path": "/web/category/:category/city/:city", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-Bz6GjeAd.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-C1WRcSP2.js", "/assets/FooterAlt-DOfNv2_o.js", "/assets/MainNav-Rx7bjBT9.js", "/assets/lib-Bu0gq4yq.js", "/assets/Card-_-YKaDvz.js", "/assets/index-DKq2BHTc.js", "/assets/LeftNav-DL901WSY.js", "/assets/AuthContext-B4NbHobO.js", "/assets/RatingBoxSquare-C9szhh3k.js"], "css": [] }, "routes/web/categorycity/category": { "id": "routes/web/categorycity/category", "parentId": "root", "path": "/web/category/:category", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/category-CdtYNkaX.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-C1WRcSP2.js", "/assets/FooterAlt-DOfNv2_o.js", "/assets/MainNav-Rx7bjBT9.js", "/assets/lib-Bu0gq4yq.js", "/assets/Card-_-YKaDvz.js", "/assets/index-DKq2BHTc.js", "/assets/LeftNav-DL901WSY.js", "/assets/AuthContext-B4NbHobO.js", "/assets/RatingBoxSquare-C9szhh3k.js"], "css": [] }, "routes/web/browse/browse": { "id": "routes/web/browse/browse", "parentId": "root", "path": "/web/browser", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/browse-CVm5p5fc.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/SrchNavbar-Bi2tpRBO.js", "/assets/components-C1WRcSP2.js", "/assets/lib-Bu0gq4yq.js", "/assets/UserMenu-CCnKsYgk.js", "/assets/LeftNav-DL901WSY.js", "/assets/AuthContext-B4NbHobO.js", "/assets/css-CVxtJxAn.js", "/assets/index-DKq2BHTc.js", "/assets/json-CpUbNIRD.js"], "css": [] }, "routes/web/signin/index": { "id": "routes/web/signin/index", "parentId": "root", "path": "/web/signin", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-CCW1WQAs.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/zod-Ctzy-QJu.js", "/assets/components-C1WRcSP2.js", "/assets/types-DBTFAyTi.js", "/assets/NotificationContext-Cp8-V6es.js", "/assets/OperationContext-S2E0zlUA.js", "/assets/AuthContext-B4NbHobO.js", "/assets/AuthHeader-BHHSunR4.js", "/assets/lib-Bu0gq4yq.js"], "css": [] }, "routes/web/signup/index": { "id": "routes/web/signup/index", "parentId": "root", "path": "/web/signup", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-Bm-cTK-k.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/zod-Ctzy-QJu.js", "/assets/components-C1WRcSP2.js", "/assets/OperationContext-S2E0zlUA.js", "/assets/NotificationContext-Cp8-V6es.js", "/assets/lib-Bu0gq4yq.js", "/assets/types-DBTFAyTi.js", "/assets/AuthHeader-BHHSunR4.js"], "css": [] }, "routes/web/reset_password/index": { "id": "routes/web/reset_password/index", "parentId": "root", "path": "/web/reset-password", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-iu539tl4.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/zod-Ctzy-QJu.js", "/assets/components-C1WRcSP2.js", "/assets/OperationContext-S2E0zlUA.js", "/assets/AuthContext-B4NbHobO.js", "/assets/types-DBTFAyTi.js", "/assets/lib-Bu0gq4yq.js", "/assets/NotificationContext-Cp8-V6es.js", "/assets/AuthHeader-BHHSunR4.js"], "css": [] }, "routes/web/account/index": { "id": "routes/web/account/index", "parentId": "root", "path": "/web/account", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-Dy_akSJO.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/AccountLayout-C9eqLiM3.js", "/assets/ContentLayout-DJgwCVQi.js", "/assets/components-C1WRcSP2.js", "/assets/LeftNav-DL901WSY.js", "/assets/lib-Bu0gq4yq.js", "/assets/AuthContext-B4NbHobO.js", "/assets/HomeNav-Ca5Nqroc.js", "/assets/MainNav-Rx7bjBT9.js", "/assets/index-DKq2BHTc.js", "/assets/BusinessMenu-BPnpNXLL.js", "/assets/BusinessDrawer-DYsG4PSH.js"], "css": [] }, "routes/web/account/profile/index": { "id": "routes/web/account/profile/index", "parentId": "root", "path": "/web/account/profile", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-Dr5blr1s.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-C1WRcSP2.js", "/assets/AuthContext-B4NbHobO.js", "/assets/lib-Bu0gq4yq.js", "/assets/NotificationContext-Cp8-V6es.js", "/assets/OperationContext-S2E0zlUA.js", "/assets/zod-Ctzy-QJu.js", "/assets/types-DBTFAyTi.js", "/assets/Button-7Woa2p3a.js", "/assets/Input-D8zafJN3.js", "/assets/Select-DOicJRBv.js", "/assets/css-CVxtJxAn.js", "/assets/ProfileLayout-CE9GuGmU.js", "/assets/LoadingMessage-BwEE7ojk.js", "/assets/LeftNav-DL901WSY.js", "/assets/HomeNav-Ca5Nqroc.js", "/assets/MainNav-Rx7bjBT9.js", "/assets/index-DKq2BHTc.js"], "css": [] }, "routes/web/account/email_address/index": { "id": "routes/web/account/email_address/index", "parentId": "root", "path": "/web/account/email_address", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-rXJ0yS0j.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-C1WRcSP2.js", "/assets/AccountLayout-C9eqLiM3.js", "/assets/AuthContext-B4NbHobO.js", "/assets/lib-Bu0gq4yq.js", "/assets/zod-Ctzy-QJu.js", "/assets/Button-7Woa2p3a.js", "/assets/Input-D8zafJN3.js", "/assets/types-DBTFAyTi.js", "/assets/css-CVxtJxAn.js", "/assets/NotificationContext-Cp8-V6es.js", "/assets/OperationContext-S2E0zlUA.js", "/assets/ProfileContentLayout-BoTnlSXA.js", "/assets/LoadingMessage-BwEE7ojk.js", "/assets/LeftNav-DL901WSY.js", "/assets/HomeNav-Ca5Nqroc.js", "/assets/MainNav-Rx7bjBT9.js", "/assets/index-DKq2BHTc.js", "/assets/BusinessMenu-BPnpNXLL.js"], "css": [] }, "routes/web/account/change_password/index": { "id": "routes/web/account/change_password/index", "parentId": "root", "path": "/web/account/change_password", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-gdnf4JYA.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-C1WRcSP2.js", "/assets/AccountLayout-C9eqLiM3.js", "/assets/AuthContext-B4NbHobO.js", "/assets/lib-Bu0gq4yq.js", "/assets/zod-Ctzy-QJu.js", "/assets/Button-7Woa2p3a.js", "/assets/Input-D8zafJN3.js", "/assets/types-DBTFAyTi.js", "/assets/css-CVxtJxAn.js", "/assets/NotificationContext-Cp8-V6es.js", "/assets/OperationContext-S2E0zlUA.js", "/assets/ProfileContentLayout-BoTnlSXA.js", "/assets/LoadingMessage-BwEE7ojk.js", "/assets/LeftNav-DL901WSY.js", "/assets/HomeNav-Ca5Nqroc.js", "/assets/MainNav-Rx7bjBT9.js", "/assets/index-DKq2BHTc.js", "/assets/BusinessMenu-BPnpNXLL.js"], "css": [] }, "routes/web/account/reset_password/index": { "id": "routes/web/account/reset_password/index", "parentId": "root", "path": "/web/account/reset_password", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-DIBRth-5.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-C1WRcSP2.js", "/assets/AccountLayout-C9eqLiM3.js", "/assets/AuthContext-B4NbHobO.js", "/assets/lib-Bu0gq4yq.js", "/assets/zod-Ctzy-QJu.js", "/assets/Button-7Woa2p3a.js", "/assets/Input-D8zafJN3.js", "/assets/types-DBTFAyTi.js", "/assets/css-CVxtJxAn.js", "/assets/NotificationContext-Cp8-V6es.js", "/assets/OperationContext-S2E0zlUA.js", "/assets/ProfileContentLayout-BoTnlSXA.js", "/assets/LoadingMessage-BwEE7ojk.js", "/assets/LeftNav-DL901WSY.js", "/assets/HomeNav-Ca5Nqroc.js", "/assets/MainNav-Rx7bjBT9.js", "/assets/index-DKq2BHTc.js", "/assets/BusinessMenu-BPnpNXLL.js"], "css": [] }, "routes/web/account/deactivate_profile/index": { "id": "routes/web/account/deactivate_profile/index", "parentId": "root", "path": "/web/account/deactivate_profile", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-Q5XiFn_X.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-C1WRcSP2.js", "/assets/AccountLayout-C9eqLiM3.js", "/assets/AuthContext-B4NbHobO.js", "/assets/lib-Bu0gq4yq.js", "/assets/zod-Ctzy-QJu.js", "/assets/Button-7Woa2p3a.js", "/assets/Input-D8zafJN3.js", "/assets/types-DBTFAyTi.js", "/assets/css-CVxtJxAn.js", "/assets/NotificationContext-Cp8-V6es.js", "/assets/OperationContext-S2E0zlUA.js", "/assets/ProfileContentLayout-BoTnlSXA.js", "/assets/LoadingMessage-BwEE7ojk.js", "/assets/LeftNav-DL901WSY.js", "/assets/HomeNav-Ca5Nqroc.js", "/assets/MainNav-Rx7bjBT9.js", "/assets/index-DKq2BHTc.js", "/assets/BusinessMenu-BPnpNXLL.js"], "css": [] }, "routes/web/terms/index": { "id": "routes/web/terms/index", "parentId": "root", "path": "/web/terms", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-C5vTm3oE.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/VerticalHeight-CjKseacd.js", "/assets/FooterAlt-DOfNv2_o.js", "/assets/SearchLayout-DNZBeXps.js", "/assets/lib-Bu0gq4yq.js", "/assets/components-C1WRcSP2.js", "/assets/MainNav-Rx7bjBT9.js", "/assets/index-DKq2BHTc.js", "/assets/LeftNav-DL901WSY.js", "/assets/AuthContext-B4NbHobO.js"], "css": [] }, "routes/web/privacy/index": { "id": "routes/web/privacy/index", "parentId": "root", "path": "/web/privacy", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-BPWfJOCQ.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/VerticalHeight-CjKseacd.js", "/assets/FooterAlt-DOfNv2_o.js", "/assets/SearchLayout-DNZBeXps.js", "/assets/lib-Bu0gq4yq.js", "/assets/components-C1WRcSP2.js", "/assets/MainNav-Rx7bjBT9.js", "/assets/index-DKq2BHTc.js", "/assets/LeftNav-DL901WSY.js", "/assets/AuthContext-B4NbHobO.js"], "css": [] }, "routes/web/contact/index": { "id": "routes/web/contact/index", "parentId": "root", "path": "/web/contact", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-CVoSHmqd.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/lib-Bu0gq4yq.js", "/assets/VerticalHeight-CjKseacd.js", "/assets/FooterAlt-DOfNv2_o.js", "/assets/SearchLayout-DNZBeXps.js", "/assets/components-C1WRcSP2.js", "/assets/MainNav-Rx7bjBT9.js", "/assets/index-DKq2BHTc.js", "/assets/LeftNav-DL901WSY.js", "/assets/AuthContext-B4NbHobO.js"], "css": [] }, "routes/web/browse/db": { "id": "routes/web/browse/db", "parentId": "root", "path": "/web/db", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/db-B3xZ8zw4.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-C1WRcSP2.js", "/assets/SrchNavbar-Bi2tpRBO.js", "/assets/Categories-Cm8S5MzT.js", "/assets/FooterSection-DlPTR5ww.js", "/assets/VerticalHeight-CjKseacd.js", "/assets/lib-Bu0gq4yq.js", "/assets/UserMenu-CCnKsYgk.js", "/assets/LeftNav-DL901WSY.js", "/assets/AuthContext-B4NbHobO.js", "/assets/css-CVxtJxAn.js", "/assets/index-DKq2BHTc.js", "/assets/json-CpUbNIRD.js"], "css": [] }, "routes/web/copyright/Copyright": { "id": "routes/web/copyright/Copyright", "parentId": "root", "path": "/web/copyright", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/Copyright-DdRQ7mmJ.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/MainNav-Rx7bjBT9.js", "/assets/FooterAlt-DOfNv2_o.js", "/assets/components-C1WRcSP2.js", "/assets/lib-Bu0gq4yq.js", "/assets/index-DKq2BHTc.js", "/assets/LeftNav-DL901WSY.js", "/assets/AuthContext-B4NbHobO.js"], "css": [] }, "routes/web/responsible_disclosure/ResponsibleDisclosure": { "id": "routes/web/responsible_disclosure/ResponsibleDisclosure", "parentId": "root", "path": "/web/responsible-disclosure", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/ResponsibleDisclosure-Btv-Zntn.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/MainNav-Rx7bjBT9.js", "/assets/components-C1WRcSP2.js", "/assets/lib-Bu0gq4yq.js", "/assets/index-DKq2BHTc.js", "/assets/LeftNav-DL901WSY.js", "/assets/AuthContext-B4NbHobO.js"], "css": [] }, "routes/web/account/portfolio/index": { "id": "routes/web/account/portfolio/index", "parentId": "root", "path": "/web/account/portfolio", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-CLw9IahT.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-C1WRcSP2.js", "/assets/AccountLayout-C9eqLiM3.js", "/assets/AuthContext-B4NbHobO.js", "/assets/lib-Bu0gq4yq.js", "/assets/LoadingMessage-BwEE7ojk.js", "/assets/LeftNav-DL901WSY.js", "/assets/HomeNav-Ca5Nqroc.js", "/assets/MainNav-Rx7bjBT9.js", "/assets/index-DKq2BHTc.js"], "css": [] }, "routes/web/account/portfolio/business/index": { "id": "routes/web/account/portfolio/business/index", "parentId": "root", "path": "/web/account/portfolio/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-h1nyBOqS.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-C1WRcSP2.js", "/assets/AuthContext-B4NbHobO.js", "/assets/lib-Bu0gq4yq.js", "/assets/ProfileLayout-CE9GuGmU.js", "/assets/zod-Ctzy-QJu.js", "/assets/types-DBTFAyTi.js", "/assets/TextareaWithWordLimit-DnrlCRiQ.js", "/assets/NotificationContext-Cp8-V6es.js", "/assets/OperationContext-S2E0zlUA.js", "/assets/Button-7Woa2p3a.js", "/assets/Input-D8zafJN3.js", "/assets/css-CVxtJxAn.js", "/assets/Select-DOicJRBv.js", "/assets/BusinessMenu-BPnpNXLL.js", "/assets/BusinessDrawer-DYsG4PSH.js", "/assets/LoadingMessage-BwEE7ojk.js", "/assets/LeftNav-DL901WSY.js", "/assets/HomeNav-Ca5Nqroc.js", "/assets/MainNav-Rx7bjBT9.js", "/assets/index-DKq2BHTc.js"], "css": [] }, "routes/web/account/create_business/index": { "id": "routes/web/account/create_business/index", "parentId": "root", "path": "/web/account/create_business", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-D_LmDFjk.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-C1WRcSP2.js", "/assets/AccountLayout-C9eqLiM3.js", "/assets/AuthContext-B4NbHobO.js", "/assets/zod-Ctzy-QJu.js", "/assets/lib-Bu0gq4yq.js", "/assets/Input-D8zafJN3.js", "/assets/Select-DOicJRBv.js", "/assets/Button-7Woa2p3a.js", "/assets/css-CVxtJxAn.js", "/assets/TextareaWithWordLimit-DnrlCRiQ.js", "/assets/CreatePageSchema-5wPOr2lU.js", "/assets/NotificationContext-Cp8-V6es.js", "/assets/OperationContext-S2E0zlUA.js", "/assets/ProfileContentLayout-BoTnlSXA.js", "/assets/LoadingMessage-BwEE7ojk.js", "/assets/LeftNav-DL901WSY.js", "/assets/HomeNav-Ca5Nqroc.js", "/assets/MainNav-Rx7bjBT9.js", "/assets/index-DKq2BHTc.js", "/assets/types-DBTFAyTi.js", "/assets/BusinessMenu-BPnpNXLL.js"], "css": [] }, "routes/web/account/portfolio/business/settings/index": { "id": "routes/web/account/portfolio/business/settings/index", "parentId": "root", "path": "/web/account/portfolio/:business_guid/:user_guid/settings", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-BACOSQ5h.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/zod-Ctzy-QJu.js", "/assets/components-C1WRcSP2.js", "/assets/lib-Bu0gq4yq.js", "/assets/types-DBTFAyTi.js", "/assets/AccountLayout-C9eqLiM3.js", "/assets/ContentLayout-DJgwCVQi.js", "/assets/NotificationContext-Cp8-V6es.js", "/assets/OperationContext-S2E0zlUA.js", "/assets/css-CVxtJxAn.js", "/assets/AuthContext-B4NbHobO.js", "/assets/LoadingMessage-BwEE7ojk.js", "/assets/LeftNav-DL901WSY.js", "/assets/HomeNav-Ca5Nqroc.js", "/assets/MainNav-Rx7bjBT9.js", "/assets/index-DKq2BHTc.js", "/assets/BusinessMenu-BPnpNXLL.js", "/assets/BusinessDrawer-DYsG4PSH.js"], "css": [] }, "routes/web/account/portfolio/business/gallery/index": { "id": "routes/web/account/portfolio/business/gallery/index", "parentId": "root", "path": "/web/account/portfolio/:business_guid/:user_guid/gallery", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-DOc29xA_.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-C1WRcSP2.js", "/assets/AccountLayout-C9eqLiM3.js", "/assets/ContentLayout-DJgwCVQi.js", "/assets/lib-Bu0gq4yq.js", "/assets/EditPhotoDialogContext-ZF-0EIVf.js", "/assets/NotificationContext-Cp8-V6es.js", "/assets/index-DKq2BHTc.js", "/assets/SliderContext-B9QipN8C.js", "/assets/AuthContext-B4NbHobO.js", "/assets/OperationContext-S2E0zlUA.js", "/assets/LoadingMessage-BwEE7ojk.js", "/assets/LeftNav-DL901WSY.js", "/assets/HomeNav-Ca5Nqroc.js", "/assets/MainNav-Rx7bjBT9.js", "/assets/BusinessMenu-BPnpNXLL.js", "/assets/BusinessDrawer-DYsG4PSH.js"], "css": [] }, "routes/web/account/portfolio/business/products/index": { "id": "routes/web/account/portfolio/business/products/index", "parentId": "root", "path": "/web/account/portfolio/:business_guid/:user_guid/products", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-Sk_iDMDx.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-C1WRcSP2.js", "/assets/AccountLayout-C9eqLiM3.js", "/assets/ContentLayout-DJgwCVQi.js", "/assets/lib-Bu0gq4yq.js", "/assets/AuthContext-B4NbHobO.js", "/assets/NotificationContext-Cp8-V6es.js", "/assets/OperationContext-S2E0zlUA.js", "/assets/index-DKq2BHTc.js", "/assets/ProductSliderContext-DvY3fnx_.js", "/assets/LoadingMessage-BwEE7ojk.js", "/assets/LeftNav-DL901WSY.js", "/assets/HomeNav-Ca5Nqroc.js", "/assets/MainNav-Rx7bjBT9.js", "/assets/BusinessMenu-BPnpNXLL.js", "/assets/BusinessDrawer-DYsG4PSH.js"], "css": [] }, "routes/web/account/portfolio/business/videos/index": { "id": "routes/web/account/portfolio/business/videos/index", "parentId": "root", "path": "/web/account/portfolio/:business_guid/:user_guid/videos", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-J0qXU5Ke.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-C1WRcSP2.js", "/assets/AccountLayout-C9eqLiM3.js", "/assets/ContentLayout-DJgwCVQi.js", "/assets/lib-Bu0gq4yq.js", "/assets/EditVideoDialogContext-CfuCKtyS.js", "/assets/NotificationContext-Cp8-V6es.js", "/assets/index-DKq2BHTc.js", "/assets/VideoSliderContext-K_9P8z5b.js", "/assets/AuthContext-B4NbHobO.js", "/assets/LoadingMessage-BwEE7ojk.js", "/assets/LeftNav-DL901WSY.js", "/assets/HomeNav-Ca5Nqroc.js", "/assets/MainNav-Rx7bjBT9.js", "/assets/BusinessMenu-BPnpNXLL.js", "/assets/BusinessDrawer-DYsG4PSH.js", "/assets/OperationContext-S2E0zlUA.js", "/assets/types-DBTFAyTi.js"], "css": [] }, "routes/web/account/portfolio/business/facilities/index": { "id": "routes/web/account/portfolio/business/facilities/index", "parentId": "root", "path": "/web/account/portfolio/:business_guid/:user_guid/facilities", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-BHjfbKgI.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-C1WRcSP2.js", "/assets/lib-Bu0gq4yq.js", "/assets/AccountLayout-C9eqLiM3.js", "/assets/ContentLayout-DJgwCVQi.js", "/assets/NotificationContext-Cp8-V6es.js", "/assets/OperationContext-S2E0zlUA.js", "/assets/AuthContext-B4NbHobO.js", "/assets/LoadingMessage-BwEE7ojk.js", "/assets/LeftNav-DL901WSY.js", "/assets/HomeNav-Ca5Nqroc.js", "/assets/MainNav-Rx7bjBT9.js", "/assets/index-DKq2BHTc.js", "/assets/BusinessMenu-BPnpNXLL.js", "/assets/BusinessDrawer-DYsG4PSH.js"], "css": [] }, "routes/web/account/portfolio/business/activate/index": { "id": "routes/web/account/portfolio/business/activate/index", "parentId": "root", "path": "/web/account/portfolio/:business_guid/:user_guid/activate", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-Cq2FLtIX.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-C1WRcSP2.js", "/assets/NotificationContext-Cp8-V6es.js", "/assets/OperationContext-S2E0zlUA.js", "/assets/lib-Bu0gq4yq.js", "/assets/AccountLayout-C9eqLiM3.js", "/assets/ContentLayout-DJgwCVQi.js", "/assets/AuthContext-B4NbHobO.js", "/assets/LoadingMessage-BwEE7ojk.js", "/assets/LeftNav-DL901WSY.js", "/assets/HomeNav-Ca5Nqroc.js", "/assets/MainNav-Rx7bjBT9.js", "/assets/index-DKq2BHTc.js", "/assets/BusinessMenu-BPnpNXLL.js", "/assets/BusinessDrawer-DYsG4PSH.js"], "css": [] }, "routes/web/account/portfolio/business/social_media/index": { "id": "routes/web/account/portfolio/business/social_media/index", "parentId": "root", "path": "/web/account/portfolio/:business_guid/:user_guid/social_media", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-BTrGxxBP.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-C1WRcSP2.js", "/assets/lib-Bu0gq4yq.js", "/assets/AccountLayout-C9eqLiM3.js", "/assets/ContentLayout-DJgwCVQi.js", "/assets/OperationContext-S2E0zlUA.js", "/assets/LoadingMessage-BwEE7ojk.js", "/assets/LeftNav-DL901WSY.js", "/assets/AuthContext-B4NbHobO.js", "/assets/HomeNav-Ca5Nqroc.js", "/assets/MainNav-Rx7bjBT9.js", "/assets/index-DKq2BHTc.js", "/assets/BusinessMenu-BPnpNXLL.js", "/assets/BusinessDrawer-DYsG4PSH.js"], "css": [] }, "routes/web/account/portfolio/business/delete/index": { "id": "routes/web/account/portfolio/business/delete/index", "parentId": "root", "path": "/web/account/portfolio/:business_guid/:user_guid/delete", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-_2tqgTRE.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-C1WRcSP2.js", "/assets/lib-Bu0gq4yq.js", "/assets/AccountLayout-C9eqLiM3.js", "/assets/ContentLayout-DJgwCVQi.js", "/assets/AuthContext-B4NbHobO.js", "/assets/zod-Ctzy-QJu.js", "/assets/Button-7Woa2p3a.js", "/assets/Input-D8zafJN3.js", "/assets/NotificationContext-Cp8-V6es.js", "/assets/types-DBTFAyTi.js", "/assets/OperationContext-S2E0zlUA.js", "/assets/LoadingMessage-BwEE7ojk.js", "/assets/LeftNav-DL901WSY.js", "/assets/HomeNav-Ca5Nqroc.js", "/assets/MainNav-Rx7bjBT9.js", "/assets/index-DKq2BHTc.js", "/assets/BusinessMenu-BPnpNXLL.js", "/assets/BusinessDrawer-DYsG4PSH.js", "/assets/css-CVxtJxAn.js"], "css": [] }, "routes/web/account/portfolio/business/reassign/index": { "id": "routes/web/account/portfolio/business/reassign/index", "parentId": "root", "path": "/web/account/portfolio/:business_guid/:user_guid/reassign", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-JRDf62NW.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-C1WRcSP2.js", "/assets/lib-Bu0gq4yq.js", "/assets/AccountLayout-C9eqLiM3.js", "/assets/ContentLayout-DJgwCVQi.js", "/assets/AuthContext-B4NbHobO.js", "/assets/OperationContext-S2E0zlUA.js", "/assets/LoadingMessage-BwEE7ojk.js", "/assets/LeftNav-DL901WSY.js", "/assets/HomeNav-Ca5Nqroc.js", "/assets/MainNav-Rx7bjBT9.js", "/assets/index-DKq2BHTc.js", "/assets/BusinessMenu-BPnpNXLL.js", "/assets/BusinessDrawer-DYsG4PSH.js"], "css": [] }, "routes/web/account/events/index": { "id": "routes/web/account/events/index", "parentId": "root", "path": "/web/account/events", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-BbWamc6A.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/AccountLayout-C9eqLiM3.js", "/assets/ProfileContentLayout-BoTnlSXA.js", "/assets/zod-Ctzy-QJu.js", "/assets/components-C1WRcSP2.js", "/assets/OperationContext-S2E0zlUA.js", "/assets/CreatePageSchema-5wPOr2lU.js", "/assets/Input-D8zafJN3.js", "/assets/css-CVxtJxAn.js", "/assets/LeftNav-DL901WSY.js", "/assets/lib-Bu0gq4yq.js", "/assets/AuthContext-B4NbHobO.js", "/assets/HomeNav-Ca5Nqroc.js", "/assets/MainNav-Rx7bjBT9.js", "/assets/index-DKq2BHTc.js", "/assets/BusinessMenu-BPnpNXLL.js", "/assets/types-DBTFAyTi.js"], "css": ["/assets/index-CZpt01_F.css"] }, "routes/web/landing/change_email/index": { "id": "routes/web/landing/change_email/index", "parentId": "root", "path": "/web/landing/change_email", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-BsuUFDBm.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-C1WRcSP2.js", "/assets/AuthContext-B4NbHobO.js", "/assets/lib-Bu0gq4yq.js"], "css": [] }, "routes/web/landing/reset_password/index": { "id": "routes/web/landing/reset_password/index", "parentId": "root", "path": "/web/landing/reset_password/:guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-DqeSxvnl.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/zod-Ctzy-QJu.js", "/assets/components-C1WRcSP2.js", "/assets/OperationContext-S2E0zlUA.js", "/assets/AuthContext-B4NbHobO.js", "/assets/NotificationContext-Cp8-V6es.js", "/assets/lib-Bu0gq4yq.js", "/assets/types-DBTFAyTi.js"], "css": [] }, "routes/web/landing/complete_signup/index": { "id": "routes/web/landing/complete_signup/index", "parentId": "root", "path": "/web/landing/complete_signup/:guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-BI-qSvkN.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-C1WRcSP2.js", "/assets/lib-Bu0gq4yq.js"], "css": [] }, "routes/api/user/index": { "id": "routes/api/user/index", "parentId": "root", "path": "api/user", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/signin": { "id": "routes/api/user/signin", "parentId": "root", "path": "api/user/signin", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/signin-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/verifytoken": { "id": "routes/api/user/verifytoken", "parentId": "root", "path": "api/user/verifytoken", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/verifytoken-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/user": { "id": "routes/api/user/user", "parentId": "root", "path": "api/user/:guid", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/user-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/change_password": { "id": "routes/api/user/change_password", "parentId": "root", "path": "api/user/change_password/:guid", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/change_password-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/reset_password_request": { "id": "routes/api/user/reset_password_request", "parentId": "root", "path": "api/user/reset_password_request", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/reset_password_request-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/reset_password": { "id": "routes/api/user/reset_password", "parentId": "root", "path": "api/user/reset_password/:guid", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/reset_password-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/activate_deactivate": { "id": "routes/api/user/activate_deactivate", "parentId": "root", "path": "api/user/activate_deactivate/:guid", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/activate_deactivate-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/user_profile_image": { "id": "routes/api/user/user_profile_image", "parentId": "root", "path": "api/user/user_profile_image/:guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/user_profile_image-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/user_profile_bg": { "id": "routes/api/user/user_profile_bg", "parentId": "root", "path": "api/user/user_profile_bg/:guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/user_profile_bg-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/change_email_request": { "id": "routes/api/user/change_email_request", "parentId": "root", "path": "api/user/change_email_request", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/change_email_request-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/change_email": { "id": "routes/api/user/change_email", "parentId": "root", "path": "api/user/change_email", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/change_email-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/verify_signup": { "id": "routes/api/user/verify_signup", "parentId": "root", "path": "api/user/verify_signup/:user_hash", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/verify_signup-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/index": { "id": "routes/api/listing/index", "parentId": "root", "path": "api/listing", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-DP2rzg_V.js", "imports": [], "css": [] }, "routes/api/listing/listing": { "id": "routes/api/listing/listing", "parentId": "root", "path": "api/listing/:guid_or_username", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/listing-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/search": { "id": "routes/api/listing/search", "parentId": "root", "path": "api/listing/search", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/search-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/searchlisting": { "id": "routes/api/listing/searchlisting", "parentId": "root", "path": "api/listing/searchlisting", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/searchlisting-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/featured_listing": { "id": "routes/api/listing/featured_listing", "parentId": "root", "path": "api/listing/featured_listing", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/featured_listing-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/business_facility_features": { "id": "routes/api/listing/business_facility_features", "parentId": "root", "path": "api/listing/business_facility_features/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_facility_features-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/listing_by_category": { "id": "routes/api/listing/listing_by_category", "parentId": "root", "path": "api/listing/listing_by_category/:category/:limit", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/listing_by_category-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/home_listing_by_category": { "id": "routes/api/listing/home_listing_by_category", "parentId": "root", "path": "api/listing/home_listing_by_category/:category/:limit", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/home_listing_by_category-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/home_latest_businesses": { "id": "routes/api/listing/home_latest_businesses", "parentId": "root", "path": "api/listing/home_latest_businesses/:limit", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/home_latest_businesses-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/business_gallery": { "id": "routes/api/listing/business_gallery", "parentId": "root", "path": "api/listing/business_gallery/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_gallery-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/business_profile_image": { "id": "routes/api/listing/business_profile_image", "parentId": "root", "path": "api/listing/business_profile_image/:guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_profile_image-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/business_profile_bg": { "id": "routes/api/listing/business_profile_bg", "parentId": "root", "path": "api/listing/business_profile_bg/:guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_profile_bg-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/owner/index": { "id": "routes/api/listing/owner/index", "parentId": "root", "path": "api/listing/owner", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-K6Dvbx-E.js", "imports": [], "css": [] }, "routes/api/listing/delete_business": { "id": "routes/api/listing/delete_business", "parentId": "root", "path": "api/listing/delete_business/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/delete_business-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/reassign_business": { "id": "routes/api/listing/reassign_business", "parentId": "root", "path": "api/listing/reassign_business", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/reassign_business-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/business_single_search": { "id": "routes/api/listing/business_single_search", "parentId": "root", "path": "api/listing/business_single_search", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_single_search-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/user_single_search": { "id": "routes/api/listing/user_single_search", "parentId": "root", "path": "api/listing/user_single_search", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/user_single_search-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/operating_hours": { "id": "routes/api/listing/operating_hours", "parentId": "root", "path": "api/listing/operating_hours", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/operating_hours-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/gallery": { "id": "routes/api/listing/gallery", "parentId": "root", "path": "api/listing/gallery/:business_guid/:user_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/gallery-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/sys_facility_features/index": { "id": "routes/api/listing/sys_facility_features/index", "parentId": "root", "path": "api/listing/sys_facility_features", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-C6Kfwj0f.js", "imports": [], "css": [] }, "routes/api/listing/selected_facility_features/selected_facility_features": { "id": "routes/api/listing/selected_facility_features/selected_facility_features", "parentId": "root", "path": "api/listing/selected_facility_features/:user_guid/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/selected_facility_features-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/selected_facility_features/index": { "id": "routes/api/listing/selected_facility_features/index", "parentId": "root", "path": "api/listing/selected_facility_features", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-RnTpOC5-.js", "imports": [], "css": [] }, "routes/api/listing/sys_social_media/index": { "id": "routes/api/listing/sys_social_media/index", "parentId": "root", "path": "api/listing/sys_social_media", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-DVN7Oi2P.js", "imports": [], "css": [] }, "routes/api/listing/selected_social_media/selected_social_media": { "id": "routes/api/listing/selected_social_media/selected_social_media", "parentId": "root", "path": "api/listing/selected_social_media/:user_guid/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/selected_social_media-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/selected_social_media/index": { "id": "routes/api/listing/selected_social_media/index", "parentId": "root", "path": "api/listing/selected_social_media", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-DdXTRxfG.js", "imports": [], "css": [] }, "routes/api/listing/business_social_media": { "id": "routes/api/listing/business_social_media", "parentId": "root", "path": "api/listing/business_social_media/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_social_media-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/activate/activate": { "id": "routes/api/listing/activate/activate", "parentId": "root", "path": "api/listing/activate/:user_guid/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/activate-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/recents": { "id": "routes/api/listing/recents", "parentId": "root", "path": "api/listing/recents", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/recents-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/video_link": { "id": "routes/api/listing/video_link", "parentId": "root", "path": "api/listing/save_video_link", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/video_link-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/video_links": { "id": "routes/api/listing/video_links", "parentId": "root", "path": "api/listing/video_links/:business_guid/:user_guid", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/video_links-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/video_links_listing": { "id": "routes/api/listing/video_links_listing", "parentId": "root", "path": "api/listing/video_links/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/video_links_listing-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/products/index": { "id": "routes/api/listing/products/index", "parentId": "root", "path": "api/listing/products/:business_guid/:user_guid", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-BIjMHF-b.js", "imports": [], "css": [] }, "routes/api/listing/category": { "id": "routes/api/listing/category", "parentId": "root", "path": "api/listing/category/:category", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/category-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/category_city": { "id": "routes/api/listing/category_city", "parentId": "root", "path": "api/listing/category_city/:category/:city", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/category_city-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/category_city_sitexml": { "id": "routes/api/listing/category_city_sitexml", "parentId": "root", "path": "api/listing/cat_city_sitexml", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/category_city_sitexml-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/category_sitexml": { "id": "routes/api/listing/category_sitexml", "parentId": "root", "path": "api/listing/cat_sitexml", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/category_sitexml-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/rating/index": { "id": "routes/api/rating/index", "parentId": "root", "path": "api/rating", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-BQEWTaK-.js", "imports": [], "css": [] }, "routes/api/rating/rating": { "id": "routes/api/rating/rating", "parentId": "root", "path": "api/rating/:user_guid/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/rating-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/rating/business_ratings": { "id": "routes/api/rating/business_ratings", "parentId": "root", "path": "api/rating/business_ratings/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_ratings-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/rating/ratings_reviews": { "id": "routes/api/rating/ratings_reviews", "parentId": "root", "path": "api/rating/ratings_reviews/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/ratings_reviews-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/util/state": { "id": "routes/api/util/state", "parentId": "root", "path": "api/util/state", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/state-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/util/country": { "id": "routes/api/util/country", "parentId": "root", "path": "api/util/country", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/country-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/util/country_locale": { "id": "routes/api/util/country_locale", "parentId": "root", "path": "api/util/country_locale", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/country_locale-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/util/city": { "id": "routes/api/util/city", "parentId": "root", "path": "api/util/city", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/city-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/util/category": { "id": "routes/api/util/category", "parentId": "root", "path": "api/util/category", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/category-DP2rzg_V.js", "imports": [], "css": [] } }, "url": "/assets/manifest-6c9f510c.js", "version": "6c9f510c" };
+const serverManifest = { "entry": { "module": "/assets/entry.client-QM-VzdkY.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-CqyJs_9b.js"], "css": [] }, "routes": { "root": { "id": "root", "parentId": void 0, "path": "", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/root-DbaH_Zfi.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-CqyJs_9b.js", "/assets/NotificationContext-5qxxJsOx.js", "/assets/AuthContext-CD4rwEG9.js", "/assets/SliderContext-WoTnsDSD.js", "/assets/EditPhotoDialogContext-D-D3E5Sr.js", "/assets/EditVideoDialogContext-CmdFEghF.js", "/assets/VideoSliderContext-DwKEG9Kf.js", "/assets/OperationContext-BdFCpeXF.js", "/assets/lib-BhVPRy-q.js", "/assets/LoadingMessage-GuDUfNbD.js", "/assets/ShareDialogContext-qalLEDkl.js", "/assets/index-CLt_mu8V.js", "/assets/types-DBTFAyTi.js", "/assets/zod-DwrW5z8F.js"], "css": ["/assets/root-DThf9NWy.css"] }, "routes/sitemap-categories-cities.xml": { "id": "routes/sitemap-categories-cities.xml", "parentId": "root", "path": "/sitemap-categories-cities.xml", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/sitemap-categories-cities.xml-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/sitemap-categories.xml": { "id": "routes/sitemap-categories.xml", "parentId": "root", "path": "/sitemap-categories.xml", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/sitemap-categories.xml-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/_index_second_backup": { "id": "routes/_index_second_backup", "parentId": "root", "path": void 0, "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/_index_second_backup-C1Ya5BFq.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/HomeNav-BoRcWLmj.js", "/assets/components-CqyJs_9b.js", "/assets/lib-BhVPRy-q.js", "/assets/Footer-ClOtixAQ.js", "/assets/UserMenu-Bng8wWWg.js", "/assets/TopAd-CG5kM9eJ.js", "/assets/LeftNav-BZC7Nwlr.js", "/assets/AuthContext-CD4rwEG9.js", "/assets/css-CVxtJxAn.js", "/assets/index-CLt_mu8V.js"], "css": [] }, "routes/_index_third_backup": { "id": "routes/_index_third_backup", "parentId": "root", "path": void 0, "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/_index_third_backup-CPKZxbib.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/SrchNavbar-BclWdl2q.js", "/assets/lib-BhVPRy-q.js", "/assets/components-CqyJs_9b.js", "/assets/FooterSection-Cs3Mcskf.js", "/assets/UserMenu-Bng8wWWg.js", "/assets/LeftNav-BZC7Nwlr.js", "/assets/AuthContext-CD4rwEG9.js", "/assets/css-CVxtJxAn.js", "/assets/index-CLt_mu8V.js", "/assets/json-ZhZtaBAh.js"], "css": [] }, "routes/sitemap-main.xml": { "id": "routes/sitemap-main.xml", "parentId": "root", "path": "/sitemap-main.xml", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/sitemap-main.xml-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/_index_backup": { "id": "routes/_index_backup", "parentId": "root", "path": void 0, "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/_index_backup-Du3tiBfn.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/Footer-ClOtixAQ.js", "/assets/lib-BhVPRy-q.js", "/assets/components-CqyJs_9b.js", "/assets/UserMenu-Bng8wWWg.js", "/assets/LeftNav-BZC7Nwlr.js", "/assets/AuthContext-CD4rwEG9.js", "/assets/css-CVxtJxAn.js", "/assets/index-CLt_mu8V.js"], "css": [] }, "routes/sitemap.xml": { "id": "routes/sitemap.xml", "parentId": "root", "path": "/sitemap.xml", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/sitemap.xml-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/homepage": { "id": "routes/homepage", "parentId": "root", "path": "homepage", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/homepage-B31w44Yt.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/YourGuide-BYl2f_HD.js", "/assets/components-CqyJs_9b.js", "/assets/lib-BhVPRy-q.js", "/assets/FooterAlt-CVazQV9m.js", "/assets/MainNav-BrQVVc1j.js", "/assets/index-CLt_mu8V.js", "/assets/LeftNav-BZC7Nwlr.js", "/assets/AuthContext-CD4rwEG9.js"], "css": [] }, "routes/landing": { "id": "routes/landing", "parentId": "root", "path": "landing", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-BspaleB3.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js"], "css": [] }, "routes/listing": { "id": "routes/listing", "parentId": "root", "path": "listing", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-DRKDp5xR.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/RatingContext-CMW2SlV8.js", "/assets/lib-BhVPRy-q.js", "/assets/components-CqyJs_9b.js", "/assets/RatingBoxSquare-BqLsbyqG.js", "/assets/SliderContext-WoTnsDSD.js", "/assets/index-CLt_mu8V.js", "/assets/VideoSliderContext-DwKEG9Kf.js", "/assets/ProductSliderContext-Qpf4CXkS.js", "/assets/AuthContext-CD4rwEG9.js", "/assets/NotificationContext-5qxxJsOx.js", "/assets/TopAd-CG5kM9eJ.js", "/assets/SearchLayout-DamiAwb8.js", "/assets/VerticalHeight-CjKseacd.js", "/assets/zod-DwrW5z8F.js", "/assets/OperationContext-BdFCpeXF.js", "/assets/types-DBTFAyTi.js", "/assets/FooterAlt-CVazQV9m.js", "/assets/MainNav-BrQVVc1j.js", "/assets/LeftNav-BZC7Nwlr.js"], "css": [] }, "routes/_index": { "id": "routes/_index", "parentId": "root", "path": void 0, "index": true, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/_index-DB9gsaFn.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/YourGuide-BYl2f_HD.js", "/assets/FooterAlt-CVazQV9m.js", "/assets/lib-BhVPRy-q.js", "/assets/OperationContext-BdFCpeXF.js", "/assets/components-CqyJs_9b.js", "/assets/MainNav-BrQVVc1j.js", "/assets/index-CLt_mu8V.js", "/assets/LeftNav-BZC7Nwlr.js", "/assets/AuthContext-CD4rwEG9.js"], "css": [] }, "routes/_404": { "id": "routes/_404", "parentId": "root", "path": "*", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/_404-DdbIyc08.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/MainNav-BrQVVc1j.js", "/assets/components-CqyJs_9b.js", "/assets/lib-BhVPRy-q.js", "/assets/index-CLt_mu8V.js", "/assets/LeftNav-BZC7Nwlr.js", "/assets/AuthContext-CD4rwEG9.js"], "css": [] }, "routes/web": { "id": "routes/web", "parentId": "root", "path": "web", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-Cmlstfnz.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js"], "css": [] }, "routes/listing/listing": { "id": "routes/listing/listing", "parentId": "root", "path": "/:id", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/listing-CRyGcFrh.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-CqyJs_9b.js", "/assets/RatingContext-CMW2SlV8.js", "/assets/SearchLayout-DamiAwb8.js", "/assets/SliderContext-WoTnsDSD.js", "/assets/lib-BhVPRy-q.js", "/assets/AuthContext-CD4rwEG9.js", "/assets/ShareDialogContext-qalLEDkl.js", "/assets/RatingBoxInfoCard-CtQoLbKN.js", "/assets/VideoSliderContext-DwKEG9Kf.js", "/assets/ProductSliderContext-Qpf4CXkS.js", "/assets/zod-DwrW5z8F.js", "/assets/NotificationContext-5qxxJsOx.js", "/assets/OperationContext-BdFCpeXF.js", "/assets/types-DBTFAyTi.js", "/assets/FooterAlt-CVazQV9m.js", "/assets/MainNav-BrQVVc1j.js", "/assets/index-CLt_mu8V.js", "/assets/LeftNav-BZC7Nwlr.js"], "css": [] }, "routes/listing/index": { "id": "routes/listing/index", "parentId": "root", "path": "/web/:id", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-DRKDp5xR.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/RatingContext-CMW2SlV8.js", "/assets/lib-BhVPRy-q.js", "/assets/components-CqyJs_9b.js", "/assets/RatingBoxSquare-BqLsbyqG.js", "/assets/SliderContext-WoTnsDSD.js", "/assets/index-CLt_mu8V.js", "/assets/VideoSliderContext-DwKEG9Kf.js", "/assets/ProductSliderContext-Qpf4CXkS.js", "/assets/AuthContext-CD4rwEG9.js", "/assets/NotificationContext-5qxxJsOx.js", "/assets/TopAd-CG5kM9eJ.js", "/assets/SearchLayout-DamiAwb8.js", "/assets/VerticalHeight-CjKseacd.js", "/assets/zod-DwrW5z8F.js", "/assets/OperationContext-BdFCpeXF.js", "/assets/types-DBTFAyTi.js", "/assets/FooterAlt-CVazQV9m.js", "/assets/MainNav-BrQVVc1j.js", "/assets/LeftNav-BZC7Nwlr.js"], "css": [] }, "routes/landing/index": { "id": "routes/landing/index", "parentId": "root", "path": "/landing", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-BspaleB3.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js"], "css": [] }, "routes/web/browse/index": { "id": "routes/web/browse/index", "parentId": "root", "path": "/web/srch", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-CJeEDTcr.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-CqyJs_9b.js", "/assets/lib-BhVPRy-q.js", "/assets/Featured-B9cli2QA.js", "/assets/Categories-DssDvnmQ.js", "/assets/RatingBoxSquare-BqLsbyqG.js", "/assets/MainNav-BrQVVc1j.js", "/assets/index-CLt_mu8V.js", "/assets/LeftNav-BZC7Nwlr.js", "/assets/AuthContext-CD4rwEG9.js"], "css": [] }, "routes/web/srch/index": { "id": "routes/web/srch/index", "parentId": "root", "path": "/web/search", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-hieIdaHb.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-CqyJs_9b.js", "/assets/MainNav-BrQVVc1j.js", "/assets/FooterAlt-CVazQV9m.js", "/assets/lib-BhVPRy-q.js", "/assets/Featured-B9cli2QA.js", "/assets/SearchAd-D6ctOjPR.js", "/assets/InfoCard-PQRX6PC1.js", "/assets/Pagination-Vi1XlgTL.js", "/assets/index-CLt_mu8V.js", "/assets/LeftNav-BZC7Nwlr.js", "/assets/AuthContext-CD4rwEG9.js", "/assets/json-ZhZtaBAh.js", "/assets/RatingBoxInfoCard-CtQoLbKN.js"], "css": [] }, "routes/web/categorycity/index": { "id": "routes/web/categorycity/index", "parentId": "root", "path": "/web/cat/:category/city/:city", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-DBGafdmf.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-CqyJs_9b.js", "/assets/FooterAlt-CVazQV9m.js", "/assets/MainNav-BrQVVc1j.js", "/assets/lib-BhVPRy-q.js", "/assets/Card-C-w_Kmkq.js", "/assets/index-CLt_mu8V.js", "/assets/LeftNav-BZC7Nwlr.js", "/assets/AuthContext-CD4rwEG9.js", "/assets/RatingBoxSquare-BqLsbyqG.js"], "css": [] }, "routes/web/categorycity/catcity/index": { "id": "routes/web/categorycity/catcity/index", "parentId": "root", "path": "/web/category/:category/city/:city", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-o9fFCSpJ.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/MainNav-BrQVVc1j.js", "/assets/FooterAlt-CVazQV9m.js", "/assets/lib-BhVPRy-q.js", "/assets/components-CqyJs_9b.js", "/assets/Featured-B9cli2QA.js", "/assets/SearchAd-D6ctOjPR.js", "/assets/InfoCard-PQRX6PC1.js", "/assets/index-CLt_mu8V.js", "/assets/LeftNav-BZC7Nwlr.js", "/assets/AuthContext-CD4rwEG9.js", "/assets/json-ZhZtaBAh.js", "/assets/RatingBoxInfoCard-CtQoLbKN.js"], "css": [] }, "routes/web/categorycity/category": { "id": "routes/web/categorycity/category", "parentId": "root", "path": "/web/cat/:category", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/category-Cp72bNaE.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-CqyJs_9b.js", "/assets/FooterAlt-CVazQV9m.js", "/assets/MainNav-BrQVVc1j.js", "/assets/lib-BhVPRy-q.js", "/assets/Card-C-w_Kmkq.js", "/assets/index-CLt_mu8V.js", "/assets/LeftNav-BZC7Nwlr.js", "/assets/AuthContext-CD4rwEG9.js", "/assets/RatingBoxSquare-BqLsbyqG.js"], "css": [] }, "routes/web/categorycity/cat/index": { "id": "routes/web/categorycity/cat/index", "parentId": "root", "path": "/web/category/:category", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-Dly006xb.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/MainNav-BrQVVc1j.js", "/assets/FooterAlt-CVazQV9m.js", "/assets/lib-BhVPRy-q.js", "/assets/components-CqyJs_9b.js", "/assets/Featured-B9cli2QA.js", "/assets/SearchAd-D6ctOjPR.js", "/assets/InfoCard-PQRX6PC1.js", "/assets/index-CLt_mu8V.js", "/assets/LeftNav-BZC7Nwlr.js", "/assets/AuthContext-CD4rwEG9.js", "/assets/json-ZhZtaBAh.js", "/assets/RatingBoxInfoCard-CtQoLbKN.js"], "css": [] }, "routes/web/browse/browse": { "id": "routes/web/browse/browse", "parentId": "root", "path": "/web/browser", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/browse-Bpk46hkb.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/SrchNavbar-BclWdl2q.js", "/assets/components-CqyJs_9b.js", "/assets/lib-BhVPRy-q.js", "/assets/UserMenu-Bng8wWWg.js", "/assets/LeftNav-BZC7Nwlr.js", "/assets/AuthContext-CD4rwEG9.js", "/assets/css-CVxtJxAn.js", "/assets/index-CLt_mu8V.js", "/assets/json-ZhZtaBAh.js"], "css": [] }, "routes/web/signin/index": { "id": "routes/web/signin/index", "parentId": "root", "path": "/web/signin", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-DMNtAuYF.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/zod-DwrW5z8F.js", "/assets/components-CqyJs_9b.js", "/assets/types-DBTFAyTi.js", "/assets/NotificationContext-5qxxJsOx.js", "/assets/OperationContext-BdFCpeXF.js", "/assets/AuthContext-CD4rwEG9.js", "/assets/AuthHeader-BHHSunR4.js", "/assets/lib-BhVPRy-q.js"], "css": [] }, "routes/web/signup/index": { "id": "routes/web/signup/index", "parentId": "root", "path": "/web/signup", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-U1a4x9tF.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/zod-DwrW5z8F.js", "/assets/components-CqyJs_9b.js", "/assets/OperationContext-BdFCpeXF.js", "/assets/NotificationContext-5qxxJsOx.js", "/assets/lib-BhVPRy-q.js", "/assets/types-DBTFAyTi.js", "/assets/AuthHeader-BHHSunR4.js"], "css": [] }, "routes/web/reset_password/index": { "id": "routes/web/reset_password/index", "parentId": "root", "path": "/web/reset-password", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-CaIjtpqy.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/zod-DwrW5z8F.js", "/assets/components-CqyJs_9b.js", "/assets/OperationContext-BdFCpeXF.js", "/assets/AuthContext-CD4rwEG9.js", "/assets/types-DBTFAyTi.js", "/assets/lib-BhVPRy-q.js", "/assets/NotificationContext-5qxxJsOx.js", "/assets/AuthHeader-BHHSunR4.js"], "css": [] }, "routes/web/account/index": { "id": "routes/web/account/index", "parentId": "root", "path": "/web/account", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-BaLUcFIa.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/AccountLayout-00qVkU1J.js", "/assets/ContentLayout-3EkUTb9A.js", "/assets/components-CqyJs_9b.js", "/assets/LeftNav-BZC7Nwlr.js", "/assets/lib-BhVPRy-q.js", "/assets/AuthContext-CD4rwEG9.js", "/assets/HomeNav-BoRcWLmj.js", "/assets/MainNav-BrQVVc1j.js", "/assets/index-CLt_mu8V.js", "/assets/BusinessMenu-BITNlXae.js", "/assets/BusinessDrawer-xwK0RZVP.js"], "css": [] }, "routes/web/account/profile/index": { "id": "routes/web/account/profile/index", "parentId": "root", "path": "/web/account/profile", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-BsXCqz0C.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-CqyJs_9b.js", "/assets/AuthContext-CD4rwEG9.js", "/assets/lib-BhVPRy-q.js", "/assets/NotificationContext-5qxxJsOx.js", "/assets/OperationContext-BdFCpeXF.js", "/assets/zod-DwrW5z8F.js", "/assets/types-DBTFAyTi.js", "/assets/Button-7Woa2p3a.js", "/assets/Input-BS9C0eXC.js", "/assets/Select-StinbZqy.js", "/assets/css-CVxtJxAn.js", "/assets/ProfileLayout-KWOqLqRm.js", "/assets/LoadingMessage-GuDUfNbD.js", "/assets/LeftNav-BZC7Nwlr.js", "/assets/HomeNav-BoRcWLmj.js", "/assets/MainNav-BrQVVc1j.js", "/assets/index-CLt_mu8V.js"], "css": [] }, "routes/web/account/email_address/index": { "id": "routes/web/account/email_address/index", "parentId": "root", "path": "/web/account/email_address", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-Cveo0e5X.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-CqyJs_9b.js", "/assets/AccountLayout-00qVkU1J.js", "/assets/AuthContext-CD4rwEG9.js", "/assets/lib-BhVPRy-q.js", "/assets/zod-DwrW5z8F.js", "/assets/Button-7Woa2p3a.js", "/assets/Input-BS9C0eXC.js", "/assets/types-DBTFAyTi.js", "/assets/css-CVxtJxAn.js", "/assets/NotificationContext-5qxxJsOx.js", "/assets/OperationContext-BdFCpeXF.js", "/assets/ProfileContentLayout-sXJeUBb6.js", "/assets/LoadingMessage-GuDUfNbD.js", "/assets/LeftNav-BZC7Nwlr.js", "/assets/HomeNav-BoRcWLmj.js", "/assets/MainNav-BrQVVc1j.js", "/assets/index-CLt_mu8V.js", "/assets/BusinessMenu-BITNlXae.js"], "css": [] }, "routes/web/account/change_password/index": { "id": "routes/web/account/change_password/index", "parentId": "root", "path": "/web/account/change_password", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-BHA55g9c.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-CqyJs_9b.js", "/assets/AccountLayout-00qVkU1J.js", "/assets/AuthContext-CD4rwEG9.js", "/assets/lib-BhVPRy-q.js", "/assets/zod-DwrW5z8F.js", "/assets/Button-7Woa2p3a.js", "/assets/Input-BS9C0eXC.js", "/assets/types-DBTFAyTi.js", "/assets/css-CVxtJxAn.js", "/assets/NotificationContext-5qxxJsOx.js", "/assets/OperationContext-BdFCpeXF.js", "/assets/ProfileContentLayout-sXJeUBb6.js", "/assets/LoadingMessage-GuDUfNbD.js", "/assets/LeftNav-BZC7Nwlr.js", "/assets/HomeNav-BoRcWLmj.js", "/assets/MainNav-BrQVVc1j.js", "/assets/index-CLt_mu8V.js", "/assets/BusinessMenu-BITNlXae.js"], "css": [] }, "routes/web/account/reset_password/index": { "id": "routes/web/account/reset_password/index", "parentId": "root", "path": "/web/account/reset_password", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-DjTH7vxv.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-CqyJs_9b.js", "/assets/AccountLayout-00qVkU1J.js", "/assets/AuthContext-CD4rwEG9.js", "/assets/lib-BhVPRy-q.js", "/assets/zod-DwrW5z8F.js", "/assets/Button-7Woa2p3a.js", "/assets/Input-BS9C0eXC.js", "/assets/types-DBTFAyTi.js", "/assets/css-CVxtJxAn.js", "/assets/NotificationContext-5qxxJsOx.js", "/assets/OperationContext-BdFCpeXF.js", "/assets/ProfileContentLayout-sXJeUBb6.js", "/assets/LoadingMessage-GuDUfNbD.js", "/assets/LeftNav-BZC7Nwlr.js", "/assets/HomeNav-BoRcWLmj.js", "/assets/MainNav-BrQVVc1j.js", "/assets/index-CLt_mu8V.js", "/assets/BusinessMenu-BITNlXae.js"], "css": [] }, "routes/web/account/deactivate_profile/index": { "id": "routes/web/account/deactivate_profile/index", "parentId": "root", "path": "/web/account/deactivate_profile", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-BSoHFZEP.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-CqyJs_9b.js", "/assets/AccountLayout-00qVkU1J.js", "/assets/AuthContext-CD4rwEG9.js", "/assets/lib-BhVPRy-q.js", "/assets/zod-DwrW5z8F.js", "/assets/Button-7Woa2p3a.js", "/assets/Input-BS9C0eXC.js", "/assets/types-DBTFAyTi.js", "/assets/css-CVxtJxAn.js", "/assets/NotificationContext-5qxxJsOx.js", "/assets/OperationContext-BdFCpeXF.js", "/assets/ProfileContentLayout-sXJeUBb6.js", "/assets/LoadingMessage-GuDUfNbD.js", "/assets/LeftNav-BZC7Nwlr.js", "/assets/HomeNav-BoRcWLmj.js", "/assets/MainNav-BrQVVc1j.js", "/assets/index-CLt_mu8V.js", "/assets/BusinessMenu-BITNlXae.js"], "css": [] }, "routes/web/terms/index": { "id": "routes/web/terms/index", "parentId": "root", "path": "/web/terms", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-CqtxVlYp.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/lib-BhVPRy-q.js", "/assets/VerticalHeight-CjKseacd.js", "/assets/FooterAlt-CVazQV9m.js", "/assets/SearchLayout-DamiAwb8.js", "/assets/components-CqyJs_9b.js", "/assets/MainNav-BrQVVc1j.js", "/assets/index-CLt_mu8V.js", "/assets/LeftNav-BZC7Nwlr.js", "/assets/AuthContext-CD4rwEG9.js"], "css": [] }, "routes/web/privacy/index": { "id": "routes/web/privacy/index", "parentId": "root", "path": "/web/privacy", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-B-jLH3Xr.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/lib-BhVPRy-q.js", "/assets/VerticalHeight-CjKseacd.js", "/assets/FooterAlt-CVazQV9m.js", "/assets/SearchLayout-DamiAwb8.js", "/assets/components-CqyJs_9b.js", "/assets/MainNav-BrQVVc1j.js", "/assets/index-CLt_mu8V.js", "/assets/LeftNav-BZC7Nwlr.js", "/assets/AuthContext-CD4rwEG9.js"], "css": [] }, "routes/web/contact/index": { "id": "routes/web/contact/index", "parentId": "root", "path": "/web/contact", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-98XHP-dS.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/lib-BhVPRy-q.js", "/assets/VerticalHeight-CjKseacd.js", "/assets/SearchLayout-DamiAwb8.js", "/assets/components-CqyJs_9b.js", "/assets/FooterAlt-CVazQV9m.js", "/assets/MainNav-BrQVVc1j.js", "/assets/index-CLt_mu8V.js", "/assets/LeftNav-BZC7Nwlr.js", "/assets/AuthContext-CD4rwEG9.js"], "css": [] }, "routes/web/browse/db": { "id": "routes/web/browse/db", "parentId": "root", "path": "/web/db", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/db-B9ROHeIy.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-CqyJs_9b.js", "/assets/SrchNavbar-BclWdl2q.js", "/assets/Categories-DssDvnmQ.js", "/assets/Featured-B9cli2QA.js", "/assets/FooterSection-Cs3Mcskf.js", "/assets/VerticalHeight-CjKseacd.js", "/assets/SearchAd-D6ctOjPR.js", "/assets/lib-BhVPRy-q.js", "/assets/UserMenu-Bng8wWWg.js", "/assets/LeftNav-BZC7Nwlr.js", "/assets/AuthContext-CD4rwEG9.js", "/assets/css-CVxtJxAn.js", "/assets/index-CLt_mu8V.js", "/assets/json-ZhZtaBAh.js"], "css": [] }, "routes/web/copyright/Copyright": { "id": "routes/web/copyright/Copyright", "parentId": "root", "path": "/web/copyright", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/Copyright-_0VK0lX7.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/MainNav-BrQVVc1j.js", "/assets/FooterAlt-CVazQV9m.js", "/assets/components-CqyJs_9b.js", "/assets/lib-BhVPRy-q.js", "/assets/index-CLt_mu8V.js", "/assets/LeftNav-BZC7Nwlr.js", "/assets/AuthContext-CD4rwEG9.js"], "css": [] }, "routes/web/responsible_disclosure/ResponsibleDisclosure": { "id": "routes/web/responsible_disclosure/ResponsibleDisclosure", "parentId": "root", "path": "/web/responsible-disclosure", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/ResponsibleDisclosure-DdHecMJI.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/lib-BhVPRy-q.js", "/assets/MainNav-BrQVVc1j.js", "/assets/FooterAlt-CVazQV9m.js", "/assets/components-CqyJs_9b.js", "/assets/index-CLt_mu8V.js", "/assets/LeftNav-BZC7Nwlr.js", "/assets/AuthContext-CD4rwEG9.js"], "css": [] }, "routes/web/account/portfolio/index": { "id": "routes/web/account/portfolio/index", "parentId": "root", "path": "/web/account/portfolio", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-C3k6tC0s.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-CqyJs_9b.js", "/assets/AccountLayout-00qVkU1J.js", "/assets/AuthContext-CD4rwEG9.js", "/assets/lib-BhVPRy-q.js", "/assets/LoadingMessage-GuDUfNbD.js", "/assets/LeftNav-BZC7Nwlr.js", "/assets/HomeNav-BoRcWLmj.js", "/assets/MainNav-BrQVVc1j.js", "/assets/index-CLt_mu8V.js"], "css": [] }, "routes/web/account/portfolio/business/index": { "id": "routes/web/account/portfolio/business/index", "parentId": "root", "path": "/web/account/portfolio/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-YXyKMRdj.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-CqyJs_9b.js", "/assets/AuthContext-CD4rwEG9.js", "/assets/lib-BhVPRy-q.js", "/assets/ProfileLayout-KWOqLqRm.js", "/assets/zod-DwrW5z8F.js", "/assets/types-DBTFAyTi.js", "/assets/SelectCurrency-BzCNd5zd.js", "/assets/NotificationContext-5qxxJsOx.js", "/assets/OperationContext-BdFCpeXF.js", "/assets/Button-7Woa2p3a.js", "/assets/Input-BS9C0eXC.js", "/assets/css-CVxtJxAn.js", "/assets/TextareaWithWordLimit-CdyeyW5X.js", "/assets/Select-StinbZqy.js", "/assets/BusinessMenu-BITNlXae.js", "/assets/BusinessDrawer-xwK0RZVP.js", "/assets/LoadingMessage-GuDUfNbD.js", "/assets/LeftNav-BZC7Nwlr.js", "/assets/HomeNav-BoRcWLmj.js", "/assets/MainNav-BrQVVc1j.js", "/assets/index-CLt_mu8V.js"], "css": [] }, "routes/web/account/create_business/index": { "id": "routes/web/account/create_business/index", "parentId": "root", "path": "/web/account/create_business", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-BMd5uaW8.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-CqyJs_9b.js", "/assets/AccountLayout-00qVkU1J.js", "/assets/AuthContext-CD4rwEG9.js", "/assets/zod-DwrW5z8F.js", "/assets/lib-BhVPRy-q.js", "/assets/Input-BS9C0eXC.js", "/assets/Select-StinbZqy.js", "/assets/Button-7Woa2p3a.js", "/assets/css-CVxtJxAn.js", "/assets/TextareaWithWordLimit-CdyeyW5X.js", "/assets/CreatePageSchema-Cx5KYOuQ.js", "/assets/NotificationContext-5qxxJsOx.js", "/assets/OperationContext-BdFCpeXF.js", "/assets/SelectCurrency-BzCNd5zd.js", "/assets/ProfileContentLayout-sXJeUBb6.js", "/assets/LoadingMessage-GuDUfNbD.js", "/assets/LeftNav-BZC7Nwlr.js", "/assets/HomeNav-BoRcWLmj.js", "/assets/MainNav-BrQVVc1j.js", "/assets/index-CLt_mu8V.js", "/assets/types-DBTFAyTi.js", "/assets/BusinessMenu-BITNlXae.js"], "css": [] }, "routes/web/account/portfolio/business/settings/index": { "id": "routes/web/account/portfolio/business/settings/index", "parentId": "root", "path": "/web/account/portfolio/:business_guid/:user_guid/settings", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-BCiNhFkT.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/zod-DwrW5z8F.js", "/assets/components-CqyJs_9b.js", "/assets/lib-BhVPRy-q.js", "/assets/types-DBTFAyTi.js", "/assets/AccountLayout-00qVkU1J.js", "/assets/ContentLayout-3EkUTb9A.js", "/assets/NotificationContext-5qxxJsOx.js", "/assets/OperationContext-BdFCpeXF.js", "/assets/css-CVxtJxAn.js", "/assets/AuthContext-CD4rwEG9.js", "/assets/LoadingMessage-GuDUfNbD.js", "/assets/LeftNav-BZC7Nwlr.js", "/assets/HomeNav-BoRcWLmj.js", "/assets/MainNav-BrQVVc1j.js", "/assets/index-CLt_mu8V.js", "/assets/BusinessMenu-BITNlXae.js", "/assets/BusinessDrawer-xwK0RZVP.js"], "css": [] }, "routes/web/account/portfolio/business/gallery/index": { "id": "routes/web/account/portfolio/business/gallery/index", "parentId": "root", "path": "/web/account/portfolio/:business_guid/:user_guid/gallery", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-B2IhVATV.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-CqyJs_9b.js", "/assets/AccountLayout-00qVkU1J.js", "/assets/ContentLayout-3EkUTb9A.js", "/assets/lib-BhVPRy-q.js", "/assets/EditPhotoDialogContext-D-D3E5Sr.js", "/assets/NotificationContext-5qxxJsOx.js", "/assets/index-CLt_mu8V.js", "/assets/SliderContext-WoTnsDSD.js", "/assets/AuthContext-CD4rwEG9.js", "/assets/OperationContext-BdFCpeXF.js", "/assets/LoadingMessage-GuDUfNbD.js", "/assets/LeftNav-BZC7Nwlr.js", "/assets/HomeNav-BoRcWLmj.js", "/assets/MainNav-BrQVVc1j.js", "/assets/BusinessMenu-BITNlXae.js", "/assets/BusinessDrawer-xwK0RZVP.js"], "css": [] }, "routes/web/account/portfolio/business/products/index": { "id": "routes/web/account/portfolio/business/products/index", "parentId": "root", "path": "/web/account/portfolio/:business_guid/:user_guid/products", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-Buc499dj.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-CqyJs_9b.js", "/assets/AccountLayout-00qVkU1J.js", "/assets/ContentLayout-3EkUTb9A.js", "/assets/lib-BhVPRy-q.js", "/assets/AuthContext-CD4rwEG9.js", "/assets/NotificationContext-5qxxJsOx.js", "/assets/OperationContext-BdFCpeXF.js", "/assets/index-CLt_mu8V.js", "/assets/ProductSliderContext-Qpf4CXkS.js", "/assets/LoadingMessage-GuDUfNbD.js", "/assets/LeftNav-BZC7Nwlr.js", "/assets/HomeNav-BoRcWLmj.js", "/assets/MainNav-BrQVVc1j.js", "/assets/BusinessMenu-BITNlXae.js", "/assets/BusinessDrawer-xwK0RZVP.js"], "css": [] }, "routes/web/account/portfolio/business/services/index": { "id": "routes/web/account/portfolio/business/services/index", "parentId": "root", "path": "/web/account/portfolio/:business_guid/:user_guid/services", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-C7Rk1gtC.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-CqyJs_9b.js", "/assets/AccountLayout-00qVkU1J.js", "/assets/ContentLayout-3EkUTb9A.js", "/assets/lib-BhVPRy-q.js", "/assets/AuthContext-CD4rwEG9.js", "/assets/zod-DwrW5z8F.js", "/assets/Button-7Woa2p3a.js", "/assets/Input-BS9C0eXC.js", "/assets/TextareaWithWordLimit-CdyeyW5X.js", "/assets/css-CVxtJxAn.js", "/assets/OperationContext-BdFCpeXF.js", "/assets/types-DBTFAyTi.js", "/assets/Pagination-Vi1XlgTL.js", "/assets/LeftNav-BZC7Nwlr.js", "/assets/HomeNav-BoRcWLmj.js", "/assets/MainNav-BrQVVc1j.js", "/assets/index-CLt_mu8V.js", "/assets/BusinessMenu-BITNlXae.js", "/assets/BusinessDrawer-xwK0RZVP.js"], "css": [] }, "routes/web/account/portfolio/business/videos/index": { "id": "routes/web/account/portfolio/business/videos/index", "parentId": "root", "path": "/web/account/portfolio/:business_guid/:user_guid/videos", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-CJkybXrs.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-CqyJs_9b.js", "/assets/AccountLayout-00qVkU1J.js", "/assets/ContentLayout-3EkUTb9A.js", "/assets/lib-BhVPRy-q.js", "/assets/EditVideoDialogContext-CmdFEghF.js", "/assets/NotificationContext-5qxxJsOx.js", "/assets/index-CLt_mu8V.js", "/assets/VideoSliderContext-DwKEG9Kf.js", "/assets/AuthContext-CD4rwEG9.js", "/assets/LoadingMessage-GuDUfNbD.js", "/assets/LeftNav-BZC7Nwlr.js", "/assets/HomeNav-BoRcWLmj.js", "/assets/MainNav-BrQVVc1j.js", "/assets/BusinessMenu-BITNlXae.js", "/assets/BusinessDrawer-xwK0RZVP.js", "/assets/OperationContext-BdFCpeXF.js", "/assets/types-DBTFAyTi.js"], "css": [] }, "routes/web/account/portfolio/business/facilities/index": { "id": "routes/web/account/portfolio/business/facilities/index", "parentId": "root", "path": "/web/account/portfolio/:business_guid/:user_guid/facilities", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-Er5v3OBV.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-CqyJs_9b.js", "/assets/AccountLayout-00qVkU1J.js", "/assets/ContentLayout-3EkUTb9A.js", "/assets/lib-BhVPRy-q.js", "/assets/AuthContext-CD4rwEG9.js", "/assets/Pagination-Vi1XlgTL.js", "/assets/zod-DwrW5z8F.js", "/assets/Button-7Woa2p3a.js", "/assets/TextareaWithWordLimit-CdyeyW5X.js", "/assets/css-CVxtJxAn.js", "/assets/OperationContext-BdFCpeXF.js", "/assets/Select-StinbZqy.js", "/assets/types-DBTFAyTi.js", "/assets/LeftNav-BZC7Nwlr.js", "/assets/HomeNav-BoRcWLmj.js", "/assets/MainNav-BrQVVc1j.js", "/assets/index-CLt_mu8V.js", "/assets/BusinessMenu-BITNlXae.js", "/assets/BusinessDrawer-xwK0RZVP.js"], "css": [] }, "routes/web/account/portfolio/business/activate/index": { "id": "routes/web/account/portfolio/business/activate/index", "parentId": "root", "path": "/web/account/portfolio/:business_guid/:user_guid/activate", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-ptCELhZD.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-CqyJs_9b.js", "/assets/NotificationContext-5qxxJsOx.js", "/assets/OperationContext-BdFCpeXF.js", "/assets/lib-BhVPRy-q.js", "/assets/AccountLayout-00qVkU1J.js", "/assets/ContentLayout-3EkUTb9A.js", "/assets/AuthContext-CD4rwEG9.js", "/assets/LoadingMessage-GuDUfNbD.js", "/assets/LeftNav-BZC7Nwlr.js", "/assets/HomeNav-BoRcWLmj.js", "/assets/MainNav-BrQVVc1j.js", "/assets/index-CLt_mu8V.js", "/assets/BusinessMenu-BITNlXae.js", "/assets/BusinessDrawer-xwK0RZVP.js"], "css": [] }, "routes/web/account/portfolio/business/socialmedia/index": { "id": "routes/web/account/portfolio/business/socialmedia/index", "parentId": "root", "path": "/web/account/portfolio/:business_guid/:user_guid/social_media", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-B2vOAlp5.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-CqyJs_9b.js", "/assets/AccountLayout-00qVkU1J.js", "/assets/ContentLayout-3EkUTb9A.js", "/assets/lib-BhVPRy-q.js", "/assets/AuthContext-CD4rwEG9.js", "/assets/Pagination-Vi1XlgTL.js", "/assets/zod-DwrW5z8F.js", "/assets/Button-7Woa2p3a.js", "/assets/Input-BS9C0eXC.js", "/assets/OperationContext-BdFCpeXF.js", "/assets/Select-StinbZqy.js", "/assets/types-DBTFAyTi.js", "/assets/LeftNav-BZC7Nwlr.js", "/assets/HomeNav-BoRcWLmj.js", "/assets/MainNav-BrQVVc1j.js", "/assets/index-CLt_mu8V.js", "/assets/BusinessMenu-BITNlXae.js", "/assets/BusinessDrawer-xwK0RZVP.js", "/assets/css-CVxtJxAn.js"], "css": [] }, "routes/web/account/portfolio/business/delete/index": { "id": "routes/web/account/portfolio/business/delete/index", "parentId": "root", "path": "/web/account/portfolio/:business_guid/:user_guid/delete", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-s33e9AsS.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-CqyJs_9b.js", "/assets/lib-BhVPRy-q.js", "/assets/AccountLayout-00qVkU1J.js", "/assets/ContentLayout-3EkUTb9A.js", "/assets/AuthContext-CD4rwEG9.js", "/assets/zod-DwrW5z8F.js", "/assets/Button-7Woa2p3a.js", "/assets/Input-BS9C0eXC.js", "/assets/NotificationContext-5qxxJsOx.js", "/assets/types-DBTFAyTi.js", "/assets/OperationContext-BdFCpeXF.js", "/assets/LoadingMessage-GuDUfNbD.js", "/assets/LeftNav-BZC7Nwlr.js", "/assets/HomeNav-BoRcWLmj.js", "/assets/MainNav-BrQVVc1j.js", "/assets/index-CLt_mu8V.js", "/assets/BusinessMenu-BITNlXae.js", "/assets/BusinessDrawer-xwK0RZVP.js", "/assets/css-CVxtJxAn.js"], "css": [] }, "routes/web/account/portfolio/business/reassign/index": { "id": "routes/web/account/portfolio/business/reassign/index", "parentId": "root", "path": "/web/account/portfolio/:business_guid/:user_guid/reassign", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-B0vN-p00.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-CqyJs_9b.js", "/assets/lib-BhVPRy-q.js", "/assets/AccountLayout-00qVkU1J.js", "/assets/ContentLayout-3EkUTb9A.js", "/assets/AuthContext-CD4rwEG9.js", "/assets/OperationContext-BdFCpeXF.js", "/assets/LoadingMessage-GuDUfNbD.js", "/assets/LeftNav-BZC7Nwlr.js", "/assets/HomeNav-BoRcWLmj.js", "/assets/MainNav-BrQVVc1j.js", "/assets/index-CLt_mu8V.js", "/assets/BusinessMenu-BITNlXae.js", "/assets/BusinessDrawer-xwK0RZVP.js"], "css": [] }, "routes/web/account/events/index": { "id": "routes/web/account/events/index", "parentId": "root", "path": "/web/account/events", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-CzYKiczR.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/AccountLayout-00qVkU1J.js", "/assets/ProfileContentLayout-sXJeUBb6.js", "/assets/zod-DwrW5z8F.js", "/assets/components-CqyJs_9b.js", "/assets/OperationContext-BdFCpeXF.js", "/assets/CreatePageSchema-Cx5KYOuQ.js", "/assets/Input-BS9C0eXC.js", "/assets/css-CVxtJxAn.js", "/assets/LeftNav-BZC7Nwlr.js", "/assets/lib-BhVPRy-q.js", "/assets/AuthContext-CD4rwEG9.js", "/assets/HomeNav-BoRcWLmj.js", "/assets/MainNav-BrQVVc1j.js", "/assets/index-CLt_mu8V.js", "/assets/BusinessMenu-BITNlXae.js", "/assets/types-DBTFAyTi.js"], "css": ["/assets/index-BIhNhsOi.css"] }, "routes/web/landing/change_email/index": { "id": "routes/web/landing/change_email/index", "parentId": "root", "path": "/web/landing/change_email", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-Cg_PmAqI.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-CqyJs_9b.js", "/assets/AuthContext-CD4rwEG9.js", "/assets/lib-BhVPRy-q.js"], "css": [] }, "routes/web/landing/reset_password/index": { "id": "routes/web/landing/reset_password/index", "parentId": "root", "path": "/web/landing/reset_password/:guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-DK-vS5v1.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/zod-DwrW5z8F.js", "/assets/components-CqyJs_9b.js", "/assets/OperationContext-BdFCpeXF.js", "/assets/AuthContext-CD4rwEG9.js", "/assets/NotificationContext-5qxxJsOx.js", "/assets/lib-BhVPRy-q.js", "/assets/types-DBTFAyTi.js"], "css": [] }, "routes/web/landing/complete_signup/index": { "id": "routes/web/landing/complete_signup/index", "parentId": "root", "path": "/web/landing/complete_signup/:guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-Cx6hzgSW.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-CqyJs_9b.js", "/assets/lib-BhVPRy-q.js"], "css": [] }, "routes/api/user/index": { "id": "routes/api/user/index", "parentId": "root", "path": "api/user", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/signin": { "id": "routes/api/user/signin", "parentId": "root", "path": "api/user/signin", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/signin-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/verifytoken": { "id": "routes/api/user/verifytoken", "parentId": "root", "path": "api/user/verifytoken", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/verifytoken-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/user": { "id": "routes/api/user/user", "parentId": "root", "path": "api/user/:guid", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/user-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/change_password": { "id": "routes/api/user/change_password", "parentId": "root", "path": "api/user/change_password/:guid", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/change_password-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/reset_password_request": { "id": "routes/api/user/reset_password_request", "parentId": "root", "path": "api/user/reset_password_request", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/reset_password_request-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/reset_password": { "id": "routes/api/user/reset_password", "parentId": "root", "path": "api/user/reset_password/:guid", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/reset_password-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/activate_deactivate": { "id": "routes/api/user/activate_deactivate", "parentId": "root", "path": "api/user/activate_deactivate/:guid", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/activate_deactivate-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/user_profile_image": { "id": "routes/api/user/user_profile_image", "parentId": "root", "path": "api/user/user_profile_image/:guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/user_profile_image-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/user_profile_bg": { "id": "routes/api/user/user_profile_bg", "parentId": "root", "path": "api/user/user_profile_bg/:guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/user_profile_bg-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/change_email_request": { "id": "routes/api/user/change_email_request", "parentId": "root", "path": "api/user/change_email_request", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/change_email_request-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/change_email": { "id": "routes/api/user/change_email", "parentId": "root", "path": "api/user/change_email", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/change_email-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/verify_signup": { "id": "routes/api/user/verify_signup", "parentId": "root", "path": "api/user/verify_signup/:user_hash", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/verify_signup-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/index": { "id": "routes/api/listing/index", "parentId": "root", "path": "api/listing", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-DP2rzg_V.js", "imports": [], "css": [] }, "routes/api/listing/listing": { "id": "routes/api/listing/listing", "parentId": "root", "path": "api/listing/:guid_or_username", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/listing-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/search": { "id": "routes/api/listing/search", "parentId": "root", "path": "api/listing/search", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/search-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/searchlisting": { "id": "routes/api/listing/searchlisting", "parentId": "root", "path": "api/listing/searchlisting", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/searchlisting-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/featured_listing": { "id": "routes/api/listing/featured_listing", "parentId": "root", "path": "api/listing/featured_listing", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/featured_listing-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/business_facility_features": { "id": "routes/api/listing/business_facility_features", "parentId": "root", "path": "api/listing/business_facility_features/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_facility_features-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/related_by_category": { "id": "routes/api/listing/related_by_category", "parentId": "root", "path": "api/listing/related_by_category/:category/:limit", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/related_by_category-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/nearby_businesses": { "id": "routes/api/listing/nearby_businesses", "parentId": "root", "path": "api/listing/nearby_businesses/:city_id/:limit", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/nearby_businesses-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/listing_by_category": { "id": "routes/api/listing/listing_by_category", "parentId": "root", "path": "api/listing/listing_by_category/:category/:limit", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/listing_by_category-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/home_listing_by_category": { "id": "routes/api/listing/home_listing_by_category", "parentId": "root", "path": "api/listing/home_listing_by_category/:category/:limit", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/home_listing_by_category-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/home_latest_businesses": { "id": "routes/api/listing/home_latest_businesses", "parentId": "root", "path": "api/listing/home_latest_businesses/:limit", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/home_latest_businesses-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/business_gallery": { "id": "routes/api/listing/business_gallery", "parentId": "root", "path": "api/listing/business_gallery/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_gallery-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/business_profile_image": { "id": "routes/api/listing/business_profile_image", "parentId": "root", "path": "api/listing/business_profile_image/:guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_profile_image-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/business_profile_bg": { "id": "routes/api/listing/business_profile_bg", "parentId": "root", "path": "api/listing/business_profile_bg/:guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_profile_bg-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/owner/index": { "id": "routes/api/listing/owner/index", "parentId": "root", "path": "api/listing/owner", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-K6Dvbx-E.js", "imports": [], "css": [] }, "routes/api/listing/delete_business": { "id": "routes/api/listing/delete_business", "parentId": "root", "path": "api/listing/delete_business/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/delete_business-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/reassign_business": { "id": "routes/api/listing/reassign_business", "parentId": "root", "path": "api/listing/reassign_business", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/reassign_business-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/business_single_search": { "id": "routes/api/listing/business_single_search", "parentId": "root", "path": "api/listing/business_single_search", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_single_search-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/user_single_search": { "id": "routes/api/listing/user_single_search", "parentId": "root", "path": "api/listing/user_single_search", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/user_single_search-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/operating_hours": { "id": "routes/api/listing/operating_hours", "parentId": "root", "path": "api/listing/operating_hours", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/operating_hours-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/gallery": { "id": "routes/api/listing/gallery", "parentId": "root", "path": "api/listing/gallery/:business_guid/:user_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/gallery-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/facilities/index": { "id": "routes/api/listing/facilities/index", "parentId": "root", "path": "api/listing/facilities", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-C6Kfwj0f.js", "imports": [], "css": [] }, "routes/api/listing/facilities/facility": { "id": "routes/api/listing/facilities/facility", "parentId": "root", "path": "api/listing/facilities/:facility_guid", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/facility-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/facilities/facilities": { "id": "routes/api/listing/facilities/facilities", "parentId": "root", "path": "api/listing/facilities/:business_guid/:user_guid", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/facilities-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/sys_facilities/index": { "id": "routes/api/listing/sys_facilities/index", "parentId": "root", "path": "api/listing/sys_facilities", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-RnTpOC5-.js", "imports": [], "css": [] }, "routes/api/listing/sys_facility_features/index": { "id": "routes/api/listing/sys_facility_features/index", "parentId": "root", "path": "api/listing/sys_facility_features", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-DVN7Oi2P.js", "imports": [], "css": [] }, "routes/api/listing/selected_facility_features/selected_facility_features": { "id": "routes/api/listing/selected_facility_features/selected_facility_features", "parentId": "root", "path": "api/listing/selected_facility_features/:user_guid/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/selected_facility_features-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/selected_facility_features/index": { "id": "routes/api/listing/selected_facility_features/index", "parentId": "root", "path": "api/listing/selected_facility_features", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-DdXTRxfG.js", "imports": [], "css": [] }, "routes/api/listing/social_media/index": { "id": "routes/api/listing/social_media/index", "parentId": "root", "path": "api/listing/social_media", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-BIjMHF-b.js", "imports": [], "css": [] }, "routes/api/listing/social_media/social_medium": { "id": "routes/api/listing/social_media/social_medium", "parentId": "root", "path": "api/listing/social_media/:social_media_guid", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/social_medium-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/social_media/social_media": { "id": "routes/api/listing/social_media/social_media", "parentId": "root", "path": "api/listing/social_media/:business_guid/:user_guid", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/social_media-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/sys_social_media/index": { "id": "routes/api/listing/sys_social_media/index", "parentId": "root", "path": "api/listing/sys_social_media", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-BQEWTaK-.js", "imports": [], "css": [] }, "routes/api/listing/selected_social_media/selected_social_media": { "id": "routes/api/listing/selected_social_media/selected_social_media", "parentId": "root", "path": "api/listing/selected_social_media/:user_guid/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/selected_social_media-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/selected_social_media/index": { "id": "routes/api/listing/selected_social_media/index", "parentId": "root", "path": "api/listing/selected_social_media", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-My_wb10K.js", "imports": [], "css": [] }, "routes/api/listing/business_social_media": { "id": "routes/api/listing/business_social_media", "parentId": "root", "path": "api/listing/business_social_media/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_social_media-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/activate/activate": { "id": "routes/api/listing/activate/activate", "parentId": "root", "path": "api/listing/activate/:user_guid/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/activate-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/recents": { "id": "routes/api/listing/recents", "parentId": "root", "path": "api/listing/recents", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/recents-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/video_link": { "id": "routes/api/listing/video_link", "parentId": "root", "path": "api/listing/save_video_link", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/video_link-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/video_links": { "id": "routes/api/listing/video_links", "parentId": "root", "path": "api/listing/video_links/:business_guid/:user_guid", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/video_links-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/video_links_listing": { "id": "routes/api/listing/video_links_listing", "parentId": "root", "path": "api/listing/video_links/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/video_links_listing-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/products/index": { "id": "routes/api/listing/products/index", "parentId": "root", "path": "api/listing/products/:business_guid/:user_guid", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-D0WdxB02.js", "imports": [], "css": [] }, "routes/api/listing/services/services": { "id": "routes/api/listing/services/services", "parentId": "root", "path": "api/listing/services/:business_guid/:user_guid", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/services-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/services/index": { "id": "routes/api/listing/services/index", "parentId": "root", "path": "api/listing/services", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-C3LV8HgG.js", "imports": [], "css": [] }, "routes/api/listing/services/service": { "id": "routes/api/listing/services/service", "parentId": "root", "path": "api/listing/services/:service_guid", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/service-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/services/services_by_business_guid": { "id": "routes/api/listing/services/services_by_business_guid", "parentId": "root", "path": "api/listing/business/services/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/services_by_business_guid-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/category": { "id": "routes/api/listing/category", "parentId": "root", "path": "api/listing/category/:category", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/category-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/category_city": { "id": "routes/api/listing/category_city", "parentId": "root", "path": "api/listing/category_city/:category/:city", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/category_city-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/category_city_sitexml": { "id": "routes/api/listing/category_city_sitexml", "parentId": "root", "path": "api/listing/cat_city_sitexml", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/category_city_sitexml-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/category_sitexml": { "id": "routes/api/listing/category_sitexml", "parentId": "root", "path": "api/listing/cat_sitexml", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/category_sitexml-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/rating/index": { "id": "routes/api/rating/index", "parentId": "root", "path": "api/rating", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-LjUnHRa3.js", "imports": [], "css": [] }, "routes/api/rating/rating": { "id": "routes/api/rating/rating", "parentId": "root", "path": "api/rating/:user_guid/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/rating-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/rating/business_ratings": { "id": "routes/api/rating/business_ratings", "parentId": "root", "path": "api/rating/business_ratings/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_ratings-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/rating/ratings_reviews": { "id": "routes/api/rating/ratings_reviews", "parentId": "root", "path": "api/rating/ratings_reviews/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/ratings_reviews-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/rating/rate_business": { "id": "routes/api/rating/rate_business", "parentId": "root", "path": "api/rating/rate_business", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/rate_business-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/rating/get_business_rating": { "id": "routes/api/rating/get_business_rating", "parentId": "root", "path": "api/rating/get_business_rating/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/get_business_rating-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/rating/get_business_reviews": { "id": "routes/api/rating/get_business_reviews", "parentId": "root", "path": "api/rating/get_business_reviews/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/get_business_reviews-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/util/state": { "id": "routes/api/util/state", "parentId": "root", "path": "api/util/state", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/state-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/util/country": { "id": "routes/api/util/country", "parentId": "root", "path": "api/util/country", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/country-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/util/country_locale": { "id": "routes/api/util/country_locale", "parentId": "root", "path": "api/util/country_locale", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/country_locale-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/util/city": { "id": "routes/api/util/city", "parentId": "root", "path": "api/util/city", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/city-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/util/category": { "id": "routes/api/util/category", "parentId": "root", "path": "api/util/category", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/category-DP2rzg_V.js", "imports": [], "css": [] }, "routes/api/util/currencies": { "id": "routes/api/util/currencies", "parentId": "root", "path": "api/util/currencies", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/currencies-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/util/country_currencies": { "id": "routes/api/util/country_currencies", "parentId": "root", "path": "api/util/country_currencies", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/country_currencies-l0sNRNKZ.js", "imports": [], "css": [] } }, "url": "/assets/manifest-cab5800e.js", "version": "cab5800e" };
 const mode = "production";
 const assetsBuildDirectory = "build/client";
 const basename = "/";
@@ -23812,7 +30635,7 @@ const routes = {
     path: "landing",
     index: void 0,
     caseSensitive: void 0,
-    module: route15
+    module: route16
   },
   "routes/listing": {
     id: "routes/listing",
@@ -23820,7 +30643,7 @@ const routes = {
     path: "listing",
     index: void 0,
     caseSensitive: void 0,
-    module: route14
+    module: route15
   },
   "routes/_index": {
     id: "routes/_index",
@@ -23846,13 +30669,21 @@ const routes = {
     caseSensitive: void 0,
     module: route13
   },
-  "routes/listing/index": {
-    id: "routes/listing/index",
+  "routes/listing/listing": {
+    id: "routes/listing/listing",
     parentId: "root",
     path: "/:id",
     index: void 0,
     caseSensitive: void 0,
     module: route14
+  },
+  "routes/listing/index": {
+    id: "routes/listing/index",
+    parentId: "root",
+    path: "/web/:id",
+    index: void 0,
+    caseSensitive: void 0,
+    module: route15
   },
   "routes/landing/index": {
     id: "routes/landing/index",
@@ -23860,31 +30691,55 @@ const routes = {
     path: "/landing",
     index: void 0,
     caseSensitive: void 0,
-    module: route15
+    module: route16
   },
   "routes/web/browse/index": {
     id: "routes/web/browse/index",
     parentId: "root",
-    path: "/web/search",
-    index: void 0,
-    caseSensitive: void 0,
-    module: route16
-  },
-  "routes/web/categorycity/index": {
-    id: "routes/web/categorycity/index",
-    parentId: "root",
-    path: "/web/category/:category/city/:city",
+    path: "/web/srch",
     index: void 0,
     caseSensitive: void 0,
     module: route17
   },
+  "routes/web/srch/index": {
+    id: "routes/web/srch/index",
+    parentId: "root",
+    path: "/web/search",
+    index: void 0,
+    caseSensitive: void 0,
+    module: route18
+  },
+  "routes/web/categorycity/index": {
+    id: "routes/web/categorycity/index",
+    parentId: "root",
+    path: "/web/cat/:category/city/:city",
+    index: void 0,
+    caseSensitive: void 0,
+    module: route19
+  },
+  "routes/web/categorycity/catcity/index": {
+    id: "routes/web/categorycity/catcity/index",
+    parentId: "root",
+    path: "/web/category/:category/city/:city",
+    index: void 0,
+    caseSensitive: void 0,
+    module: route20
+  },
   "routes/web/categorycity/category": {
     id: "routes/web/categorycity/category",
+    parentId: "root",
+    path: "/web/cat/:category",
+    index: void 0,
+    caseSensitive: void 0,
+    module: route21
+  },
+  "routes/web/categorycity/cat/index": {
+    id: "routes/web/categorycity/cat/index",
     parentId: "root",
     path: "/web/category/:category",
     index: void 0,
     caseSensitive: void 0,
-    module: route18
+    module: route22
   },
   "routes/web/browse/browse": {
     id: "routes/web/browse/browse",
@@ -23892,7 +30747,7 @@ const routes = {
     path: "/web/browser",
     index: void 0,
     caseSensitive: void 0,
-    module: route19
+    module: route23
   },
   "routes/web/signin/index": {
     id: "routes/web/signin/index",
@@ -23900,7 +30755,7 @@ const routes = {
     path: "/web/signin",
     index: void 0,
     caseSensitive: void 0,
-    module: route20
+    module: route24
   },
   "routes/web/signup/index": {
     id: "routes/web/signup/index",
@@ -23908,7 +30763,7 @@ const routes = {
     path: "/web/signup",
     index: void 0,
     caseSensitive: void 0,
-    module: route21
+    module: route25
   },
   "routes/web/reset_password/index": {
     id: "routes/web/reset_password/index",
@@ -23916,7 +30771,7 @@ const routes = {
     path: "/web/reset-password",
     index: void 0,
     caseSensitive: void 0,
-    module: route22
+    module: route26
   },
   "routes/web/account/index": {
     id: "routes/web/account/index",
@@ -23924,7 +30779,7 @@ const routes = {
     path: "/web/account",
     index: void 0,
     caseSensitive: void 0,
-    module: route23
+    module: route27
   },
   "routes/web/account/profile/index": {
     id: "routes/web/account/profile/index",
@@ -23932,7 +30787,7 @@ const routes = {
     path: "/web/account/profile",
     index: void 0,
     caseSensitive: void 0,
-    module: route24
+    module: route28
   },
   "routes/web/account/email_address/index": {
     id: "routes/web/account/email_address/index",
@@ -23940,7 +30795,7 @@ const routes = {
     path: "/web/account/email_address",
     index: void 0,
     caseSensitive: void 0,
-    module: route25
+    module: route29
   },
   "routes/web/account/change_password/index": {
     id: "routes/web/account/change_password/index",
@@ -23948,7 +30803,7 @@ const routes = {
     path: "/web/account/change_password",
     index: void 0,
     caseSensitive: void 0,
-    module: route26
+    module: route30
   },
   "routes/web/account/reset_password/index": {
     id: "routes/web/account/reset_password/index",
@@ -23956,7 +30811,7 @@ const routes = {
     path: "/web/account/reset_password",
     index: void 0,
     caseSensitive: void 0,
-    module: route27
+    module: route31
   },
   "routes/web/account/deactivate_profile/index": {
     id: "routes/web/account/deactivate_profile/index",
@@ -23964,7 +30819,7 @@ const routes = {
     path: "/web/account/deactivate_profile",
     index: void 0,
     caseSensitive: void 0,
-    module: route28
+    module: route32
   },
   "routes/web/terms/index": {
     id: "routes/web/terms/index",
@@ -23972,7 +30827,7 @@ const routes = {
     path: "/web/terms",
     index: void 0,
     caseSensitive: void 0,
-    module: route29
+    module: route33
   },
   "routes/web/privacy/index": {
     id: "routes/web/privacy/index",
@@ -23980,7 +30835,7 @@ const routes = {
     path: "/web/privacy",
     index: void 0,
     caseSensitive: void 0,
-    module: route30
+    module: route34
   },
   "routes/web/contact/index": {
     id: "routes/web/contact/index",
@@ -23988,7 +30843,7 @@ const routes = {
     path: "/web/contact",
     index: void 0,
     caseSensitive: void 0,
-    module: route31
+    module: route35
   },
   "routes/web/browse/db": {
     id: "routes/web/browse/db",
@@ -23996,7 +30851,7 @@ const routes = {
     path: "/web/db",
     index: void 0,
     caseSensitive: void 0,
-    module: route32
+    module: route36
   },
   "routes/web/copyright/Copyright": {
     id: "routes/web/copyright/Copyright",
@@ -24004,7 +30859,7 @@ const routes = {
     path: "/web/copyright",
     index: void 0,
     caseSensitive: void 0,
-    module: route33
+    module: route37
   },
   "routes/web/responsible_disclosure/ResponsibleDisclosure": {
     id: "routes/web/responsible_disclosure/ResponsibleDisclosure",
@@ -24012,7 +30867,7 @@ const routes = {
     path: "/web/responsible-disclosure",
     index: void 0,
     caseSensitive: void 0,
-    module: route34
+    module: route38
   },
   "routes/web/account/portfolio/index": {
     id: "routes/web/account/portfolio/index",
@@ -24020,7 +30875,7 @@ const routes = {
     path: "/web/account/portfolio",
     index: void 0,
     caseSensitive: void 0,
-    module: route35
+    module: route39
   },
   "routes/web/account/portfolio/business/index": {
     id: "routes/web/account/portfolio/business/index",
@@ -24028,7 +30883,7 @@ const routes = {
     path: "/web/account/portfolio/:business_guid",
     index: void 0,
     caseSensitive: void 0,
-    module: route36
+    module: route40
   },
   "routes/web/account/create_business/index": {
     id: "routes/web/account/create_business/index",
@@ -24036,7 +30891,7 @@ const routes = {
     path: "/web/account/create_business",
     index: void 0,
     caseSensitive: void 0,
-    module: route37
+    module: route41
   },
   "routes/web/account/portfolio/business/settings/index": {
     id: "routes/web/account/portfolio/business/settings/index",
@@ -24044,7 +30899,7 @@ const routes = {
     path: "/web/account/portfolio/:business_guid/:user_guid/settings",
     index: void 0,
     caseSensitive: void 0,
-    module: route38
+    module: route42
   },
   "routes/web/account/portfolio/business/gallery/index": {
     id: "routes/web/account/portfolio/business/gallery/index",
@@ -24052,7 +30907,7 @@ const routes = {
     path: "/web/account/portfolio/:business_guid/:user_guid/gallery",
     index: void 0,
     caseSensitive: void 0,
-    module: route39
+    module: route43
   },
   "routes/web/account/portfolio/business/products/index": {
     id: "routes/web/account/portfolio/business/products/index",
@@ -24060,7 +30915,15 @@ const routes = {
     path: "/web/account/portfolio/:business_guid/:user_guid/products",
     index: void 0,
     caseSensitive: void 0,
-    module: route40
+    module: route44
+  },
+  "routes/web/account/portfolio/business/services/index": {
+    id: "routes/web/account/portfolio/business/services/index",
+    parentId: "root",
+    path: "/web/account/portfolio/:business_guid/:user_guid/services",
+    index: void 0,
+    caseSensitive: void 0,
+    module: route45
   },
   "routes/web/account/portfolio/business/videos/index": {
     id: "routes/web/account/portfolio/business/videos/index",
@@ -24068,7 +30931,7 @@ const routes = {
     path: "/web/account/portfolio/:business_guid/:user_guid/videos",
     index: void 0,
     caseSensitive: void 0,
-    module: route41
+    module: route46
   },
   "routes/web/account/portfolio/business/facilities/index": {
     id: "routes/web/account/portfolio/business/facilities/index",
@@ -24076,7 +30939,7 @@ const routes = {
     path: "/web/account/portfolio/:business_guid/:user_guid/facilities",
     index: void 0,
     caseSensitive: void 0,
-    module: route42
+    module: route47
   },
   "routes/web/account/portfolio/business/activate/index": {
     id: "routes/web/account/portfolio/business/activate/index",
@@ -24084,15 +30947,15 @@ const routes = {
     path: "/web/account/portfolio/:business_guid/:user_guid/activate",
     index: void 0,
     caseSensitive: void 0,
-    module: route43
+    module: route48
   },
-  "routes/web/account/portfolio/business/social_media/index": {
-    id: "routes/web/account/portfolio/business/social_media/index",
+  "routes/web/account/portfolio/business/socialmedia/index": {
+    id: "routes/web/account/portfolio/business/socialmedia/index",
     parentId: "root",
     path: "/web/account/portfolio/:business_guid/:user_guid/social_media",
     index: void 0,
     caseSensitive: void 0,
-    module: route44
+    module: route49
   },
   "routes/web/account/portfolio/business/delete/index": {
     id: "routes/web/account/portfolio/business/delete/index",
@@ -24100,7 +30963,7 @@ const routes = {
     path: "/web/account/portfolio/:business_guid/:user_guid/delete",
     index: void 0,
     caseSensitive: void 0,
-    module: route45
+    module: route50
   },
   "routes/web/account/portfolio/business/reassign/index": {
     id: "routes/web/account/portfolio/business/reassign/index",
@@ -24108,7 +30971,7 @@ const routes = {
     path: "/web/account/portfolio/:business_guid/:user_guid/reassign",
     index: void 0,
     caseSensitive: void 0,
-    module: route46
+    module: route51
   },
   "routes/web/account/events/index": {
     id: "routes/web/account/events/index",
@@ -24116,7 +30979,7 @@ const routes = {
     path: "/web/account/events",
     index: void 0,
     caseSensitive: void 0,
-    module: route47
+    module: route52
   },
   "routes/web/landing/change_email/index": {
     id: "routes/web/landing/change_email/index",
@@ -24124,7 +30987,7 @@ const routes = {
     path: "/web/landing/change_email",
     index: void 0,
     caseSensitive: void 0,
-    module: route48
+    module: route53
   },
   "routes/web/landing/reset_password/index": {
     id: "routes/web/landing/reset_password/index",
@@ -24132,7 +30995,7 @@ const routes = {
     path: "/web/landing/reset_password/:guid",
     index: void 0,
     caseSensitive: void 0,
-    module: route49
+    module: route54
   },
   "routes/web/landing/complete_signup/index": {
     id: "routes/web/landing/complete_signup/index",
@@ -24140,7 +31003,7 @@ const routes = {
     path: "/web/landing/complete_signup/:guid",
     index: void 0,
     caseSensitive: void 0,
-    module: route50
+    module: route55
   },
   "routes/api/user/index": {
     id: "routes/api/user/index",
@@ -24148,7 +31011,7 @@ const routes = {
     path: "api/user",
     index: void 0,
     caseSensitive: void 0,
-    module: route51
+    module: route56
   },
   "routes/api/user/signin": {
     id: "routes/api/user/signin",
@@ -24156,7 +31019,7 @@ const routes = {
     path: "api/user/signin",
     index: void 0,
     caseSensitive: void 0,
-    module: route52
+    module: route57
   },
   "routes/api/user/verifytoken": {
     id: "routes/api/user/verifytoken",
@@ -24164,7 +31027,7 @@ const routes = {
     path: "api/user/verifytoken",
     index: void 0,
     caseSensitive: void 0,
-    module: route53
+    module: route58
   },
   "routes/api/user/user": {
     id: "routes/api/user/user",
@@ -24172,7 +31035,7 @@ const routes = {
     path: "api/user/:guid",
     index: void 0,
     caseSensitive: void 0,
-    module: route54
+    module: route59
   },
   "routes/api/user/change_password": {
     id: "routes/api/user/change_password",
@@ -24180,7 +31043,7 @@ const routes = {
     path: "api/user/change_password/:guid",
     index: void 0,
     caseSensitive: void 0,
-    module: route55
+    module: route60
   },
   "routes/api/user/reset_password_request": {
     id: "routes/api/user/reset_password_request",
@@ -24188,7 +31051,7 @@ const routes = {
     path: "api/user/reset_password_request",
     index: void 0,
     caseSensitive: void 0,
-    module: route56
+    module: route61
   },
   "routes/api/user/reset_password": {
     id: "routes/api/user/reset_password",
@@ -24196,7 +31059,7 @@ const routes = {
     path: "api/user/reset_password/:guid",
     index: void 0,
     caseSensitive: void 0,
-    module: route57
+    module: route62
   },
   "routes/api/user/activate_deactivate": {
     id: "routes/api/user/activate_deactivate",
@@ -24204,7 +31067,7 @@ const routes = {
     path: "api/user/activate_deactivate/:guid",
     index: void 0,
     caseSensitive: void 0,
-    module: route58
+    module: route63
   },
   "routes/api/user/user_profile_image": {
     id: "routes/api/user/user_profile_image",
@@ -24212,7 +31075,7 @@ const routes = {
     path: "api/user/user_profile_image/:guid",
     index: void 0,
     caseSensitive: void 0,
-    module: route59
+    module: route64
   },
   "routes/api/user/user_profile_bg": {
     id: "routes/api/user/user_profile_bg",
@@ -24220,7 +31083,7 @@ const routes = {
     path: "api/user/user_profile_bg/:guid",
     index: void 0,
     caseSensitive: void 0,
-    module: route60
+    module: route65
   },
   "routes/api/user/change_email_request": {
     id: "routes/api/user/change_email_request",
@@ -24228,7 +31091,7 @@ const routes = {
     path: "api/user/change_email_request",
     index: void 0,
     caseSensitive: void 0,
-    module: route61
+    module: route66
   },
   "routes/api/user/change_email": {
     id: "routes/api/user/change_email",
@@ -24236,7 +31099,7 @@ const routes = {
     path: "api/user/change_email",
     index: void 0,
     caseSensitive: void 0,
-    module: route62
+    module: route67
   },
   "routes/api/user/verify_signup": {
     id: "routes/api/user/verify_signup",
@@ -24244,7 +31107,7 @@ const routes = {
     path: "api/user/verify_signup/:user_hash",
     index: void 0,
     caseSensitive: void 0,
-    module: route63
+    module: route68
   },
   "routes/api/listing/index": {
     id: "routes/api/listing/index",
@@ -24252,7 +31115,7 @@ const routes = {
     path: "api/listing",
     index: void 0,
     caseSensitive: void 0,
-    module: route64
+    module: route69
   },
   "routes/api/listing/listing": {
     id: "routes/api/listing/listing",
@@ -24260,7 +31123,7 @@ const routes = {
     path: "api/listing/:guid_or_username",
     index: void 0,
     caseSensitive: void 0,
-    module: route65
+    module: route70
   },
   "routes/api/listing/search": {
     id: "routes/api/listing/search",
@@ -24268,7 +31131,7 @@ const routes = {
     path: "api/listing/search",
     index: void 0,
     caseSensitive: void 0,
-    module: route66
+    module: route71
   },
   "routes/api/listing/searchlisting": {
     id: "routes/api/listing/searchlisting",
@@ -24276,7 +31139,7 @@ const routes = {
     path: "api/listing/searchlisting",
     index: void 0,
     caseSensitive: void 0,
-    module: route67
+    module: route72
   },
   "routes/api/listing/featured_listing": {
     id: "routes/api/listing/featured_listing",
@@ -24284,7 +31147,7 @@ const routes = {
     path: "api/listing/featured_listing",
     index: void 0,
     caseSensitive: void 0,
-    module: route68
+    module: route73
   },
   "routes/api/listing/business_facility_features": {
     id: "routes/api/listing/business_facility_features",
@@ -24292,7 +31155,23 @@ const routes = {
     path: "api/listing/business_facility_features/:business_guid",
     index: void 0,
     caseSensitive: void 0,
-    module: route69
+    module: route74
+  },
+  "routes/api/listing/related_by_category": {
+    id: "routes/api/listing/related_by_category",
+    parentId: "root",
+    path: "api/listing/related_by_category/:category/:limit",
+    index: void 0,
+    caseSensitive: void 0,
+    module: route75
+  },
+  "routes/api/listing/nearby_businesses": {
+    id: "routes/api/listing/nearby_businesses",
+    parentId: "root",
+    path: "api/listing/nearby_businesses/:city_id/:limit",
+    index: void 0,
+    caseSensitive: void 0,
+    module: route76
   },
   "routes/api/listing/listing_by_category": {
     id: "routes/api/listing/listing_by_category",
@@ -24300,7 +31179,7 @@ const routes = {
     path: "api/listing/listing_by_category/:category/:limit",
     index: void 0,
     caseSensitive: void 0,
-    module: route70
+    module: route77
   },
   "routes/api/listing/home_listing_by_category": {
     id: "routes/api/listing/home_listing_by_category",
@@ -24308,7 +31187,7 @@ const routes = {
     path: "api/listing/home_listing_by_category/:category/:limit",
     index: void 0,
     caseSensitive: void 0,
-    module: route71
+    module: route78
   },
   "routes/api/listing/home_latest_businesses": {
     id: "routes/api/listing/home_latest_businesses",
@@ -24316,7 +31195,7 @@ const routes = {
     path: "api/listing/home_latest_businesses/:limit",
     index: void 0,
     caseSensitive: void 0,
-    module: route72
+    module: route79
   },
   "routes/api/listing/business_gallery": {
     id: "routes/api/listing/business_gallery",
@@ -24324,7 +31203,7 @@ const routes = {
     path: "api/listing/business_gallery/:business_guid",
     index: void 0,
     caseSensitive: void 0,
-    module: route73
+    module: route80
   },
   "routes/api/listing/business_profile_image": {
     id: "routes/api/listing/business_profile_image",
@@ -24332,7 +31211,7 @@ const routes = {
     path: "api/listing/business_profile_image/:guid",
     index: void 0,
     caseSensitive: void 0,
-    module: route74
+    module: route81
   },
   "routes/api/listing/business_profile_bg": {
     id: "routes/api/listing/business_profile_bg",
@@ -24340,7 +31219,7 @@ const routes = {
     path: "api/listing/business_profile_bg/:guid",
     index: void 0,
     caseSensitive: void 0,
-    module: route75
+    module: route82
   },
   "routes/api/listing/owner/index": {
     id: "routes/api/listing/owner/index",
@@ -24348,7 +31227,7 @@ const routes = {
     path: "api/listing/owner",
     index: void 0,
     caseSensitive: void 0,
-    module: route76
+    module: route83
   },
   "routes/api/listing/delete_business": {
     id: "routes/api/listing/delete_business",
@@ -24356,7 +31235,7 @@ const routes = {
     path: "api/listing/delete_business/:business_guid",
     index: void 0,
     caseSensitive: void 0,
-    module: route77
+    module: route84
   },
   "routes/api/listing/reassign_business": {
     id: "routes/api/listing/reassign_business",
@@ -24364,7 +31243,7 @@ const routes = {
     path: "api/listing/reassign_business",
     index: void 0,
     caseSensitive: void 0,
-    module: route78
+    module: route85
   },
   "routes/api/listing/business_single_search": {
     id: "routes/api/listing/business_single_search",
@@ -24372,7 +31251,7 @@ const routes = {
     path: "api/listing/business_single_search",
     index: void 0,
     caseSensitive: void 0,
-    module: route79
+    module: route86
   },
   "routes/api/listing/user_single_search": {
     id: "routes/api/listing/user_single_search",
@@ -24380,7 +31259,7 @@ const routes = {
     path: "api/listing/user_single_search",
     index: void 0,
     caseSensitive: void 0,
-    module: route80
+    module: route87
   },
   "routes/api/listing/operating_hours": {
     id: "routes/api/listing/operating_hours",
@@ -24388,7 +31267,7 @@ const routes = {
     path: "api/listing/operating_hours",
     index: void 0,
     caseSensitive: void 0,
-    module: route81
+    module: route88
   },
   "routes/api/listing/gallery": {
     id: "routes/api/listing/gallery",
@@ -24396,7 +31275,39 @@ const routes = {
     path: "api/listing/gallery/:business_guid/:user_guid",
     index: void 0,
     caseSensitive: void 0,
-    module: route82
+    module: route89
+  },
+  "routes/api/listing/facilities/index": {
+    id: "routes/api/listing/facilities/index",
+    parentId: "root",
+    path: "api/listing/facilities",
+    index: void 0,
+    caseSensitive: void 0,
+    module: route90
+  },
+  "routes/api/listing/facilities/facility": {
+    id: "routes/api/listing/facilities/facility",
+    parentId: "root",
+    path: "api/listing/facilities/:facility_guid",
+    index: void 0,
+    caseSensitive: void 0,
+    module: route91
+  },
+  "routes/api/listing/facilities/facilities": {
+    id: "routes/api/listing/facilities/facilities",
+    parentId: "root",
+    path: "api/listing/facilities/:business_guid/:user_guid",
+    index: void 0,
+    caseSensitive: void 0,
+    module: route92
+  },
+  "routes/api/listing/sys_facilities/index": {
+    id: "routes/api/listing/sys_facilities/index",
+    parentId: "root",
+    path: "api/listing/sys_facilities",
+    index: void 0,
+    caseSensitive: void 0,
+    module: route93
   },
   "routes/api/listing/sys_facility_features/index": {
     id: "routes/api/listing/sys_facility_features/index",
@@ -24404,7 +31315,7 @@ const routes = {
     path: "api/listing/sys_facility_features",
     index: void 0,
     caseSensitive: void 0,
-    module: route83
+    module: route94
   },
   "routes/api/listing/selected_facility_features/selected_facility_features": {
     id: "routes/api/listing/selected_facility_features/selected_facility_features",
@@ -24412,7 +31323,7 @@ const routes = {
     path: "api/listing/selected_facility_features/:user_guid/:business_guid",
     index: void 0,
     caseSensitive: void 0,
-    module: route84
+    module: route95
   },
   "routes/api/listing/selected_facility_features/index": {
     id: "routes/api/listing/selected_facility_features/index",
@@ -24420,7 +31331,31 @@ const routes = {
     path: "api/listing/selected_facility_features",
     index: void 0,
     caseSensitive: void 0,
-    module: route85
+    module: route96
+  },
+  "routes/api/listing/social_media/index": {
+    id: "routes/api/listing/social_media/index",
+    parentId: "root",
+    path: "api/listing/social_media",
+    index: void 0,
+    caseSensitive: void 0,
+    module: route97
+  },
+  "routes/api/listing/social_media/social_medium": {
+    id: "routes/api/listing/social_media/social_medium",
+    parentId: "root",
+    path: "api/listing/social_media/:social_media_guid",
+    index: void 0,
+    caseSensitive: void 0,
+    module: route98
+  },
+  "routes/api/listing/social_media/social_media": {
+    id: "routes/api/listing/social_media/social_media",
+    parentId: "root",
+    path: "api/listing/social_media/:business_guid/:user_guid",
+    index: void 0,
+    caseSensitive: void 0,
+    module: route99
   },
   "routes/api/listing/sys_social_media/index": {
     id: "routes/api/listing/sys_social_media/index",
@@ -24428,7 +31363,7 @@ const routes = {
     path: "api/listing/sys_social_media",
     index: void 0,
     caseSensitive: void 0,
-    module: route86
+    module: route100
   },
   "routes/api/listing/selected_social_media/selected_social_media": {
     id: "routes/api/listing/selected_social_media/selected_social_media",
@@ -24436,7 +31371,7 @@ const routes = {
     path: "api/listing/selected_social_media/:user_guid/:business_guid",
     index: void 0,
     caseSensitive: void 0,
-    module: route87
+    module: route101
   },
   "routes/api/listing/selected_social_media/index": {
     id: "routes/api/listing/selected_social_media/index",
@@ -24444,7 +31379,7 @@ const routes = {
     path: "api/listing/selected_social_media",
     index: void 0,
     caseSensitive: void 0,
-    module: route88
+    module: route102
   },
   "routes/api/listing/business_social_media": {
     id: "routes/api/listing/business_social_media",
@@ -24452,7 +31387,7 @@ const routes = {
     path: "api/listing/business_social_media/:business_guid",
     index: void 0,
     caseSensitive: void 0,
-    module: route89
+    module: route103
   },
   "routes/api/listing/activate/activate": {
     id: "routes/api/listing/activate/activate",
@@ -24460,7 +31395,7 @@ const routes = {
     path: "api/listing/activate/:user_guid/:business_guid",
     index: void 0,
     caseSensitive: void 0,
-    module: route90
+    module: route104
   },
   "routes/api/listing/recents": {
     id: "routes/api/listing/recents",
@@ -24468,7 +31403,7 @@ const routes = {
     path: "api/listing/recents",
     index: void 0,
     caseSensitive: void 0,
-    module: route91
+    module: route105
   },
   "routes/api/listing/video_link": {
     id: "routes/api/listing/video_link",
@@ -24476,7 +31411,7 @@ const routes = {
     path: "api/listing/save_video_link",
     index: void 0,
     caseSensitive: void 0,
-    module: route92
+    module: route106
   },
   "routes/api/listing/video_links": {
     id: "routes/api/listing/video_links",
@@ -24484,7 +31419,7 @@ const routes = {
     path: "api/listing/video_links/:business_guid/:user_guid",
     index: void 0,
     caseSensitive: void 0,
-    module: route93
+    module: route107
   },
   "routes/api/listing/video_links_listing": {
     id: "routes/api/listing/video_links_listing",
@@ -24492,7 +31427,7 @@ const routes = {
     path: "api/listing/video_links/:business_guid",
     index: void 0,
     caseSensitive: void 0,
-    module: route94
+    module: route108
   },
   "routes/api/listing/products/index": {
     id: "routes/api/listing/products/index",
@@ -24500,7 +31435,39 @@ const routes = {
     path: "api/listing/products/:business_guid/:user_guid",
     index: void 0,
     caseSensitive: void 0,
-    module: route95
+    module: route109
+  },
+  "routes/api/listing/services/services": {
+    id: "routes/api/listing/services/services",
+    parentId: "root",
+    path: "api/listing/services/:business_guid/:user_guid",
+    index: void 0,
+    caseSensitive: void 0,
+    module: route110
+  },
+  "routes/api/listing/services/index": {
+    id: "routes/api/listing/services/index",
+    parentId: "root",
+    path: "api/listing/services",
+    index: void 0,
+    caseSensitive: void 0,
+    module: route111
+  },
+  "routes/api/listing/services/service": {
+    id: "routes/api/listing/services/service",
+    parentId: "root",
+    path: "api/listing/services/:service_guid",
+    index: void 0,
+    caseSensitive: void 0,
+    module: route112
+  },
+  "routes/api/listing/services/services_by_business_guid": {
+    id: "routes/api/listing/services/services_by_business_guid",
+    parentId: "root",
+    path: "api/listing/business/services/:business_guid",
+    index: void 0,
+    caseSensitive: void 0,
+    module: route113
   },
   "routes/api/listing/category": {
     id: "routes/api/listing/category",
@@ -24508,7 +31475,7 @@ const routes = {
     path: "api/listing/category/:category",
     index: void 0,
     caseSensitive: void 0,
-    module: route96
+    module: route114
   },
   "routes/api/listing/category_city": {
     id: "routes/api/listing/category_city",
@@ -24516,7 +31483,7 @@ const routes = {
     path: "api/listing/category_city/:category/:city",
     index: void 0,
     caseSensitive: void 0,
-    module: route97
+    module: route115
   },
   "routes/api/listing/category_city_sitexml": {
     id: "routes/api/listing/category_city_sitexml",
@@ -24524,7 +31491,7 @@ const routes = {
     path: "api/listing/cat_city_sitexml",
     index: void 0,
     caseSensitive: void 0,
-    module: route98
+    module: route116
   },
   "routes/api/listing/category_sitexml": {
     id: "routes/api/listing/category_sitexml",
@@ -24532,7 +31499,7 @@ const routes = {
     path: "api/listing/cat_sitexml",
     index: void 0,
     caseSensitive: void 0,
-    module: route99
+    module: route117
   },
   "routes/api/rating/index": {
     id: "routes/api/rating/index",
@@ -24540,7 +31507,7 @@ const routes = {
     path: "api/rating",
     index: void 0,
     caseSensitive: void 0,
-    module: route100
+    module: route118
   },
   "routes/api/rating/rating": {
     id: "routes/api/rating/rating",
@@ -24548,7 +31515,7 @@ const routes = {
     path: "api/rating/:user_guid/:business_guid",
     index: void 0,
     caseSensitive: void 0,
-    module: route101
+    module: route119
   },
   "routes/api/rating/business_ratings": {
     id: "routes/api/rating/business_ratings",
@@ -24556,7 +31523,7 @@ const routes = {
     path: "api/rating/business_ratings/:business_guid",
     index: void 0,
     caseSensitive: void 0,
-    module: route102
+    module: route120
   },
   "routes/api/rating/ratings_reviews": {
     id: "routes/api/rating/ratings_reviews",
@@ -24564,7 +31531,31 @@ const routes = {
     path: "api/rating/ratings_reviews/:business_guid",
     index: void 0,
     caseSensitive: void 0,
-    module: route103
+    module: route121
+  },
+  "routes/api/rating/rate_business": {
+    id: "routes/api/rating/rate_business",
+    parentId: "root",
+    path: "api/rating/rate_business",
+    index: void 0,
+    caseSensitive: void 0,
+    module: route122
+  },
+  "routes/api/rating/get_business_rating": {
+    id: "routes/api/rating/get_business_rating",
+    parentId: "root",
+    path: "api/rating/get_business_rating/:business_guid",
+    index: void 0,
+    caseSensitive: void 0,
+    module: route123
+  },
+  "routes/api/rating/get_business_reviews": {
+    id: "routes/api/rating/get_business_reviews",
+    parentId: "root",
+    path: "api/rating/get_business_reviews/:business_guid",
+    index: void 0,
+    caseSensitive: void 0,
+    module: route124
   },
   "routes/api/util/state": {
     id: "routes/api/util/state",
@@ -24572,7 +31563,7 @@ const routes = {
     path: "api/util/state",
     index: void 0,
     caseSensitive: void 0,
-    module: route104
+    module: route125
   },
   "routes/api/util/country": {
     id: "routes/api/util/country",
@@ -24580,7 +31571,7 @@ const routes = {
     path: "api/util/country",
     index: void 0,
     caseSensitive: void 0,
-    module: route105
+    module: route126
   },
   "routes/api/util/country_locale": {
     id: "routes/api/util/country_locale",
@@ -24588,7 +31579,7 @@ const routes = {
     path: "api/util/country_locale",
     index: void 0,
     caseSensitive: void 0,
-    module: route106
+    module: route127
   },
   "routes/api/util/city": {
     id: "routes/api/util/city",
@@ -24596,7 +31587,7 @@ const routes = {
     path: "api/util/city",
     index: void 0,
     caseSensitive: void 0,
-    module: route107
+    module: route128
   },
   "routes/api/util/category": {
     id: "routes/api/util/category",
@@ -24604,7 +31595,23 @@ const routes = {
     path: "api/util/category",
     index: void 0,
     caseSensitive: void 0,
-    module: route108
+    module: route129
+  },
+  "routes/api/util/currencies": {
+    id: "routes/api/util/currencies",
+    parentId: "root",
+    path: "api/util/currencies",
+    index: void 0,
+    caseSensitive: void 0,
+    module: route130
+  },
+  "routes/api/util/country_currencies": {
+    id: "routes/api/util/country_currencies",
+    parentId: "root",
+    path: "api/util/country_currencies",
+    index: void 0,
+    caseSensitive: void 0,
+    module: route131
   }
 };
 export {

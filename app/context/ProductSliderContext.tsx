@@ -1,14 +1,16 @@
 import { createContext, useContext, useEffect, useRef, useState } from "react";
 import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
+import { FaMaximize, FaMinimize } from "react-icons/fa6";
 import { IoClose } from "react-icons/io5";
 
 const ProductSliderContext = createContext<any | null>(null)
 
 export function useProductSliderContext() {
     const context = useContext(ProductSliderContext)
-    /* if (!context) {
-        throw new Error("useSliderContext must be used within a SliderProvider")
-    } */
+    if (!context) {
+        console.log(`Wrap product slider Provider around this component.`)
+        return null
+    }
     return context
 }
 
@@ -23,6 +25,8 @@ export const ProductSliderProvider = ({ children }: any) => {
     const slideStep = useRef(0)
     const counter = useRef(0)
     let slideIncrement = 0
+
+    const [maximized, setMaximized] = useState(true)
 
     const handleTouchStart = (e: any) => {
         slideStep.current = e.touches[0].clientX;
@@ -89,27 +93,45 @@ export const ProductSliderProvider = ({ children }: any) => {
         <ProductSliderContext.Provider value={vals}>
             {
                 dialog &&
-                <div className={`flex w-screen h-screen bg-white z-[20001] 
+                <div className={`flex w-full h-full bg-white z-[20001] 
                 fixed top-0 left-0 right-0 bottom-0 `}>
                     <div className={`grid grid-cols-12 gap-0 w-full`}>
-                        <div className={`col-span-12 md:col-span-9 w-full h-full relative bg-black flex`}>
-                            <div className={` w-full h-screen flex overflow-hidden`}>
+                        <div className={`${maximized ? 'col-span-12' : 'col-span-12 md:col-span-9'} w-full h-full relative bg-black flex`}>
+                            <div className={` w-full h-screen flex overflow-hidden place-items-center place-content-center`}>
                                 {
                                     slides && selectedSlide &&
                                     slides.map((slide: any, index: any) => {
 
                                         return (
-                                            <img
-                                                onTouchStart={handleTouchStart}
-                                                onTouchEnd={handleTouchEnd}
-                                                key={index}
-                                                src={IMG_BASE_URL + slide.product_image_url}
-                                                alt=""
-                                                style={{ transform: `translateX(-${currentSlide * 100}%)` }}
-                                                className={`object-scale-down w-full h-full 
-                                            block flex-shrink-0 flex-grow-0 transition-transform
+                                            <div className={`w-full h-full flex flex-shrink-0 flex-grow-0 transition-transform  place-content-center place-items-center  relative
                                             ease-in-out duration-1000`}
-                                            />
+                                                style={{ display: index === currentSlide ? 'block' : 'none' }}
+                                            >
+
+                                                <div className={`absolute top-10`}>
+                                                    <div className='text-white text-center '>{currentSlide + 1} / {slides.length}</div>
+                                                </div>
+
+
+                                                <div className={`w-[100%] md:w-[70%] h-[70%]`}>
+                                                    <img
+                                                        onTouchStart={handleTouchStart}
+                                                        onTouchEnd={handleTouchEnd}
+                                                        key={index}
+                                                        src={IMG_BASE_URL + slide.product_image_url}
+                                                        alt=""
+                                                        className={`object-scale-down w-full h-full `}
+                                                    />
+                                                </div>
+
+
+                                                <div className={`absolute bottom-[15px] w-full z-[20px] px-5 py-7 bg-black/30`}>
+                                                    <div className={` text-center text-white font-extralight text-[13px]`}>
+                                                        {slide?.product_title}
+                                                    </div>
+
+                                                </div>
+                                            </div>
                                         )
                                     })
                                 }
@@ -124,7 +146,7 @@ export const ProductSliderProvider = ({ children }: any) => {
 
                             </button>
                             <button onMouseDown={next} className={`block absolute top-0 bottom-0 
-                                                    p-[1rem] cursor-pointer right-0 group 
+                                                    p-[1rem] cursor-pointer ${maximized ? 'right-0' : 'right-0 md:right-0'} group 
                                                      transition duration-1000 ease-in-out`}>
                                 <div className={`w-[50px] h-[50px] bg-white/60 rounded-full flex place-content-center place-items-center group-hover:bg-white/30
                                                         transition duration-500 ease-in-out`}>
@@ -135,14 +157,26 @@ export const ProductSliderProvider = ({ children }: any) => {
                             {/** close button handle */}
                             <div
                                 onMouseDown={() => handleClose()}
-                                className={`w-[50px] h-[50px] z-[300] bg-white
+                                className={`w-[30px] h-[30px] z-[300] bg-white
                                                     flex place-content-center place-items-center
                                                     rounded-full absolute left-2 top-2 cursor-pointer
                                                     hover:bg-white/40 transition duration-1000 ease-in-out`}>
                                 <IoClose className={`text-[30px]`} />
                             </div>
+
+                            {/** Maximize or Minimize */}
+                            <div
+                                onClick={() => { setMaximized(!maximized) }}
+                                className={`w-[30px] h-[30px] z-[300] bg-white flex place-content-center place-items-center rounded-full absolute top-2 right-2 cursor-pointer hover:bg-white/40 transition duration-1000 ease-in-out`}>
+                                {
+                                    maximized ?
+                                        <FaMinimize className={`text-[20px]`} />
+                                        :
+                                        <FaMaximize className={`text-[20px]`} />
+                                }
+                            </div>
                         </div>
-                        <div className={`hidden md:block md:col-span-3 px-5`}>
+                        <div className={`${maximized ? 'hidden' : 'hidden md:block md:col-span-3'} px-5`}>
                             <h1 className=' text-[22px] my-4 font-sans font-extrabold tracking-tight leading-[24px]'>Products for {listing && listing.title}</h1>
                             <div className=' my-4 '>{currentSlide + 1} / {slides.length}</div>
                             <hr />
@@ -161,8 +195,8 @@ export const ProductSliderProvider = ({ children }: any) => {
                                 <a
                                     target="_product"
                                     href={slides[currentSlide].product_link}
-                                    className={`bg-blue-600 text-white px-12 py-4 text-center rounded-md cursor-pointer hover:shadow-lg hover:shadow-gray-300`}                                    >
-                                    Go
+                                    className={`bg-gray-500 text-white px-12 py-4 text-center rounded-md cursor-pointer hover:shadow-lg hover:shadow-gray-300`}                                    >
+                                    Continue
                                 </a>
                             </div>
                         </div>

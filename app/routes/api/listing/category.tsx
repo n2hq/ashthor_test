@@ -2,13 +2,8 @@ import { LoaderFunction } from "@remix-run/node"
 import { convertDashToSpace, DoResponse } from "~/lib/lib"
 import { query } from "../DB"
 
-
-
 export const loader: LoaderFunction = async ({ request, params }) => {
     const ITEMS_PER_PAGE = 20;
-
-
-
 
     try {
         const category = params.category
@@ -88,7 +83,21 @@ export const loader: LoaderFunction = async ({ request, params }) => {
                     FROM tbl_selected_social_media sm
                     JOIN tbl_sys_social_media sysm ON sm.media_id = sysm.media_id
                     WHERE d.gid = sm.business_guid
-                ) AS social_media   
+                ) AS social_media,
+                (
+                    SELECT bpi3.image_url 
+                    FROM tbl_business_profile_image bpi3
+                    WHERE bpi3.business_guid = d.gid 
+                    ORDER BY bpi3.date_created DESC 
+                    LIMIT 1
+                ) AS profile_image_url_ext,
+                (
+                    SELECT bbg.image_url 
+                    FROM tbl_business_profile_bg bbg
+                    WHERE bbg.business_guid = d.gid 
+                    ORDER BY bbg.date_created DESC 
+                    LIMIT 1
+                ) AS bg_image_url_ext
                 
             FROM tbl_dir d
             LEFT JOIN tbl_country c ON d.country_code = c.iso2
@@ -96,8 +105,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
             LEFT JOIN tbl_city ci ON d.city_id = ci.id
             WHERE d.category = ?
             ${searchParams.criteria ? `AND (d.title LIKE ? OR d.short_description LIKE ?)` : ''}
-            AND 
-            d.active_status = true
+            AND d.active_status = true
             ORDER BY ${sortColumn} ${sortOrder}
             LIMIT ? OFFSET ?
         `, [
@@ -107,7 +115,74 @@ export const loader: LoaderFunction = async ({ request, params }) => {
             offset
         ]);
 
-        console.log(rawdata)
+        // If you still want to use LEFT JOIN approach instead of subqueries, use this:
+        /*
+        const rawdata: any = await query(`
+            SELECT DISTINCT
+                d.id,
+                d.rating_total,
+                d.established,
+                d.rating_count,
+                d.rating_average,
+                d.username,
+                d.gid,
+                d.title,
+                d.address_one,
+                d.address_two,
+                c.latitude,
+                c.longitude,
+                d.phone,
+                d.email_address AS email_address,
+                d.website,
+                d.short_description AS short_description,
+                d.category,
+                d.country_code,
+                d.state_code,
+                d.city_id,
+                d.date_created AS created_at,
+                d.last_updated AS updated_at,
+                ci.name AS city_name,
+                s.name AS state_name,
+                c.name AS country_name,
+                bpi.image_url AS profile_image,
+                bbg.image_url AS background_image,
+                (
+                    SELECT GROUP_CONCAT(
+                    CONCAT(sm.media_id, '$', sm.user_description, '$', sysm.base_url) 
+                    SEPARATOR ', '
+                    )
+                    FROM tbl_selected_social_media sm
+                    JOIN tbl_sys_social_media sysm ON sm.media_id = sysm.media_id
+                    WHERE d.gid = sm.business_guid
+                ) AS social_media   
+                
+            FROM tbl_dir d
+            LEFT JOIN tbl_country c ON d.country_code = c.iso2
+            LEFT JOIN tbl_state s ON d.state_code = s.iso2 AND d.country_code = s.country_code
+            LEFT JOIN tbl_city ci ON d.city_id = ci.id
+            LEFT JOIN (
+                SELECT DISTINCT ON (business_guid) business_guid, image_url
+                FROM tbl_business_profile_image
+                ORDER BY business_guid, date_created DESC
+            ) bpi ON d.gid = bpi.business_guid
+            LEFT JOIN (
+                SELECT DISTINCT ON (business_guid) business_guid, image_url
+                FROM tbl_business_profile_bg
+                ORDER BY business_guid, date_created DESC
+            ) bbg ON d.gid = bbg.business_guid
+            WHERE d.category = ?
+            ${searchParams.criteria ? `AND (d.title LIKE ? OR d.short_description LIKE ?)` : ''}
+            AND d.active_status = true
+            ORDER BY ${sortColumn} ${sortOrder}
+            LIMIT ? OFFSET ?
+        `, [
+            category,
+            ...(searchParams.criteria ? [`%${searchParams.criteria}%`, `%${searchParams.criteria}%`] : []),
+            ITEMS_PER_PAGE,
+            offset
+        ]);
+        */
+
         // 3. Get operating hours separately (prevents duplicates from JOIN)
         const businessIds = rawdata.map((b: any) => b.gid);
         let operatingHours: any = {};
@@ -184,5 +259,4 @@ export const loader: LoaderFunction = async ({ request, params }) => {
             message: process.env.NODE_ENV === 'development' ? error.message : undefined
         }, 500);
     }
-
 }

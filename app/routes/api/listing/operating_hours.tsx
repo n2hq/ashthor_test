@@ -41,7 +41,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
         }
 
         //const listings: any = rows.map((listing: any) => { return (listing) })
-        console.log(rows[0])
+        //console.log(rows[0])
 
         return DoResponse(rows[0], 200)
 

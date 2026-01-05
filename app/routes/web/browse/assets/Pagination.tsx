@@ -62,11 +62,11 @@ export default function Pagination({ pagination }: PaginationProps) {
     };
 
     return (
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div className="text-sm text-gray-600">
-                Showing {((currentPage - 1) * pagination.itemsPerPage) + 1} to{' '}
+        <div className="flex flex-row items-center justify-between gap-4">
+            <div className="text-[13px] text-gray-500">
+                Items {((currentPage - 1) * pagination.itemsPerPage) + 1} to{' '}
                 {Math.min(currentPage * pagination.itemsPerPage, pagination.totalItems)} of{' '}
-                {pagination.totalItems} items
+                {pagination.totalItems}
             </div>
 
             <nav className="flex items-center space-x-1">

@@ -16,6 +16,9 @@ import { leftNavLinks } from '~/lib/json.js'
 import { categories as category } from '~/lib/json/categories.js'
 import { useOperation } from '~/context/OperationContext.js'
 import { pageType } from '~/lib/json/page_type.js'
+import PhoneNoInput from '~/components/content/input/PhoneNoInput.js'
+import SelectCurrency from '~/components/content/select/SelectCurrency.js'
+import InputNumberOnly from '~/components/content/input/InputNumberOnly.js'
 
 const CreatePageForm = ({ data, user }: any) => {
 
@@ -28,6 +31,7 @@ const CreatePageForm = ({ data, user }: any) => {
 
     const { showOperation, showSuccess, showError, showWarning, showInfo, completeOperation } = useOperation();
 
+    const currencies = data.currencies
     const countries = data.countries
     let [states, setStates] = useState(data.states)
     let [cities, setCities] = useState(data.cities)
@@ -72,7 +76,8 @@ const CreatePageForm = ({ data, user }: any) => {
 
         datar['first_name'] = user.first_name
         datar['last_name'] = user.last_name
-
+        console.log(datar)
+        //return true;
         setWorking(true)
         //notification.notify('Creating page...')
         showOperation('processing', 'Creating a page')
@@ -281,15 +286,52 @@ const CreatePageForm = ({ data, user }: any) => {
 
 
 
-                <Input
+                <PhoneNoInput
                     controlTitle={"Phone number"}
                     controlPlaceholder={"Enter phone number"}
                     controlName={"phone"}
                     register={register}
+                    setValue={setValue}
+                    getValues={getValues}
                     changeHandler={changeHandler}
                     error={errors.phone}
                     controlInformation={`Phone OR Mobile number. `}
                 />
+
+                <div className={`w-full mt-4 mb-12`}>
+                    <div className={`text-2xl font-semibold`}>
+                        Minimum rate charged by this business.
+                    </div>
+                    <div className={`text-[14px] py-4 mb-0 leading-[1.3em]`}>Select the minimum amount customers or clients are charged to purchase goods/services from this business. This is optional.</div>
+
+                    <div className={`p-4 border rounded-xl`}>
+                        <SelectCurrency
+                            controlTitle={"Currency"}
+                            controlName={"minimum_amount_currency_code"}
+                            controlPlaceholder={"Select currency"}
+                            selectJson={currencies}
+                            register={register}
+                            changeHandler={changeHandler}
+                            error={errors.country_code}
+                            setCode={resetStates}
+                            controlInformation={`Default currency to receive funds.`}
+                        />
+
+                        <div className={`h-2`}></div>
+
+                        <InputNumberOnly
+                            controlTitle={"Minimum amount charged"}
+                            controlPlaceholder={"Starting amount. E.g. 10 or 30..."}
+                            controlName={"minimum_amount"}
+                            register={register}
+                            changeHandler={changeHandler}
+                            error={errors.established}
+                            controlInformation={`Enter the starting amount charged by this business`}
+                        />
+
+                    </div>
+                </div>
+
 
                 <Input
                     controlTitle={"Year established - Optional"}

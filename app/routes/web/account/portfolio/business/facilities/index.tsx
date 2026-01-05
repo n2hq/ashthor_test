@@ -1,100 +1,117 @@
-import { useParams } from '@remix-run/react'
 import React, { useEffect, useState } from 'react'
-import { getBusinessProfile, getSelectedFacilityFeatures, getSysFacilityFeatures, IsAuthenticated, logError } from '~/lib/lib'
 import AccountLayout from '../../../assets/AccountLayout'
 import ContentLayout from '../../../assets/ContentLayout'
-import BusinessMenu from '../assets/BusinessMenu'
-import FacilityFeatures from './assets/FactilityFeatures'
+import { getBusinessProfile, getFacilityList, getFacilityProfile, getServiceList, getServiceProfile, getSysFacilities, getSysFacilityFeatures, IsAuthenticated, removeAllParagraphs } from '~/lib/lib'
+import BusinessProfile from '../assets/BusinessProfile'
 import { useAuth } from '~/context/AuthContext'
-import CardTitle from '../../../assets/CardTitle'
-import BusinessHeader from '../assets/BusinessHeader'
-import { facilityFeatures as faciFeatures } from '~/lib/json/facility_features'
-import LoadingMessage from '~/components/content/LoadingMessage'
+import { useParams, useSearchParams } from '@remix-run/react'
+import { FacilityType, ServiceType, SysFacilityType } from '~/lib/types'
+import { AddServiceProvider, useAddServiceContext } from '~/context/AddServiceContext'
+import Pagination from '~/components/content/Pagination'
+import { AddFacilitiesProvider, useAddFacilitiesContext } from '~/context/AddFacilitiesContext'
 
 const index = () => {
     useEffect(() => {
         IsAuthenticated(localStorage)
     }, [])
 
-    const [businessGuid, setBusinessGuid] = useState('')
+    const [businessGuid, setBusinessGuid] = useState<string | ''>('')
     const [userGuid, setUserGuid] = useState('')
-    const [facilityFeatures, setFacilityFeatures] = useState<any | null>(null)
-    const [selectedFacilityFeatures, setSelectedFacilityFeatures] = useState<any | null>(null)
-    const [data, setData] = useState<any | null>(null)
     const [loading, setLoading] = useState(true)
+    const [facilityList, setFacilityList] = useState<FacilityType[] | null>(null)
+    const [sysFacilities, setSysFacilities] = useState<SysFacilityType[] | null>(null)
     const { business_guid, user_guid } = useParams();
     const [businessProfile, setBusinessProfile] = useState<any | null>(null)
+    const [data, setData] = useState<any | null>(null)
+    const [pagination, setPagination] = useState<any | null>(null)
+
     const auth = useAuth()
-    if (!auth) { return null }
+    const [searchParams, setSearchParams] = useSearchParams();
+
 
     useEffect(() => {
-        const getAllData = async (businessGuid: string, userGuid: string) => {
 
+        const getAllData = async (businessGuid: string, userGuid: string, page: number) => {
             setBusinessGuid(businessGuid)
+
             setUserGuid(userGuid)
-            const facilityFeatures = await getSysFacilityFeatures()
-            setFacilityFeatures(faciFeatures)
-            const selectedFacilityFeatures = await getSelectedFacilityFeatures(userGuid, businessGuid)
-            setSelectedFacilityFeatures(selectedFacilityFeatures)
+
             const businessProfile = await getBusinessProfile(businessGuid || "")
+
+            const sysFacilities: SysFacilityType[] | null = await getSysFacilities()
+
+            const res = await getFacilityList(businessGuid, userGuid, page)
+
+            const facilityList: FacilityType[] = res.data || []
+            setPagination(res.pagination)
+            console.log(res)
             setBusinessProfile(businessProfile)
+            setFacilityList(facilityList)
+            setSysFacilities(sysFacilities)
         }
+
         try {
             if (business_guid && user_guid) {
-                getAllData(business_guid, user_guid)
+                const page = parseInt(searchParams.get('page') || '1');
+                const limit = parseInt(searchParams.get('limit') || '10')
+
+                getAllData(business_guid, user_guid, page)
             }
         } catch (e: any) {
-            logError(e)
+            console.log(e.message)
         }
-    }, [business_guid, user_guid, faciFeatures])
+    }, [user_guid, business_guid])
 
     useEffect(() => {
-
-
-        if (businessGuid && userGuid && facilityFeatures && selectedFacilityFeatures && businessProfile) {
+        if (businessGuid && userGuid && facilityList && businessProfile) {
 
             const data = {
                 businessGuid: businessGuid,
                 userGuid: userGuid,
-                facilityFeatures: facilityFeatures,
-                selectedFacilityFeatures: selectedFacilityFeatures,
+                facilityList: facilityList,
                 businessProfile: businessProfile
             }
             setData(data)
             setLoading(false)
         }
-    }, [
-        businessGuid,
-        userGuid,
-        facilityFeatures,
-        selectedFacilityFeatures,
-        businessProfile
-    ])
-
-
-
-    if (loading) {
-        return <LoadingMessage />
-    }
+    }, [businessGuid, userGuid, facilityList, businessProfile])
 
     return (
         <AccountLayout>
-            <ContentLayout
+            <ContentLayout title={'Facilities Settings'}
                 businessGuid={businessGuid}
                 data={data}
                 businessProfile={businessProfile}
-                title={'Facility Features'}>
+            >
+
+                <AddFacilitiesProvider>
+                    {
+                        businessGuid && userGuid &&
+
+                        <AddFacility
+                            userGuid={userGuid}
+                            businessGuid={businessGuid}
+                            facilityList={facilityList}
+                            sysFacilities={sysFacilities}
+                        />
+
+                    }
+
+
+                    {
+                        (pagination && facilityList && businessGuid && userGuid) &&
+                        <DisplayFacilities
+                            pagination={pagination}
+                            facilityList={facilityList}
+                            businessGuid={businessGuid}
+                            userGuid={userGuid}
+                            sysFacilities={sysFacilities}
+                        />
+                    }
+                </AddFacilitiesProvider>
 
 
 
-                {
-                    data && <FacilityFeatures
-                        userGuid={userGuid}
-                        businessGuid={businessGuid}
-                        facilityFeatures={facilityFeatures}
-                        selectedFacilityFeatures={selectedFacilityFeatures}
-                    />
-                }
 
             </ContentLayout>
         </AccountLayout>
@@ -102,3 +119,139 @@ const index = () => {
 }
 
 export default index
+
+export interface AddFacilityProps {
+    userGuid: string
+    businessGuid: string
+    facilityList: FacilityType[] | null
+    sysFacilities: SysFacilityType[] | null
+}
+
+export const AddFacility = ({
+    userGuid, businessGuid,
+    facilityList, sysFacilities
+}: AddFacilityProps) => {
+
+    const addFacility = useAddFacilitiesContext()
+
+
+
+    async function getAvailableSysSocialMedia(
+        userFacilityList: FacilityType[] | null,
+        sysFacilities: SysFacilityType[] | null
+    ): Promise<SysFacilityType[] | null | undefined> {
+        // Get all social media codes already used by the user
+        const usedCodes = new Set(userFacilityList?.map(item => item.facility_id));
+
+        // Filter sysSocialMedia to only include unused ones
+        return sysFacilities?.filter(platform => !usedCodes.has(platform.id));
+    }
+
+    const handleOpenDialog = async () => {
+        addFacility?.setDialog(true)
+        addFacility?.setUserGuid(userGuid)
+        addFacility?.setBusinessGuid(businessGuid)
+        addFacility?.setFacilityProfile(null)
+
+        const availableSysFacilities = await getAvailableSysSocialMedia(facilityList, sysFacilities);
+        addFacility?.setSysFacilities(availableSysFacilities)
+    }
+
+
+
+
+
+    return (
+        <div className={`mb-2`}>
+            <button
+                onMouseDown={handleOpenDialog}
+                className={` bg-blue-800 rounded-md px-3 py-1
+                text-white hover:bg-blue-700 transition
+                duration-500 ease-in-out hover:shadow-md
+                 shadow-gray-900 hover:shadow-black/50`}>
+                Add Facility
+            </button>
+        </div>
+    )
+}
+
+export interface DisplayFacilitiesProps {
+    pagination: any
+    facilityList: any
+    businessGuid: string
+    userGuid: string
+    sysFacilities: SysFacilityType[] | null
+}
+export const DisplayFacilities = ({
+    pagination,
+    facilityList,
+    businessGuid,
+    userGuid,
+    sysFacilities
+}: DisplayFacilitiesProps) => {
+
+    const addFacilityCtx = useAddFacilitiesContext()
+    const [isClicked, setIsClicked] = useState(false)
+
+    const handleUpdateFacility = async (facilityGuid: string) => {
+        addFacilityCtx?.setDialog(true)
+        addFacilityCtx?.setBusinessGuid(businessGuid)
+        addFacilityCtx?.setUserGuid(userGuid)
+        const facilityProfile = await getFacilityProfile(facilityGuid)
+
+        addFacilityCtx?.setFacilityProfile(facilityProfile)
+        addFacilityCtx?.setSysFacilities(sysFacilities)
+        setIsClicked(true)
+    }
+
+    useEffect(() => {
+        if (facilityList) {
+            console.log(facilityList)
+        }
+    }, [facilityList])
+
+    return (
+        <div>
+            <div className={`mt-6 flex flex-col border rounded-xl overflow-hidden relative`}>
+
+                <div className={`flex flex-row gap-0 p-3 text-lg font-bold gap-x-2`}>
+                    <div className={`min-w-[200px] w-[200px]`}>
+                        Facility Name
+                    </div>
+                    <div className={`grow `}>
+                        Facility Description
+                    </div>
+                </div>
+                {
+                    facilityList?.map((facility: FacilityType, index: number) => {
+                        const isOdd = (index % 2) === 0 ? true : false
+                        const facilityObject = sysFacilities?.find(platform => platform.id === facility?.facility_id);
+                        return (
+                            <div
+                                onClick={() => handleUpdateFacility(facility?.facility_guid)}
+                                key={index} className={` flex flex-row place-items-center relative ${isOdd && 'bg-gray-100'} border-t py-2 px-3 cursor-pointer gap-x-2`}>
+
+                                <div className={`min-w-[200px] w-[200px] text-base first:border-none line-clamp-1`}>
+                                    {facilityObject?.name}
+                                </div>
+                                <div className={`grow w-full line-clamp-1 text-base`}>
+                                    {removeAllParagraphs(facility?.facility_description)}
+                                </div>
+
+                            </div>
+                        )
+                    })
+                }
+            </div>
+
+            <div className={`mt-6`}>
+                {
+                    pagination &&
+                    <Pagination
+                        pagination={pagination}
+                    />
+                }
+            </div>
+        </div>
+    )
+}

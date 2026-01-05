@@ -4,8 +4,8 @@ import { useEditPhotoDialogContext } from '~/context/EditPhotoDialogContext'
 import { useEditProductDialogContext } from '~/context/EditProductDialogContext'
 import { useEditVideoDialogContext } from '~/context/EditVideoDialogContext'
 import { useNotification } from '~/context/NotificationContext'
-import { config } from '~/lib/lib'
-import { GalleryItemMenuProps, ProductItemMenuProps } from '~/lib/types'
+import { config, filterCountry, getCountriesCurrencies } from '~/lib/lib'
+import { CountryType, GalleryItemMenuProps, ProductItemMenuProps } from '~/lib/types'
 
 const GalleryItemMenu = ({
     product,
@@ -20,16 +20,28 @@ const GalleryItemMenu = ({
     const notification = useNotification()
     const IMG_BASE_URL = import.meta.env.VITE_IMG_BASE_URL
 
-    const handleOpenDialog = () => {
+    const handleOpenDialog = async () => {
         editProduct.setDialog(true)
         editProduct.setImgSrc(config.IMG_BASE_URL + product.product_image_url)
         editProduct.setProductTitle(product.product_title)
         editProduct.setProductDescription(product.product_description)
         editProduct.setProductLink(product.product_link)
         editProduct.setProductGuid(product.product_guid)
+        editProduct.setProductAmount(product.product_amount)
+        editProduct.setProductCurrencyId(product.product_currency_country_id)
         editProduct.setUserGuid(userGuid)
         editProduct.setBusinessGuid(businessGuid)
+        const countriesData: CountryType[] | undefined = await getCountriesCurrencies()
 
+        const filteredCountry: CountryType[] | undefined = filterCountry(countriesData, product.product_currency_country_id)
+
+        let ctry: CountryType | undefined = undefined
+
+        if (filteredCountry && filteredCountry.length > 0) {
+            ctry = filteredCountry[0] // Now safe to access
+        }
+
+        editProduct.setSelectedCountry(ctry)
         //setDialog(true)
     }
 

@@ -2,7 +2,7 @@ const CopyrightPolicy = () => {
     return (
         <div className="w-full  max-w-[1200px] mx-auto px-4 py-8">
             <div className={`max-w-[700px]`}>
-                <h1 className="text-3xl tracking-tighter font-black text-gray-900 mb-6 first-letter:italic">Copyright Policy</h1>
+                <h1 className="text-3xl tracking-normal font-extrabold text-gray-900 mb-6 first-letter:italic">Copyright Policy</h1>
                 <p className="text-gray-600 mb-8">Last Updated: {new Date().toLocaleDateString()}</p>
 
                 <div className="space-y-8">

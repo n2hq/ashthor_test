@@ -152,7 +152,7 @@ const SocialMedia = ({
                         {mergedSocialMedia?.map((socialMedia: any) => (
                             <label
                                 key={socialMedia.media_id}
-                                className="flex items-center space-x-3 p-3 border rounded cursor-pointer"
+                                className="flex items-center space-x-3 p-3 border rounded-2xl cursor-pointer"
 
                             >
                                 <div>
@@ -164,7 +164,7 @@ const SocialMedia = ({
                                         className="hidden"
                                     />
                                     <div
-                                        className={`w-5 h-5 border-[1px] border-black  rounded-none 
+                                        className={`w-5 h-5 border-[1px] border-black  rounded 
                                             ${socialMedia.active ? 'bg-blue-400' : 'bg-white'
                                             }`}
                                     ></div>
@@ -175,8 +175,9 @@ const SocialMedia = ({
                                     <div className=' w-full h-[50px] mt-1 rounded overflow-hidden'>
                                         <textarea
                                             onClick={(e) => handleToggle(socialMedia.media_id)}
+                                            placeholder={`OurHandle`}
                                             onChange={(e) => handleDescriptionChange(socialMedia.media_id, e.target.value)}
-                                            className={`w-full h-full bg-gray-100
+                                            className={`w-full h-full bg-gray-100 rounded-2xl
                                             border p-3 text-sm`}
                                             value={socialMedia.user_description}
                                             onBlur={(e) => {

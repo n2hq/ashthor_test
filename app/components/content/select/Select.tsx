@@ -38,7 +38,7 @@ const Select = ({
                         </div>
                     }
                 </div>
-                <div className='w-[90%]'>
+                <div className='w-[100%]'>
                     {
                         ready && <select
                             {...register(controlName, {
@@ -54,9 +54,11 @@ const Select = ({
                         >
                             <option value="">{controlPlaceholder}</option>
                             {
-                                selectJson.map((item: any, id: any) => {
+                                selectJson?.map((item: any, id: any) => {
                                     return (
-                                        <option key={id} value={item.id}>
+                                        <option key={id} value={item.id}
+                                            className={`text-xl`}
+                                        >
                                             {item.name}
                                         </option>
                                     )

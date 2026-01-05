@@ -223,7 +223,7 @@ const OperationNotification: React.FC = () => {
 
     return (
         <div className="fixed inset-0 flex items-center justify-center z-[10000] bg-black bg-opacity-50">
-            <div className="bg-white rounded-xl shadow-2xl p-6 w-80 animate-fade-in">
+            <div className="bg-white rounded-xl shadow-2xl px-6 py-4 w-[300px] animate-fade-in">
                 {/* Header with icon */}
                 <div className="flex items-center mb-4">
                     <div className="bg-blue-100 p-3 rounded-full mr-3">
@@ -252,21 +252,21 @@ const OperationNotification: React.FC = () => {
                 <p className="text-gray-600 text-sm mb-4">{getOperationMessage()}</p>
 
                 {/* Animated loader */}
-                <div className="flex justify-center">
+                {/*  <div className="flex justify-center">
                     <div className="flex space-x-2">
                         <div className="w-3 h-3 bg-blue-500 rounded-full animate-bounce"></div>
                         <div className="w-3 h-3 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
                         <div className="w-3 h-3 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '0.4s' }}></div>
                     </div>
-                </div>
+                </div> */}
 
                 {/* Cancel button */}
-                <button
+                {/* <button
                     onClick={hideOperation}
-                    className="mt-4 text-sm text-gray-500 hover:text-gray-700 transition-colors"
+                    className="mt-2 text-sm text-gray-500 hover:text-gray-700 transition-colors"
                 >
                     Cancel
-                </button>
+                </button> */}
             </div>
         </div>
     );

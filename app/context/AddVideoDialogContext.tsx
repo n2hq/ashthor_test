@@ -6,6 +6,7 @@ import { z } from "zod"
 import { saveVideo } from "~/lib/lib";
 import { AddVideoType } from "~/lib/types";
 import { useOperation } from "./OperationContext";
+import { CgClose } from "react-icons/cg";
 
 const AddVideoDialogContext = createContext<any | null>(null)
 
@@ -152,8 +153,9 @@ export function AddVideoDialogProvider({ children }: any) {
 
         } else {
 
-            notification.alertCancel("Video error!", "Video could not be loaded!")
-
+            //notification.alertCancel("Video error!", "Video could not be loaded!")
+            showError("Video Error", "Video could not be loaded.")
+            completeOperation()
         }
 
 
@@ -273,19 +275,54 @@ export function AddVideoDialogProvider({ children }: any) {
                 fixed top-0 left-0 right-0 bottom-0 bg-black/30 rounded-[8px]
                 place-content-center place-items-center overflow-hidden`}>
 
-                    <div className={`relative w-[90%] h-[80%] bg-white 
-                        rounded-[8px] overflow-x-hidden overflow-y-hidden z-[3000]`}
+                    <div className={`relative max-w-[600px] w-full h-fit bg-white mx-2
+                        rounded-[40px] overflow-x-hidden overflow-y-hidden z-[3000]`}
                         onClick={(event) => {
                             event.preventDefault()
                         }}
                     >
-                        <div className={`relative h-full overflow-y-auto`}>
-                            <div className={`relative w-full h-[75%] max-h-[75%] bg-black`}>
+                        <CloseButton setShow={setDialog} />
+                        <div className={`pt-12 pb-2 px-3 text-2xl font-semibold`}>
+                            Add Video
+                        </div>
+
+                        {/** video link */}
+                        <div className={`flex mb-3 flex-col mx-3 `}>
+                            <div className={`text-[15px] pt-1 pb-1`}>Paste a Youtube video link</div>
+                            <div className={`flex place-content-between place-items-center gap-x-4`}>
+                                <div className={`grow`}>
+                                    <input
+                                        id="videolink"
+                                        type="text"
+                                        placeholder="Paste a Youtube Video"
+                                        className={`w-full border-[1px] border-gray-300 bg-gray-100 px-3 py-2 outline-none rounded-lg text-xl`}
+                                        onKeyUp={(e: any) => {
+                                            handleVideoUrlKeyUp(e.target.value);
+                                        }}
+                                    />
+                                </div>
+                                <div>
+                                    <button
+                                        onClick={() => handleVerify()}
+                                        disabled={videoUrlState ? false : true}
+                                        className={`${videoUrlState ? 'bg-blue-800' : 'bg-blue-300'} ${videoVerified && 'hidden'} text-white px-3 py-2.5 rounded-md
+                                    shadow-md `}
+                                    >
+                                        Verify
+                                    </button>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div className={`relative w-full h-[300px] overflow-y-auto`}>
+
+                            <div className={`relative w-full h-full bg-black`}>
                                 <div className={` relative w-full h-full text-white flex place-items-center place-content-center flex-col`}>
-                                    {working ? 'Loading...' : 'Paste a Youtube link below!'}
+                                    {working ? 'Loading...' : 'Waiting...'}
                                     <iframe id="yt-iframe"
                                         src={video?.videoId ? `https://www.youtube.com/embed/${video?.videoId}` : undefined}
-                                        className="absolute top-0 left-0 w-full h-full"
+                                        className="absolute top-0 left-0 w-full h-full bg-transparent"
 
                                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                     >
@@ -293,50 +330,36 @@ export function AddVideoDialogProvider({ children }: any) {
                                 </div>
                             </div>
 
-                            {/** video link */}
-                            <div className={`flex mb-1 flex-col mx-3 `}>
-                                <div className={`text-[14px] font-semibold py-1`}>Paste a Youtube video link</div>
-                                <input
-                                    id="videolink"
-                                    type="text"
-                                    placeholder="Paste a Youtube Video"
-                                    className={`w-full border-[1px] border-gray-700 bg-gray-100 px-3 py-4 outline-none rounded-lg`}
-                                    onKeyUp={(e: any) => {
-                                        handleVideoUrlKeyUp(e.target.value);
-                                    }}
-                                />
 
-
-                            </div>
 
                             {/** video title */}
 
                             <div className={`flex mb-1 flex-col mx-3 `}>
-                                <div className={`text-[14px] font-semibold py-1`}>Enter video title</div>
+                                <div className={`text-[15px] pt-3 pb-1`}>Enter video title</div>
                                 <input
                                     id="videotitle"
                                     type="text"
                                     placeholder="Enter Video Title"
-                                    className={`w-full border-[1px] border-gray-700 bg-gray-100 px-3 py-4 outline-none rounded-lg`}
+                                    className={`w-full border-[1px] border-gray-300 bg-gray-100 px-3 py-4 outline-none rounded-lg text-xl`}
                                 />
 
                             </div>
 
                             { /** description */}
                             <div className={`flex mb-1 flex-col mx-3 `}>
-                                <div className={`text-[14px] font-semibold py-1`}>Enter title description</div>
+                                <div className={`text-[15px] pt-3 pb-1`}>Enter title description</div>
                                 <textarea
                                     id='videodescr'
                                     placeholder={`Enter picture description.`}
-                                    className={`w-full border-[1px] border-gray-700 bg-gray-100 px-3 py-4 outline-none rounded-lg`}
+                                    className={`w-full border-[1px] border-gray-300 bg-gray-100 px-3 py-4 outline-none rounded-lg text-xl`}
                                 ></textarea>
                             </div>
 
-                            <div className={`flex place-content-end px-3 gap-2`}>
+                            <div className={`flex place-content-end px-6 gap-2 py-6`}>
                                 <button
                                     onMouseDown={() => handleCloseDialog()}
                                     className={`bg-gray-800 text-white px-3 py-1.5 rounded-md
-                                    shadow-md mb-2 mt-4`}
+                                    shadow-md `}
                                 >
                                     Cancel
                                 </button>
@@ -345,18 +368,11 @@ export function AddVideoDialogProvider({ children }: any) {
                                     onClick={() => handleUpload()}
 
                                     className={`bg-blue-800 text-white px-3 py-1.5 rounded-md
-                                    shadow-md mb-2 mt-4 ${!videoVerified ? 'hidden' : 'block'}`}
+                                    shadow-md  ${!videoVerified ? 'hidden' : 'block'}`}
                                 >
                                     Submit
                                 </button>
-                                <button
-                                    onClick={() => handleVerify()}
-                                    disabled={videoUrlState ? false : true}
-                                    className={`${videoUrlState ? 'bg-blue-800' : 'bg-blue-300'} ${videoVerified && 'hidden'} text-white px-3 py-1.5 rounded-md
-                                    shadow-md mb-2 mt-4`}
-                                >
-                                    Verify
-                                </button>
+
 
                             </div>
                         </div>
@@ -365,5 +381,19 @@ export function AddVideoDialogProvider({ children }: any) {
             }
             {children}
         </AddVideoDialogContext.Provider>
+    )
+}
+
+
+export interface CloseButtonProps {
+    setShow: (show: boolean) => void
+}
+export const CloseButton = ({ setShow }: CloseButtonProps) => {
+    return (
+        <div className={`absolute top-8 right-6 text-3xl  rounded-xl  w-[40px] h-[40px] shadow-sm flex place-items-center place-content-center cursor-pointer bg-gray-200/70 hover:border-gray-200/50 text-gray-400 hover:text-gray-500 z-10`}
+            onClick={() => setShow(false)}
+        >
+            <CgClose />
+        </div>
     )
 }

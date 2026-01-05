@@ -47,7 +47,7 @@ const ContentLayout = ({ children, businessGuid, data, businessProfile, title }:
                         </div>
                         <div>
                             {
-                                businessGuid && data.userGuid &&
+                                businessGuid && data?.userGuid &&
                                 <BusinessMenu setIsOpen={setIsOpen} guid={businessGuid} userGuid={data.userGuid} />
                             }
                         </div>

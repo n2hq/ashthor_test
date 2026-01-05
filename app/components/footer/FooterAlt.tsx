@@ -2,7 +2,9 @@ import { Link } from '@remix-run/react'
 import React from 'react'
 import { FaFacebook, FaInstagram } from 'react-icons/fa'
 import { FaXTwitter } from 'react-icons/fa6'
-import MainLogo from '../header/latest/MainLogo'
+import HeaderLogo from '../header/v1/HeaderLogo'
+import { config } from '~/lib/lib'
+
 
 
 const aboutLinks = [
@@ -91,15 +93,15 @@ const doBusinessLinks = [
 const garsseteSocialLinks = [
     {
         icon: <FaFacebook />,
-        link: 'http://facebook.com/bycetinc'
+        link: 'http://facebook.com/ashthors'
     },
     {
         icon: <FaXTwitter />,
-        link: 'http://x.com/bycetinc'
+        link: 'http://x.com/ashthors'
     },
     {
         icon: <FaInstagram />,
-        link: 'http://instagram.com/bycetinc'
+        link: 'http://instagram.com/ashthors'
     },
 ]
 
@@ -138,14 +140,14 @@ export type CategoriesType = {
 
 const FooterAlt = () => {
     return (
-        <div className={`px-[15px] bg-gray-100 pt-[50px] pb-[70px]`}>
-            <div className={`max-w-[1200px] mx-auto w-full`}>
+        <div className={`px-[25px] bg-[#EADDCA]/50 pt-[50px] pb-[70px]`}>
+            <div className={`max-w-[1100px] mx-auto w-full`}>
                 <div className={`w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-y-8 lg:gap-x-4`}>
 
                     {/** first column */}
                     <div className={`lg:col-span-2 flex flex-col place-items-center text-center md:place-items-start md:text-left`}>
                         <div className={`font-poppins font-[300] text-xl`}>
-                            About Bycet
+                            About us
                         </div>
 
                         <div className={`flex flex-col space-y-2 mt-2 font-poppins font-[300]`}>
@@ -256,18 +258,18 @@ const FooterAlt = () => {
                             />
                         </div>
                         <div className={`font-poppins text-[22px] font-[600]`}>
-                            <MainLogo />
+                            <HeaderLogo />
                         </div>
                     </div>
                     <div className={`font-poppins text-[13px] mt-[-2px]`}>
-                        © 2025 Bycet. All rights reserved.
+                        © 2025 {config.SITENAME}. All rights reserved.
                     </div>
 
                 </div>
 
                 <div className={`mt-3 font-poppins font-[300] grid-cols-1 md:grid-cols-12 flex flex-col place-items-center text-center md:place-items-start md:text-left`}>
                     <div className={`md:col-span-8`}>
-                        Bycet connects you to trusted local businesses. Discover services, read reviews, and support your community. Find everything from restaurants to contractors in one comprehensive directory. Your journey to better local experiences starts here.
+                        {config.SITENAME} connects you to trusted local businesses. Discover services, read reviews, and support your community. Find everything from restaurants to contractors in one comprehensive directory. Your journey to better local experiences starts here.
                     </div>
                     <div className={`md:col-span-4`}>
 
@@ -297,9 +299,9 @@ const FooterAlt = () => {
                 <div>
                     <div>
                         <p className="text-[10px] text-gray-400 text-center mt-2">
-                            <a href="https://bycet.com/" target="_blank"
+                            <a href={config.BASE_URL} target="_blank"
                                 className={`hover:underline`}>
-                                Bycet Business Directory
+                                {config.SITENAME} Business Directory
                             </a>
                         </p>
                     </div>

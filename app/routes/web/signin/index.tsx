@@ -3,10 +3,12 @@ import ResponsiveNav from '~/components/header/minimal/ResponsiveNav'
 import SigninBody from './assets/SigninBody'
 import { OperationProvider } from '~/context/OperationContext'
 import { generateRandom10DigitNumber, logError } from '~/lib/lib'
-import { MetaFunction } from '@remix-run/react'
+import { MetaFunction, useLoaderData } from '@remix-run/react'
 import { LoaderFunction } from '@remix-run/node'
 
 export const loader: LoaderFunction = async ({ request, params }) => {
+
+    const referer = request.headers.get("Referer");
 
     try {
         let randomNumber
@@ -19,7 +21,8 @@ export const loader: LoaderFunction = async ({ request, params }) => {
         }
 
         return {
-            randomNumber: randomNumber
+            randomNumber: randomNumber,
+            referer: referer
         }
     } catch (err: any) {
         logError(err)
@@ -30,6 +33,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
 
     let randomNo = data?.randomNumber
+
     try {
 
 
@@ -65,11 +69,15 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
 };
 
 const index = () => {
+    const data: any = useLoaderData()
+    let referer = data?.referer
+
+
     return (
         <div>
             {/* <ResponsiveNav theme='light' /> */}
             <OperationProvider>
-                <SigninBody />
+                <SigninBody referer={referer} />
             </OperationProvider>
         </div>
     )

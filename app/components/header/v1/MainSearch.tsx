@@ -122,7 +122,7 @@ const MainSearch = () => {
                         }
                     }}
                 />
-                <button className={`bg-[#6001D2] h-full w-[60px] rounded-full flex place-items-center place-content-center text-white`}>
+                <button className={`bg-[#A52A2A] h-full w-[60px] rounded-full flex place-items-center place-content-center text-white`}>
                     <FaSearch />
                 </button>
             </div>

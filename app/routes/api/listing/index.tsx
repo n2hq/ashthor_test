@@ -1,7 +1,7 @@
 import { ActionFunctionArgs, LoaderFunction } from "@remix-run/node"
 import { query } from "../DB"
 import { ListingType } from "~/lib/types"
-import { DoResponse, GenerateRandomHash } from "~/lib/lib"
+import { DoResponse, GenerateRandomHash, removeCommas } from "~/lib/lib"
 
 export const loader: LoaderFunction = async ({ request, params }) => {
     const contentType = request.headers.get("Content-Type")
@@ -119,6 +119,7 @@ export async function action({ request, params }: ActionFunctionArgs) {
 
             const listingHash = GenerateRandomHash()
 
+            const minimumAmt = removeCommas(body?.minimum_amount)
             //console.log(body)
 
             const result = await query(`INSERT INTO tbl_dir SET 
@@ -140,7 +141,9 @@ export async function action({ request, params }: ActionFunctionArgs) {
                 gid = ?, 
                 owner = ?,
                 established = ?,
-                listing_hash = ?`,
+                listing_hash = ?,
+                minimum_amount = ?,
+                minimum_amount_currency_code = ?`,
                 [
                     body.title || null,
                     body.pagetype,
@@ -160,7 +163,9 @@ export async function action({ request, params }: ActionFunctionArgs) {
                     gid,
                     body.owner || null,
                     body.established || null,
-                    listingHash || null
+                    listingHash || null,
+                    minimumAmt || null,
+                    body.minimum_amount_currency_code || null
                 ])
 
             const rating = 3

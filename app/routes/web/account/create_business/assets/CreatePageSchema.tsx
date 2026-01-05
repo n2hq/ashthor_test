@@ -126,6 +126,9 @@ const CreatePageSchema = z.object({
             { message: "Must be only numbers and not more than 4 digits" }
         ),
 
+    minimum_amount_currency_code: z.any(),
+    minimum_amount: z.any()
+
 
 }).superRefine((data, ctx) => {
 

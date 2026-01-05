@@ -3,12 +3,13 @@ import ContentLayout from '../assets/ContentLayout'
 import AccountLayout from '../assets/AccountLayout'
 import { useAuth } from '~/context/AuthContext'
 import CreatePageForm from './assets/CreatePageForm'
-import { getCategories, getCities, getCountries, getStates, getUserProfile, IsAuthenticated } from '~/lib/lib'
+import { getCategories, getCities, getCountries, getCurrencies, getStates, getUserProfile, IsAuthenticated } from '~/lib/lib'
 import CardTitle from '../assets/CardTitle'
 import CardHeader from '../assets/CardHeader'
 import ProfileContentLayout from '../assets/ProfileContentLayout'
 import { OperationProvider } from '~/context/OperationContext'
 import LoadingMessage from '~/components/content/LoadingMessage'
+import { Currency } from '~/lib/types'
 
 const index = () => {
     const tokens = localStorage?.getItem("authTokens")
@@ -24,13 +25,14 @@ const index = () => {
     const [cities, setCities] = useState<any | null>(null)
     const [categories, setCategories] = useState<any | null>(null)
     const [userProfile, setUserProfile] = useState<any | null>(null)
-
+    const [currencies, setCurrencies] = useState<Currency[] | undefined>(undefined)
     useEffect(() => {
         const getAllData = async (user: any) => {
             const countries = await getCountries()
             const states = await getStates("")
             const cities = await getCities("", "")
             const categories = await getCategories()
+            const currencies: Currency[] | undefined = await getCurrencies()
 
             const userProfileData = await getUserProfile(user?.guid || "")
             setUserProfile(userProfileData)
@@ -40,6 +42,7 @@ const index = () => {
             setCities(cities)
             setCategories(categories)
             setUser(user)
+            setCurrencies(currencies)
         }
 
         try {
@@ -59,7 +62,8 @@ const index = () => {
                 countries,
                 states,
                 cities,
-                categories
+                categories,
+                currencies
             }
             setData(data)
             setLoading(false)

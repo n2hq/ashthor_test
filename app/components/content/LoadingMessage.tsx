@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { FiRotateCw } from 'react-icons/fi'
 import { MdRotate90DegreesCw } from 'react-icons/md'
 import { TbRotateClockwise2 } from 'react-icons/tb'
+import { config } from '~/lib/lib'
 
 
 export interface LoadingProp {
@@ -39,7 +40,7 @@ const LoadingMessage = ({ loading }: LoadingProp) => {
                     <div style={{ marginBottom: '0px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: '0.5em' }}>
                         <div className='spinner'></div>
 
-                        <b style={{ fontFamily: 'arial', fontSize: '13px', fontWeight: 'bold' }}>Bycet</b>
+                        <b style={{ fontFamily: 'arial', fontSize: '13px', fontWeight: 'bold', textTransform: 'lowercase' }}>{config.SITENAME}</b>
                     </div>
 
 

@@ -87,14 +87,14 @@ function buildSearchQuery(params: any) {
 
     const whereClause = conditions.length > 0 ? `WHERE ${conditions.join(' AND ')}` : '';
 
-    const baseQuery = `
+    /* const baseQuery = `
         SELECT
             d.id, d.username, d.gid, d.title, d.short_description, d.phone,
             d.category, d.established, d.address_one, d.address_two, d.website,
             d.date_created, co.name AS country_name, co.iso2 AS country_code,
             st.name AS state_name, st.iso2 AS state_code, ci.name AS city_name,
             b.image_url, bg.image_url AS bg_image_url,
-            r.average_rating, r.total_reviews,
+            r.average_rating, r.total_reviews, d.currency, d.minimum_amount,
             (
                 SELECT GROUP_CONCAT(
                     CONCAT(sm.media_id, '$', sm.user_description, '$', sysm.base_url) 
@@ -118,7 +118,36 @@ function buildSearchQuery(params: any) {
             GROUP BY business_guid
         ) r ON d.gid = r.business_guid
         ${whereClause}
+    `; */
+
+    const baseQuery = `
+        SELECT
+            d.id, d.username, d.gid, d.title, d.short_description, d.phone,
+            d.category, d.established, d.address_one, d.address_two, d.website,
+            d.date_created, co.name AS country_name, co.iso2 AS country_code,
+            st.name AS state_name, st.iso2 AS state_code, ci.name AS city_name,
+            b.image_url, bg.image_url AS bg_image_url, bg.image_url AS bg_image_url_ext, b.image_url AS profile_image_url_ext,
+            r.avg_rating, r.count_of_rating, d.currency, d.minimum_amount,
+            (
+                SELECT GROUP_CONCAT(
+                    CONCAT(sm.media_id, '$', sm.user_description, '$', sysm.base_url) 
+                    SEPARATOR ', '
+                )
+                FROM tbl_selected_social_media sm
+                JOIN tbl_sys_social_media sysm ON sm.media_id = sysm.media_id
+                WHERE d.gid = sm.business_guid
+            ) AS social_media
+        FROM tbl_dir d
+        LEFT JOIN tbl_country co ON co.iso2 = d.country_code
+        LEFT JOIN tbl_state st ON st.iso2 = d.state_code AND st.country_code = d.country_code
+        LEFT JOIN tbl_city ci ON ci.id = d.city_id
+        LEFT JOIN tbl_business_profile_image b ON d.gid = b.business_guid
+        LEFT JOIN tbl_business_profile_bg bg ON d.gid = bg.business_guid
+        LEFT JOIN tbl_business_rating_summary r ON d.gid = r.business_guid
+        ${whereClause}
     `;
+
+    console.log(baseQuery)
 
     const countQuery = `
         SELECT COUNT(*) as total
@@ -128,6 +157,8 @@ function buildSearchQuery(params: any) {
         LEFT JOIN tbl_city ci ON ci.id = d.city_id
         ${whereClause}
     `;
+
+
 
     return { baseQuery, countQuery, params: queryParams };
 }

@@ -91,7 +91,7 @@ export default function BusinessUserSelector({ userGuid }: any) {
         <div className="space-y-6 p-4 max-w-lg">
 
             {/* Business Search */}
-            <div>
+            <div className={`relative`}>
                 <label className="block text-sm font-medium mb-1">Search Business</label>
                 <input
                     id="biz"
@@ -102,21 +102,24 @@ export default function BusinessUserSelector({ userGuid }: any) {
                     placeholder="Type business name..."
                 />
                 {businessResults.length > 0 && (
-                    <ul className="border mt-2 rounded bg-white shadow divide-y">
-                        {businessResults.map((biz, index) => (
-                            <li
-                                key={biz.id}
-                                onClick={() => {
-
-                                    setSelectedBusiness(biz);
-                                    setBusinessResults([]);
-                                    setBusinessQuery(biz.title);
-                                }}
-                                className="p-2 cursor-pointer hover:bg-gray-100"
-                            >
-                                {biz.title}
-                            </li>
-                        ))}
+                    <ul className={`border mt-2 rounded bg-white shadow divide-y`}>
+                        {
+                            businessResults?.map((biz, index: number) => {
+                                const isEven = index % 2 === 0 ? true : false
+                                return (
+                                    <li
+                                        key={biz.id}
+                                        onClick={() => {
+                                            setSelectedBusiness(biz);
+                                            setBusinessResults([]);
+                                            setBusinessQuery(biz.title);
+                                        }}
+                                        className={`${isEven ? 'bg-gray-50' : 'bg-white'} p-2 cursor-pointer hover:bg-gray-100`}
+                                    >
+                                        {biz.title}
+                                    </li>
+                                )
+                            })}
                     </ul>
                 )}
                 {selectedBusiness && (
@@ -125,7 +128,7 @@ export default function BusinessUserSelector({ userGuid }: any) {
             </div>
 
             {/* User Search */}
-            <div>
+            <div className={`relative w-full`}>
                 <label className="block text-sm font-medium mb-1">Search User</label>
                 <input
                     id="user"
@@ -136,21 +139,24 @@ export default function BusinessUserSelector({ userGuid }: any) {
                     placeholder="Type user name..."
                 />
                 {userResults.length > 0 && (
-                    <ul className="border mt-2 rounded bg-white shadow divide-y">
-                        {userResults.map((u) => (
-                            <li
-                                key={u.id}
-                                onClick={() => {
+                    <ul className={`absolute border mt-2 rounded bg-white shadow divide-y w-full max-h-[200px] overflow-y-auto`}>
+                        {userResults.map((u, index: number) => {
+                            const isEven = index % 2 === 0 ? true : false
+                            return (
+                                <li
+                                    key={u.id}
+                                    onClick={() => {
 
-                                    setSelectedUser(u);
-                                    setUserResults([]);
-                                    setUserQuery(`${u.first_name}, ${u.lastname}`);
-                                }}
-                                className="p-2 cursor-pointer hover:bg-gray-100"
-                            >
-                                {u.first_name}, {u.lastname}
-                            </li>
-                        ))}
+                                        setSelectedUser(u);
+                                        setUserResults([]);
+                                        setUserQuery(`${u.first_name}, ${u.lastname}`);
+                                    }}
+                                    className={`${isEven ? 'bg-gray-50' : 'bg-white'} p-2 cursor-pointer hover:bg-gray-100`}
+                                >
+                                    {u.first_name}, {u.lastname}
+                                </li>
+                            )
+                        })}
                     </ul>
                 )}
                 {selectedUser && (
