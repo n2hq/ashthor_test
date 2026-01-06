@@ -1,0 +1,1 @@
+import{j as s}from"./jsx-runtime-0DLF9kdB.js";import{F as a}from"./FooterAlt-CM9v_zHo.js";import{M as o}from"./MainNav-CNy0SZ2H.js";const m=({children:l})=>s.jsxs("div",{className:"h-full w-full",children:[s.jsx(o,{}),s.jsx("main",{className:"h-full flex w-full flex-col ",children:l}),s.jsx(a,{})]});export{m as S};
