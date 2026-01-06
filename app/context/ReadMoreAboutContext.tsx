@@ -3,7 +3,7 @@ import { BiChevronLeft } from "react-icons/bi";
 import { CgClose } from "react-icons/cg";
 
 interface ReadMoreType {
-    setDescription: (description: string) => void
+    setDescription: (description: any) => void
     setShow: (show: boolean) => void
     setTitle: (title: string) => void
 }

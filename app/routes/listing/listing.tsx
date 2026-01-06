@@ -223,7 +223,10 @@ const listing = () => {
                                         <About listing={listing} />
                                     </ReadMoreAboutProvider>
 
-                                    <StartingAmount listing={listing} />
+                                    <ReadMoreAboutProvider>
+                                        <StartingAmount listing={listing} />
+                                    </ReadMoreAboutProvider>
+
 
                                     <div className={`block lg:hidden mb-12`}>
                                         <WorkingHours listing={listing}

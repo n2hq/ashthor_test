@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { ReactNode, useEffect, useState } from 'react'
 import AlternateImage from '~/components/content/AlternateImage'
 import ReadMoreAboutContext, { useReadMoreContext } from '~/context/ReadMoreAboutContext'
 import { appConfig, config, convertDashToSpace, formatNumber, getBusinessProfileImageData, getInitials } from '~/lib/lib'
@@ -30,14 +30,34 @@ const StartingAmount = ({ listing }: AboutProps) => {
 
     const readMoreCtx = useReadMoreContext()
 
-    const handleReadMore = (description: string) => {
+    const handleReadMore = (description: string | ReactNode) => {
         readMoreCtx?.setDescription(description)
         readMoreCtx?.setShow(true)
-        readMoreCtx?.setTitle('About this business')
+        readMoreCtx?.setTitle('Starting amount')
     }
 
+    const [starting, setStarting] = useState<ReactNode | null>(null)
+
+    useEffect(() => {
+        if (listing) {
+            if (listing?.starting_note && listing?.minimum_amount) {
+                let str = <div>
+                    <div className={`text-3xl font-semibold`}>
+                        {listing?.currency}{formatNumber(Number(listing?.minimum_amount))}
+                    </div>
+                    <div className={`text-lg mt-6`}>
+                        {listing?.starting_note}
+                    </div>
+
+                </div>
+
+                setStarting(str)
+            }
+
+        }
+    }, [listing])
     return (
-        <div className={` border-t py-10`}>
+        <div className={` border-t py-10 relative`}>
 
             {/** about title */}
             <div className={`text-[22px] md:text-[25px] font-semibold`}>
@@ -55,15 +75,33 @@ const StartingAmount = ({ listing }: AboutProps) => {
 
             {
 
-                <div className={`mt-6 flex gap-12 place-items-start`}>
-                    <div className={`grow text-lg`}>
-                        {listing?.starting_note || 'This business has no minimum amount set.'}
+                <div className={`mt-6 flex gap-12 place-items-start relative`}>
+                    <div className={`grow text-lg line-clamp-2`}>
+                        {
+
+                            (!listing?.starting_note && Number(listing?.minimum_amount <= 0)) ? 'This business has no minimum amount set.' : (listing?.starting_note || 'This may cover core business services or products. It could also include promos, seasonal and special offers.')
+                        }
                     </div>
                     <div className={`text-4xl`}>
 
                         {listing?.currency}{formatNumber(Number(listing?.minimum_amount || 0))}
                     </div>
                 </div>
+            }
+
+            {
+
+                <button className={`mt-6 shadow-md rounded-xl text-xl px-5 py-3 bg-[#895129]/20 `}
+                    onClick={() => {
+                        if (starting === null) {
+                            handleReadMore(listing?.starting_note)
+                        } else {
+                            handleReadMore(starting)
+                        }
+                    }}
+                >
+                    Read more
+                </button>
             }
         </div>
     )
