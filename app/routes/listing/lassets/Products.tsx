@@ -115,7 +115,7 @@ const Products = ({ listing, products }: ProductsProps) => {
                                         className={`w-[250px] min-w-[250px] cursor-pointer`}
                                         onClick={() => { showCarousel(i) }}
                                     >
-                                        <div className={`relative w-full h-[180px] rounded-xl overflow-hidden bg-blue-200`}>
+                                        <div className={`relative w-full h-[180px] rounded-xl overflow-hidden`}>
                                             <img
                                                 src={config.IMG_BASE_URL + item.product_image_url}
                                                 alt=""
