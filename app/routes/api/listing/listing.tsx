@@ -114,8 +114,16 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
             let starting_note = body.starting_note as string === undefined ? listing.starting_note : body.starting_note
 
             let minimum_amount = body.minimum_amount as string === undefined ? listing.minimum_amount : body.minimum_amount
-            minimum_amount = removeCommas(minimum_amount)
 
+
+
+
+            if (minimum_amount !== null && minimum_amount !== undefined) {
+                minimum_amount = removeCommas(minimum_amount)
+                minimum_amount = Number(minimum_amount)
+            } else {
+                minimum_amount = 0
+            }
 
 
             {/** check if username has not been taken */ }

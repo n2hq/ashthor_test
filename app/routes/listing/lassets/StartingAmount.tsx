@@ -51,10 +51,10 @@ const StartingAmount = ({ listing }: AboutProps) => {
             {/** about description */}
 
             {
-                (listing?.starting_note && listing?.currency) &&
-                <div className={`mt-6 flex gap-12`}>
-                    <div>
-                        {listing?.starting_note}
+
+                <div className={`mt-6 flex gap-12 place-items-start`}>
+                    <div className={`grow text-lg`}>
+                        {listing?.starting_note || 'This business has no minimum amount set.'}
                     </div>
                     <div className={`text-4xl`}>
 
